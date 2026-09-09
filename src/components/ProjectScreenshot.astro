@@ -1,0 +1,20 @@
+---
+import { t, type Locale } from '@/data/site';
+import { screenshotUI, type ProjectScreenshot } from '@/data/screenshots';
+import Icon from './Icon.astro';
+interface Props { lang: Locale; screenshot: ProjectScreenshot; compact?: boolean }
+const { lang, screenshot: shot, compact = false } = Astro.props;
+const path = `/images/screenshots/${shot.id}`;
+const metadata = `${t(shot.application, lang)} · ${t(screenshotUI.preview, lang)} · ${t(shot.language, lang)}`;
+---
+<figure class:list={['project-screenshot', { 'screenshot-compact': compact }]}>
+  <a class="screenshot-open" href={`${path}.png`} data-screenshot={shot.id} data-title={t(shot.title, lang)} data-description={t(shot.description, lang)} data-metadata={metadata} data-alt={t(shot.alt, lang)} data-width={shot.width} data-height={shot.height} aria-label={`${t(screenshotUI.open, lang)}: ${t(shot.title, lang)}`} aria-haspopup="dialog">
+    <span class="screenshot-frame-heading"><span class="screenshot-dot" aria-hidden="true"></span>{t(shot.application, lang)}<Icon name="external" size={14}/></span>
+    <span class="screenshot-viewport"><img src={`${path}-800.webp`} srcset={`${path}-800.webp ${Math.min(800,shot.width)}w, ${path}-1600.webp ${Math.min(1600,shot.width)}w`} sizes="(max-width: 900px) calc(100vw - 40px), 600px" width={shot.width} height={shot.height} alt={t(shot.alt, lang)} style={shot.previewOffset ? `transform: translateY(-${shot.previewOffset}%)` : undefined} loading="lazy" decoding="async" /></span>
+    <span class="screenshot-frame-footer"><span>{t(screenshotUI.open, lang)}</span><Icon name="search" size={16}/></span>
+  </a>
+  <figcaption>
+    <div class="screenshot-meta"><span>{t(screenshotUI.preview, lang)}</span><span>{t(shot.language, lang)}</span></div>
+    {!compact && <><h3>{t(shot.title, lang)}</h3><p>{t(shot.description, lang)}</p></>}
+  </figcaption>
+</figure>

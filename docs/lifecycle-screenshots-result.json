@@ -1,0 +1,405 @@
+{
+  "failure_summary": "## Verification Failed\n\n5 of 6 scenarios are non-passing.\n\n### Non-passing Scenarios\n\n**Project screenshots open with localized context**\n- verdict: Skip\n- Skip: both localized homepages and the three project galleries (no verifier covered this step)\n- Skip: a visitor opens each screenshot and closes the enlarged view (no verifier covered this step)\n- Skip: the original image loads with its localized caption and focus returns to its link (no verifier covered this step)\n\n**Screenshot links work without JavaScript**\n- verdict: Skip\n- Skip: a visitor with JavaScript disabled (no verifier covered this step)\n- Skip: the visitor follows a screenshot link (no verifier covered this step)\n- Skip: the original image opens directly (no verifier covered this step)\n\n**A failed image request has a visible recovery path**\n- verdict: Skip\n- Skip: an unavailable original screenshot (no verifier covered this step)\n- Skip: the enlarged image cannot load (no verifier covered this step)\n- Skip: a localized error explains how to open the original and the viewer can still close (no verifier covered this step)\n\n**Localized destinations remain valid**\n- verdict: Skip\n- Skip: the complete localized static build (no verifier covered this step)\n- Skip: each route and its navigation links are opened (no verifier covered this step)\n- Skip: every internal destination exists (no verifier covered this step)\n\n**Screenshot layouts fit small screens**\n- verdict: Skip\n- Skip: each localized main page on a mobile viewport (no verifier covered this step)\n- Skip: a visitor explores the page (no verifier covered this step)\n- Skip: the content fits without page-level horizontal scrolling (no verifier covered this step)\n\n### Action Required\n\nResolve the failures or missing verification coverage above and re-run verification.\n",
+  "lint_issues": 6,
+  "passed": false,
+  "quality_score": 0.9166666666666666,
+  "stage": "complete",
+  "verification": {
+    "results": [
+      {
+        "duration_ms": 0,
+        "evidence": [
+          {
+            "locations": [
+              "src/data/screenshots.ts"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "src/data/screenshot-assets.json"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "src/components/ProjectScreenshot.astro"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "src/components/ScreenshotGallery.astro"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "src/components/ScreenshotViewer.astro"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "src/components/Home.astro"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "src/components/ProjectPage.astro"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "src/layouts/Layout.astro"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "src/styles/screenshots.css"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "src/scripts/site.ts"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "public/images/screenshots"
+            ],
+            "matched": true,
+            "pattern": "public/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "scripts/optimize-screenshots.mjs"
+            ],
+            "matched": true,
+            "pattern": "scripts/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "tests/site.test.mjs"
+            ],
+            "matched": true,
+            "pattern": "tests/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "specs/task-project-screenshots.spec.md"
+            ],
+            "matched": true,
+            "pattern": "specs/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "knowledge/requirements/req-project-screenshots.md"
+            ],
+            "matched": true,
+            "pattern": "knowledge/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "docs/screenshots.md"
+            ],
+            "matched": true,
+            "pattern": "docs/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "docs/artwork.md"
+            ],
+            "matched": true,
+            "pattern": "docs/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "docs/sources.md"
+            ],
+            "matched": true,
+            "pattern": "docs/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "docs/verification.md"
+            ],
+            "matched": true,
+            "pattern": "docs/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "README.md"
+            ],
+            "matched": true,
+            "pattern": "README.md",
+            "type": "pattern_match"
+          }
+        ],
+        "provenance": "computational",
+        "scenario_name": "[boundaries] explicit change set respects declared paths",
+        "step_results": [
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/data/screenshots.ts",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/data/screenshot-assets.json",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/components/ProjectScreenshot.astro",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/components/ScreenshotGallery.astro",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/components/ScreenshotViewer.astro",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/components/Home.astro",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/components/ProjectPage.astro",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/layouts/Layout.astro",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/styles/screenshots.css",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/scripts/site.ts",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `public/**`",
+            "step_text": "public/images/screenshots",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `scripts/**`",
+            "step_text": "scripts/optimize-screenshots.mjs",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `tests/**`",
+            "step_text": "tests/site.test.mjs",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `specs/**`",
+            "step_text": "specs/task-project-screenshots.spec.md",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `knowledge/**`",
+            "step_text": "knowledge/requirements/req-project-screenshots.md",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `docs/**`",
+            "step_text": "docs/screenshots.md",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `docs/**`",
+            "step_text": "docs/artwork.md",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `docs/**`",
+            "step_text": "docs/sources.md",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `docs/**`",
+            "step_text": "docs/verification.md",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `README.md`",
+            "step_text": "README.md",
+            "verdict": "pass"
+          }
+        ],
+        "verdict": "pass"
+      },
+      {
+        "duration_ms": 0,
+        "evidence": [],
+        "scenario_name": "Project screenshots open with localized context",
+        "step_results": [
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "both localized homepages and the three project galleries",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "a visitor opens each screenshot and closes the enlarged view",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the original image loads with its localized caption and focus returns to its link",
+            "verdict": "skip"
+          }
+        ],
+        "verdict": "skip"
+      },
+      {
+        "duration_ms": 0,
+        "evidence": [],
+        "scenario_name": "Screenshot links work without JavaScript",
+        "step_results": [
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "a visitor with JavaScript disabled",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the visitor follows a screenshot link",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the original image opens directly",
+            "verdict": "skip"
+          }
+        ],
+        "verdict": "skip"
+      },
+      {
+        "duration_ms": 0,
+        "evidence": [],
+        "scenario_name": "A failed image request has a visible recovery path",
+        "step_results": [
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "an unavailable original screenshot",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the enlarged image cannot load",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "a localized error explains how to open the original and the viewer can still close",
+            "verdict": "skip"
+          }
+        ],
+        "verdict": "skip"
+      },
+      {
+        "duration_ms": 0,
+        "evidence": [],
+        "scenario_name": "Localized destinations remain valid",
+        "step_results": [
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the complete localized static build",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "each route and its navigation links are opened",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "every internal destination exists",
+            "verdict": "skip"
+          }
+        ],
+        "verdict": "skip"
+      },
+      {
+        "duration_ms": 0,
+        "evidence": [],
+        "scenario_name": "Screenshot layouts fit small screens",
+        "step_results": [
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "each localized main page on a mobile viewport",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "a visitor explores the page",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the content fits without page-level horizontal scrolling",
+            "verdict": "skip"
+          }
+        ],
+        "verdict": "skip"
+      }
+    ],
+    "spec_name": "Add genuine project screenshots and accessible image viewing",
+    "summary": {
+      "failed": 0,
+      "passed": 1,
+      "pending_review": 0,
+      "skipped": 5,
+      "total": 6,
+      "uncertain": 0
+    }
+  }
+}

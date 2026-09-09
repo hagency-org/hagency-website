@@ -1,0 +1,22 @@
+
+> hagency-website@1.0.0 test
+> node --test tests/site.test.mjs
+
+✔ all localized routes render and internal links resolve (2343.308416ms)
+✔ language preserves route and theme persists across pages (732.598708ms)
+✔ walkthrough progresses and replays without live requests (1787.021917ms)
+✔ localized search finds guides and handles no matches (1373.474292ms)
+✔ download platform filter selects available assets (1191.169958ms)
+✔ mobile navigation and layouts have no horizontal overflow (5170.6365ms)
+✔ key pages meet automated accessibility checks in both themes (16582.700584ms)
+✔ copy controls, update filters, feeds, and missing pages work (1690.254375ms)
+✔ Matrix network comparison switches architecture without live requests (1471.157167ms)
+✔ equal room roles update human and agent permissions together (1285.973708ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 33945.538792

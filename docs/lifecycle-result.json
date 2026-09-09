@@ -1,0 +1,337 @@
+{
+  "failure_summary": "## Verification Failed\n\n6 of 7 scenarios are non-passing.\n\n### Non-passing Scenarios\n\n**Both languages deliver complete static pages**\n- verdict: Skip\n- Skip: the production static build (no verifier covered this step)\n- Skip: every English and Chinese route is opened (no verifier covered this step)\n- Skip: each renders localized content and all internal destinations exist (no verifier covered this step)\n\n**Language and theme survive navigation**\n- verdict: Skip\n- Skip: a Chinese project page in light theme (no verifier covered this step)\n- Skip: the visitor changes language and navigates (no verifier covered this step)\n- Skip: the corresponding English page and selected theme remain active (no verifier covered this step)\n\n**The walkthrough can be completed and replayed**\n- verdict: Skip\n- Skip: the illustrative demo (no verifier covered this step)\n- Skip: a visitor advances through every step and replays (no verifier covered this step)\n- Skip: the active panel and progress reflect the selected step (no verifier covered this step)\n\n**Search handles matches and no results**\n- verdict: Skip\n- Skip: the current language search interface (no verifier covered this step)\n- Skip: the visitor searches known and unknown phrases (no verifier covered this step)\n- Skip: matching local pages or an explicit empty result are displayed (no verifier covered this step)\n\n**Download filtering retains valid release links**\n- verdict: Skip\n- Skip: the verified release manifest (no verifier covered this step)\n- Skip: the visitor selects a platform (no verifier covered this step)\n- Skip: only applicable release assets are offered (no verifier covered this step)\n\n**Small screens remain navigable**\n- verdict: Skip\n- Skip: a mobile viewport in each language (no verifier covered this step)\n- Skip: the navigation opens and pages are explored (no verifier covered this step)\n- Skip: all controls remain accessible without page-level horizontal scrolling (no verifier covered this step)\n\n### Action Required\n\nResolve the failures or missing verification coverage above and re-run verification.\n",
+  "lint_issues": 7,
+  "passed": false,
+  "quality_score": 0.9166666666666666,
+  "stage": "complete",
+  "verification": {
+    "results": [
+      {
+        "duration_ms": 0,
+        "evidence": [
+          {
+            "locations": [
+              "src"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "public"
+            ],
+            "matched": true,
+            "pattern": "public/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "scripts"
+            ],
+            "matched": true,
+            "pattern": "scripts/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "tests"
+            ],
+            "matched": true,
+            "pattern": "tests/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "specs"
+            ],
+            "matched": true,
+            "pattern": "specs/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "knowledge"
+            ],
+            "matched": true,
+            "pattern": "knowledge/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "docs"
+            ],
+            "matched": true,
+            "pattern": "docs/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "package.json"
+            ],
+            "matched": true,
+            "pattern": "package.json",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "package-lock.json"
+            ],
+            "matched": true,
+            "pattern": "package-lock.json",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "astro.config.mjs"
+            ],
+            "matched": true,
+            "pattern": "astro.config.mjs",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "tsconfig.json"
+            ],
+            "matched": true,
+            "pattern": "tsconfig.json",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              ".gitignore"
+            ],
+            "matched": true,
+            "pattern": ".gitignore",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "README.md"
+            ],
+            "matched": true,
+            "pattern": "README.md",
+            "type": "pattern_match"
+          }
+        ],
+        "provenance": "computational",
+        "scenario_name": "[boundaries] explicit change set respects declared paths",
+        "step_results": [
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `public/**`",
+            "step_text": "public",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `scripts/**`",
+            "step_text": "scripts",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `tests/**`",
+            "step_text": "tests",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `specs/**`",
+            "step_text": "specs",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `knowledge/**`",
+            "step_text": "knowledge",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `docs/**`",
+            "step_text": "docs",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `package.json`",
+            "step_text": "package.json",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `package-lock.json`",
+            "step_text": "package-lock.json",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `astro.config.mjs`",
+            "step_text": "astro.config.mjs",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `tsconfig.json`",
+            "step_text": "tsconfig.json",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `.gitignore`",
+            "step_text": ".gitignore",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `README.md`",
+            "step_text": "README.md",
+            "verdict": "pass"
+          }
+        ],
+        "verdict": "pass"
+      },
+      {
+        "duration_ms": 0,
+        "evidence": [],
+        "scenario_name": "Both languages deliver complete static pages",
+        "step_results": [
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the production static build",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "every English and Chinese route is opened",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "each renders localized content and all internal destinations exist",
+            "verdict": "skip"
+          }
+        ],
+        "verdict": "skip"
+      },
+      {
+        "duration_ms": 0,
+        "evidence": [],
+        "scenario_name": "Language and theme survive navigation",
+        "step_results": [
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "a Chinese project page in light theme",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the visitor changes language and navigates",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the corresponding English page and selected theme remain active",
+            "verdict": "skip"
+          }
+        ],
+        "verdict": "skip"
+      },
+      {
+        "duration_ms": 0,
+        "evidence": [],
+        "scenario_name": "The walkthrough can be completed and replayed",
+        "step_results": [
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the illustrative demo",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "a visitor advances through every step and replays",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the active panel and progress reflect the selected step",
+            "verdict": "skip"
+          }
+        ],
+        "verdict": "skip"
+      },
+      {
+        "duration_ms": 0,
+        "evidence": [],
+        "scenario_name": "Search handles matches and no results",
+        "step_results": [
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the current language search interface",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the visitor searches known and unknown phrases",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "matching local pages or an explicit empty result are displayed",
+            "verdict": "skip"
+          }
+        ],
+        "verdict": "skip"
+      },
+      {
+        "duration_ms": 0,
+        "evidence": [],
+        "scenario_name": "Download filtering retains valid release links",
+        "step_results": [
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the verified release manifest",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the visitor selects a platform",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "only applicable release assets are offered",
+            "verdict": "skip"
+          }
+        ],
+        "verdict": "skip"
+      },
+      {
+        "duration_ms": 0,
+        "evidence": [],
+        "scenario_name": "Small screens remain navigable",
+        "step_results": [
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "a mobile viewport in each language",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the navigation opens and pages are explored",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "all controls remain accessible without page-level horizontal scrolling",
+            "verdict": "skip"
+          }
+        ],
+        "verdict": "skip"
+      }
+    ],
+    "spec_name": "Build the complete bilingual Hagency website",
+    "summary": {
+      "failed": 0,
+      "passed": 1,
+      "pending_review": 0,
+      "skipped": 6,
+      "total": 7,
+      "uncertain": 0
+    }
+  }
+}

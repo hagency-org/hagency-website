@@ -1,0 +1,11 @@
+---
+import { b, t, url, type Locale } from '@/data/site';
+import { matrix } from '@/data/matrix';
+import Icon from './Icon.astro';
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+---
+<section class="section matrix-intro" id="matrix"><div class="container">
+  <div class="intro-grid reveal"><div><span class="eyebrow">{t(b('OPEN PROTOCOL. SHARED POSSIBILITIES.', '开放协议，共享可能。'),lang)}</span><h2>{t(matrix.homeTitle,lang)}</h2></div><div><p>{t(matrix.homeBody,lang)}</p><a class="text-link" href={url(lang,'matrix')}>{t(b('Meet Matrix and federation','认识 Matrix 与联邦互通'),lang)}<Icon size={17}/></a></div></div>
+  <div class="matrix-pillars">{matrix.pillars.map(pillar=><div><Icon name={pillar.icon} size={24}/><h3>{t(pillar.title,lang)}</h3><p>{t(pillar.body,lang)}</p></div>)}</div>
+</div></section>

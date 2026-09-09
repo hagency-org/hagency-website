@@ -1,0 +1,25 @@
+---
+import { locales, projects, t, type Locale } from '@/data/site';
+import { coreSlugs, pageInfo, guides, articles } from '@/data/content';
+import Layout from '@/layouts/Layout.astro';
+import Home from '@/components/Home.astro';
+import StandardPage from '@/components/StandardPage.astro';
+import ProjectPage from '@/components/ProjectPage.astro';
+import ArticlePage from '@/components/ArticlePage.astro';
+import MatrixPage from '@/components/MatrixPage.astro';
+export function getStaticPaths() {
+  const routes = [...coreSlugs, ...guides.map(g => `docs/${g.slug}`), ...articles.map(a => `updates/${a.slug}`)];
+  return locales.flatMap(lang => routes.map(slug => ({ params: { lang, slug: slug || undefined } })));
+}
+const lang = Astro.params.lang as Locale;
+const slug = Astro.params.slug ?? '';
+const project = projects.find(p => `projects/${p.id}` === slug);
+const guide = guides.find(g => `docs/${g.slug}` === slug);
+const article = articles.find(a => `updates/${a.slug}` === slug);
+const content = guide ?? article;
+const info = project ? { title: project.headline, description: project.description } : content ?? pageInfo[slug as keyof typeof pageInfo];
+if (!info) throw new Error(`Unknown page: ${lang}/${slug}`);
+---
+<Layout lang={lang} slug={slug} title={t(info.title,lang)} description={t(info.description,lang)}>
+  {slug === '' ? <Home lang={lang}/> : slug === 'matrix' ? <MatrixPage lang={lang}/> : project ? <ProjectPage lang={lang} project={project}/> : content ? <ArticlePage lang={lang} article={content} kind={guide ? 'docs' : 'updates'}/> : <StandardPage lang={lang} slug={slug as Exclude<keyof typeof pageInfo,''|'matrix'>}/>}
+</Layout>

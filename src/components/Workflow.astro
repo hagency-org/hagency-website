@@ -1,0 +1,30 @@
+---
+import { b, t, ui, url, type Locale } from '@/data/site';
+import { steps } from '@/data/workflow';
+import Icon from './Icon.astro';
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+---
+<div class="walkthrough" data-demo>
+  <div class="demo-top"><span class="eyebrow"><span class="status-dot"></span>{t(ui.walkthrough, lang)}</span><span class="small-label">{t(ui.preview, lang)}</span></div>
+  <div class="demo-layout">
+    <div class="demo-steps" role="group" aria-label={t(b('Walkthrough steps', '演示步骤'), lang)}>
+      {steps.map((step, i) => <button class:list={['demo-step', { active: i === 0 }]} type="button" data-step={i} aria-pressed={i === 0} aria-controls={`demo-panel-${i}`}><span class="step-index">{String(i + 1).padStart(2, '0')}</span><span>{t(step.title, lang)}</span><Icon name="arrow" size={16} /></button>)}
+    </div>
+    <div class="demo-stage">
+      {steps.map((step, i) => <section id={`demo-panel-${i}`} data-panel={i} hidden={i !== 0} class="demo-panel" aria-labelledby={`demo-heading-${i}`}>
+        <div class="demo-panel-heading"><div><span class="eyebrow">{step.project}</span><h3 id={`demo-heading-${i}`}>{t(step.title, lang)}</h3></div><div class="demo-panel-icon"><Icon name={step.icon} size={28} /></div></div>
+        <p class="demo-explanation">{t(step.description, lang)}</p>
+        <div class="sample-window">
+          <div class="sample-bar"><span><i></i><i></i><i></i></span><span>{t(ui.example, lang)}</span><Icon name={i === 5 ? 'shield' : 'chat'} size={13} /></div>
+          <div class="sample-conversation"><div class="sample-avatar">{i === 4 || i === 6 ? 'A' : <Icon name={i === 5 ? 'shield' : 'people'} size={20} />}</div><div><strong>{typeof step.actor === 'string' ? step.actor : t(step.actor, lang)}</strong><p>{t(step.message, lang)}</p><div class="sample-detail"><Icon name={step.icon} size={15} /><span>{t(step.detail, lang)}</span></div></div></div>
+          <div class="sample-status"><span class="status-dot"></span>{t(step.status, lang)}</div>
+        </div>
+        <a class="text-link" href={url(lang, `docs/${step.guide}`)}>{t(ui.readGuide, lang)}<Icon size={16} /></a>
+      </section>)}
+      <div class="demo-controls"><button type="button" class="button button-small button-quiet" data-prev disabled><span aria-hidden="true">←</span>{t(ui.previous, lang)}</button><span class="demo-progress" aria-live="polite" data-progress>{t(ui.step, lang)} <span>1</span> / 8</span><button type="button" class="button button-small" data-next data-next-label={t(ui.next, lang)} data-replay-label={t(ui.replay, lang)}><span>{t(ui.next, lang)}</span><Icon size={16} /></button></div>
+    </div>
+  </div>
+  <p class="demo-disclosure"><Icon name="eye" size={14} />{t(ui.demoNote, lang)}</p>
+</div>
+<details class="demo-transcript"><summary>{t(b('Read the complete walkthrough as text', '阅读完整文字流程'), lang)}</summary><ol>{steps.map(step => <li><strong>{t(step.title, lang)}</strong><p>{t(step.description, lang)}</p></li>)}</ol></details>

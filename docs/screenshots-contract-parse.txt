@@ -1,0 +1,15 @@
+Spec: Add genuine project screenshots and accessible image viewing (task)
+  inherits: project
+  tags: ["website", "screenshots", "i18n"]
+  sections: 4
+    - Intent: Let visitors see actual project interfaces through bilingual screenshot cards
+on...
+    - Constraints: 4 items
+    - Boundaries: 9 items
+    - Acceptance Criteria: 5 scenarios
+      - Project screenshots open with localized context: 3 steps
+      - Screenshot links work without JavaScript: 3 steps
+      - A failed image request has a visible recovery path: 3 steps
+      - Localized destinations remain valid: 3 steps
+      - Screenshot layouts fit small screens: 3 steps
+

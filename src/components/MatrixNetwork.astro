@@ -1,0 +1,38 @@
+---
+import { b, t, type Locale } from '@/data/site';
+import { matrix } from '@/data/matrix';
+import Icon from './Icon.astro';
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const servers = [
+  { domain: 'lab.example', label: b('Research team', '研究团队'), name: 'Mei', id: '@mei:lab.example', icon: 'people', color: 'blue' },
+  { domain: 'studio.example', label: b('Design studio', '设计工作室'), name: 'Leo', id: '@leo:studio.example', icon: 'people', color: 'amber' },
+  { domain: 'agents.example', label: b('Agent contributor', 'Agent 贡献者'), name: 'Atlas', id: '@atlas:agents.example', icon: 'fleet', color: 'teal' },
+];
+---
+<div class="matrix-network" data-network>
+  <div class="network-toolbar">
+    <span class="eyebrow">{t(b('EXPLORE THE ARCHITECTURE', '探索通信架构'),lang)}</span>
+    <div class="network-switch" role="group" aria-label={t(b('Network architecture','网络架构'),lang)}>
+      <button type="button" data-network-mode="federated" aria-pressed="true" aria-controls="network-federated">{t(b('Federated','联邦式'),lang)}</button>
+      <button type="button" data-network-mode="centralized" aria-pressed="false" aria-controls="network-centralized">{t(b('Centralized','中心化'),lang)}</button>
+    </div>
+  </div>
+  <div id="network-federated" data-network-panel="federated">
+    <div class="network-shared-room"><Icon name="chat" size={21}/><span>{t(b('ONE SHARED PROJECT ROOM', '同一个共享项目房间'),lang)}</span><span class="small-label">Matrix</span></div>
+    <div class="federated-servers">
+      {servers.map(server=><div class:list={['federated-server',server.color]}>
+        <span class="server-orbit"><Icon name="network" size={30}/></span>
+        <span class="eyebrow">{t(server.label,lang)}</span><h3>{server.domain}</h3>
+        <div class="federation-member"><Icon name={server.icon} size={19}/><div><strong>{server.name}</strong><code>{server.id}</code></div></div>
+      </div>)}
+    </div>
+    <p class="network-caption"><span class="status-dot"></span>{t(b('Independent operators · synchronized room events · shared participation', '独立运营方 · 同步房间事件 · 共同参与'),lang)}</p>
+    <p class="network-explanation">{t(matrix.federationDetail,lang)}</p>
+  </div>
+  <div id="network-centralized" data-network-panel="centralized" hidden>
+    <div class="centralized-network"><div class="central-hub"><Icon name="network" size={32}/><h3>{t(b('One service operator','同一个服务运营方'),lang)}</h3><p>{t(b('Accounts · infrastructure · service policy','账户 · 基础设施 · 服务策略'),lang)}</p></div><div class="central-members">{servers.map(server=><div><Icon name={server.icon} size={23}/><strong>{server.name}</strong><small>{t(b('Platform account','平台账户'),lang)}</small></div>)}</div></div>
+    <p class="network-explanation">{t(matrix.centralDetail,lang)}</p>
+  </div>
+  <p class="demo-disclosure"><Icon name="eye" size={14}/>{t(b('Conceptual examples with fictional identities. No servers or agents are connected.', '使用虚构身份的概念示例，不连接真实服务器或 Agent。'),lang)}</p>
+</div>

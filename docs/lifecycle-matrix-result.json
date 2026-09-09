@@ -1,0 +1,356 @@
+{
+  "failure_summary": "## Verification Failed\n\n4 of 5 scenarios are non-passing.\n\n### Non-passing Scenarios\n\n**Matrix content is discoverable in both languages**\n- verdict: Skip\n- Skip: the complete localized static build (no verifier covered this step)\n- Skip: each route and its navigation links are opened (no verifier covered this step)\n- Skip: localized content renders and every internal destination exists (no verifier covered this step)\n\n**Visitors can compare network architectures**\n- verdict: Skip\n- Skip: the bilingual Matrix introduction (no verifier covered this step)\n- Skip: a visitor switches between federated and centralized examples (no verifier covered this step)\n- Skip: the diagram and explanation reflect the selected architecture without live requests (no verifier covered this step)\n\n**Identical granted roles have identical example capabilities**\n- verdict: Skip\n- Skip: the illustrative human and agent room members (no verifier covered this step)\n- Skip: a visitor changes the role from collaborator to moderator and back (no verifier covered this step)\n- Skip: both members receive the same displayed capabilities and no real grant is issued (no verifier covered this step)\n\n**New explanations fit small screens**\n- verdict: Skip\n- Skip: each localized main page on a mobile viewport (no verifier covered this step)\n- Skip: the visitor explores the page and navigation (no verifier covered this step)\n- Skip: the content fits without page-level horizontal scrolling (no verifier covered this step)\n\n### Action Required\n\nResolve the failures or missing verification coverage above and re-run verification.\n",
+  "lint_issues": 7,
+  "passed": false,
+  "quality_score": 0.9166666666666666,
+  "stage": "complete",
+  "verification": {
+    "results": [
+      {
+        "duration_ms": 0,
+        "evidence": [
+          {
+            "locations": [
+              "src/data/matrix.ts"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "src/data/site.ts"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "src/data/content.ts"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "src/components/MatrixNetwork.astro"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "src/components/RoomPermissions.astro"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "src/components/MatrixIntro.astro"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "src/components/MatrixPage.astro"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "src/components/Home.astro"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "src/components/StandardPage.astro"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "src/layouts/Layout.astro"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "src/pages"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "src/scripts/site.ts"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "src/styles/matrix.css"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "tests/site.test.mjs"
+            ],
+            "matched": true,
+            "pattern": "tests/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "specs/task-matrix-positioning.spec.md"
+            ],
+            "matched": true,
+            "pattern": "specs/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "knowledge/requirements/req-matrix-positioning.md"
+            ],
+            "matched": true,
+            "pattern": "knowledge/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "docs"
+            ],
+            "matched": true,
+            "pattern": "docs/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "README.md"
+            ],
+            "matched": true,
+            "pattern": "README.md",
+            "type": "pattern_match"
+          }
+        ],
+        "provenance": "computational",
+        "scenario_name": "[boundaries] explicit change set respects declared paths",
+        "step_results": [
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/data/matrix.ts",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/data/site.ts",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/data/content.ts",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/components/MatrixNetwork.astro",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/components/RoomPermissions.astro",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/components/MatrixIntro.astro",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/components/MatrixPage.astro",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/components/Home.astro",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/components/StandardPage.astro",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/layouts/Layout.astro",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/pages",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/scripts/site.ts",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/styles/matrix.css",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `tests/**`",
+            "step_text": "tests/site.test.mjs",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `specs/**`",
+            "step_text": "specs/task-matrix-positioning.spec.md",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `knowledge/**`",
+            "step_text": "knowledge/requirements/req-matrix-positioning.md",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `docs/**`",
+            "step_text": "docs",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `README.md`",
+            "step_text": "README.md",
+            "verdict": "pass"
+          }
+        ],
+        "verdict": "pass"
+      },
+      {
+        "duration_ms": 0,
+        "evidence": [],
+        "scenario_name": "Matrix content is discoverable in both languages",
+        "step_results": [
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the complete localized static build",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "each route and its navigation links are opened",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "localized content renders and every internal destination exists",
+            "verdict": "skip"
+          }
+        ],
+        "verdict": "skip"
+      },
+      {
+        "duration_ms": 0,
+        "evidence": [],
+        "scenario_name": "Visitors can compare network architectures",
+        "step_results": [
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the bilingual Matrix introduction",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "a visitor switches between federated and centralized examples",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the diagram and explanation reflect the selected architecture without live requests",
+            "verdict": "skip"
+          }
+        ],
+        "verdict": "skip"
+      },
+      {
+        "duration_ms": 0,
+        "evidence": [],
+        "scenario_name": "Identical granted roles have identical example capabilities",
+        "step_results": [
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the illustrative human and agent room members",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "a visitor changes the role from collaborator to moderator and back",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "both members receive the same displayed capabilities and no real grant is issued",
+            "verdict": "skip"
+          }
+        ],
+        "verdict": "skip"
+      },
+      {
+        "duration_ms": 0,
+        "evidence": [],
+        "scenario_name": "New explanations fit small screens",
+        "step_results": [
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "each localized main page on a mobile viewport",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the visitor explores the page and navigation",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the content fits without page-level horizontal scrolling",
+            "verdict": "skip"
+          }
+        ],
+        "verdict": "skip"
+      }
+    ],
+    "spec_name": "Explain Matrix federation and equal room permissions",
+    "summary": {
+      "failed": 0,
+      "passed": 1,
+      "pending_review": 0,
+      "skipped": 4,
+      "total": 5,
+      "uncertain": 0
+    }
+  }
+}

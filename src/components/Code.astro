@@ -1,0 +1,10 @@
+---
+import { t, ui, type Locale } from '@/data/site';
+import Icon from './Icon.astro';
+interface Props { code: string; lang: Locale; label?: string }
+const { code, lang, label = 'Terminal' } = Astro.props;
+---
+<div class="code-block">
+  <div class="code-header"><span>{label}</span><button type="button" class="copy-button" data-copy data-success={t(ui.copied, lang)} data-failure={t(ui.copyFailed, lang)}><Icon name="copy" size={14} /><span>{t(ui.copy, lang)}</span></button></div>
+  <pre tabindex="0"><code>{code}</code></pre><span class="sr-only copy-status" aria-live="polite"></span>
+</div>

@@ -1,0 +1,13 @@
+---
+import { t, type Locale, type Project } from '@/data/site';
+import { projectScreenshots, screenshotUI } from '@/data/screenshots';
+import ProjectScreenshot from './ProjectScreenshot.astro';
+interface Props { lang: Locale; project: Project }
+const { lang, project } = Astro.props;
+---
+<section class="section container border-top screenshot-section" id="screenshots" aria-labelledby="screenshots-heading">
+  <div class="section-header"><span class="eyebrow">{t(screenshotUI.label, lang)}</span><h2 id="screenshots-heading">{t(screenshotUI.title, lang)}</h2><p>{t(screenshotUI.intro, lang)}</p></div>
+  {project.id === 'palpo' && <p class="screenshot-scope">{t(screenshotUI.palpoScope, lang)}</p>}
+  <div class="screenshot-gallery">{projectScreenshots(project.id).map(screenshot => <ProjectScreenshot lang={lang} screenshot={screenshot}/>)}</div>
+  <p class="screenshot-scope screenshot-scope-bottom">{t(screenshotUI.scope, lang)}</p>
+</section>

@@ -1,0 +1,6 @@
+200 https://matrix.org/
+200 https://matrix.org/docs/matrix-concepts/elements-of-matrix/
+200 https://spec.matrix.org/latest/
+200 https://spec.matrix.org/latest/server-server-api/
+200 https://spec.matrix.org/latest/client-server-api/
+200 https://spec.matrix.org/latest/application-service-api/

@@ -1,0 +1,16 @@
+Spec: Add genuine project screenshots and accessible image viewing
+Quality: 92% (determinism: 100%, testability: 100%, coverage: 75%)
+
+  [WARN ] line 15: [coverage] constraint 'Keep product pixels original; generated artwork remains d...' has no matching scenario step
+         suggestion: add a scenario that verifies this constraint
+  [WARN ] line 49: [verification-metadata-suggestion] scenario 'A failed image request has a visible recovery path' covers external I/O behavior without verification-strength metadata
+         suggestion: add `Level:` / `层级:`, `Test Double:` / `替身:`, or `Targets:` / `命中:` to clarify test strength
+  [INFO ] line 35: [bdd-rule-grouping] 5 scenarios with no Rule grouping
+         suggestion: Grouping scenarios under `Rule: <id> — <name>` makes the behavior they prove explicit and lets the rule lift to capability scope later. Add `Rule:` headers above related scenarios. This is a suggestion, not a gate — if flat structure is right for this spec, ignore it or leave `<!-- lint-ack: bdd-rule-grouping — <reason> -->`.
+  [INFO ] line 40: [bdd-implementation-detail-step] step describes UI/implementation procedure ('visit') rather than behavior
+         suggestion: Behavioral steps survive UI refactors; procedural ones break when the page changes. Prefer `When the user signs in` over `When the user clicks the #login button`. If this step genuinely must assert UI mechanics, leave it and (Phase 5) `<!-- lint-ack: bdd-implementation-detail-step — <reason> -->`.
+  [INFO ] line 45: [bdd-implementation-detail-step] step describes UI/implementation procedure ('visit') rather than behavior
+         suggestion: Behavioral steps survive UI refactors; procedural ones break when the page changes. Prefer `When the user signs in` over `When the user clicks the #login button`. If this step genuinely must assert UI mechanics, leave it and (Phase 5) `<!-- lint-ack: bdd-implementation-detail-step — <reason> -->`.
+  [INFO ] line 64: [bdd-implementation-detail-step] step describes UI/implementation procedure ('visit') rather than behavior
+         suggestion: Behavioral steps survive UI refactors; procedural ones break when the page changes. Prefer `When the user signs in` over `When the user clicks the #login button`. If this step genuinely must assert UI mechanics, leave it and (Phase 5) `<!-- lint-ack: bdd-implementation-detail-step — <reason> -->`.
+

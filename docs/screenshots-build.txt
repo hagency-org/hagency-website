@@ -1,0 +1,87 @@
+
+> hagency-website@1.0.0 build
+> astro build
+
+18:10:55 [types] Generated 21ms
+18:10:55 [build] output: "static"
+18:10:55 [build] mode: "static"
+18:10:55 [build] directory: /Users/yuechen/home/hagency/projects/hagency-website/dist/
+18:10:55 [build] Collecting build info...
+18:10:55 [build] ✓ Completed in 46ms.
+18:10:55 [build] Building static entrypoints...
+18:10:56 [vite] ✓ built in 131ms
+18:10:56 [vite] ✓ built in 38ms
+18:10:56 [build] Rearranging server assets...
+
+ generating static routes 
+18:10:56   ├─ /404.html (+5ms) 
+18:10:56   ├─ /robots.txt (+1ms) 
+18:10:56   ├─ /sitemap.xml (+1ms) 
+18:10:56   ├─ /en/rss.xml (+1ms) 
+18:10:56   ├─ /zh-cn/rss.xml (+1ms) 
+18:10:56   ├─ /en/index.html (+4ms) 
+18:10:56   ├─ /en/ecosystem/index.html (+2ms) 
+18:10:56   ├─ /en/matrix/index.html (+2ms) 
+18:10:56   ├─ /en/demo/index.html (+2ms) 
+18:10:56   ├─ /en/use-cases/index.html (+1ms) 
+18:10:56   ├─ /en/get-started/index.html (+1ms) 
+18:10:56   ├─ /en/downloads/index.html (+2ms) 
+18:10:56   ├─ /en/docs/index.html (+1ms) 
+18:10:56   ├─ /en/security/index.html (+7ms) 
+18:10:56   ├─ /en/updates/index.html (+2ms) 
+18:10:56   ├─ /en/roadmap/index.html (+1ms) 
+18:10:56   ├─ /en/community/index.html (+1ms) 
+18:10:56   ├─ /en/about/index.html (+1ms) 
+18:10:56   ├─ /en/media/index.html (+1ms) 
+18:10:56   ├─ /en/projects/hafleet/index.html (+1ms) 
+18:10:56   ├─ /en/projects/robrix2/index.html (+1ms) 
+18:10:56   ├─ /en/projects/palpo/index.html (+1ms) 
+18:10:56   ├─ /en/docs/choose-your-path/index.html (+1ms) 
+18:10:56   ├─ /en/docs/install-robrix2/index.html (+1ms) 
+18:10:56   ├─ /en/docs/run-hafleet/index.html (+1ms) 
+18:10:56   ├─ /en/docs/deploy-palpo/index.html (+1ms) 
+18:10:56   ├─ /en/docs/connect-fleet/index.html (+1ms) 
+18:10:56   ├─ /en/docs/request-agent/index.html (+1ms) 
+18:10:56   ├─ /en/docs/task-threads/index.html (+1ms) 
+18:10:56   ├─ /en/docs/approvals/index.html (+1ms) 
+18:10:56   ├─ /en/docs/share-files/index.html (+1ms) 
+18:10:56   ├─ /en/docs/operations/index.html (+1ms) 
+18:10:56   ├─ /en/updates/introducing-hagency/index.html (+1ms) 
+18:10:56   ├─ /en/updates/conversation-to-result/index.html (+1ms) 
+18:10:56   ├─ /en/updates/why-matrix/index.html (+1ms) 
+18:10:56   ├─ /zh-cn/index.html (+1ms) 
+18:10:56   ├─ /zh-cn/ecosystem/index.html (+1ms) 
+18:10:56   ├─ /zh-cn/matrix/index.html (+1ms) 
+18:10:56   ├─ /zh-cn/demo/index.html (+1ms) 
+18:10:56   ├─ /zh-cn/use-cases/index.html (+1ms) 
+18:10:56   ├─ /zh-cn/get-started/index.html (+1ms) 
+18:10:56   ├─ /zh-cn/downloads/index.html (+1ms) 
+18:10:56   ├─ /zh-cn/docs/index.html (+1ms) 
+18:10:56   ├─ /zh-cn/security/index.html (+1ms) 
+18:10:56   ├─ /zh-cn/updates/index.html (+1ms) 
+18:10:56   ├─ /zh-cn/roadmap/index.html (+1ms) 
+18:10:56   ├─ /zh-cn/community/index.html (+1ms) 
+18:10:56   ├─ /zh-cn/about/index.html (+1ms) 
+18:10:56   ├─ /zh-cn/media/index.html (+1ms) 
+18:10:56   ├─ /zh-cn/projects/hafleet/index.html (+1ms) 
+18:10:56   ├─ /zh-cn/projects/robrix2/index.html (+1ms) 
+18:10:56   ├─ /zh-cn/projects/palpo/index.html (+1ms) 
+18:10:56   ├─ /zh-cn/docs/choose-your-path/index.html (+1ms) 
+18:10:56   ├─ /zh-cn/docs/install-robrix2/index.html (+1ms) 
+18:10:56   ├─ /zh-cn/docs/run-hafleet/index.html (+1ms) 
+18:10:56   ├─ /zh-cn/docs/deploy-palpo/index.html (+1ms) 
+18:10:56   ├─ /zh-cn/docs/connect-fleet/index.html (+1ms) 
+18:10:56   ├─ /zh-cn/docs/request-agent/index.html (+1ms) 
+18:10:56   ├─ /zh-cn/docs/task-threads/index.html (+1ms) 
+18:10:56   ├─ /zh-cn/docs/approvals/index.html (+1ms) 
+18:10:56   ├─ /zh-cn/docs/share-files/index.html (+1ms) 
+18:10:56   ├─ /zh-cn/docs/operations/index.html (+1ms) 
+18:10:56   ├─ /zh-cn/updates/introducing-hagency/index.html (+1ms) 
+18:10:56   ├─ /zh-cn/updates/conversation-to-result/index.html (+1ms) 
+18:10:56   ├─ /zh-cn/updates/why-matrix/index.html (+8ms) 
+18:10:56   ├─ /index.html (+1ms) 
+18:10:56 ✓ Completed in 100ms.
+
+18:10:56 [build] ✓ Completed in 301ms.
+18:10:56 [build] 62 page(s) built in 357ms
+18:10:56 [build] Complete!

@@ -1,0 +1,13 @@
+---
+import { b, t, ui, type Locale } from '@/data/site';
+import { screenshotUI } from '@/data/screenshots';
+import Icon from './Icon.astro';
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+---
+<dialog class="screenshot-dialog" aria-labelledby="screenshot-title" aria-describedby="screenshot-description" data-screenshot-dialog data-loading={t(screenshotUI.loading,lang)} data-error={t(screenshotUI.error,lang)}>
+  <div class="screenshot-dialog-heading"><div><p class="screenshot-dialog-meta" data-screenshot-metadata></p><h2 id="screenshot-title">{t(b('Project screenshot', '项目截图'),lang)}</h2></div><button type="button" class="icon-button" data-screenshot-close aria-label={t(ui.close,lang)} autofocus><Icon name="close"/></button></div>
+  <div class="screenshot-toolbar"><p id="screenshot-description"></p><div><button type="button" data-screenshot-zoom aria-pressed="false" data-actual={t(screenshotUI.actual,lang)} data-fit={t(screenshotUI.fit,lang)}>{t(screenshotUI.actual,lang)}</button><a data-screenshot-original target="_blank" rel="noopener noreferrer">{t(screenshotUI.original,lang)}<Icon name="external" size={13}/></a></div></div>
+  <p class="screenshot-load-status" role="status" data-screenshot-status hidden></p>
+  <div class="screenshot-image-scroll" data-screenshot-image tabindex="0" role="region" aria-label={t(b('Full screenshot, scroll to explore', '完整截图，可滚动查看'),lang)}></div>
+</dialog>

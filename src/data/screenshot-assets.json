@@ -1,0 +1,56 @@
+[
+  {
+    "id": "hafleet-resources",
+    "source": "resource-agent-live-v8.png",
+    "width": 1450,
+    "height": 1737,
+    "bytes": 342281,
+    "sha256": "33bb459de3d167cfcbae5445e1c8d1893c8f98c600ba6c64d8bd27a1bbfe7c05",
+    "sourceModified": "2026-09-08T07:48:41.197Z"
+  },
+  {
+    "id": "hafleet-engagements",
+    "source": "walkthrough-engagements.png",
+    "width": 1500,
+    "height": 1262,
+    "bytes": 217945,
+    "sha256": "b0a23549a743bbcb396b4e994e3d6ed95a9f9926e93310da7175a8fceaf821aa",
+    "sourceModified": "2026-09-07T21:24:29.767Z"
+  },
+  {
+    "id": "robrix2-group-files",
+    "source": "robrix-files-native-0908/robrix-files-group-saved.png",
+    "width": 2978,
+    "height": 1710,
+    "bytes": 638822,
+    "sha256": "a7e10b83f498ca026e0bf4ecfd1378866dd9159092e26cac8e59723ab75e55fb",
+    "sourceModified": "2026-09-08T22:02:45.574Z"
+  },
+  {
+    "id": "robrix2-encrypted-files",
+    "source": "robrix-files-native-0908/robrix-files-encrypted-final.png",
+    "width": 2978,
+    "height": 1710,
+    "bytes": 766878,
+    "sha256": "706c4ab909fbcb8ce0c3357a04de6782ff3cf6a8f1cbd05bbc4fae08f9ee31d1",
+    "sourceModified": "2026-09-08T22:05:06.088Z"
+  },
+  {
+    "id": "palpo-project-access",
+    "source": "request-readiness-final-deployed.png",
+    "width": 1440,
+    "height": 1412,
+    "bytes": 157569,
+    "sha256": "2ec73920a912a7817e4e86120a299e9a026c02d90c8d42d57cce6ad0a73bf897",
+    "sourceModified": "2026-09-07T22:58:34.712Z"
+  },
+  {
+    "id": "palpo-resource-catalog",
+    "source": "agent-definition-check-0908-repaired.png",
+    "width": 1440,
+    "height": 2522,
+    "bytes": 341698,
+    "sha256": "db7533d3092ef32d411663899d7d776b65c359194d5832c385cc921c50fefa89",
+    "sourceModified": "2026-09-08T23:48:52.522Z"
+  }
+]

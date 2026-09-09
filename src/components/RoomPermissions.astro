@@ -1,0 +1,18 @@
+---
+import { b, t, type Locale } from '@/data/site';
+import { matrix } from '@/data/matrix';
+import Icon from './Icon.astro';
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const people = [{ name: 'Mei', type: b('Human', '人类'), icon: 'people' }, { name: 'Atlas', type: b('Agent', 'Agent'), icon: 'fleet' }];
+const member = b('Collaborator','协作者');
+const moderator = b('Room moderator','房间管理者');
+const allowed = b('Allowed','允许');
+const restricted = b('Requires moderator role','需要房间管理角色');
+---
+<div class="permission-example" data-permission-example data-allowed={t(allowed,lang)} data-restricted={t(restricted,lang)} data-member={t(member,lang)} data-moderator={t(moderator,lang)}>
+  <div class="permission-toolbar"><div><span class="eyebrow">{t(b('SAME ROLE. SAME ROOM PERMISSIONS.', '相同角色，相同房间权限。'),lang)}</span><p>{t(b('Choose a role to see what both participants can do.', '选择角色，查看双方可以执行的操作。'),lang)}</p></div><div><label for="room-role">{t(b('Grant both participants this role','为双方授予此角色'),lang)}</label><select id="room-role" data-room-role><option value="member">{t(member,lang)}</option><option value="moderator">{t(moderator,lang)}</option></select></div></div>
+  <div class="permission-members">{people.map(person=><article class="permission-member" data-room-member><div class="permission-identity"><span class="permission-avatar"><Icon name={person.icon} size={27}/></span><div><span class="eyebrow">{t(person.type,lang)}</span><h3>{person.name}</h3></div><span class="permission-role" data-room-role-label>{t(member,lang)}</span></div><ul>{matrix.capabilities.map(capability=><li data-capability={capability.id} data-elevated={capability.elevated} data-granted={!capability.elevated}><span>{t(capability.label,lang)}</span><span class="permission-verdict"><span data-permission-check hidden={capability.elevated}><Icon name="check" size={17}/></span><span data-permission-lock hidden={!capability.elevated}><Icon name="shield" size={17}/></span><span class="sr-only" data-permission-label>{t(capability.elevated?restricted:allowed,lang)}</span></span></li>)}</ul></article>)}</div>
+  <p class="permission-status" aria-live="polite" data-permission-status data-member-status={t(b('Both are collaborators. Messages and file sharing are allowed; room moderation is not granted.','双方均为协作者，允许发消息和分享文件，尚未授予房间管理权限。'),lang)} data-moderator-status={t(b('Both are room moderators. The same additional topic and message moderation permissions are granted.','双方均为房间管理者，获得相同的额外话题与消息管理权限。'),lang)}>{t(b('Both are collaborators. Messages and file sharing are allowed; room moderation is not granted.','双方均为协作者，允许发消息和分享文件，尚未授予房间管理权限。'),lang)}</p>
+  <p class="demo-disclosure"><Icon name="eye" size={14}/>{t(b('Example room policy, not a live grant. Actual permissions depend on room configuration and the authority of the person granting them.', '房间策略示例，不会实际授权。真实权限取决于房间配置，以及授权者本身的权限。'),lang)}</p>
+</div>

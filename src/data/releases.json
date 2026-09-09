@@ -1,0 +1,120 @@
+{
+  "verifiedAt": "2026-09-09T00:09:42.921Z",
+  "releases": [
+    {
+      "id": "hafleet",
+      "tag": "v1.2.0",
+      "publishedAt": "2026-07-30T00:59:23Z",
+      "source": "https://github.com/hagency-org/HAFleet/releases/tag/v1.2.0",
+      "assets": [
+        {
+          "name": "hafleet-1.2.0.tar.gz",
+          "url": "https://github.com/hagency-org/HAFleet/releases/download/v1.2.0/hafleet-1.2.0.tar.gz",
+          "size": 1191929,
+          "platform": "macos,linux",
+          "arch": "Node.js",
+          "signature": null
+        },
+        {
+          "name": "hafleet-remote-1.2.0.tar.gz",
+          "url": "https://github.com/hagency-org/HAFleet/releases/download/v1.2.0/hafleet-remote-1.2.0.tar.gz",
+          "size": 90413,
+          "platform": "macos,linux",
+          "arch": "Node.js",
+          "signature": null
+        }
+      ],
+      "checksums": "https://github.com/hagency-org/HAFleet/releases/download/v1.2.0/SHA256SUMS"
+    },
+    {
+      "id": "robrix2",
+      "tag": "v1.1.0",
+      "publishedAt": "2026-07-22T15:54:28Z",
+      "source": "https://github.com/Project-Robius-China/robrix2/releases/tag/v1.1.0",
+      "assets": [
+        {
+          "name": "robrix-1.1.0-android-aarch64-release.apk",
+          "url": "https://github.com/Project-Robius-China/robrix2/releases/download/v1.1.0/robrix-1.1.0-android-aarch64-release.apk",
+          "size": 92157796,
+          "platform": "android",
+          "arch": "ARM64",
+          "signature": null
+        },
+        {
+          "name": "robrix-1.1.0-linux-aarch64-release.deb",
+          "url": "https://github.com/Project-Robius-China/robrix2/releases/download/v1.1.0/robrix-1.1.0-linux-aarch64-release.deb",
+          "size": 93757952,
+          "platform": "linux",
+          "arch": "ARM64",
+          "signature": "https://github.com/Project-Robius-China/robrix2/releases/download/v1.1.0/robrix-1.1.0-linux-aarch64-release.deb.sig"
+        },
+        {
+          "name": "robrix-1.1.0-linux-x86_64-release.deb",
+          "url": "https://github.com/Project-Robius-China/robrix2/releases/download/v1.1.0/robrix-1.1.0-linux-x86_64-release.deb",
+          "size": 98130118,
+          "platform": "linux",
+          "arch": "x86-64",
+          "signature": "https://github.com/Project-Robius-China/robrix2/releases/download/v1.1.0/robrix-1.1.0-linux-x86_64-release.deb.sig"
+        },
+        {
+          "name": "robrix-1.1.0-macos-aarch64-release.dmg",
+          "url": "https://github.com/Project-Robius-China/robrix2/releases/download/v1.1.0/robrix-1.1.0-macos-aarch64-release.dmg",
+          "size": 91960407,
+          "platform": "macos",
+          "arch": "ARM64",
+          "signature": "https://github.com/Project-Robius-China/robrix2/releases/download/v1.1.0/robrix-1.1.0-macos-aarch64-release.dmg.sig"
+        },
+        {
+          "name": "robrix-1.1.0-macos-x86_64-release.dmg",
+          "url": "https://github.com/Project-Robius-China/robrix2/releases/download/v1.1.0/robrix-1.1.0-macos-x86_64-release.dmg",
+          "size": 96743918,
+          "platform": "macos",
+          "arch": "x86-64",
+          "signature": "https://github.com/Project-Robius-China/robrix2/releases/download/v1.1.0/robrix-1.1.0-macos-x86_64-release.dmg.sig"
+        },
+        {
+          "name": "robrix-1.1.0-windows-x86_64-release.exe",
+          "url": "https://github.com/Project-Robius-China/robrix2/releases/download/v1.1.0/robrix-1.1.0-windows-x86_64-release.exe",
+          "size": 57343475,
+          "platform": "windows",
+          "arch": "x86-64",
+          "signature": "https://github.com/Project-Robius-China/robrix2/releases/download/v1.1.0/robrix-1.1.0-windows-x86_64-release.exe.sig"
+        }
+      ],
+      "checksums": null
+    },
+    {
+      "id": "palpo",
+      "tag": "v0.4.0",
+      "publishedAt": "2026-07-07T00:32:03Z",
+      "source": "https://github.com/palpo-im/palpo/releases/tag/v0.4.0",
+      "assets": [
+        {
+          "name": "palpo-aarch64-apple-darwin.tar.gz",
+          "url": "https://github.com/palpo-im/palpo/releases/download/v0.4.0/palpo-aarch64-apple-darwin.tar.gz",
+          "size": 19849285,
+          "platform": "macos",
+          "arch": "ARM64",
+          "signature": null
+        },
+        {
+          "name": "palpo-x86_64-pc-windows-msvc.zip",
+          "url": "https://github.com/palpo-im/palpo/releases/download/v0.4.0/palpo-x86_64-pc-windows-msvc.zip",
+          "size": 21457494,
+          "platform": "windows",
+          "arch": "x86-64",
+          "signature": null
+        },
+        {
+          "name": "palpo-x86_64-unknown-linux-gnu.tar.gz",
+          "url": "https://github.com/palpo-im/palpo/releases/download/v0.4.0/palpo-x86_64-unknown-linux-gnu.tar.gz",
+          "size": 21625046,
+          "platform": "linux",
+          "arch": "x86-64",
+          "signature": null
+        }
+      ],
+      "checksums": null
+    }
+  ]
+}
