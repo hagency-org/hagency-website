@@ -225,16 +225,31 @@ builds and all browser tests before deploying the tested Pages artifact.
 
 ## 2026-09-10 — Custom domain base path
 
-The repository serves GitHub Pages at the verified custom domain hagency.ai
-with HTTPS enforced, so the published build must use the root base path. The
-Pages workflow built with `SITE_URL=https://hagency-org.github.io/hagency-website/`,
-which baked the repository prefix into the locale redirect, navigation, assets,
-canonical metadata, feeds and sitemap. Visitors to https://hagency.ai/ were sent
-to /hagency-website/en/ and received the 404 page.
+The site is published to a custom domain rather than the repository subpath, so
+the build must use the root base path. The Pages workflow built with
+`SITE_URL=https://hagency-org.github.io/hagency-website/`, which baked the
+repository prefix into the locale redirect, navigation, assets, canonical
+metadata, feeds and sitemap. Visitors to the custom domain were sent to
+/hagency-website/en/ and received the 404 page.
 
-The workflow now builds and tests with `SITE_URL=https://hagency.ai/`, and
+The workflow now builds and tests with `SITE_URL=https://hagency.org/`, and
 `tests/pages.test.mjs` derives its origin and base path from `SITE_URL` instead
 of the hardcoded repository prefix. Both Pages browser tests pass against the
 custom-domain build and against a repository-subpath build. Astro check, the
-local production build and all 17 local browser tests pass. No domain, DNS,
-Pages setting or credential was changed.
+local production build and all 17 local browser tests pass.
+
+## 2026-09-10 — Domain change to hagency.org
+
+The published domain is hagency.org. Verified from outside the repository: the
+Pages custom domain is hagency.org with the domain verified, HTTPS enforced and
+a certificate approved for hagency.org and www.hagency.org; both the apex and
+www resolve to the GitHub Pages addresses; localized routes, feeds and the
+architecture pages return 200 over HTTPS.
+
+The first root-path deploy was built before this rename, so its canonical URLs,
+language alternates, robots sitemap line and sitemap entries still named
+hagency.ai, which no longer serves the site. This change renames the build
+target, the default in `tests/pages.test.mjs` and the README so the next deploy
+publishes metadata matching the live domain. No domain, DNS, Pages setting or
+credential was changed by this work; the base path is identical for either
+domain.

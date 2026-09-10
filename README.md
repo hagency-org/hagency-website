@@ -152,16 +152,16 @@ and the earlier `docs/lifecycle-result.json`.
 
 ## Public website
 
-- English: https://hagency.ai/en/
-- 简体中文: https://hagency.ai/zh-cn/
+- English: https://hagency.org/en/
+- 简体中文: https://hagency.org/zh-cn/
 
 Pushes to `main` run typecheck, the complete local browser suite, a production
 build and published-path browser checks, then publish the tested `dist/` artifact
 through GitHub Pages. Pull requests run the same checks without deploying.
 
 ```sh
-SITE_URL=https://hagency.ai/ npm run build
-SITE_URL=https://hagency.ai/ node --test tests/pages.test.mjs
+SITE_URL=https://hagency.org/ npm run build
+SITE_URL=https://hagency.org/ node --test tests/pages.test.mjs
 ```
 
 `SITE_URL` determines the origin and base path for navigation, images,
