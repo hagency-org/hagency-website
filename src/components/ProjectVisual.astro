@@ -5,8 +5,8 @@ interface Props { project: Project; lang: Locale }
 const { project, lang } = Astro.props;
 ---
 <div class:list={['project-visual', project.color]}>
-  <header><Icon name={project.id === 'hafleet' ? 'fleet' : project.id === 'robrix2' ? 'chat' : 'network'} size={18} /><span>{project.name}</span><span>{t(b('CONCEPTUAL VIEW', '概念示意'), lang)}</span></header>
-  {project.id === 'hafleet' && <div>
+  <header><Icon name={project.id === 'hagency' ? 'fleet' : project.id === 'robrix2' ? 'chat' : 'network'} size={18} /><span>{project.name}</span><span>{t(b('CONCEPTUAL VIEW', '概念示意'), lang)}</span></header>
+  {project.id === 'hagency' && <div>
     {[
       { title: b('A resource you contribute', '你贡献的资源'), sub: b('Coding runtime · model configuration', '编程运行时 · 模型配置'), state: b('CONFIGURE', '配置'), icon: 'fleet' },
       { title: b('An agent for the project', '项目所需的 Agent'), sub: b('Qualified role · provider approval', '合格角色 · 提供方审批'), state: b('ALLOCATE', '分配'), icon: 'people' },
@@ -14,5 +14,5 @@ const { project, lang } = Astro.props;
     ].map(row => <div class="mini-row"><span class="mini-icon"><Icon name={row.icon} size={18} /></span><span><strong>{t(row.title, lang)}</strong><small>{t(row.sub, lang)}</small></span><span class="mini-state">{t(row.state, lang)}</span></div>)}
   </div>}
   {project.id === 'robrix2' && <div class="mini-chat"><span class="small-label"># {t(b('project-studio', '项目工作室'), lang)}</span><div><span class="mini-avatar"><Icon name="people" size={16} /></span><div><strong>{t(b('You', '你'), lang)}</strong><p>{t(b('@Atlas, let’s turn this idea into something we can test.', '@Atlas，让我们把这个想法变成可测试的成果。'), lang)}</p></div></div><div><span class="mini-avatar">A</span><div><strong>Atlas</strong><p>{t(b('I’ll start with the implementation and share the progress here.', '我会从实现开始，在这里同步进展。'), lang)}</p></div></div><div class="mini-thread"><Icon name="chat" size={13} /> {t(b('One task. A connected conversation.', '一个任务，一段持续的对话。'), lang)}</div></div>}
-  {project.id === 'palpo' && <><div class="server-visual"><div class="server-rack">{[1,2,3].map(()=><div><i></i><i></i><span></span></div>)}</div><span class="server-connect"></span><div class="server-clients"><span>Robrix2</span><span>HAFleet</span><span>{t(b('Matrix network', 'Matrix 网络'), lang)}</span></div></div><p class="visual-caption">Rust / Salvo / PostgreSQL<br/>{t(b('An open foundation for every connection.', '为每个连接提供开放基础。'), lang)}</p></>}
+  {project.id === 'palpo' && <><div class="server-visual"><div class="server-rack">{[1,2,3].map(()=><div><i></i><i></i><span></span></div>)}</div><span class="server-connect"></span><div class="server-clients"><span>Robrix2</span><span>Hagency</span><span>{t(b('Matrix network', 'Matrix 网络'), lang)}</span></div></div><p class="visual-caption">Rust / Salvo / PostgreSQL<br/>{t(b('An open foundation for every connection.', '为每个连接提供开放基础。'), lang)}</p></>}
 </div>

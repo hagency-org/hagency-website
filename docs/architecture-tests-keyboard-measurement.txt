@@ -1,0 +1,50 @@
+
+> hagency-website@1.0.0 test
+> node --test tests/site.test.mjs
+
+✔ all localized routes render and internal links resolve (3324.991417ms)
+✔ language preserves route and theme persists across pages (770.575ms)
+✔ walkthrough progresses and replays without live requests (1825.61425ms)
+✔ localized search finds guides and handles no matches (1425.807833ms)
+✔ download platform filter selects available assets (1225.356709ms)
+✔ mobile navigation and layouts have no horizontal overflow (6166.539875ms)
+✔ key pages meet automated accessibility checks in both themes (21654.684458ms)
+✔ copy controls, update filters, feeds, and missing pages work (1738.4215ms)
+✔ Matrix network comparison switches architecture without live requests (1533.860458ms)
+✔ equal room roles update human and agent permissions together (1344.436959ms)
+✔ project screenshots load and enlarge with localized captions and keyboard controls (14691.134292ms)
+✔ original screenshot links work without JavaScript (1860.549916ms)
+✔ screenshot load failures show a localized recovery link (1415.682291ms)
+✖ architecture diagram switches views and inspects connections in both languages (841.393584ms)
+✔ architecture zoom reset theme and mobile controls work (4265.727292ms)
+✔ architecture text explains all connections without JavaScript (1310.03875ms)
+✔ architecture text survives a failed island request (621.195208ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 16
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 66345.533042
+
+✖ failing tests:
+
+test at tests/site.test.mjs:326:1
+✖ architecture diagram switches views and inspects connections in both languages (841.393584ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /control plane/. Input:
+
+  'Codex App Server'
+
+      at file:///Users/yuechen/home/hagency/projects/hagency-website/tests/site.test.mjs:344:14
+      at async withPage (file:///Users/yuechen/home/hagency/projects/hagency-website/tests/site.test.mjs:39:8)
+      at async TestContext.<anonymous> (file:///Users/yuechen/home/hagency/projects/hagency-website/tests/site.test.mjs:328:36)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'Codex App Server',
+    expected: /control plane/,
+    operator: 'match',
+    diff: 'simple'
+  }

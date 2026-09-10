@@ -1,11 +1,11 @@
 # Hagency website
 
-A complete English and Simplified Chinese promotional website for HAFleet,
+A complete English and Simplified Chinese promotional website for Hagency,
 Robrix2, and Palpo. Built with Astro and TypeScript, with original generated
 hero artwork inspired by the selected Adora visual direction.
 
 This directory is an independent new Git repository, owned here under
-`projects/hagency-website/`. It is not a symlink and has no upstream remote.
+`projects/hagency-website/`. It is not a symlink. Source: https://github.com/hagency-org/hagency-website.
 
 ## Run locally
 
@@ -32,7 +32,7 @@ Astro 7 manages its preview server as a background process. Use
 
 ## Included
 
-30 pages per language: 17 main pages, 10 practical guides, and 3 introductory
+31 pages per language: 18 main pages, 10 practical guides, and 3 introductory
 articles. Main pages cover the ecosystem, all three projects, an eight-step
 interactive walkthrough, use cases, getting started, downloads, documentation,
 trust and control, updates, roadmap, community, about, and brand/media.
@@ -42,6 +42,13 @@ open-source, agent-native alternative-to-WeChat positioning. It includes an
 interactive network comparison and an illustrative role selector showing equal
 room permissions for a person and an agent. Both examples are local and issue
 no real server requests or authorization grants.
+
+The architecture page uses React Flow for four interactive views: the whole
+system, Appservice registration, message delivery, and coding-agent runtimes.
+Nodes and connections expose detailed bilingual explanations; pan/zoom/reset,
+keyboard inspection, a minimap and theme switching are supported. Static API
+tables, registration steps, runtime differences and connection references remain
+readable without JavaScript. See [implementation sources](docs/architecture.md).
 
 Language switching preserves the route and section anchor. Theme preference
 persists across navigation. Search indexes the current language's pages and
@@ -65,6 +72,8 @@ Palpo's gallery explicitly identifies its separate companion administration app.
 - `src/data/workflow.ts`: all eight bilingual walkthrough steps.
 - `src/data/matrix.ts`: Matrix, federation, comparison, and agent identity copy.
 - `src/data/screenshots.ts`: real project screenshots and bilingual captions.
+- `src/data/architecture.ts`: React Flow components, connections and four views.
+- `src/data/architecture-content.ts`: detailed architecture and source notes.
 - `src/data/releases.json`: verified upstream release assets and source URLs.
 - `src/components/StandardPage.astro`: secondary pages and their localized copy.
 - `src/pages/[lang]/[...slug].astro`: all localized content routes.
@@ -131,26 +140,31 @@ the complete walkthrough, search and empty results, download filtering, mobile
 layouts at 320/390/768px, representative WCAG A/AA automated rules in both themes,
 clipboard behavior, feeds, release filtering, and the missing-page experience.
 
-The active Task Contract is `specs/task-project-screenshots.spec.md`; the Matrix
-and original site contracts remain in `specs/`. Their exact
+The active Task Contract is `specs/task-interactive-architecture.spec.md`; earlier
+site, Matrix and screenshot contracts remain in `specs/`. Their exact
 test selectors are bound to the Node suite. The installed agent-spec 1.4.0
 native lifecycle does not execute this Node suite; its scenario skips are
 recorded separately and must not be reported as passes. See
-[verification notes](docs/verification.md), `docs/lifecycle-screenshots-result.json`,
+[verification notes](docs/verification.md), `docs/lifecycle-architecture-result.json`,
+`docs/lifecycle-screenshots-result.json`,
 `docs/lifecycle-matrix-result.json`,
 and the earlier `docs/lifecycle-result.json`.
 
-## Prepare for public hosting
+## Public website
 
-No production domain or hosting destination has been selected. Local builds use
-`http://localhost:4328` for metadata and disable indexing. Build with the actual
-HTTPS origin once it is chosen:
+- English: https://hagency-org.github.io/hagency-website/en/
+- 简体中文: https://hagency-org.github.io/hagency-website/zh-cn/
+
+Pushes to `main` run typecheck, the complete local browser suite, a production
+build and subdirectory browser checks, then publish the tested `dist/` artifact
+through GitHub Pages. Pull requests run the same checks without deploying.
 
 ```sh
-SITE_URL=https://your-real-domain.example npm run build
+SITE_URL=https://hagency-org.github.io/hagency-website/ npm run build
+node --test tests/pages.test.mjs
 ```
 
-Host the contents of `dist/` on a static host with directory-index support and
-`404.html` as the error document. This generates the correct canonical URLs,
-language alternates, feeds, sitemap, and crawl settings for that origin. Keep
-preview/staging builds unindexed. Public deployment is a separate action.
+`SITE_URL` determines the origin and repository path for navigation, images,
+canonical URLs, language alternates, feeds and sitemap. Unset it for local
+previews at the root path with indexing disabled. Native agent-spec does not
+execute these Node browser tests; its skips are reported separately.

@@ -14,7 +14,7 @@ federation, and demonstrate agent-native room participation in both languages.
 
 - Centralized versus federated examples explain architecture, not benchmark claims.
 - Permission controls are illustrative; never connect them to real authorizations.
-- Room roles are distinct from HAFleet runtime execution permissions.
+- Room roles are distinct from Hagency runtime execution permissions.
 - Native agent-spec cannot execute Node browser tests; retain native skips.
 
 ## Boundaries

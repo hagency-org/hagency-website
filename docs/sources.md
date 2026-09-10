@@ -6,7 +6,7 @@ No live product instance was restarted or exercised for this editorial review.
 
 | Project | Public source reviewed | Published release | Development evidence |
 |---|---|---|---|
-| HAFleet | [hagency-org/HAFleet](https://github.com/hagency-org/HAFleet), master `4fb9749` | [v1.2.0](https://github.com/hagency-org/HAFleet/releases/tag/v1.2.0), July 30 | Local `c380959`, September 8 integration reports |
+| Hagency | [hagency-org/hagency](https://github.com/hagency-org/hagency), master `4fb9749` | [v1.2.0](https://github.com/hagency-org/hagency/releases/tag/v1.2.0), July 30 | Local `c380959`, September 8 integration reports |
 | Robrix2 | [Project-Robius-China/robrix2](https://github.com/Project-Robius-China/robrix2), main `e28e118e` | [v1.1.0](https://github.com/Project-Robius-China/robrix2/releases/tag/v1.1.0), July 22 | Local `88ebf221`, September 8 macOS client verification |
 | Palpo | [palpo-im/palpo](https://github.com/palpo-im/palpo), main `c96c8e33` | [v0.4.0](https://github.com/palpo-im/palpo/releases/tag/v0.4.0), July 7 | Separate local companion-admin worktree `c8748200` |
 
@@ -15,7 +15,7 @@ included in those public release packages. `src/data/releases.json` contains
 the exact GitHub release asset URLs, byte sizes, architectures, publication
 timestamps, signatures when supplied, and the API verification timestamp.
 
-## HAFleet
+## Hagency
 
 Node.js local coding-agent operations, documented macOS/Linux setup, resource
 configuration and named agent definitions. The newer integration includes
@@ -39,7 +39,7 @@ The upstream community link was obtained from the repository documentation.
 Rust/Salvo Matrix homeserver using PostgreSQL. The inspected source README
 specifies Rust 1.94+ and PostgreSQL 16+. See [Palpo documentation](https://palpo.im/).
 Maintainers identify limited large-scale, long-running production evidence.
-The newer HAFleet companion admin is a separate Node service; it is not part
+The newer Hagency companion admin is a separate Node service; it is not part
 of the v0.4.0 archive. Credential rotation and fleet-wide stop acknowledgment
 remain gaps. No blanket production-readiness or complete encryption-path
 compatibility claim is made.
@@ -98,3 +98,23 @@ provenance are recorded in [screenshots.md](screenshots.md). Homepage project
 cards now show real interfaces; project pages each include two views. Palpo's
 views are labeled as its separate development companion admin application,
 not as features bundled in the published Palpo v0.4.0 server package.
+
+## Interactive architecture expansion
+
+The new architecture page follows the outbound development implementation:
+Hagency local revision `05dc46b`, Palpo `8a0908cd`, and Robrix2 `d5523276`.
+See [architecture source notes](architecture.md) for exact files, transport
+directions, runtime distinctions and current-versus-published availability.
+The Matrix client, Appservice and federation references remain the standard
+protocol sources; fleet v2 polling and Palpo admin routes are project extensions.
+The older fleet connection guide now describes outbound pairing and generation
+proof followed by heartbeats, with legacy callback behavior identified separately.
+
+## Product rename — September 9
+
+The operator selected Hagency as the sole runtime brand, with no old-name
+aliases. Generic fleet identifiers and endpoints are unchanged. Historical
+captures retain their original pixels and are identified as pre-rename captures.
+No Hagency release assets have been published; downloads offer source installation
+instead of inventing renamed asset URLs. Earlier verification records remain
+historical evidence.

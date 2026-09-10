@@ -1,5 +1,5 @@
 ---
-import { b, t, ui, url, projects, repos, type Locale } from '@/data/site';
+import { b, t, ui, url, asset, projects, repos, type Locale } from '@/data/site';
 import { guides, articles, pageInfo } from '@/data/content';
 import Icon from '@/components/Icon.astro';
 import Mark from '@/components/Mark.astro';
@@ -12,7 +12,7 @@ const { lang, slug = '', title, description, noindex = false } = Astro.props;
 const other = lang === 'en' ? 'zh-cn' : 'en';
 const origin = Astro.site ?? new URL('http://localhost:4328');
 const production = origin.protocol === 'https:';
-const nav = [{ slug: 'ecosystem', label: ui.ecosystem }, { slug: 'matrix', label: ui.matrix }, { slug: 'use-cases', label: ui.useCases }, { slug: 'docs', label: ui.docs }, { slug: 'community', label: ui.community }];
+const nav = [{ slug: 'ecosystem', label: ui.ecosystem }, { slug: 'architecture', label: ui.architecture }, { slug: 'matrix', label: ui.matrix }, { slug: 'use-cases', label: ui.useCases }, { slug: 'docs', label: ui.docs }, { slug: 'community', label: ui.community }];
 const searchItems = [
   ...Object.entries(pageInfo).map(([route, value]) => ({ title: t(value.title, lang), description: t(value.description, lang), href: url(lang, route), type: t(b('Page', '页面'), lang) })),
   ...projects.map(p => ({ title: p.name, description: t(p.description, lang), href: url(lang, `projects/${p.id}`), type: t(ui.projects, lang) })),
@@ -27,16 +27,16 @@ const searchItems = [
     <title>{slug ? `${title} — Hagency` : `Hagency — ${title}`}</title><meta name="description" content={description} />
     <meta name="theme-color" content="#0a0a0f" /><meta name="color-scheme" content="dark light" />
     {(!production || noindex) && <meta name="robots" content="noindex, nofollow" />}
-    <link rel="icon" type="image/svg+xml" href="/brand/hagency-mark.svg" />
+    <link rel="icon" type="image/svg+xml" href={asset("brand/hagency-mark.svg")} />
     <link rel="canonical" href={new URL(url(lang, slug), origin).href} />
     <link rel="alternate" hreflang="en" href={new URL(url('en', slug), origin).href} />
     <link rel="alternate" hreflang="zh-CN" href={new URL(url('zh-cn', slug), origin).href} />
     <link rel="alternate" hreflang="x-default" href={new URL(url('en', slug), origin).href} />
-    <link rel="alternate" type="application/rss+xml" title={`Hagency — ${t(ui.updates, lang)}`} href={`/${lang}/rss.xml`} />
+    <link rel="alternate" type="application/rss+xml" title={`Hagency — ${t(ui.updates, lang)}`} href={asset(`${lang}/rss.xml`)} />
     <meta property="og:type" content="website" /><meta property="og:site_name" content="Hagency" /><meta property="og:title" content={title} /><meta property="og:description" content={description} />
-    <meta property="og:url" content={new URL(url(lang, slug), origin).href} /><meta property="og:image" content={new URL('/images/hagency-social.png', origin).href} />
+    <meta property="og:url" content={new URL(url(lang, slug), origin).href} /><meta property="og:image" content={new URL(asset('images/hagency-social.png'), origin).href} />
     <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'zh_CN'} /><meta name="twitter:card" content="summary_large_image" />
-    <link rel="preload" href="/fonts/GeistVF.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={asset("fonts/GeistVF.woff2")} as="font" type="font/woff2" crossorigin />
     <script is:inline>
       try { const selected = localStorage.getItem('hagency-theme'); document.documentElement.dataset.theme = selected === 'light' || selected === 'dark' ? selected : (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'); } catch { document.documentElement.dataset.theme = 'dark'; }
     </script>
@@ -58,7 +58,7 @@ const searchItems = [
     </nav>
     <main id="main"><slot /></main>
     <section class="closing-cta"><div class="closing-orbit" aria-hidden="true"></div><div class="container"><span class="eyebrow">HAGENCY</span><h2>{t(ui.learnTogether, lang)}</h2><p>{t(ui.ctaBody, lang)}</p><div class="button-row"><a class="button" href={url(lang, 'get-started')}>{t(ui.start, lang)}<Icon size={17} /></a><a class="button button-quiet" href={url(lang, 'community')}>{t(b('Join the community', '加入社区'), lang)}<Icon size={17} /></a></div></div></section>
-    <footer class="site-footer container"><div class="footer-main"><div class="footer-brand"><a class="brand" href={url(lang)}><Mark /><span>hagency<span class="brand-period">.</span></span></a><p>{t(ui.footer, lang)}</p></div><div><span class="eyebrow">{t(ui.projects, lang)}</span>{projects.map(p => <a href={url(lang, `projects/${p.id}`)}>{p.name}</a>)}</div><div><span class="eyebrow">{t(ui.resources, lang)}</span>{[['matrix', ui.matrix], ['docs', ui.docs], ['downloads', ui.downloads], ['security', ui.security], ['updates', ui.updates]].map(([path, label]) => <a href={url(lang, path as string)}>{t(label as typeof ui.docs, lang)}</a>)}</div><div><span class="eyebrow">{t(ui.ecosystemLabel, lang)}</span>{[['community', ui.community], ['roadmap', ui.roadmap], ['about', ui.about], ['media', ui.media]].map(([path, label]) => <a href={url(lang, path as string)}>{t(label as typeof ui.docs, lang)}</a>)}</div></div><div class="footer-bottom"><p>{t(ui.footerNote, lang)}</p><a href={repos.hafleet} target="_blank" rel="noopener noreferrer">GitHub <Icon name="external" size={12} /></a></div></footer>
+    <footer class="site-footer container"><div class="footer-main"><div class="footer-brand"><a class="brand" href={url(lang)}><Mark /><span>hagency<span class="brand-period">.</span></span></a><p>{t(ui.footer, lang)}</p></div><div><span class="eyebrow">{t(ui.projects, lang)}</span>{projects.map(p => <a href={url(lang, `projects/${p.id}`)}>{p.name}</a>)}</div><div><span class="eyebrow">{t(ui.resources, lang)}</span>{[['architecture', ui.architecture], ['matrix', ui.matrix], ['docs', ui.docs], ['downloads', ui.downloads], ['security', ui.security], ['updates', ui.updates]].map(([path, label]) => <a href={url(lang, path as string)}>{t(label as typeof ui.docs, lang)}</a>)}</div><div><span class="eyebrow">{t(ui.ecosystemLabel, lang)}</span>{[['community', ui.community], ['roadmap', ui.roadmap], ['about', ui.about], ['media', ui.media]].map(([path, label]) => <a href={url(lang, path as string)}>{t(label as typeof ui.docs, lang)}</a>)}</div></div><div class="footer-bottom"><p>{t(ui.footerNote, lang)}</p><a href={repos.hagency} target="_blank" rel="noopener noreferrer">GitHub <Icon name="external" size={12} /></a></div></footer>
     <dialog class="search-dialog" aria-labelledby="search-title" data-search-index={JSON.stringify(searchItems)} data-empty={t(ui.noResults, lang)}>
       <div class="search-dialog-top"><h2 id="search-title">{t(ui.search, lang)}</h2><button class="icon-button search-close" type="button" aria-label={t(ui.close, lang)}><Icon name="close" /></button></div>
       <label class="search-input-wrap"><Icon name="search" size={20} /><span class="sr-only">{t(ui.search, lang)}</span><input type="search" placeholder={t(ui.searchPlaceholder, lang)} autocomplete="off" /></label>

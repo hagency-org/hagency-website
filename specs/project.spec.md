@@ -5,7 +5,7 @@ tags: [website, astro, i18n]
 
 ## Intent
 
-Present HAFleet, Robrix2 and Palpo through a comprehensive, accessible static
+Present Hagency, Robrix2 and Palpo through a comprehensive, accessible static
 website in English and Simplified Chinese using the operator-selected Adora style.
 
 ## Constraints

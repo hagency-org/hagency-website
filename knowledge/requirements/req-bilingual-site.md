@@ -9,7 +9,7 @@ tags: [website, i18n]
 
 ## Source
 
-The operator requested a comprehensive Hagency website for HAFleet, Robrix2 and
+The operator requested a comprehensive Hagency website for Hagency, Robrix2 and
 Palpo, selected ymote/adora-website as the style reference, and instructed:
 "do it in both en and cn i18n" on 2026-09-08.
 

@@ -6,7 +6,7 @@ const { lang, detailed = false } = Astro.props;
 const nodes = [
   { id: 'robrix2', name: 'Robrix2', color: 'blue', icon: 'chat', role: b('Your workspace', '你的工作空间'), desc: b('People, conversations, and decisions.', '人、对话与决策。'), detail: b('The native client presents rooms, threads, and supported owner approval cards. It displays actions; it does not become the authorization authority.', '原生客户端呈现房间、线程与受支持的所有者审批卡片。它负责展示操作，而不是成为权限来源。') },
   { id: 'palpo', name: 'Palpo', color: 'amber', icon: 'network', role: b('Your connection', '你的通信连接'), desc: b('Rooms, identities, and open communication.', '房间、身份与开放通信。'), detail: b('The Matrix homeserver carries room events, membership, and media. Application services connect agent identities through scoped registrations.', 'Matrix 服务器承载房间事件、成员关系与媒体。应用服务通过限定范围的注册连接 Agent 身份。') },
-  { id: 'hafleet', name: 'HAFleet', color: 'teal', icon: 'fleet', role: b('Your agent runtime', '你的 Agent 运行时'), desc: b('Resources, tasks, and useful execution.', '资源、任务与有效执行。'), detail: b('The control plane runs coding agents and owns task and execution state. Its bridge connects work to Matrix; model requests follow the configured provider.', '控制平面运行编程 Agent，维护任务与执行状态。桥接将工作接入 Matrix；模型请求则发送至配置的服务提供方。') },
+  { id: 'hagency', name: 'Hagency', color: 'teal', icon: 'fleet', role: b('Your agent runtime', '你的 Agent 运行时'), desc: b('Resources, tasks, and useful execution.', '资源、任务与有效执行。'), detail: b('The control plane runs coding agents and owns task and execution state. Its bridge connects work to Matrix; model requests follow the configured provider.', '控制平面运行编程 Agent，维护任务与执行状态。桥接将工作接入 Matrix；模型请求则发送至配置的服务提供方。') },
 ];
 ---
 <div class:list={['architecture', { detailed }]}>
@@ -24,3 +24,5 @@ const nodes = [
   </div>
   <div class="architecture-under"><Icon name="people" size={17} /><span>{t(b('People set direction. Open protocols connect the work.', '人指引方向，开放协议连接工作。'), lang)}</span></div>
 </div>
+
+<a class="text-link" style="margin-top:24px" href={url(lang,'architecture')}>{t(b('Explore the complete architecture', '探索完整系统架构'),lang)}<Icon size={17}/></a>

@@ -13,7 +13,7 @@ The operator requested “加一些项目截图” for the existing bilingual Ha
 
 ## Requirements
 
-- Show genuine HAFleet, Robrix2, and Palpo companion administration screenshots
+- Show genuine Hagency, Robrix2, and Palpo companion administration screenshots
   on the homepage and in each project's gallery, with two views per project.
 - Provide English and Chinese captions, accessible alternative text, and an
   enlarged view that also works on small screens and with the keyboard.

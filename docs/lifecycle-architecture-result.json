@@ -1,0 +1,490 @@
+{
+  "failure_summary": "## Verification Failed\n\n7 of 8 scenarios are non-passing.\n\n### Non-passing Scenarios\n\n**All diagram views expose their components and connections**\n- verdict: Skip\n- Skip: the bilingual architecture explorer (no verifier covered this step)\n- Skip: a visitor changes each view and selects a component or connection (no verifier covered this step)\n- Skip: the localized details match the selection without live requests (no verifier covered this step)\n\n**Diagram navigation can be reset**\n- verdict: Skip\n- Skip: the interactive diagram on desktop and mobile (no verifier covered this step)\n- Skip: the visitor zooms, moves a node, resets and changes the theme (no verifier covered this step)\n- Skip: the map returns to its original layout and follows the selected theme (no verifier covered this step)\n\n**Architecture remains available without client scripts**\n- verdict: Skip\n- Skip: a browser without JavaScript (no verifier covered this step)\n- Skip: the architecture page is opened (no verifier covered this step)\n- Skip: registration, client, outbound, runtime and connection explanations remain readable (no verifier covered this step)\n\n**Diagram loading failure retains the architecture explanation**\n- verdict: Skip\n- Skip: a failed React island request (no verifier covered this step)\n- Skip: the visitor reads the architecture page (no verifier covered this step)\n- Skip: the static explanation and connection table remain available (no verifier covered this step)\n\n**All localized destinations remain valid**\n- verdict: Skip\n- Skip: the localized static build (no verifier covered this step)\n- Skip: all routes and navigation links are opened (no verifier covered this step)\n- Skip: each internal destination exists (no verifier covered this step)\n\n**Mobile content remains usable**\n- verdict: Skip\n- Skip: every localized main page on a mobile viewport (no verifier covered this step)\n- Skip: the visitor explores the content (no verifier covered this step)\n- Skip: the page has no horizontal overflow (no verifier covered this step)\n\n**Both themes remain accessible**\n- verdict: Skip\n- Skip: both languages and themes (no verifier covered this step)\n- Skip: the key pages are examined (no verifier covered this step)\n- Skip: automated accessibility checks have no violations (no verifier covered this step)\n\n### Action Required\n\nResolve the failures or missing verification coverage above and re-run verification.\n",
+  "lint_issues": 7,
+  "passed": false,
+  "quality_score": 0.8333333333333334,
+  "stage": "complete",
+  "verification": {
+    "results": [
+      {
+        "duration_ms": 0,
+        "evidence": [
+          {
+            "locations": [
+              "src/components/ArchitectureFlow.tsx"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "src/components/ArchitecturePage.astro"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "src/components/Architecture.astro"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "src/components/ProjectPage.astro"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "src/components/StandardPage.astro"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "src/data/architecture.ts"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "src/data/architecture-content.ts"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "src/data/content.ts"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "src/data/site.ts"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "src/layouts/Layout.astro"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "src/pages/[lang]/[...slug].astro"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "src/styles/architecture.css"
+            ],
+            "matched": true,
+            "pattern": "src/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "tests/site.test.mjs"
+            ],
+            "matched": true,
+            "pattern": "tests/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "package.json"
+            ],
+            "matched": true,
+            "pattern": "package.json",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "package-lock.json"
+            ],
+            "matched": true,
+            "pattern": "package-lock.json",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "astro.config.mjs"
+            ],
+            "matched": true,
+            "pattern": "astro.config.mjs",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "tsconfig.json"
+            ],
+            "matched": true,
+            "pattern": "tsconfig.json",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "README.md"
+            ],
+            "matched": true,
+            "pattern": "README.md",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "docs/architecture.md"
+            ],
+            "matched": true,
+            "pattern": "docs/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "docs/sources.md"
+            ],
+            "matched": true,
+            "pattern": "docs/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "docs/verification.md"
+            ],
+            "matched": true,
+            "pattern": "docs/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "specs/task-interactive-architecture.spec.md"
+            ],
+            "matched": true,
+            "pattern": "specs/**",
+            "type": "pattern_match"
+          },
+          {
+            "locations": [
+              "knowledge/requirements/req-interactive-architecture.md"
+            ],
+            "matched": true,
+            "pattern": "knowledge/**",
+            "type": "pattern_match"
+          }
+        ],
+        "provenance": "computational",
+        "scenario_name": "[boundaries] explicit change set respects declared paths",
+        "step_results": [
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/components/ArchitectureFlow.tsx",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/components/ArchitecturePage.astro",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/components/Architecture.astro",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/components/ProjectPage.astro",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/components/StandardPage.astro",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/data/architecture.ts",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/data/architecture-content.ts",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/data/content.ts",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/data/site.ts",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/layouts/Layout.astro",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/pages/[lang]/[...slug].astro",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `src/**`",
+            "step_text": "src/styles/architecture.css",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `tests/**`",
+            "step_text": "tests/site.test.mjs",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `package.json`",
+            "step_text": "package.json",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `package-lock.json`",
+            "step_text": "package-lock.json",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `astro.config.mjs`",
+            "step_text": "astro.config.mjs",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `tsconfig.json`",
+            "step_text": "tsconfig.json",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `README.md`",
+            "step_text": "README.md",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `docs/**`",
+            "step_text": "docs/architecture.md",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `docs/**`",
+            "step_text": "docs/sources.md",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `docs/**`",
+            "step_text": "docs/verification.md",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `specs/**`",
+            "step_text": "specs/task-interactive-architecture.spec.md",
+            "verdict": "pass"
+          },
+          {
+            "reason": "matches allowed boundary `knowledge/**`",
+            "step_text": "knowledge/requirements/req-interactive-architecture.md",
+            "verdict": "pass"
+          }
+        ],
+        "verdict": "pass"
+      },
+      {
+        "duration_ms": 0,
+        "evidence": [],
+        "scenario_name": "All diagram views expose their components and connections",
+        "step_results": [
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the bilingual architecture explorer",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "a visitor changes each view and selects a component or connection",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the localized details match the selection without live requests",
+            "verdict": "skip"
+          }
+        ],
+        "verdict": "skip"
+      },
+      {
+        "duration_ms": 0,
+        "evidence": [],
+        "scenario_name": "Diagram navigation can be reset",
+        "step_results": [
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the interactive diagram on desktop and mobile",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the visitor zooms, moves a node, resets and changes the theme",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the map returns to its original layout and follows the selected theme",
+            "verdict": "skip"
+          }
+        ],
+        "verdict": "skip"
+      },
+      {
+        "duration_ms": 0,
+        "evidence": [],
+        "scenario_name": "Architecture remains available without client scripts",
+        "step_results": [
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "a browser without JavaScript",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the architecture page is opened",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "registration, client, outbound, runtime and connection explanations remain readable",
+            "verdict": "skip"
+          }
+        ],
+        "verdict": "skip"
+      },
+      {
+        "duration_ms": 0,
+        "evidence": [],
+        "scenario_name": "Diagram loading failure retains the architecture explanation",
+        "step_results": [
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "a failed React island request",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the visitor reads the architecture page",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the static explanation and connection table remain available",
+            "verdict": "skip"
+          }
+        ],
+        "verdict": "skip"
+      },
+      {
+        "duration_ms": 0,
+        "evidence": [],
+        "scenario_name": "All localized destinations remain valid",
+        "step_results": [
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the localized static build",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "all routes and navigation links are opened",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "each internal destination exists",
+            "verdict": "skip"
+          }
+        ],
+        "verdict": "skip"
+      },
+      {
+        "duration_ms": 0,
+        "evidence": [],
+        "scenario_name": "Mobile content remains usable",
+        "step_results": [
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "every localized main page on a mobile viewport",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the visitor explores the content",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the page has no horizontal overflow",
+            "verdict": "skip"
+          }
+        ],
+        "verdict": "skip"
+      },
+      {
+        "duration_ms": 0,
+        "evidence": [],
+        "scenario_name": "Both themes remain accessible",
+        "step_results": [
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "both languages and themes",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "the key pages are examined",
+            "verdict": "skip"
+          },
+          {
+            "reason": "no verifier covered this step",
+            "step_text": "automated accessibility checks have no violations",
+            "verdict": "skip"
+          }
+        ],
+        "verdict": "skip"
+      }
+    ],
+    "spec_name": "Interactive bilingual project architecture",
+    "summary": {
+      "failed": 0,
+      "passed": 1,
+      "pending_review": 0,
+      "skipped": 7,
+      "total": 8,
+      "uncertain": 0
+    }
+  }
+}

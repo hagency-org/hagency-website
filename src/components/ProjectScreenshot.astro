@@ -1,10 +1,10 @@
 ---
-import { t, type Locale } from '@/data/site';
+import { t, asset, type Locale } from '@/data/site';
 import { screenshotUI, type ProjectScreenshot } from '@/data/screenshots';
 import Icon from './Icon.astro';
 interface Props { lang: Locale; screenshot: ProjectScreenshot; compact?: boolean }
 const { lang, screenshot: shot, compact = false } = Astro.props;
-const path = `/images/screenshots/${shot.id}`;
+const path = asset(`images/screenshots/${shot.id}`);
 const metadata = `${t(shot.application, lang)} · ${t(screenshotUI.preview, lang)} · ${t(shot.language, lang)}`;
 ---
 <figure class:list={['project-screenshot', { 'screenshot-compact': compact }]}>

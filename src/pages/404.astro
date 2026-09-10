@@ -1,5 +1,6 @@
 ---
 import '@/styles/global.css';
+import { url } from '@/data/site';
 import Mark from '@/components/Mark.astro';
 ---
-<!doctype html><html lang="en" data-theme="dark"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="robots" content="noindex"/><title>Page not found — Hagency</title></head><body><main class="container not-found"><a class="brand" href="/en/"><Mark/><span>hagency.</span></a><span class="eyebrow">404</span><h1>This page has moved beyond our orbit.</h1><p lang="zh-CN">这个页面暂时不在我们的轨道上。</p><div class="button-row"><a class="button" href="/en/">English home</a><a class="button button-quiet" href="/zh-cn/" lang="zh-CN">返回中文首页</a></div></main></body></html>
+<!doctype html><html lang="en" data-theme="dark"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="robots" content="noindex"/><title>Page not found — Hagency</title></head><body><main class="container not-found"><a class="brand" href={url("en")}><Mark/><span>hagency.</span></a><span class="eyebrow">404</span><h1>This page has moved beyond our orbit.</h1><p lang="zh-CN">这个页面暂时不在我们的轨道上。</p><div class="button-row"><a class="button" href={url("en")}>English home</a><a class="button button-quiet" href={url("zh-cn")} lang="zh-CN">返回中文首页</a></div></main></body></html>

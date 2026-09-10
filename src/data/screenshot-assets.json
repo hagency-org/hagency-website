@@ -1,6 +1,6 @@
 [
   {
-    "id": "hafleet-resources",
+    "id": "hagency-resources",
     "source": "resource-agent-live-v8.png",
     "width": 1450,
     "height": 1737,
@@ -9,7 +9,7 @@
     "sourceModified": "2026-09-08T07:48:41.197Z"
   },
   {
-    "id": "hafleet-engagements",
+    "id": "hagency-engagements",
     "source": "walkthrough-engagements.png",
     "width": 1500,
     "height": 1262,

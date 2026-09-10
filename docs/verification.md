@@ -3,7 +3,59 @@
 Tested from the actual edited tree:
 `/Users/yuechen/home/hagency/projects/hagency-website`.
 
-## Project screenshots — current verification
+## Interactive architecture — current verification
+
+Added `/en/architecture/` and `/zh-cn/architecture/` with a real React Flow
+island and four views: whole system, Appservice registration, message delivery,
+and coding-agent runtimes. API tables, seven registration stages, five adapter
+cards, credential directions, storage, federation and connection references are
+rendered as static bilingual content. Research and provenance: `architecture.md`.
+
+- Typecheck: **0 errors, 0 warnings, 0 hints** (40 files).
+- Static build: **passed**, 62 localized content routes (31 per language), plus
+  the root redirect, 404 and feeds.
+- Full Node/Playwright browser suite: **17 passed, 0 failed, 0 skipped**,
+  65.7 seconds, after the final diagram routing changes.
+- All four views switch correctly in both languages. Node and edge keyboard
+  inspection includes the custom outer terminal path, native Codex approval,
+  ACP, Matrix delivery and registration connections.
+- Zoom, pan, node dragging, reset, fit, locale/anchor preservation and theme
+  synchronization pass at 320px and 1440px. The existing mobile suite covers all
+  18 main pages per locale at 320/390/768px without page overflow.
+- Static architecture content works with JavaScript disabled and with the
+  actual React island request blocked. Diagram interaction issues no live
+  service requests or grants.
+- Automated axe checks pass with architecture included in both languages and
+  themes. Screenshot galleries and all previous site interactions still pass.
+- Dependency audit: **0 vulnerabilities**. The Sharp update was also checked
+  against the six original capture dimensions and an in-memory hero export.
+
+Visual review covered all four desktop diagrams, Chinese light-theme
+registration, and Chinese mobile controls and inspector. Outer links fit inside
+the canvas; dedicated ports separate unrelated connections. Review captures
+are under `test-results/architecture-*.png`. At mobile width, the full map starts
+at overview scale; zoom controls and the component selector expose its details.
+
+Initial checks found an inline link distinguished only by color; it now has an
+underline. The keyboard test now waits for React Flow's measured nodes to become
+visible before focusing a newly selected view, and reads the untranslated-by-CSS
+text node instead of asserting against uppercase visual styling. These initial
+results are retained separately from the passing final run.
+
+Active contract: `specs/task-interactive-architecture.spec.md`. Native agent-spec
+1.4.0 reports **1 boundary pass, 0 failures, 7 skips**, quality 83%. Its overall
+result remains **non-passing** because it does not execute these Node selectors.
+Those native skips remain skips. Independent browser results are in
+`architecture-tests.txt`; native output is `lifecycle-architecture-result.json`.
+Typecheck, build, contract parse/lint and dependency audit logs use the
+`architecture-` prefix in this directory. Automated browser evidence covers
+Chromium, not a complete manual accessibility or cross-browser certification.
+
+The local static preview serves both architecture routes on port 4328. No
+application source, account, live service or server configuration was changed.
+No public deployment, commit or push was performed for this addition.
+
+## Project screenshots — prior verification
 
 Added six genuine development integration captures: two HAFleet console views,
 two Robrix2 native desktop views, and two Palpo companion admin views. The
@@ -143,3 +195,33 @@ credential, or production deployment was changed.
 Local metadata is intentionally unindexed until a real HTTPS `SITE_URL` is
 selected. The website displays the September 8 reviewed content snapshot;
 future release changes require an explicit content refresh in both languages.
+
+## 2026-09-09 — Product brand rename
+
+Renamed current website labels/routes to Hagency while retaining generic fleet
+terms and the existing architecture implementation. Historical captures retain
+their original pixels and are labeled as pre-rename captures. Removed invented
+renamed release asset URLs and linked to the source guide while a Hagency package
+is unpublished.
+
+Astro check/build passed. All 17 browser tests passed after the download filter
+assertions were updated to the actual nine published assets and two releases.
+Agent-spec boundary validation passed; native Node scenarios remain skipped, not
+passing. Evidence and the complete pre-rename snapshot are under
+`~/Library/Caches/hagency-rename/2026-09-09/`.
+
+## 2026-09-09 — GitHub Pages publication
+
+Authorized destination: `hagency-org/hagency-website`, at
+https://hagency-org.github.io/hagency-website/. The Pages build includes the
+completed bilingual architecture and Hagency product rename. Navigation, assets,
+feeds, sitemap, canonical metadata and locale entrypoints honor the repository
+base path. Local root-path previews remain supported.
+
+Astro check/build and all 17 existing browser tests passed. A production build
+passed both new Pages browser tests, covering all 62 localized content routes,
+asset paths, locale switching, search, screenshot loading and interactive
+architecture. Native agent-spec Node scenarios remain skipped (non-passing);
+actual browser execution is recorded separately. Evidence is in
+`~/Library/Caches/hagency-website-publish/2026-09-09/`. GitHub Actions repeats both
+builds and all browser tests before deploying the tested Pages artifact.

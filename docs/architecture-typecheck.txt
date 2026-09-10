@@ -1,0 +1,10 @@
+
+> hagency-website@1.0.0 check
+> astro check
+
+23:30:12 [types] Generated 37ms
+23:30:12 [check] Getting diagnostics for Astro files in /Users/yuechen/home/hagency/projects/hagency-website...
+Result (40 files):
+- 0 errors
+- 0 warnings
+- 0 hints

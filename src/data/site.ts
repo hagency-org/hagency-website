@@ -3,10 +3,11 @@ export type Locale = typeof locales[number];
 export type Text = Record<Locale, string>;
 export const b = (en: string, cn: string): Text => ({ en, 'zh-cn': cn });
 export const t = (text: Text, lang: Locale) => text[lang];
-export const url = (lang: Locale, slug = '') => `/${lang}/${slug ? `${slug}/` : ''}`;
+export const asset = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`;
+export const url = (lang: Locale, slug = '') => asset(`${lang}/${slug ? `${slug}/` : ''}`);
 export const verified = '2026-09-08';
 export const repos = {
-  hafleet: 'https://github.com/hagency-org/HAFleet',
+  hagency: 'https://github.com/hagency-org/hagency',
   robrix2: 'https://github.com/Project-Robius-China/robrix2',
   palpo: 'https://github.com/palpo-im/palpo',
 };
@@ -15,6 +16,7 @@ export const ui = {
   projects: b('Projects', '项目'), ecosystem: b('How it works', '工作原理'), useCases: b('Use cases', '应用场景'),
   docs: b('Documentation', '文档'), community: b('Community', '社区'), start: b('Get started', '开始使用'),
   matrix: b('Why Matrix', '为什么选 Matrix'),
+  architecture: b('Architecture', '系统架构'),
   explore: b('Explore the workflow', '探索协作流程'), source: b('View on GitHub', '在 GitHub 查看'),
   learn: b('Explore project', '了解项目'), allProjects: b('Three projects. One connected workspace.', '三个项目，一个协作空间。'),
   search: b('Search', '搜索'), searchPlaceholder: b('Search projects, guides, and ideas…', '搜索项目、指南和理念…'),
@@ -25,7 +27,7 @@ export const ui = {
   updates: b('Updates', '项目动态'), roadmap: b('Roadmap', '路线图'), downloads: b('Downloads', '下载'),
   security: b('Trust & control', '信任与控制'), media: b('Brand & media', '品牌与媒体'),
   footer: b('Open tools. Shared conversations. Human direction.', '开放工具，共同协作，由人掌舵。'),
-  footerNote: b('Built in the open. HAFleet, Robrix2, and Palpo retain their own maintainers and licenses.', '开放协作，共同构建。HAFleet、Robrix2 与 Palpo 各自保留维护团队和许可证。'),
+  footerNote: b('Built in the open. Hagency, Robrix2, and Palpo retain their own maintainers and licenses.', '开放协作，共同构建。Hagency、Robrix2 与 Palpo 各自保留维护团队和许可证。'),
   lastVerified: b('Release information verified September 8, 2026', '版本信息核对于 2026 年 9 月 8 日'),
   readGuide: b('Read the guide', '阅读指南'), readMore: b('Read the story', '阅读全文'), next: b('Next step', '下一步'),
   previous: b('Previous', '上一步'), replay: b('Replay walkthrough', '重新体验'), step: b('Step', '步骤'),
@@ -77,7 +79,7 @@ export type Project = {
 };
 export const projects: Project[] = [
   {
-    id: 'hafleet', name: 'HAFleet', number: '01', color: 'teal', role: b('THE AGENT CONTROL PLANE', 'AGENT 控制平面'),
+    id: 'hagency', name: 'Hagency', number: '01', color: 'teal', role: b('THE AGENT CONTROL PLANE', 'AGENT 控制平面'),
     headline: b('A home for your\nagent workforce.', '为你的 Agent 团队，\n建立运行的家。'),
     description: b('Turn individual coding agents into a connected working system. Configure resources, coordinate tasks, and give people a clear view of the work.', '将独立的编程 Agent 连接成协作系统。配置资源、协调任务，让人清晰了解工作的每一步。'),
     short: b('Run agents. Share capacity. Keep oversight.', '运行 Agent，共享能力，持续掌控。'),
@@ -91,7 +93,7 @@ export const projects: Project[] = [
       { title: b('Local and connected', '本地运行，连接协作'), body: b('Run the control plane locally, add remote relays where needed, and connect through the optional Matrix bridge. Model requests still follow your configured provider.', '在本地运行控制平面，按需添加远程中继，并通过可选 Matrix 桥接接入协作。模型请求仍会发送至你配置的服务提供方。') },
     ],
     preview: b('Resource definitions, the new allocation workflow, activity updates, files, and scoped approvals are demonstrated on the September 8 development integration. They are not a claim about every v1.2.0 installation.', '资源定义、新分配流程、活动更新、文件传递和限定范围审批，已在 9 月 8 日开发集成中演示；不代表所有 v1.2.0 安装都包含这些能力。'),
-    install: 'git clone https://github.com/hagency-org/HAFleet.git\ncd HAFleet\n./install/install-macos.sh --dry-run',
+    install: 'git clone https://github.com/hagency-org/hagency.git\ncd hagency\n./install/install-macos.sh --dry-run',
   },
   {
     id: 'robrix2', name: 'Robrix2', number: '02', color: 'blue', role: b('THE HUMAN WORKSPACE', '人的协作空间'),
@@ -119,24 +121,24 @@ export const projects: Project[] = [
     features: [
       { title: b('Built around Matrix', '围绕 Matrix 构建'), body: b('Accounts, rooms, messages, media, and federation use the Matrix protocol. Compatible clients can participate without adopting a private chat network.', '账户、房间、消息、媒体与联邦互通基于 Matrix 协议。兼容客户端可以参与协作，无需加入封闭的聊天网络。') },
       { title: b('Rust meets PostgreSQL', 'Rust 与 PostgreSQL'), body: b('A Rust server on the Salvo framework, backed by PostgreSQL. Use familiar database inspection, backup, and operational tooling.', '采用 Salvo 框架构建 Rust 服务端，以 PostgreSQL 存储数据，方便使用成熟的数据库检查、备份和运维工具。') },
-      { title: b('Connect application services', '连接应用服务'), body: b('Matrix application services connect external tools to room events and scoped identities. HAFleet uses this surface to join the collaboration.', 'Matrix 应用服务将外部工具连接到房间事件与限定范围身份。HAFleet 通过这一接口加入协作。') },
+      { title: b('Connect application services', '连接应用服务'), body: b('Matrix application services connect external tools to room events and scoped identities. Hagency uses this surface to join the collaboration.', 'Matrix 应用服务将外部工具连接到房间事件与限定范围身份。Hagency 通过这一接口加入协作。') },
       { title: b('A guided fleet connection', '引导式接入 Agent 舰队'), body: b('The companion development admin service guides administrators and fleet owners through authorization, pairing, and a verified event round trip.', '配套的开发版管理服务，引导管理员和舰队所有者完成授权、配对及真实事件往返验证。') },
       { title: b('Projects with clear ownership', '项目归属清晰'), body: b('The admin integration helps project owners register rooms, establish a separate approval conversation, request roles, and observe admitted agents.', '管理集成帮助项目所有者注册房间、建立独立审批会话、申请角色，并确认 Agent 实际加入项目。') },
       { title: b('An open development journey', '开放的开发进程'), body: b('Evaluate through source builds or published packages. The project welcomes testing; large-scale, long-running production evidence is still being developed.', '通过源码构建或已发布安装包进行评估。项目欢迎参与测试，大规模长期生产运行证据仍在积累中。') },
     ],
-    preview: b('The HAFleet web-admin integration is a separate Node service in a development worktree. It is not bundled in Palpo v0.4.0. Evaluate deployment needs against Palpo’s current documentation.', 'HAFleet 网页管理集成是开发工作树中的独立 Node 服务，并未打包进 Palpo v0.4.0。部署前请对照 Palpo 当前文档评估需求。'),
+    preview: b('The Hagency web-admin integration is a separate Node service in a development worktree. It is not bundled in Palpo v0.4.0. Evaluate deployment needs against Palpo’s current documentation.', 'Hagency 网页管理集成是开发工作树中的独立 Node 服务，并未打包进 Palpo v0.4.0。部署前请对照 Palpo 当前文档评估需求。'),
     install: 'git clone https://github.com/palpo-im/palpo.git\ncd palpo\ncargo build --release',
   },
 ];
 
 export const paths = [
   { id: 'client', icon: 'chat', title: b('I want a better workspace', '我想体验新的协作空间'), description: b('Install Robrix2 and connect to your Matrix server.', '安装 Robrix2，连接你的 Matrix 服务器。'), href: 'docs/install-robrix2', label: b('Start with Robrix2', '从 Robrix2 开始') },
-  { id: 'agents', icon: 'fleet', title: b('I want to run agents', '我想运行 Agent'), description: b('Set up HAFleet and configure the resources you contribute.', '部署 HAFleet，配置你希望贡献的资源。'), href: 'docs/run-hafleet', label: b('Start with HAFleet', '从 HAFleet 开始') },
+  { id: 'agents', icon: 'fleet', title: b('I want to run agents', '我想运行 Agent'), description: b('Set up Hagency and configure the resources you contribute.', '部署 Hagency，配置你希望贡献的资源。'), href: 'docs/run-hagency', label: b('Start with Hagency', '从 Hagency 开始') },
   { id: 'server', icon: 'network', title: b('I want to host the stack', '我想自主托管'), description: b('Deploy Palpo and build your collaboration foundation.', '部署 Palpo，构建你的协作基础设施。'), href: 'docs/deploy-palpo', label: b('Start with Palpo', '从 Palpo 开始') },
 ];
 
 export const faqs = [
-  { title: b('Do I need to install all three projects?', '需要安装全部三个项目吗？'), body: b('No. Robrix2 works as a Matrix client, HAFleet can run with an optional Matrix bridge, and Palpo is a Matrix homeserver. Start with the part you need and connect the others later.', '不需要。Robrix2 是 Matrix 客户端，HAFleet 可独立运行并按需启用 Matrix 桥接，Palpo 则是 Matrix 服务器。可以先使用需要的部分，再连接其他项目。') },
+  { title: b('Do I need to install all three projects?', '需要安装全部三个项目吗？'), body: b('No. Robrix2 works as a Matrix client, Hagency can run with an optional Matrix bridge, and Palpo is a Matrix homeserver. Start with the part you need and connect the others later.', '不需要。Robrix2 是 Matrix 客户端，Hagency 可独立运行并按需启用 Matrix 桥接，Palpo 则是 Matrix 服务器。可以先使用需要的部分，再连接其他项目。') },
   { title: b('Can I use another Matrix client or server?', '可以使用其他 Matrix 客户端或服务器吗？'), body: b('Ordinary collaboration uses Matrix messages and threads. Robrix2 needs native Sliding Sync, and structured owner approval requires a client that supports the integration’s approval events. A normal chat reply is not an approval.', '日常协作使用 Matrix 消息和线程。Robrix2 需要原生 Sliding Sync，结构化所有者审批则需要支持相关审批事件的客户端。普通聊天回复不等于授权。') },
   { title: b('Does everything stay on my computer?', '所有数据都会留在我的电脑上吗？'), body: b('You choose where the control plane and server run. Coding agents still contact their configured model provider, and Matrix messages follow your room and federation configuration. Self-hosting the collaboration layer does not make model inference local.', '你可以选择控制平面和服务器的运行位置。编程 Agent 仍会访问配置的模型服务，Matrix 消息遵循房间与联邦配置。自行托管协作层，不等于模型推理也在本地完成。') },
   { title: b('Are the demos included in the published releases?', '演示功能都包含在已发布版本里吗？'), body: b('Some integrated workflows come from newer development branches. Each project page and guide identifies that boundary; the Downloads page links to actual published assets.', '部分集成流程来自更新的开发分支。项目页面和指南会说明这一边界，下载页面只链接到实际发布的文件。') },

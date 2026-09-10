@@ -1,0 +1,16 @@
+Spec: Interactive bilingual project architecture (task)
+  inherits: project
+  tags: ["website", "architecture", "react-flow", "i18n"]
+  sections: 4
+    - Intent: Explain the actual connections across the three projects with React Flow and
+equ...
+    - Constraints: 4 items
+    - Boundaries: 11 items
+    - Acceptance Criteria: 7 scenarios
+      - All diagram views expose their components and connections: 3 steps
+      - Diagram navigation can be reset: 3 steps
+      - Architecture remains available without client scripts: 3 steps
+      - Diagram loading failure retains the architecture explanation: 3 steps
+      - All localized destinations remain valid: 3 steps
+      - Mobile content remains usable: 3 steps
+      - Both themes remain accessible: 3 steps

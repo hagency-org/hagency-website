@@ -12,8 +12,8 @@ integration views, rather than assigning an unverified release or commit.
 
 | Website asset | Archive-relative source | Source modification (UTC) | Application / UI |
 | --- | --- | --- | --- |
-| `hafleet-resources.png` | `resource-agent-live-v8.png` | September 8, 07:48 | HAFleet resource console / Chinese |
-| `hafleet-engagements.png` | `walkthrough-engagements.png` | September 7, 21:24 | HAFleet engagements console / English |
+| `hagency-resources.png` | `resource-agent-live-v8.png` | September 8, 07:48 | Hagency resource console / Chinese |
+| `hagency-engagements.png` | `walkthrough-engagements.png` | September 7, 21:24 | Hagency engagements console / English |
 | `robrix2-group-files.png` | `robrix-files-native-0908/robrix-files-group-saved.png` | September 8, 22:02 | Robrix2 native desktop client / English UI, Chinese conversation |
 | `robrix2-encrypted-files.png` | `robrix-files-native-0908/robrix-files-encrypted-final.png` | September 8, 22:05 | Robrix2 native desktop client / English UI, Chinese conversation |
 | `palpo-project-access.png` | `request-readiness-final-deployed.png` | September 7, 22:58 | Palpo companion administration / English |
@@ -39,7 +39,7 @@ byte counts, full UTC timestamps, and SHA-256 digests are retained in
   delivery scene. The separate encrypted-room screenshot retains its lock
   indicators; neither image is presented as proof that every room is encrypted.
 - Palpo's screenshots show the separate `palpo-admin-web` companion app used
-  for HAFleet integration. The gallery expressly distinguishes it from the
+  for Hagency integration. The gallery expressly distinguishes it from the
   Palpo homeserver and says it is not included in Palpo v0.4.0's server release.
 - Development status indicators and test data are retained. These images do not
   imply all visible features are part of the published release packages.
