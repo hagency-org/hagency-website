@@ -152,19 +152,22 @@ and the earlier `docs/lifecycle-result.json`.
 
 ## Public website
 
-- English: https://hagency-org.github.io/hagency-website/en/
-- 简体中文: https://hagency-org.github.io/hagency-website/zh-cn/
+- English: https://hagency.ai/en/
+- 简体中文: https://hagency.ai/zh-cn/
 
 Pushes to `main` run typecheck, the complete local browser suite, a production
-build and subdirectory browser checks, then publish the tested `dist/` artifact
+build and published-path browser checks, then publish the tested `dist/` artifact
 through GitHub Pages. Pull requests run the same checks without deploying.
 
 ```sh
-SITE_URL=https://hagency-org.github.io/hagency-website/ npm run build
-node --test tests/pages.test.mjs
+SITE_URL=https://hagency.ai/ npm run build
+SITE_URL=https://hagency.ai/ node --test tests/pages.test.mjs
 ```
 
-`SITE_URL` determines the origin and repository path for navigation, images,
-canonical URLs, language alternates, feeds and sitemap. Unset it for local
+`SITE_URL` determines the origin and base path for navigation, images,
+canonical URLs, language alternates, feeds and sitemap. The custom domain
+serves the site at the root path, so the published build uses no repository
+prefix. Set a `https://<owner>.github.io/<repo>/` value instead to publish
+under a repository subpath; the same tests cover both. Unset it for local
 previews at the root path with indexing disabled. Native agent-spec does not
 execute these Node browser tests; its skips are reported separately.

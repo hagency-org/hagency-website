@@ -6,8 +6,9 @@ import { resolve, join, extname, sep } from 'node:path';
 import { chromium } from 'playwright';
 
 const dist = resolve('dist');
-const prefix = '/hagency-website/';
-const publicOrigin = 'https://hagency-org.github.io';
+const site = new URL(process.env.SITE_URL || 'https://hagency.ai/');
+const prefix = site.pathname;
+const publicOrigin = site.origin;
 const mime = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.png': 'image/png', '.woff2': 'font/woff2', '.xml': 'application/xml' };
 let server, browser, origin;
 async function walk(directory) {
@@ -16,9 +17,9 @@ async function walk(directory) {
 }
 before(async () => {
   if (process.env.PUBLISHED_SITE) {
-    const site = new URL(process.env.PUBLISHED_SITE);
-    assert.equal(site.pathname, prefix);
-    origin = site.origin;
+    const published = new URL(process.env.PUBLISHED_SITE);
+    assert.equal(published.pathname, prefix);
+    origin = published.origin;
   } else {
     server = createServer(async (req, res) => {
       try {
@@ -60,7 +61,7 @@ test('GitHub Pages serves localized routes and assets under its base path', asyn
       for (const link of links) {
         const target = new URL(link, page.url());
         if (target.origin !== origin) continue;
-        assert.ok(target.pathname.startsWith(prefix), `${route}: ${link} escapes the repository path`);
+        assert.ok(target.pathname.startsWith(prefix), `${route}: ${link} escapes the site base path`);
         const file = resolve(dist, decodeURIComponent(target.pathname.slice(prefix.length)));
         assert.ok(file === dist || file.startsWith(dist + sep));
         await stat(file);
@@ -71,7 +72,8 @@ test('GitHub Pages serves localized routes and assets under its base path', asyn
       assert.ok(content.includes(publicOrigin + prefix));
       assert.ok(!content.includes('localhost:4328'));
     }
-    if (!process.env.PUBLISHED_SITE) assert.equal((await fetch(origin + '/en/')).status, 404);
+    const outside = prefix === '/' ? '/hagency-website/en/' : '/en/';
+    if (!process.env.PUBLISHED_SITE) assert.equal((await fetch(origin + outside)).status, 404);
   });
 });
 test('GitHub Pages keeps locale search screenshots and architecture interactive', async () => {

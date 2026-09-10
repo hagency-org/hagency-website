@@ -1,8 +1,5 @@
 # Verification — September 8, 2026
 
-Tested from the actual edited tree:
-`/Users/yuechen/home/hagency/projects/hagency-website`.
-
 ## Interactive architecture — current verification
 
 Added `/en/architecture/` and `/zh-cn/architecture/` with a real React Flow
@@ -225,3 +222,19 @@ architecture. Native agent-spec Node scenarios remain skipped (non-passing);
 actual browser execution is recorded separately. Evidence is in
 `~/Library/Caches/hagency-website-publish/2026-09-09/`. GitHub Actions repeats both
 builds and all browser tests before deploying the tested Pages artifact.
+
+## 2026-09-10 — Custom domain base path
+
+The repository serves GitHub Pages at the verified custom domain hagency.ai
+with HTTPS enforced, so the published build must use the root base path. The
+Pages workflow built with `SITE_URL=https://hagency-org.github.io/hagency-website/`,
+which baked the repository prefix into the locale redirect, navigation, assets,
+canonical metadata, feeds and sitemap. Visitors to https://hagency.ai/ were sent
+to /hagency-website/en/ and received the 404 page.
+
+The workflow now builds and tests with `SITE_URL=https://hagency.ai/`, and
+`tests/pages.test.mjs` derives its origin and base path from `SITE_URL` instead
+of the hardcoded repository prefix. Both Pages browser tests pass against the
+custom-domain build and against a repository-subpath build. Astro check, the
+local production build and all 17 local browser tests pass. No domain, DNS,
+Pages setting or credential was changed.
