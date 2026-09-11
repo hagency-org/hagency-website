@@ -6,7 +6,7 @@ import { resolve, join, extname, sep } from 'node:path';
 import { chromium } from 'playwright';
 
 const dist = resolve('dist');
-const site = new URL(process.env.SITE_URL || 'https://hagency.ai/');
+const site = new URL(process.env.SITE_URL || 'https://hagency.org/');
 const prefix = site.pathname;
 const publicOrigin = site.origin;
 const mime = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.png': 'image/png', '.woff2': 'font/woff2', '.xml': 'application/xml' };
