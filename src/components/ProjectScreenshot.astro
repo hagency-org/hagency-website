@@ -5,7 +5,7 @@ import Icon from './Icon.astro';
 interface Props { lang: Locale; screenshot: ProjectScreenshot; compact?: boolean }
 const { lang, screenshot: shot, compact = false } = Astro.props;
 const path = asset(`images/screenshots/${shot.id}`);
-const metadata = `${t(shot.application, lang)} · ${t(screenshotUI.preview, lang)} · ${t(shot.language, lang)}`;
+const metadata = `${t(shot.application, lang)} · ${t(shot.provenance ?? screenshotUI.preview, lang)} · ${t(shot.language, lang)}`;
 ---
 <figure class:list={['project-screenshot', { 'screenshot-compact': compact }]}>
   <a class="screenshot-open" href={`${path}.png`} data-screenshot={shot.id} data-title={t(shot.title, lang)} data-description={t(shot.description, lang)} data-metadata={metadata} data-alt={t(shot.alt, lang)} data-width={shot.width} data-height={shot.height} aria-label={`${t(screenshotUI.open, lang)}: ${t(shot.title, lang)}`} aria-haspopup="dialog">
@@ -14,7 +14,7 @@ const metadata = `${t(shot.application, lang)} · ${t(screenshotUI.preview, lang
     <span class="screenshot-frame-footer"><span>{t(screenshotUI.open, lang)}</span><Icon name="search" size={16}/></span>
   </a>
   <figcaption>
-    <div class="screenshot-meta"><span>{t(screenshotUI.preview, lang)}</span><span>{t(shot.language, lang)}</span></div>
+    <div class="screenshot-meta"><span>{t(shot.provenance ?? screenshotUI.preview, lang)}</span><span>{t(shot.language, lang)}</span></div>
     {!compact && <><h3>{t(shot.title, lang)}</h3><p>{t(shot.description, lang)}</p></>}
   </figcaption>
 </figure>

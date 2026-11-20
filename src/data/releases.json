@@ -1,94 +1,78 @@
 {
-  "verifiedAt": "2026-09-09T00:09:42.921Z",
+  "verifiedAt": "2026-11-20T00:00:38.187Z",
   "releases": [
     {
       "id": "robrix2",
-      "tag": "v1.1.0",
-      "publishedAt": "2026-07-22T15:54:28Z",
-      "source": "https://github.com/Project-Robius-China/robrix2/releases/tag/v1.1.0",
+      "tag": "v0.5.0-rc.13",
+      "publishedAt": "2026-11-19T04:40:58Z",
+      "prerelease": true,
+      "source": "https://github.com/hagency-org/hagency-desktop/releases/tag/v0.5.0-rc.13",
       "assets": [
         {
-          "name": "robrix-1.1.0-android-aarch64-release.apk",
-          "url": "https://github.com/Project-Robius-China/robrix2/releases/download/v1.1.0/robrix-1.1.0-android-aarch64-release.apk",
-          "size": 92157796,
-          "platform": "android",
-          "arch": "ARM64",
-          "signature": null
-        },
-        {
-          "name": "robrix-1.1.0-linux-aarch64-release.deb",
-          "url": "https://github.com/Project-Robius-China/robrix2/releases/download/v1.1.0/robrix-1.1.0-linux-aarch64-release.deb",
-          "size": 93757952,
-          "platform": "linux",
-          "arch": "ARM64",
-          "signature": "https://github.com/Project-Robius-China/robrix2/releases/download/v1.1.0/robrix-1.1.0-linux-aarch64-release.deb.sig"
-        },
-        {
-          "name": "robrix-1.1.0-linux-x86_64-release.deb",
-          "url": "https://github.com/Project-Robius-China/robrix2/releases/download/v1.1.0/robrix-1.1.0-linux-x86_64-release.deb",
-          "size": 98130118,
-          "platform": "linux",
-          "arch": "x86-64",
-          "signature": "https://github.com/Project-Robius-China/robrix2/releases/download/v1.1.0/robrix-1.1.0-linux-x86_64-release.deb.sig"
-        },
-        {
-          "name": "robrix-1.1.0-macos-aarch64-release.dmg",
-          "url": "https://github.com/Project-Robius-China/robrix2/releases/download/v1.1.0/robrix-1.1.0-macos-aarch64-release.dmg",
-          "size": 91960407,
+          "name": "hagency-desktop-macos-arm64.dmg",
+          "url": "https://github.com/hagency-org/hagency-desktop/releases/download/v0.5.0-rc.13/hagency-desktop-macos-arm64.dmg",
+          "size": 169884184,
           "platform": "macos",
           "arch": "ARM64",
-          "signature": "https://github.com/Project-Robius-China/robrix2/releases/download/v1.1.0/robrix-1.1.0-macos-aarch64-release.dmg.sig"
+          "signature": null,
+          "digest": "sha256:5ed48b8fbbe2b7556fcbb702eff799e29a6407122d0f0c89d48d74e2d7e0790c"
         },
         {
-          "name": "robrix-1.1.0-macos-x86_64-release.dmg",
-          "url": "https://github.com/Project-Robius-China/robrix2/releases/download/v1.1.0/robrix-1.1.0-macos-x86_64-release.dmg",
-          "size": 96743918,
-          "platform": "macos",
-          "arch": "x86-64",
-          "signature": "https://github.com/Project-Robius-China/robrix2/releases/download/v1.1.0/robrix-1.1.0-macos-x86_64-release.dmg.sig"
-        },
-        {
-          "name": "robrix-1.1.0-windows-x86_64-release.exe",
-          "url": "https://github.com/Project-Robius-China/robrix2/releases/download/v1.1.0/robrix-1.1.0-windows-x86_64-release.exe",
-          "size": 57343475,
+          "name": "hagency-desktop-windows-amd64.exe",
+          "url": "https://github.com/hagency-org/hagency-desktop/releases/download/v0.5.0-rc.13/hagency-desktop-windows-amd64.exe",
+          "size": 122505475,
           "platform": "windows",
           "arch": "x86-64",
-          "signature": "https://github.com/Project-Robius-China/robrix2/releases/download/v1.1.0/robrix-1.1.0-windows-x86_64-release.exe.sig"
+          "signature": null,
+          "digest": "sha256:436b890bffa835908b018a87cef4d356927e21851ab5846245afb0fec410c777"
+        }
+      ],
+      "checksums": "https://github.com/hagency-org/hagency-desktop/releases/download/v0.5.0-rc.13/SHA256SUMS.txt"
+    },
+    {
+      "id": "palpo",
+      "tag": "v0.6.0",
+      "publishedAt": "2026-11-17T11:09:43Z",
+      "prerelease": false,
+      "source": "https://github.com/palpo-im/palpo/releases/tag/v0.6.0",
+      "assets": [
+        {
+          "name": "palpo-aarch64-apple-darwin.tar.gz",
+          "url": "https://github.com/palpo-im/palpo/releases/download/v0.6.0/palpo-aarch64-apple-darwin.tar.gz",
+          "size": 27201922,
+          "platform": "macos",
+          "arch": "ARM64",
+          "signature": null,
+          "digest": "sha256:807d3763c198a6c9281178a9a4a073e566a1ae4615568ff1d4c902b4cd44d3fe"
+        },
+        {
+          "name": "palpo-x86_64-pc-windows-msvc.zip",
+          "url": "https://github.com/palpo-im/palpo/releases/download/v0.6.0/palpo-x86_64-pc-windows-msvc.zip",
+          "size": 32345007,
+          "platform": "windows",
+          "arch": "x86-64",
+          "signature": null,
+          "digest": "sha256:4ef9e4f3b62297ff482bb4652e085823c4339d2588377e3f329c12f5724d2707"
+        },
+        {
+          "name": "palpo-x86_64-unknown-linux-gnu.tar.gz",
+          "url": "https://github.com/palpo-im/palpo/releases/download/v0.6.0/palpo-x86_64-unknown-linux-gnu.tar.gz",
+          "size": 31086069,
+          "platform": "linux",
+          "arch": "x86-64",
+          "signature": null,
+          "digest": "sha256:7773ba7908ec934849322af51a5d24e877139006a4f759c4b6865de506e220d1"
         }
       ],
       "checksums": null
     },
     {
-      "id": "palpo",
-      "tag": "v0.4.0",
-      "publishedAt": "2026-07-07T00:32:03Z",
-      "source": "https://github.com/palpo-im/palpo/releases/tag/v0.4.0",
-      "assets": [
-        {
-          "name": "palpo-aarch64-apple-darwin.tar.gz",
-          "url": "https://github.com/palpo-im/palpo/releases/download/v0.4.0/palpo-aarch64-apple-darwin.tar.gz",
-          "size": 19849285,
-          "platform": "macos",
-          "arch": "ARM64",
-          "signature": null
-        },
-        {
-          "name": "palpo-x86_64-pc-windows-msvc.zip",
-          "url": "https://github.com/palpo-im/palpo/releases/download/v0.4.0/palpo-x86_64-pc-windows-msvc.zip",
-          "size": 21457494,
-          "platform": "windows",
-          "arch": "x86-64",
-          "signature": null
-        },
-        {
-          "name": "palpo-x86_64-unknown-linux-gnu.tar.gz",
-          "url": "https://github.com/palpo-im/palpo/releases/download/v0.4.0/palpo-x86_64-unknown-linux-gnu.tar.gz",
-          "size": 21625046,
-          "platform": "linux",
-          "arch": "x86-64",
-          "signature": null
-        }
-      ],
+      "id": "hagency",
+      "tag": "cache-2026.10.14.1",
+      "publishedAt": "2026-10-13T18:34:43Z",
+      "prerelease": false,
+      "source": "https://github.com/hagency-org/hagency-server/releases/tag/cache-2026.10.14.1",
+      "assets": [],
       "checksums": null
     }
   ]

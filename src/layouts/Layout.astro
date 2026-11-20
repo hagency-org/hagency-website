@@ -12,7 +12,7 @@ const { lang, slug = '', title, description, noindex = false } = Astro.props;
 const other = lang === 'en' ? 'zh-cn' : 'en';
 const origin = Astro.site ?? new URL('http://localhost:4328');
 const production = origin.protocol === 'https:';
-const nav = [{ slug: 'ecosystem', label: ui.ecosystem }, { slug: 'architecture', label: ui.architecture }, { slug: 'matrix', label: ui.matrix }, { slug: 'use-cases', label: ui.useCases }, { slug: 'docs', label: ui.docs }, { slug: 'community', label: ui.community }];
+const nav = [{slug:'capabilities',label:ui.capabilities},{slug:'compare',label:ui.compare},{slug:'architecture',label:ui.architecture},{slug:'docs',label:ui.docs},{slug:'community',label:ui.community}];
 const searchItems = [
   ...Object.entries(pageInfo).map(([route, value]) => ({ title: t(value.title, lang), description: t(value.description, lang), href: url(lang, route), type: t(b('Page', '页面'), lang) })),
   ...projects.map(p => ({ title: p.name, description: t(p.description, lang), href: url(lang, `projects/${p.id}`), type: t(ui.projects, lang) })),

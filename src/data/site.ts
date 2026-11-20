@@ -1,3 +1,4 @@
+// Historical project IDs are retained for existing links and archived asset references.
 export const locales = ['en', 'zh-cn'] as const;
 export type Locale = typeof locales[number];
 export type Text = Record<Locale, string>;
@@ -5,141 +6,713 @@ export const b = (en: string, cn: string): Text => ({ en, 'zh-cn': cn });
 export const t = (text: Text, lang: Locale) => text[lang];
 export const asset = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`;
 export const url = (lang: Locale, slug = '') => asset(`${lang}/${slug ? `${slug}/` : ''}`);
-export const verified = '2026-09-08';
-export const repos = {
-  hagency: 'https://github.com/hagency-org/hagency',
-  robrix2: 'https://github.com/Project-Robius-China/robrix2',
-  palpo: 'https://github.com/palpo-im/palpo',
-};
+export const verified = '2026-11-19';
+export const repos = {hagency:'https://github.com/hagency-org/hagency-server',robrix2:'https://github.com/hagency-org/hagency-desktop',palpo:'https://github.com/palpo-im/palpo'};
+export type Feature = { title: Text; body: Text };
+export type Project = {id: keyof typeof repos; name:string; number:string; color:string; role:Text; headline:Text; description:Text; short:Text; version:string; date:string; technology:string[]; features:Feature[]; preview:Text; install:string};
 
 export const ui = {
-  projects: b('Projects', '项目'), ecosystem: b('How it works', '工作原理'), useCases: b('Use cases', '应用场景'),
-  docs: b('Documentation', '文档'), community: b('Community', '社区'), start: b('Get started', '开始使用'),
-  matrix: b('Why Matrix', '为什么选 Matrix'),
-  architecture: b('Architecture', '系统架构'),
-  explore: b('Explore the workflow', '探索协作流程'), source: b('View on GitHub', '在 GitHub 查看'),
-  learn: b('Explore project', '了解项目'), allProjects: b('Three projects. One connected workspace.', '三个项目，一个协作空间。'),
-  search: b('Search', '搜索'), searchPlaceholder: b('Search projects, guides, and ideas…', '搜索项目、指南和理念…'),
-  searchHint: b('Find your next step.', '找到你的下一步。'), noResults: b('No results. Try a project name or “setup”.', '没有找到结果，试试项目名称或“部署”。'),
-  close: b('Close', '关闭'), theme: b('Change color theme', '切换明暗主题'), menu: b('Open navigation', '打开导航'),
-  skip: b('Skip to content', '跳转到内容'), language: b('Switch to Chinese', '切换到英文'),
-  resources: b('Resources', '资源'), ecosystemLabel: b('The ecosystem', '项目生态'), about: b('About Hagency', '关于 Hagency'),
-  updates: b('Updates', '项目动态'), roadmap: b('Roadmap', '路线图'), downloads: b('Downloads', '下载'),
-  security: b('Trust & control', '信任与控制'), media: b('Brand & media', '品牌与媒体'),
-  footer: b('Open tools. Shared conversations. Human direction.', '开放工具，共同协作，由人掌舵。'),
-  footerNote: b('Built in the open. Hagency, Robrix2, and Palpo retain their own maintainers and licenses.', '开放协作，共同构建。Hagency、Robrix2 与 Palpo 各自保留维护团队和许可证。'),
-  lastVerified: b('Release information verified September 8, 2026', '版本信息核对于 2026 年 9 月 8 日'),
-  readGuide: b('Read the guide', '阅读指南'), readMore: b('Read the story', '阅读全文'), next: b('Next step', '下一步'),
-  previous: b('Previous', '上一步'), replay: b('Replay walkthrough', '重新体验'), step: b('Step', '步骤'),
-  walkthrough: b('Interactive walkthrough', '交互式流程演示'), preview: b('Development preview', '开发预览'),
-  published: b('Published release', '已发布版本'), copy: b('Copy', '复制'), copied: b('Copied', '已复制'),
-  copyFailed: b('Select and copy the command manually.', '请选中命令并手动复制。'),
-  onThisPage: b('On this page', '本页目录'), guide: b('Integration guide', '集成指南'),
-  allGuides: b('All guides', '全部指南'), related: b('Continue exploring', '继续探索'),
-  learnTogether: b('Build something together.', '一起创造新的可能。'),
-  ctaBody: b('Start with one project. Connect the others when your team is ready.', '从一个项目开始，在团队需要时连接整个生态。'),
-  note: b('Good to know', '使用须知'), sourceNotes: b('Sources & availability', '来源与可用性'),
-  download: b('Download', '下载'), releaseNotes: b('Release notes', '版本说明'), all: b('All platforms', '全部平台'),
-  platform: b('Your platform', '选择平台'), example: b('Illustrative workspace', '示例工作空间'),
-  demoNote: b('A guided example of the development integration. No live agents or accounts are connected.', '演示开发版本中的集成流程，不连接真实 Agent 或用户账户。'),
-  topic: b('Explore by topic', '按主题探索'), openImage: b('Open full image', '查看完整图片'),
+  "projects": {
+    "en": "Projects",
+    "zh-cn": "项目"
+  },
+  "ecosystem": {
+    "en": "How it works",
+    "zh-cn": "工作原理"
+  },
+  "useCases": {
+    "en": "Use cases",
+    "zh-cn": "应用场景"
+  },
+  "docs": {
+    "en": "Documentation",
+    "zh-cn": "文档"
+  },
+  "community": {
+    "en": "Community",
+    "zh-cn": "社区"
+  },
+  "start": {
+    "en": "Get started",
+    "zh-cn": "开始使用"
+  },
+  "matrix": {
+    "en": "Why Matrix",
+    "zh-cn": "为什么选 Matrix"
+  },
+  "architecture": {
+    "en": "Architecture",
+    "zh-cn": "系统架构"
+  },
+  "explore": {
+    "en": "Explore the workflow",
+    "zh-cn": "探索协作流程"
+  },
+  "source": {
+    "en": "View on GitHub",
+    "zh-cn": "在 GitHub 查看"
+  },
+  "learn": {
+    "en": "Explore project",
+    "zh-cn": "了解项目"
+  },
+  "allProjects": {
+    "en": "Two applications. One Matrix foundation.",
+    "zh-cn": "两个应用，一个 Matrix 基础。"
+  },
+  "search": {
+    "en": "Search",
+    "zh-cn": "搜索"
+  },
+  "searchPlaceholder": {
+    "en": "Search projects, guides, and ideas…",
+    "zh-cn": "搜索项目、指南和理念…"
+  },
+  "searchHint": {
+    "en": "Find your next step.",
+    "zh-cn": "找到你的下一步。"
+  },
+  "noResults": {
+    "en": "No results. Try a project name or “setup”.",
+    "zh-cn": "没有找到结果，试试项目名称或“部署”。"
+  },
+  "close": {
+    "en": "Close",
+    "zh-cn": "关闭"
+  },
+  "theme": {
+    "en": "Change color theme",
+    "zh-cn": "切换明暗主题"
+  },
+  "menu": {
+    "en": "Open navigation",
+    "zh-cn": "打开导航"
+  },
+  "skip": {
+    "en": "Skip to content",
+    "zh-cn": "跳转到内容"
+  },
+  "language": {
+    "en": "Switch to Chinese",
+    "zh-cn": "切换到英文"
+  },
+  "resources": {
+    "en": "Resources",
+    "zh-cn": "资源"
+  },
+  "ecosystemLabel": {
+    "en": "The ecosystem",
+    "zh-cn": "项目生态"
+  },
+  "about": {
+    "en": "About Hagency",
+    "zh-cn": "关于 Hagency"
+  },
+  "updates": {
+    "en": "Updates",
+    "zh-cn": "项目动态"
+  },
+  "roadmap": {
+    "en": "Roadmap",
+    "zh-cn": "路线图"
+  },
+  "downloads": {
+    "en": "Downloads",
+    "zh-cn": "下载"
+  },
+  "security": {
+    "en": "Trust & control",
+    "zh-cn": "信任与控制"
+  },
+  "media": {
+    "en": "Brand & media",
+    "zh-cn": "品牌与媒体"
+  },
+  "footer": {
+    "en": "Open tools. Shared conversations. Human direction.",
+    "zh-cn": "开放工具，共同协作，由人掌舵。"
+  },
+  "footerNote": {
+    "en": "Hagency Desktop and Server build on open-source foundations. Palpo, Pasion, Makepad and Robius retain their own licenses and attribution.",
+    "zh-cn": "Hagency Desktop 与 Server 基于开源基础构建，Palpo、Pasion、Makepad 和 Robius 保留各自的许可与署名。"
+  },
+  "lastVerified": {
+    "en": "Source and release snapshot: November 19, 2026",
+    "zh-cn": "源码与发布快照：2026 年 11 月 19 日"
+  },
+  "readGuide": {
+    "en": "Read the guide",
+    "zh-cn": "阅读指南"
+  },
+  "readMore": {
+    "en": "Read the story",
+    "zh-cn": "阅读全文"
+  },
+  "next": {
+    "en": "Next step",
+    "zh-cn": "下一步"
+  },
+  "previous": {
+    "en": "Previous",
+    "zh-cn": "上一步"
+  },
+  "replay": {
+    "en": "Replay walkthrough",
+    "zh-cn": "重新体验"
+  },
+  "step": {
+    "en": "Step",
+    "zh-cn": "步骤"
+  },
+  "walkthrough": {
+    "en": "Interactive walkthrough",
+    "zh-cn": "交互式流程演示"
+  },
+  "preview": {
+    "en": "Version and verification boundaries",
+    "zh-cn": "版本与验证边界"
+  },
+  "published": {
+    "en": "Published release",
+    "zh-cn": "已发布版本"
+  },
+  "copy": {
+    "en": "Copy",
+    "zh-cn": "复制"
+  },
+  "copied": {
+    "en": "Copied",
+    "zh-cn": "已复制"
+  },
+  "copyFailed": {
+    "en": "Select and copy the command manually.",
+    "zh-cn": "请选中命令并手动复制。"
+  },
+  "onThisPage": {
+    "en": "On this page",
+    "zh-cn": "本页目录"
+  },
+  "guide": {
+    "en": "Integration guide",
+    "zh-cn": "集成指南"
+  },
+  "allGuides": {
+    "en": "All guides",
+    "zh-cn": "全部指南"
+  },
+  "related": {
+    "en": "Continue exploring",
+    "zh-cn": "继续探索"
+  },
+  "learnTogether": {
+    "en": "Build something together.",
+    "zh-cn": "一起创造新的可能。"
+  },
+  "ctaBody": {
+    "en": "Start with Desktop and a compatible Hagency Server. Connect a local coding CLI when you are ready to run an Agent.",
+    "zh-cn": "从 Desktop 和兼容的 Hagency Server 开始，再连接本地编程 CLI 来运行 Agent。"
+  },
+  "note": {
+    "en": "Good to know",
+    "zh-cn": "使用须知"
+  },
+  "sourceNotes": {
+    "en": "Sources & availability",
+    "zh-cn": "来源与可用性"
+  },
+  "download": {
+    "en": "Download",
+    "zh-cn": "下载"
+  },
+  "releaseNotes": {
+    "en": "Release notes",
+    "zh-cn": "版本说明"
+  },
+  "all": {
+    "en": "All platforms",
+    "zh-cn": "全部平台"
+  },
+  "platform": {
+    "en": "Your platform",
+    "zh-cn": "选择平台"
+  },
+  "example": {
+    "en": "Illustrative workspace",
+    "zh-cn": "示例工作空间"
+  },
+  "demoNote": {
+    "en": "An illustrative walkthrough of current roles. It does not run an Agent, authorize tools, or connect to a live account.",
+    "zh-cn": "这是当前角色与步骤的示意演练，不运行 Agent、不授予工具权限，也不连接真实账户。"
+  },
+  "topic": {
+    "en": "Explore by topic",
+    "zh-cn": "按主题探索"
+  },
+  "openImage": {
+    "en": "Open full image",
+    "zh-cn": "查看完整图片"
+  },
+  "compare": {
+    "en": "Compare with Buzz",
+    "zh-cn": "对比 Buzz"
+  },
+  "capabilities": {
+    "en": "Verified capabilities",
+    "zh-cn": "能力核验"
+  }
 };
 
 export const home = {
-  eyebrow: b('THE OPEN COLLABORATION ECOSYSTEM', '开放的人机协作生态'),
-  title: b('Hagency', 'Hagency'),
-  subtitle: b('Human agency. Amplified.', '让人的能动性，延伸得更远。'),
-  description: b('An open-source, agent-native alternative to WeChat. Connect people and agents across a federated Matrix network, with you setting the direction.', '一个开源、Agent 原生的微信式协作空间。通过 Matrix 联邦网络连接人与 Agent，始终由你掌握方向。'),
-  values: [b('Agent native', 'Agent 原生'), b('Open source', '开放源码'), b('Federated', '联邦互通')],
-  scroll: b('Discover the ecosystem', '探索项目生态'),
-  introLabel: b('01 / THE BIG PICTURE', '01 / 全局视角'),
-  introTitle: b('A shared space.\nA whole new way to work.', '共享一个空间，\n开启全新协作方式。'),
-  introBody: b('Great collaboration needs more than a prompt. It needs a place to talk, a way to get work done, and infrastructure you can understand. Hagency brings all three together.', '好的协作，不止于一句提示词。它需要交流的空间、完成工作的能力，以及你能够理解和掌控的基础设施。Hagency 将这三者连接起来。'),
-  projectsLabel: b('02 / MEET THE PROJECTS', '02 / 认识项目'),
-  workflowLabel: b('03 / FROM CONVERSATION TO RESULT', '03 / 从对话到成果'),
-  workflowTitle: b('Work happens in the conversation.', '让工作，在对话中发生。'),
-  workflowBody: b('Ask an agent to take on a task. Follow its progress in a thread. Review a permission request privately. Bring the result back to your team.', '向 Agent 交办任务，在线程中跟进进展，在私密空间确认权限，再将成果带回团队。'),
-  principlesLabel: b('04 / PEOPLE AT THE CENTER', '04 / 以人为中心'),
-  principlesTitle: b('More capability.\nStill your call.', '能力更强，\n决定权仍在你手中。'),
-  principles: [
-    { title: b('Stay in the loop', '始终参与其中'), body: b('Shared conversations and visible progress give people a place to guide the work as it develops.', '共享对话与可见进展，让人在工作推进的过程中持续指引方向。'), icon: 'eye' },
-    { title: b('Choose your boundaries', '自主设定边界'), body: b('Managed runtimes start sandboxed. Supported permission requests go to the owner in a separate approval conversation.', '受管运行时默认使用沙箱。受支持的权限请求会送达所有者的独立审批会话。'), icon: 'shield' },
-    { title: b('Own your foundation', '掌握基础设施'), body: b('Open repositories and Matrix interoperability let you inspect the stack and choose where its parts run.', '开放代码仓库与 Matrix 互通能力，让你检查整个技术栈，自主选择各组件的运行位置。'), icon: 'network' },
+  "eyebrow": {
+    "en": "CODING AGENTS, IN YOUR TEAM’S CONVERSATIONS",
+    "zh-cn": "让编程 AGENT 加入团队对话"
+  },
+  "title": {
+    "en": "Hagency",
+    "zh-cn": "Hagency"
+  },
+  "subtitle": {
+    "en": "Your agents. Your conversations. Your call.",
+    "zh-cn": "你的 Agent，你的对话，由你决定。"
+  },
+  "description": {
+    "en": "Bring Codex, Claude Code and Octos into Matrix conversations. Connect your local runtime, set permissions and token limits, and keep progress and results beside the people doing the work.",
+    "zh-cn": "让 Codex、Claude Code 和 Octos 进入 Matrix 对话。连接本地运行时，设定权限与 token 限额，让进展和成果留在团队正在协作的地方。"
+  },
+  "values": [
+    {
+      "en": "Local execution",
+      "zh-cn": "本地执行"
+    },
+    {
+      "en": "Matrix interoperability",
+      "zh-cn": "Matrix 互通"
+    },
+    {
+      "en": "Explicit permissions",
+      "zh-cn": "明确授权"
+    }
   ],
-  pathLabel: b('05 / YOUR STARTING POINT', '05 / 从这里出发'),
-  pathTitle: b('Make it yours.', '找到属于你的开始。'),
-  updatesLabel: b('06 / IN THE OPEN', '06 / 开放进行时'), updatesTitle: b('Ideas, progress, and what’s next.', '理念、进展与下一步。'),
+  "scroll": {
+    "en": "Discover the ecosystem",
+    "zh-cn": "探索项目生态"
+  },
+  "introLabel": {
+    "en": "01 / THE BIG PICTURE",
+    "zh-cn": "01 / 全局视角"
+  },
+  "introTitle": {
+    "en": "A native workspace.\nA server you can host.",
+    "zh-cn": "原生协作空间，\n可自主托管的服务器。"
+  },
+  "introBody": {
+    "en": "Desktop provides chat, Projects, Agents and the local owner daemon. Server combines Palpo, Pasion sign-in and Agent management in one Rust process. You do not install a separate Fleet or legacy companion console.",
+    "zh-cn": "Desktop 提供聊天、Projects、Agents 和本地 owner daemon。Server 在一个 Rust 进程中集成 Palpo、Pasion 登录与 Agent 管理，不再需要独立 Fleet 或旧版配套控制台。"
+  },
+  "projectsLabel": {
+    "en": "02 / MEET THE PROJECTS",
+    "zh-cn": "02 / 认识项目"
+  },
+  "workflowLabel": {
+    "en": "03 / FROM CONVERSATION TO RESULT",
+    "zh-cn": "03 / 从对话到成果"
+  },
+  "workflowTitle": {
+    "en": "Work happens in the conversation.",
+    "zh-cn": "让工作，在对话中发生。"
+  },
+  "workflowBody": {
+    "en": "Create a personal Agent, connect a local runtime, and start in its private chat. Bind a team Room when you need one. Resource-pool requests follow a separate owner-approved flow.",
+    "zh-cn": "创建个人 Agent、连接本地运行时，从它的私聊开始；需要团队协作时再绑定房间。共享资源池采用另一条由资源所有者批准的流程。"
+  },
+  "principlesLabel": {
+    "en": "04 / PEOPLE AT THE CENTER",
+    "zh-cn": "04 / 以人为中心"
+  },
+  "principlesTitle": {
+    "en": "More capability.\nStill your call.",
+    "zh-cn": "能力更强，\n决定权仍在你手中。"
+  },
+  "principles": [
+    {
+      "title": {
+        "en": "Know what is available",
+        "zh-cn": "明确可用范围"
+      },
+      "body": {
+        "en": "See the reviewed source, release assets and test boundaries for each capability. A design document is not a shipped feature.",
+        "zh-cn": "逐项查看源码、发布文件与测试范围。设计文档不等于已经交付的功能。"
+      },
+      "icon": "eye"
+    },
+    {
+      "title": {
+        "en": "Grant a specific operation",
+        "zh-cn": "只批准具体操作"
+      },
+      "body": {
+        "en": "Room membership, a resource request and permission to run a tool are separate decisions. Follow the operation and scope shown in the approval.",
+        "zh-cn": "房间成员资格、资源申请和工具执行权限是不同的决定。请按审批卡片的操作与范围授权。"
+      },
+      "icon": "shield"
+    },
+    {
+      "title": {
+        "en": "Understand where data goes",
+        "zh-cn": "看清数据去向"
+      },
+      "body": {
+        "en": "Encrypted content is decrypted by participating devices, including the Agent executor. A resource host and the selected model provider can see the work they process.",
+        "zh-cn": "加密内容由参与设备解密，包括 Agent 执行设备。资源主机与所选模型提供方可看到它们处理的内容。"
+      },
+      "icon": "network"
+    }
+  ],
+  "pathLabel": {
+    "en": "05 / YOUR STARTING POINT",
+    "zh-cn": "05 / 从这里出发"
+  },
+  "pathTitle": {
+    "en": "Make it yours.",
+    "zh-cn": "找到属于你的开始。"
+  },
+  "updatesLabel": {
+    "en": "06 / IN THE OPEN",
+    "zh-cn": "06 / 开放进行时"
+  },
+  "updatesTitle": {
+    "en": "Ideas, progress, and what’s next.",
+    "zh-cn": "理念、进展与下一步。"
+  }
 };
 
-export type Feature = { title: Text; body: Text };
-export type Project = {
-  id: keyof typeof repos; name: string; number: string; color: string; role: Text;
-  headline: Text; description: Text; short: Text; version: string; date: string;
-  technology: string[]; features: Feature[]; preview: Text; install: string;
-};
 export const projects: Project[] = [
   {
-    id: 'hagency', name: 'Hagency', number: '01', color: 'teal', role: b('THE AGENT CONTROL PLANE', 'AGENT 控制平面'),
-    headline: b('A home for your\nagent workforce.', '为你的 Agent 团队，\n建立运行的家。'),
-    description: b('Turn individual coding agents into a connected working system. Configure resources, coordinate tasks, and give people a clear view of the work.', '将独立的编程 Agent 连接成协作系统。配置资源、协调任务，让人清晰了解工作的每一步。'),
-    short: b('Run agents. Share capacity. Keep oversight.', '运行 Agent，共享能力，持续掌控。'),
-    version: '1.2.0', date: '2026-07-30', technology: ['Node.js', 'Claude Code', 'Codex', 'MCP'],
-    features: [
-      { title: b('Resources before busywork', '从资源出发'), body: b('Configure the capacity you want to contribute. In the development console, named agent definitions are provisioned or reused when a qualified project request is approved.', '配置你希望贡献的资源。在开发版本控制台中，符合条件的项目请求获批后，系统会创建或复用对应的命名 Agent。') },
-      { title: b('Tasks with continuity', '任务有始有终'), body: b('Give work an identity, dependencies, and an accountable agent. Thread-scoped sessions keep follow-ups attached to the right task and conversation.', '为工作分配身份、依赖关系和负责的 Agent。按线程划分的会话，让后续交流始终对应正确的任务与对话。') },
-      { title: b('A shared message bus', '共享消息总线'), body: b('Agents exchange messages, results, and task updates through a common bus. Mailbox behavior keeps messages available when an agent is busy.', 'Agent 通过统一消息总线交换消息、成果和任务更新。即使 Agent 忙碌，邮箱机制也能保留待处理消息。') },
-      { title: b('Human permission, explicitly', '明确的人类授权'), body: b('Managed coding runtimes default to a sandbox. Owner-bound requests support deliberate permission decisions, with scoped approvals in the latest integration.', '受管编程运行时默认启用沙箱。绑定所有者的权限请求支持明确决策，最新集成还支持限定范围的审批。') },
-      { title: b('See the work move', '看见工作推进'), body: b('The latest development workflow publishes concise activity updates and returns artifacts to the current room or task thread.', '最新开发流程会发布简明的活动更新，并将文件成果送回当前房间或任务线程。') },
-      { title: b('Local and connected', '本地运行，连接协作'), body: b('Run the control plane locally, add remote relays where needed, and connect through the optional Matrix bridge. Model requests still follow your configured provider.', '在本地运行控制平面，按需添加远程中继，并通过可选 Matrix 桥接接入协作。模型请求仍会发送至你配置的服务提供方。') },
+    "id": "robrix2",
+    "name": "Hagency Desktop",
+    "number": "01",
+    "color": "blue",
+    "role": {
+      "en": "THE NATIVE WORKSPACE",
+      "zh-cn": "原生协作客户端"
+    },
+    "headline": {
+      "en": "Talk with your team.\nWork with your agents.",
+      "zh-cn": "与团队对话，\n与 Agent 协作。"
+    },
+    "description": {
+      "en": "A Rust/Makepad Matrix client with native Projects, Agents, chat and local execution. Choose Codex, Claude Code or Octos; keep model profiles, permissions and usage scoped to the right owner and conversation.",
+      "zh-cn": "基于 Rust/Makepad 的 Matrix 客户端，原生集成 Projects、Agents、聊天与本地执行。选择 Codex、Claude Code 或 Octos，让模型配置、权限和用量对应正确的所有者与对话。"
+    },
+    "short": {
+      "en": "Chat, local runtimes and Agent controls.",
+      "zh-cn": "聊天、本地运行时与 Agent 控制。"
+    },
+    "version": "0.5.0-rc.13",
+    "date": "2026-11-19",
+    "technology": [
+      "Rust",
+      "Makepad",
+      "Matrix",
+      "Codex · Claude · Octos"
     ],
-    preview: b('Resource definitions, the new allocation workflow, activity updates, files, and scoped approvals are demonstrated on the September 8 development integration. They are not a claim about every v1.2.0 installation.', '资源定义、新分配流程、活动更新、文件传递和限定范围审批，已在 9 月 8 日开发集成中演示；不代表所有 v1.2.0 安装都包含这些能力。'),
-    install: 'git clone https://github.com/hagency-org/hagency.git\ncd hagency\n./install/install-macos.sh --dry-run',
+    "features": [
+      {
+        "title": {
+          "en": "Start with one private chat",
+          "zh-cn": "从一个私聊开始"
+        },
+        "body": {
+          "en": "Create a named personal Agent without creating a Project first. Connect a local runtime and start responding in its owner chat; bind a shared Room later.",
+          "zh-cn": "无需先创建 Project，即可创建具名个人 Agent。连接本地运行时后，在所有者私聊中开始响应，再按需绑定共享房间。"
+        }
+      },
+      {
+        "title": {
+          "en": "Use the real local catalog",
+          "zh-cn": "使用真实本地模型目录"
+        },
+        "body": {
+          "en": "Choose a provider-supported model and reasoning setting. Octos selections come from local profiles; profiles with the same model remain separate. Runtime capabilities differ.",
+          "zh-cn": "选择提供方支持的模型和推理设置。Octos 选项来自本地配置档，同模型的不同配置保持独立；各运行时能力并不完全相同。"
+        }
+      },
+      {
+        "title": {
+          "en": "Follow distinct messages",
+          "zh-cn": "逐条跟进消息"
+        },
+        "body": {
+          "en": "Progress, supported background reports and final answers can appear as separate Matrix messages. Equal text does not merge distinct source identities. Full post-run reporting remains bounded by provider and routing support.",
+          "zh-cn": "进展、受支持的后台报告和最终回答可作为独立 Matrix 消息出现。文本相同不会合并不同来源的消息；运行结束后的完整报告仍受提供方与路由支持范围限制。"
+        }
+      },
+      {
+        "title": {
+          "en": "Make scoped decisions",
+          "zh-cn": "作出有范围的决定"
+        },
+        "body": {
+          "en": "Review requests and tool decisions with their exact owner, Room and operation. Token accounting is postpaid; an admitted task can exceed a configured limit.",
+          "zh-cn": "按准确的所有者、房间和操作审阅请求与工具决策。Token 用量在任务后记账，已经接纳的任务可能超过设定限额。"
+        }
+      }
+    ],
+    "preview": {
+      "en": "rc.13 publishes Apple Silicon macOS and Windows x86-64 installers. Current main is preparing rc.14 and contains later Windows discovery, sign-in and multi-account hosting changes. Linux/Intel/mobile build paths are not rc.13 download assets.",
+      "zh-cn": "rc.13 发布了 Apple Silicon macOS 与 Windows x86-64 安装包。当前 main 正准备 rc.14，并包含更晚的 Windows CLI 发现、登录和多账户托管修改；Linux、Intel 与移动端构建路径不等于 rc.13 已发布安装包。"
+    },
+    "install": "git clone https://github.com/hagency-org/hagency-desktop.git\ncd hagency-desktop\n# Development: reuse the matching pinned JIT runner.\n# See the repository JIT guide; do not compile a native app for testing."
   },
   {
-    id: 'robrix2', name: 'Robrix2', number: '02', color: 'blue', role: b('THE HUMAN WORKSPACE', '人的协作空间'),
-    headline: b('Where your team\ncomes together.', '让团队，\n在这里相聚。'),
-    description: b('A native Rust Matrix client for the conversations that move work forward. Keep people, agents, and task threads within reach.', '原生 Rust Matrix 客户端，让推动工作的对话自然发生。将人、Agent 和任务线程汇聚在触手可及的空间。'),
-    short: b('Talk, follow threads, and make the call.', '交流、跟进线程、作出决定。'),
-    version: '1.1.0', date: '2026-07-22', technology: ['Rust', 'Makepad', 'Matrix SDK', 'Desktop + mobile'],
-    features: [
-      { title: b('A native point of view', '原生界面体验'), body: b('Built in Rust with Makepad rendering and the Matrix Rust SDK. Rooms and threads live in a workspace designed around conversation.', '采用 Rust、Makepad 渲染和 Matrix Rust SDK 构建，以对话为中心组织房间与线程。') },
-      { title: b('Room for every conversation', '容纳每一种对话'), body: b('Organize people in rooms and spaces. Use mentions, replies, reactions, and rich messages to keep discussions understandable.', '通过房间和空间组织成员，用提及、回复、表情回应和富文本，让讨论清晰易懂。') },
-      { title: b('Threads that stay in context', '保留上下文的线程'), body: b('Follow a task alongside the main conversation. Multiple views help you move between a project, a task thread, and a direct message.', '在主对话之外跟进具体任务。多个视图帮助你在项目、任务线程与私信之间自然切换。') },
-      { title: b('A deliberate approval experience', '清晰的审批体验'), body: b('The Hagency development integration renders native permission cards in a separate owner conversation. The server verifies the decision and its scope.', 'Hagency 开发集成在所有者的独立会话中呈现原生权限卡片，由服务端校验决策及其范围。') },
-      { title: b('Files as part of the work', '文件也是协作的一部分'), body: b('Share messages and attachments where the discussion happens. Recent native work improves authenticated and encrypted attachment downloads.', '在讨论发生的地方分享消息与附件。近期原生改进完善了需认证附件和加密附件的下载。') },
-      { title: b('Start with your platform', '从你使用的平台开始'), body: b('Published packages cover macOS, Linux, Windows, and Android. iOS has a source-build path; OpenHarmony remains experimental.', '已发布的安装包覆盖 macOS、Linux、Windows 和 Android。iOS 支持从源码构建；OpenHarmony 仍处于实验阶段。') },
+    "id": "hagency",
+    "name": "Hagency Server",
+    "number": "02",
+    "color": "teal",
+    "role": {
+      "en": "IDENTITY, TRANSPORT AND MANAGEMENT",
+      "zh-cn": "身份、传输与管理"
+    },
+    "headline": {
+      "en": "One server.\nClear responsibilities.",
+      "zh-cn": "一个服务器，\n职责清晰。"
+    },
+    "description": {
+      "en": "One Rust process integrates Palpo Matrix, Pasion authentication and the management web UI. Its required Agent Appservice handles durable transport while the owner’s computer executes coding work.",
+      "zh-cn": "一个 Rust 进程集成 Palpo Matrix、Pasion 认证与管理 Web 界面。必需的 Agent Appservice 负责持久传输，编程任务则在所有者的电脑上执行。"
+    },
+    "short": {
+      "en": "Pasion sign-in, Matrix and Agent management.",
+      "zh-cn": "Pasion 登录、Matrix 与 Agent 管理。"
+    },
+    "version": "source",
+    "date": "2026-11-19",
+    "technology": [
+      "Rust",
+      "Palpo",
+      "Pasion",
+      "PostgreSQL"
     ],
-    preview: b('The latest native approval and attachment work was validated on a macOS development build. Choose a homeserver with native Sliding Sync; platform packaging does not imply identical integration validation.', '最新原生审批和附件改进已在 macOS 开发构建中验证。请选择支持原生 Sliding Sync 的服务器；有安装包并不代表所有平台都完成了相同的集成验证。'),
-    install: 'git clone https://github.com/Project-Robius-China/robrix2.git\ncd robrix2\ncargo run --release',
+    "features": [
+      {
+        "title": {
+          "en": "Sign in as yourself",
+          "zh-cn": "使用自己的身份登录"
+        },
+        "body": {
+          "en": "Pasion OAuth/OIDC with PKCE establishes a personal Matrix identity. An Agent has a permanent owner; an execution lease is not an ownership transfer.",
+          "zh-cn": "Pasion OAuth/OIDC 与 PKCE 建立个人 Matrix 身份。Agent 有永久所有者，执行租约不代表转移所有权。"
+        }
+      },
+      {
+        "title": {
+          "en": "Keep Rooms independent",
+          "zh-cn": "保留房间独立性"
+        },
+        "body": {
+          "en": "Projects map to Matrix Spaces. Each Room still checks actual membership and send power; joining a Space does not grant access to all child Rooms.",
+          "zh-cn": "Project 对应 Matrix Space。每个房间仍检查真实成员资格与发送权限；加入 Space 不会自动获得全部子房间的访问权。"
+        }
+      },
+      {
+        "title": {
+          "en": "Ask a resource owner directly",
+          "zh-cn": "直接向资源所有者申请"
+        },
+        "body": {
+          "en": "With resource pools enabled, an applicant selects a pool, names an Agent and requests a token ceiling. The owner approves or rejects it; capacity still needs a ready executor.",
+          "zh-cn": "启用资源池后，申请人选择资源池、填写 Agent 名称并请求 token 上限。所有者批准或拒绝；获得容量后仍需就绪的执行器。"
+        }
+      },
+      {
+        "title": {
+          "en": "Retain uncertain work",
+          "zh-cn": "保留不确定状态"
+        },
+        "body": {
+          "en": "Durable queues, generation checks, idempotency and recorded receipts support recovery. Unknown work is not automatically billed as zero or replayed as a new model run.",
+          "zh-cn": "持久队列、代际检查、幂等标识与回执支持恢复。不确定的工作不会被自动记为零用量，也不会直接重跑为新的模型任务。"
+        }
+      }
+    ],
+    "preview": {
+      "en": "Use matching current Desktop and Server revisions. Resource-pool behavior depends on management configuration. The latest Server GitHub release has no binary assets; use the documented source/container deployment path. Fleet, Engagement and authority-import instructions are retired.",
+      "zh-cn": "使用相互匹配的 Desktop 与 Server 版本。资源池行为取决于管理配置。Server 最新 GitHub release 没有二进制附件，请使用文档中的源码或容器部署路径。Fleet、Engagement 与 authority import 已退役。"
+    },
+    "install": "git clone https://github.com/hagency-org/hagency-server.git\ncd hagency-server\n# Review the complete deployment guide before generating configuration.\n# One PostgreSQL service holds three separate databases."
   },
   {
-    id: 'palpo', name: 'Palpo', number: '03', color: 'amber', role: b('THE COMMUNICATION FOUNDATION', '通信基础设施'),
-    headline: b('Your conversations.\nYour own foundation.', '你的对话，\n你的基础设施。'),
-    description: b('A Matrix homeserver built with Rust, Salvo, and PostgreSQL. Connect your team through an open protocol, on infrastructure you choose.', '基于 Rust、Salvo 和 PostgreSQL 的 Matrix 服务器。通过开放协议连接团队，自主选择基础设施。'),
-    short: b('Host your rooms. Connect your world.', '托管房间，连接你的世界。'),
-    version: '0.4.0', date: '2026-07-07', technology: ['Rust', 'Salvo', 'PostgreSQL', 'Matrix'],
-    features: [
-      { title: b('Built around Matrix', '围绕 Matrix 构建'), body: b('Accounts, rooms, messages, media, and federation use the Matrix protocol. Compatible clients can participate without adopting a private chat network.', '账户、房间、消息、媒体与联邦互通基于 Matrix 协议。兼容客户端可以参与协作，无需加入封闭的聊天网络。') },
-      { title: b('Rust meets PostgreSQL', 'Rust 与 PostgreSQL'), body: b('A Rust server on the Salvo framework, backed by PostgreSQL. Use familiar database inspection, backup, and operational tooling.', '采用 Salvo 框架构建 Rust 服务端，以 PostgreSQL 存储数据，方便使用成熟的数据库检查、备份和运维工具。') },
-      { title: b('Connect application services', '连接应用服务'), body: b('Matrix application services connect external tools to room events and scoped identities. Hagency uses this surface to join the collaboration.', 'Matrix 应用服务将外部工具连接到房间事件与限定范围身份。Hagency 通过这一接口加入协作。') },
-      { title: b('A guided fleet connection', '引导式接入 Agent 舰队'), body: b('The companion development admin service guides administrators and fleet owners through authorization, pairing, and a verified event round trip.', '配套的开发版管理服务，引导管理员和舰队所有者完成授权、配对及真实事件往返验证。') },
-      { title: b('Projects with clear ownership', '项目归属清晰'), body: b('The admin integration helps project owners register rooms, establish a separate approval conversation, request roles, and observe admitted agents.', '管理集成帮助项目所有者注册房间、建立独立审批会话、申请角色，并确认 Agent 实际加入项目。') },
-      { title: b('An open development journey', '开放的开发进程'), body: b('Evaluate through source builds or published packages. The project welcomes testing; large-scale, long-running production evidence is still being developed.', '通过源码构建或已发布安装包进行评估。项目欢迎参与测试，大规模长期生产运行证据仍在积累中。') },
+    "id": "palpo",
+    "name": "Palpo",
+    "number": "03",
+    "color": "amber",
+    "role": {
+      "en": "THE MATRIX FOUNDATION",
+      "zh-cn": "MATRIX 协议基础"
+    },
+    "headline": {
+      "en": "Open messaging.\nBuilt into the stack.",
+      "zh-cn": "开放消息协议，\n集成于协作系统。"
+    },
+    "description": {
+      "en": "The Rust Matrix homeserver underlying Hagency Server. It provides Matrix users, Rooms, Spaces, media and federation APIs. Pasion and Hagency management belong to the integrated Server, not the standalone Palpo archive.",
+      "zh-cn": "Hagency Server 底层的 Rust Matrix 服务器，提供用户、房间、Space、媒体和联邦 API。Pasion 与 Hagency 管理由集成 Server 提供，并不属于独立 Palpo 压缩包。"
+    },
+    "short": {
+      "en": "Rooms, devices, events and federation.",
+      "zh-cn": "房间、设备、事件与联邦。"
+    },
+    "version": "0.6.0",
+    "date": "2026-11-17",
+    "technology": [
+      "Rust",
+      "Matrix",
+      "Salvo",
+      "PostgreSQL"
     ],
-    preview: b('The Hagency web-admin integration is a separate Node service in a development worktree. It is not bundled in Palpo v0.4.0. Evaluate deployment needs against Palpo’s current documentation.', 'Hagency 网页管理集成是开发工作树中的独立 Node 服务，并未打包进 Palpo v0.4.0。部署前请对照 Palpo 当前文档评估需求。'),
-    install: 'git clone https://github.com/palpo-im/palpo.git\ncd palpo\ncargo build --release',
-  },
+    "features": [
+      {
+        "title": {
+          "en": "Use open Matrix primitives",
+          "zh-cn": "使用开放 Matrix 基础能力"
+        },
+        "body": {
+          "en": "Users, devices, Rooms, Spaces and standard events keep the communication layer inspectable and interoperable. Client-specific extensions still need compatible clients.",
+          "zh-cn": "用户、设备、房间、Space 与标准事件让通信层可检查、可互通；客户端扩展仍需要兼容的客户端。"
+        }
+      },
+      {
+        "title": {
+          "en": "Support device encryption",
+          "zh-cn": "支持设备端加密"
+        },
+        "body": {
+          "en": "Matrix key upload, query, claims and to-device transport support SDK-based encryption. A device identity and possession of a specific room key are separate facts.",
+          "zh-cn": "Matrix 密钥上传、查询、领取与 to-device 传输支持基于 SDK 的加密。具备设备身份与持有特定房间密钥，是两件不同的事。"
+        }
+      },
+      {
+        "title": {
+          "en": "Connect through federation",
+          "zh-cn": "通过联邦连接"
+        },
+        "body": {
+          "en": "Federation is a protocol capability, not a guarantee that every deployment, room setting or Agent extension has been tested across servers.",
+          "zh-cn": "联邦是一项协议能力，并不保证每种部署、房间设置或 Agent 扩展都已经跨服务器实测。"
+        }
+      },
+      {
+        "title": {
+          "en": "Choose the right deployment",
+          "zh-cn": "选择正确的部署方式"
+        },
+        "body": {
+          "en": "Most Hagency users connect to the integrated Server. Standalone Palpo is a separate operator path and does not install coding agents or the Hagency owner daemon.",
+          "zh-cn": "大多数 Hagency 用户连接集成 Server。独立 Palpo 是另一条运维路径，不会安装编程 Agent 或 Hagency owner daemon。"
+        }
+      }
+    ],
+    "preview": {
+      "en": "Palpo v0.6.0 publishes macOS ARM64, Linux x86-64 and Windows x86-64 archives. Hagency Server pins a specific Palpo source revision; that revision is a different baseline from this standalone release.",
+      "zh-cn": "Palpo v0.6.0 提供 macOS ARM64、Linux x86-64 与 Windows x86-64 压缩包。Hagency Server 固定使用特定 Palpo 源码版本，与独立发行版是不同基线。"
+    },
+    "install": "# For the complete Hagency stack, follow Hagency Server deployment.\n# For standalone Matrix, review Palpo’s own requirements.\ngit clone https://github.com/palpo-im/palpo.git"
+  }
 ];
 
 export const paths = [
-  { id: 'client', icon: 'chat', title: b('I want a better workspace', '我想体验新的协作空间'), description: b('Install Robrix2 and connect to your Matrix server.', '安装 Robrix2，连接你的 Matrix 服务器。'), href: 'docs/install-robrix2', label: b('Start with Robrix2', '从 Robrix2 开始') },
-  { id: 'agents', icon: 'fleet', title: b('I want to run agents', '我想运行 Agent'), description: b('Set up Hagency and configure the resources you contribute.', '部署 Hagency，配置你希望贡献的资源。'), href: 'docs/run-hagency', label: b('Start with Hagency', '从 Hagency 开始') },
-  { id: 'server', icon: 'network', title: b('I want to host the stack', '我想自主托管'), description: b('Deploy Palpo and build your collaboration foundation.', '部署 Palpo，构建你的协作基础设施。'), href: 'docs/deploy-palpo', label: b('Start with Palpo', '从 Palpo 开始') },
+  {
+    "id": "client",
+    "icon": "chat",
+    "title": {
+      "en": "Use an Agent",
+      "zh-cn": "使用 Agent"
+    },
+    "description": {
+      "en": "Download Desktop, sign in to a compatible server, then create your first personal Agent.",
+      "zh-cn": "下载 Desktop，登录兼容服务器，再创建第一个个人 Agent。"
+    },
+    "href": "docs/install-robrix2",
+    "label": {
+      "en": "Start with Desktop",
+      "zh-cn": "从 Desktop 开始"
+    }
+  },
+  {
+    "id": "agents",
+    "icon": "fleet",
+    "title": {
+      "en": "Share approved capacity",
+      "zh-cn": "共享经批准的容量"
+    },
+    "description": {
+      "en": "Connect a local runtime, define what you offer and review resource-pool requests as the owner.",
+      "zh-cn": "连接本地运行时，明确可提供的资源，并以所有者身份审阅资源池申请。"
+    },
+    "href": "docs/resource-pools",
+    "label": {
+      "en": "Read the resource-owner path",
+      "zh-cn": "查看资源所有者流程"
+    }
+  },
+  {
+    "id": "server",
+    "icon": "network",
+    "title": {
+      "en": "Host your team",
+      "zh-cn": "托管团队服务"
+    },
+    "description": {
+      "en": "Deploy the integrated Server with Pasion, Palpo and three separate databases.",
+      "zh-cn": "部署集成 Server，包含 Pasion、Palpo 与三个独立数据库。"
+    },
+    "href": "docs/deploy-palpo",
+    "label": {
+      "en": "Read the operator guide",
+      "zh-cn": "查看运维指南"
+    }
+  }
 ];
 
 export const faqs = [
-  { title: b('Do I need to install all three projects?', '需要安装全部三个项目吗？'), body: b('No. Robrix2 works as a Matrix client, Hagency can run with an optional Matrix bridge, and Palpo is a Matrix homeserver. Start with the part you need and connect the others later.', '不需要。Robrix2 是 Matrix 客户端，Hagency 可独立运行并按需启用 Matrix 桥接，Palpo 则是 Matrix 服务器。可以先使用需要的部分，再连接其他项目。') },
-  { title: b('Can I use another Matrix client or server?', '可以使用其他 Matrix 客户端或服务器吗？'), body: b('Ordinary collaboration uses Matrix messages and threads. Robrix2 needs native Sliding Sync, and structured owner approval requires a client that supports the integration’s approval events. A normal chat reply is not an approval.', '日常协作使用 Matrix 消息和线程。Robrix2 需要原生 Sliding Sync，结构化所有者审批则需要支持相关审批事件的客户端。普通聊天回复不等于授权。') },
-  { title: b('Does everything stay on my computer?', '所有数据都会留在我的电脑上吗？'), body: b('You choose where the control plane and server run. Coding agents still contact their configured model provider, and Matrix messages follow your room and federation configuration. Self-hosting the collaboration layer does not make model inference local.', '你可以选择控制平面和服务器的运行位置。编程 Agent 仍会访问配置的模型服务，Matrix 消息遵循房间与联邦配置。自行托管协作层，不等于模型推理也在本地完成。') },
-  { title: b('Are the demos included in the published releases?', '演示功能都包含在已发布版本里吗？'), body: b('Some integrated workflows come from newer development branches. Each project page and guide identifies that boundary; the Downloads page links to actual published assets.', '部分集成流程来自更新的开发分支。项目页面和指南会说明这一边界，下载页面只链接到实际发布的文件。') },
+  {
+    "title": {
+      "en": "Do I install three applications?",
+      "zh-cn": "需要安装三个应用吗？"
+    },
+    "body": {
+      "en": "A member installs Desktop and connects to a compatible Hagency Server. The operator hosts Server, which already integrates Palpo and Pasion. A local coding CLI is needed on the computer that executes the Agent.",
+      "zh-cn": "成员安装 Desktop 并连接兼容的 Hagency Server；运维者托管已经集成 Palpo 与 Pasion 的 Server。实际执行 Agent 的电脑还需要本地编程 CLI。"
+    }
+  },
+  {
+    "title": {
+      "en": "Can I use Element or another Matrix server?",
+      "zh-cn": "可以使用 Element 或其他 Matrix 服务器吗？"
+    },
+    "body": {
+      "en": "Ordinary messages use Matrix events. Hagency management requires the matching Server APIs, and interactive approval controls require a compatible client. Element end-to-end approval/report interoperability has not been verified by this audit.",
+      "zh-cn": "普通消息使用 Matrix 事件。Hagency 管理需要匹配的 Server API，交互式审批需要兼容客户端；本次审核没有验证 Element 的端到端审批或报告互通。"
+    }
+  },
+  {
+    "title": {
+      "en": "Does a token limit stop a running task?",
+      "zh-cn": "Token 限额会中断正在运行的任务吗？"
+    },
+    "body": {
+      "en": "Accounting is postpaid. A task admitted within policy may exceed its limit and continues until completion or explicit stop. Unknown usage and holds remain unresolved rather than becoming zero. This is not a billing or payment service.",
+      "zh-cn": "用量在任务后记账。按策略接纳的任务可能超出限额，并持续到完成或明确停止。不确定用量与预留保持待确认，不会变成零；这不是计费或支付服务。"
+    }
+  },
+  {
+    "title": {
+      "en": "Is Hagency better than Buzz?",
+      "zh-cn": "Hagency 比 Buzz 更好吗？"
+    },
+    "body": {
+      "en": "Compare the workflow you need. Hagency focuses on Matrix, local runtime control and owner-approved capacity. Buzz documents broader workflow, Git and canvas tools. The comparison separates source evidence from executed tests and does not claim an unmeasured overall winner.",
+      "zh-cn": "请按实际工作流程比较。Hagency 聚焦 Matrix、本地运行控制与所有者批准的容量；Buzz 文档提供更广的工作流、Git 与画布工具。对比页区分源码证据和已执行测试，不宣称未经测量的全面胜出。"
+    }
+  }
 ];

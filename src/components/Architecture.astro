@@ -4,16 +4,67 @@ import Icon from './Icon.astro';
 interface Props { lang: Locale; detailed?: boolean }
 const { lang, detailed = false } = Astro.props;
 const nodes = [
-  { id: 'robrix2', name: 'Robrix2', color: 'blue', icon: 'chat', role: b('Your workspace', '你的工作空间'), desc: b('People, conversations, and decisions.', '人、对话与决策。'), detail: b('The native client presents rooms, threads, and supported owner approval cards. It displays actions; it does not become the authorization authority.', '原生客户端呈现房间、线程与受支持的所有者审批卡片。它负责展示操作，而不是成为权限来源。') },
-  { id: 'palpo', name: 'Palpo', color: 'amber', icon: 'network', role: b('Your connection', '你的通信连接'), desc: b('Rooms, identities, and open communication.', '房间、身份与开放通信。'), detail: b('The Matrix homeserver carries room events, membership, and media. Application services connect agent identities through scoped registrations.', 'Matrix 服务器承载房间事件、成员关系与媒体。应用服务通过限定范围的注册连接 Agent 身份。') },
-  { id: 'hagency', name: 'Hagency', color: 'teal', icon: 'fleet', role: b('Your agent runtime', '你的 Agent 运行时'), desc: b('Resources, tasks, and useful execution.', '资源、任务与有效执行。'), detail: b('The control plane runs coding agents and owns task and execution state. Its bridge connects work to Matrix; model requests follow the configured provider.', '控制平面运行编程 Agent，维护任务与执行状态。桥接将工作接入 Matrix；模型请求则发送至配置的服务提供方。') },
+  {
+    "id": "robrix2",
+    "name": "Hagency Desktop",
+    "color": "blue",
+    "icon": "chat",
+    "role": {
+      "en": "CHAT + OWNER UI",
+      "zh-cn": "聊天与所有者界面"
+    },
+    "desc": {
+      "en": "Personal Agents, rooms and supported decisions.",
+      "zh-cn": "个人 Agent、房间与支持的决策。"
+    },
+    "detail": {
+      "en": "The native Makepad client hosts the local owner engine.",
+      "zh-cn": "原生 Makepad 客户端托管本地所有者引擎。"
+    }
+  },
+  {
+    "id": "hagency",
+    "name": "Hagency Server",
+    "color": "amber",
+    "icon": "network",
+    "role": {
+      "en": "ONE INTEGRATED SERVICE",
+      "zh-cn": "一个集成服务"
+    },
+    "desc": {
+      "en": "Palpo, Pasion and Agent management.",
+      "zh-cn": "Palpo、Pasion 与 Agent 管理。"
+    },
+    "detail": {
+      "en": "One Rust process; no separate Node companion or Fleet.",
+      "zh-cn": "一个 Rust 进程，无需独立 Node 配套应用或 Fleet。"
+    }
+  },
+  {
+    "id": "robrix2",
+    "name": "Codex · Claude · Octos",
+    "color": "teal",
+    "icon": "fleet",
+    "role": {
+      "en": "LOCAL EXECUTION",
+      "zh-cn": "本地执行"
+    },
+    "desc": {
+      "en": "Your chosen runtime, profile and model endpoint.",
+      "zh-cn": "自行选择运行时、配置与模型入口。"
+    },
+    "detail": {
+      "en": "Owner-controlled local credentials and supported tool policy.",
+      "zh-cn": "由所有者控制的本地凭据与支持的工具策略。"
+    }
+  }
 ];
 ---
 <div class:list={['architecture', { detailed }]}>
   <div class="architecture-overline"><span class="status-dot"></span>{t(b('A CONNECTED SYSTEM, WITH YOU IN IT', '一个有你参与的互联系统'), lang)}</div>
   <div class="architecture-nodes">
     {nodes.map((node, i) => <>
-      {i > 0 && <div class="connection" aria-hidden="true"><span></span><span class="connection-label">{i === 1 ? 'Matrix' : 'App Service'}</span><span></span></div>}
+      {i > 0 && <div class="connection" aria-hidden="true"><span></span><span class="connection-label">{i === 1 ? 'Matrix' : 'Owner device'}</span><span></span></div>}
       <a class:list={['architecture-node', node.color]} href={url(lang, `projects/${node.id}`)}>
         <div class="node-orbit"><Icon name={node.icon} size={35} /><i></i><i></i></div>
         <span class="eyebrow">{t(node.role, lang)}</span><h3>{node.name}</h3><p>{t(node.desc, lang)}</p>

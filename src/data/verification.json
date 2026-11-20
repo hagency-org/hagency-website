@@ -1,0 +1,1388 @@
+{
+  "verifiedAt": "2026-11-19",
+  "pins": {
+    "desktop": {
+      "repository": "hagency-org/hagency-desktop",
+      "commit": "71d6e9adba17b15dcb33c15732320c4286c45735"
+    },
+    "server": {
+      "repository": "hagency-org/hagency-server",
+      "commit": "9a9cbad5195f72d583b760f627d9eba608b9067f"
+    },
+    "buzz": {
+      "repository": "block/buzz",
+      "commit": "69ea27343c9b60eeeb1f6e903529cd8b789e910e"
+    },
+    "buzzApp": {
+      "repository": "block/buzz-app",
+      "commit": "c3d2b046a8773824244735750c8d87a23da36218"
+    }
+  },
+  "rows": [
+    {
+      "id": "identity",
+      "name": {
+        "en": "Account and sign-in",
+        "zh-cn": "账户与登录"
+      },
+      "desktop": {
+        "en": "Native Pasion OAuth / PKCE; Matrix SDK session.",
+        "zh-cn": "原生 Pasion OAuth / PKCE；Matrix SDK 会话。"
+      },
+      "server": {
+        "en": "Embedded Pasion; Matrix account provisioning.",
+        "zh-cn": "内嵌 Pasion，开通 Matrix 账户。"
+      },
+      "buzz": {
+        "en": "Nostr identity; native key custody and import.",
+        "zh-cn": "Nostr 身份，原生密钥保管与导入。"
+      },
+      "boundary": {
+        "en": "Different identity systems; include key backup and device readiness in onboarding tests.",
+        "zh-cn": "身份体系不同；入门测试需包含密钥备份与设备就绪。"
+      },
+      "guide": "connect-fleet",
+      "evidence": "server-smoke",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/README.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "personal-agent",
+      "name": {
+        "en": "First personal Agent",
+        "zh-cn": "首个个人 Agent"
+      },
+      "desktop": {
+        "en": "Agent → Agent manager → My Agents → Add Local Agent, after this account is hosted here.",
+        "zh-cn": "本机完成当前账户托管后：Agent → Agent 管理者 → 我的 Agent → 添加本地 Agent。"
+      },
+      "server": {
+        "en": "Permanent owner and Agent creation policy.",
+        "zh-cn": "永久所有者与 Agent 创建策略。"
+      },
+      "buzz": {
+        "en": "Personal agents with recommended harness setup.",
+        "zh-cn": "个人 Agent 与推荐 harness 配置。"
+      },
+      "boundary": {
+        "en": "Fresh accounts need hosting setup for local execution. Without hosting and pool capability, current main has an onboarding dead end; a guidance fix is prepared separately.",
+        "zh-cn": "新账户需先配置本机托管才能本地执行。当前 main 在无托管且无资源池能力时存在入门断点，另行准备引导修复。"
+      },
+      "guide": "request-agent",
+      "evidence": "server-smoke",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/README.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "ownership",
+      "name": {
+        "en": "Agent ownership",
+        "zh-cn": "Agent 所有权"
+      },
+      "desktop": {
+        "en": "Owner controls settings, execution and removal.",
+        "zh-cn": "所有者控制设置、执行和移除。"
+      },
+      "server": {
+        "en": "Personal ownership is separate from global administration.",
+        "zh-cn": "个人所有权与全局管理权限分离。"
+      },
+      "buzz": {
+        "en": "Agent identity, config and harness management.",
+        "zh-cn": "Agent 身份、配置与 harness 管理。"
+      },
+      "boundary": {
+        "en": "Room access does not transfer ownership.",
+        "zh-cn": "房间访问权限不会转移所有权。"
+      },
+      "guide": "request-agent",
+      "evidence": "source",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/README.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "projects",
+      "name": {
+        "en": "Projects and rooms",
+        "zh-cn": "项目与房间"
+      },
+      "desktop": {
+        "en": "Projects use Matrix Spaces; rooms have independent membership.",
+        "zh-cn": "项目使用 Matrix Space；房间成员独立。"
+      },
+      "server": {
+        "en": "Space/room verification and bindings.",
+        "zh-cn": "验证 Space、房间与绑定。"
+      },
+      "buzz": {
+        "en": "Relay-scoped communities, channels and threads.",
+        "zh-cn": "以中继为范围的社区、频道和线程。"
+      },
+      "boundary": {
+        "en": "A Space is not a workspace ACL inherited by every room.",
+        "zh-cn": "Space 不是所有房间继承的工作区访问控制。"
+      },
+      "guide": "task-threads",
+      "evidence": "server-smoke",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/README.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "triggers",
+      "name": {
+        "en": "When an Agent responds",
+        "zh-cn": "Agent 何时响应"
+      },
+      "desktop": {
+        "en": "Personal DM; explicit group mentions subject to the bound room policy.",
+        "zh-cn": "个人私聊；群聊明确提及，并遵守绑定房间策略。"
+      },
+      "server": {
+        "en": "Routes eligible events to the bound executor.",
+        "zh-cn": "将符合条件的事件路由到绑定执行器。"
+      },
+      "buzz": {
+        "en": "Mentions, personal chat and workflow triggers.",
+        "zh-cn": "提及、个人聊天与工作流触发。"
+      },
+      "boundary": {
+        "en": "An unmentioned group message must not silently start a model task.",
+        "zh-cn": "群聊中未提及 Agent 的消息不应悄悄启动模型任务。"
+      },
+      "guide": "task-threads",
+      "evidence": "source",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/README.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "context",
+      "name": {
+        "en": "Conversation context",
+        "zh-cn": "对话上下文"
+      },
+      "desktop": {
+        "en": "Contexts scoped by Agent, room and top-level group thread.",
+        "zh-cn": "上下文按 Agent、房间及群聊顶层线程限定。"
+      },
+      "server": {
+        "en": "Durable context and dispatch identity.",
+        "zh-cn": "持久上下文与调度身份。"
+      },
+      "buzz": {
+        "en": "Conversation and thread context in native agents.",
+        "zh-cn": "原生 Agent 具备对话与线程上下文。"
+      },
+      "boundary": {
+        "en": "Room membership and another thread must not broaden execution scope.",
+        "zh-cn": "房间成员关系或其他线程不能扩大执行范围。"
+      },
+      "guide": "task-threads",
+      "evidence": "source",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/README.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "codex",
+      "name": {
+        "en": "Codex integration",
+        "zh-cn": "Codex 接入"
+      },
+      "desktop": {
+        "en": "Native App Server protocol, supported approvals, questions and usage.",
+        "zh-cn": "原生 App Server 协议，支持的审批、问题与用量。"
+      },
+      "server": {
+        "en": "Executor capability and lease control.",
+        "zh-cn": "执行器能力与租约控制。"
+      },
+      "buzz": {
+        "en": "Codex harness available.",
+        "zh-cn": "提供 Codex harness。"
+      },
+      "boundary": {
+        "en": "Protocol support is not a claim of every interactive CLI feature.",
+        "zh-cn": "协议支持不代表 CLI 每项交互均已对等。"
+      },
+      "guide": "run-hagency",
+      "evidence": "source",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/README.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "claude",
+      "name": {
+        "en": "Claude integration",
+        "zh-cn": "Claude 接入"
+      },
+      "desktop": {
+        "en": "Managed native CLI, structured supported controls.",
+        "zh-cn": "托管原生 CLI，支持结构化控制。"
+      },
+      "server": {
+        "en": "Qualified executor dispatch.",
+        "zh-cn": "调度合格执行器。"
+      },
+      "buzz": {
+        "en": "Claude harness available.",
+        "zh-cn": "提供 Claude harness。"
+      },
+      "boundary": {
+        "en": "Review platform sandbox and permission policy; do not infer CLI parity.",
+        "zh-cn": "检查平台沙箱与权限策略，不能推定 CLI 对等。"
+      },
+      "guide": "run-hagency",
+      "evidence": "source",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/README.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "octos",
+      "name": {
+        "en": "Octos and actual model profiles",
+        "zh-cn": "Octos 与实际模型配置"
+      },
+      "desktop": {
+        "en": "OUP integration lists installed Octos profiles and model choices.",
+        "zh-cn": "通过 OUP 列出实际安装的 Octos 配置与模型。"
+      },
+      "server": {
+        "en": "Resource configuration is bound to executor capability.",
+        "zh-cn": "资源配置绑定执行器能力。"
+      },
+      "buzz": {
+        "en": "The reviewed help does not establish an Octos harness.",
+        "zh-cn": "核验的帮助文档未证明提供 Octos harness。"
+      },
+      "boundary": {
+        "en": "Keep distinct profiles for the same model; a listed model is not a successful inference test.",
+        "zh-cn": "同名模型的不同配置应保留；列出模型不能证明推理成功。"
+      },
+      "guide": "run-hagency",
+      "evidence": "source",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/docs/design/hagency-octos-oup.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "local-models",
+      "name": {
+        "en": "Local and custom model endpoints",
+        "zh-cn": "本地模型与自定义端点"
+      },
+      "desktop": {
+        "en": "Octos profiles may use local models or custom endpoints.",
+        "zh-cn": "Octos 配置可使用本地模型或自定义端点。"
+      },
+      "server": {
+        "en": "Per-resource accounting; no universal provider identity.",
+        "zh-cn": "按资源记账，不假设统一供应商身份。"
+      },
+      "buzz": {
+        "en": "Harness and provider dependent; not scored as absent.",
+        "zh-cn": "取决于 harness 与提供方，不能当作缺失打分。"
+      },
+      "boundary": {
+        "en": "Expose only the owner-selected profiles; local secrets stay local.",
+        "zh-cn": "只暴露所有者选定配置，本地密钥留在本地。"
+      },
+      "guide": "run-hagency",
+      "evidence": "source",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/README.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "other-harnesses",
+      "name": {
+        "en": "Pi, Goose and Hermes",
+        "zh-cn": "Pi、Goose 与 Hermes"
+      },
+      "desktop": {
+        "en": "No complete current native adapter acceptance for these in this audit.",
+        "zh-cn": "本轮未验收这些运行时的完整原生适配。"
+      },
+      "server": {
+        "en": "Executor protocols do not automatically add an adapter.",
+        "zh-cn": "执行器协议不会自动增加适配器。"
+      },
+      "buzz": {
+        "en": "Pi and Goose are documented harnesses.",
+        "zh-cn": "文档列出 Pi 与 Goose harness。"
+      },
+      "boundary": {
+        "en": "Buzz has broader documented harness coverage; Hermes support is not established here.",
+        "zh-cn": "Buzz 的已记录 harness 范围更广；本轮未确认 Hermes 支持。"
+      },
+      "guide": "run-hagency",
+      "evidence": "source",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/README.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "permissions",
+      "name": {
+        "en": "Tool permission decisions",
+        "zh-cn": "工具权限决策"
+      },
+      "desktop": {
+        "en": "Owner reviews supported native requests in structured UI.",
+        "zh-cn": "所有者在结构化界面审核支持的原生请求。"
+      },
+      "server": {
+        "en": "Validates ownership, bound decision and execution authority.",
+        "zh-cn": "校验所有者、绑定决策与执行权限。"
+      },
+      "buzz": {
+        "en": "Harness policy and permission controls.",
+        "zh-cn": "Harness 策略与权限控制。"
+      },
+      "boundary": {
+        "en": "Ordinary chat text and room roles are not tool authorization.",
+        "zh-cn": "普通聊天文本和房间角色不能授权工具。"
+      },
+      "guide": "approvals",
+      "evidence": "source",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/README.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "questions",
+      "name": {
+        "en": "Interactive questions",
+        "zh-cn": "交互提问"
+      },
+      "desktop": {
+        "en": "Supported structured questions return to the active runtime.",
+        "zh-cn": "支持的结构化问题返回当前运行时。"
+      },
+      "server": {
+        "en": "Retains bound operations and receipts.",
+        "zh-cn": "保留绑定操作与凭据。"
+      },
+      "buzz": {
+        "en": "Harness interaction support; exact parity needs a matched test.",
+        "zh-cn": "支持 harness 交互，准确对等性需相同任务测试。"
+      },
+      "boundary": {
+        "en": "Question handling is provider-specific; do not advertise a terminal replacement.",
+        "zh-cn": "问题处理依提供方而异，不宣传为完整终端替代品。"
+      },
+      "guide": "approvals",
+      "evidence": "source",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/README.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "files",
+      "name": {
+        "en": "Files and artifacts",
+        "zh-cn": "文件与产物"
+      },
+      "desktop": {
+        "en": "Native Matrix file bridge for Codex and Claude.",
+        "zh-cn": "Codex 与 Claude 的原生 Matrix 文件桥接。"
+      },
+      "server": {
+        "en": "Media and durable authorized file operations.",
+        "zh-cn": "媒体与持久授权文件操作。"
+      },
+      "buzz": {
+        "en": "Media and local agent artifacts.",
+        "zh-cn": "媒体与本地 Agent 产物。"
+      },
+      "boundary": {
+        "en": "Hagency native path caps a request at 64 files / 64 MiB; Octos parity is not established.",
+        "zh-cn": "Hagency 原生路径每次最多 64 个文件、64 MiB；未确认 Octos 对等。"
+      },
+      "guide": "share-files",
+      "evidence": "source",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/README.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "encryption",
+      "name": {
+        "en": "Encrypted conversation",
+        "zh-cn": "加密对话"
+      },
+      "desktop": {
+        "en": "Matrix SDK device keys and encrypted Agent room path.",
+        "zh-cn": "Matrix SDK 设备密钥与 Agent 加密房间路径。"
+      },
+      "server": {
+        "en": "Executor-device routing for encrypted Agent work.",
+        "zh-cn": "Agent 加密工作使用执行器设备路由。"
+      },
+      "buzz": {
+        "en": "NIP-17 gift-wrapped encrypted direct messages.",
+        "zh-cn": "NIP-17 gift-wrap 加密私信。"
+      },
+      "boundary": {
+        "en": "Both support encrypted paths. Executors and configured model providers can see task plaintext.",
+        "zh-cn": "双方都有加密路径；执行器与配置的模型提供方可见任务明文。"
+      },
+      "guide": "approvals",
+      "evidence": "source",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/docs/testing/spontaneous-messages-real-stack.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "keys",
+      "name": {
+        "en": "Room-key readiness",
+        "zh-cn": "房间密钥就绪"
+      },
+      "desktop": {
+        "en": "Signature-checked SDK discovery guards sendability.",
+        "zh-cn": "通过签名校验的 SDK 发现流程检查可发送性。"
+      },
+      "server": {
+        "en": "Server key publication alone does not update sender SDK state.",
+        "zh-cn": "服务器已发布密钥不等于发送方 SDK 已刷新。"
+      },
+      "buzz": {
+        "en": "Different Nostr key model; no Matrix room-key claim.",
+        "zh-cn": "采用不同的 Nostr 密钥体系，不适用 Matrix 房间密钥结论。"
+      },
+      "boundary": {
+        "en": "The 30-second helper bound does not guarantee every key-sharing case succeeds.",
+        "zh-cn": "辅助方法的 30 秒边界不保证所有密钥共享情形成功。"
+      },
+      "guide": "operations",
+      "evidence": "source",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/docs/testing/spontaneous-messages-real-stack.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "reports",
+      "name": {
+        "en": "Independent Agent reports",
+        "zh-cn": "独立 Agent 报告"
+      },
+      "desktop": {
+        "en": "Captured provider reports get distinct chat events and duplicate suppression.",
+        "zh-cn": "捕获的提供方报告生成独立聊天事件并去重。"
+      },
+      "server": {
+        "en": "Delivery-only authorization and reply outbox.",
+        "zh-cn": "仅投递授权与回复发件箱。"
+      },
+      "buzz": {
+        "en": "Agent messages in chat; no equivalent matched recovery test run here.",
+        "zh-cn": "聊天中的 Agent 消息；本轮未运行对等恢复测试。"
+      },
+      "boundary": {
+        "en": "November 17 JIT tested encrypted DM/group and restart with deterministic Codex, not paid inference.",
+        "zh-cn": "11 月 17 日 JIT 用确定性 Codex 验证了加密私聊、群聊与重启，未调用付费推理。"
+      },
+      "guide": "task-threads",
+      "evidence": "historical-jit",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/docs/testing/spontaneous-messages-real-stack.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "post-run",
+      "name": {
+        "en": "Autonomous post-run messages",
+        "zh-cn": "运行结束后的自主消息"
+      },
+      "desktop": {
+        "en": "ADR 0013 remains partial; native Octos report experiment is disabled.",
+        "zh-cn": "ADR 0013 仍部分完成；Octos 原生报告实验关闭。"
+      },
+      "server": {
+        "en": "Full durable unsolicited routing is not established by current evidence.",
+        "zh-cn": "当前证据未证明完整的持久主动消息路由。"
+      },
+      "buzz": {
+        "en": "Schedule/webhook workflows documented.",
+        "zh-cn": "文档记录定时、Webhook 工作流。"
+      },
+      "boundary": {
+        "en": "Do not claim every autonomous message from every CLI is delivered.",
+        "zh-cn": "不能声称每个 CLI 的所有自主消息均能投递。"
+      },
+      "guide": "task-threads",
+      "evidence": "partial",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/docs/adr/0013-spontaneous-agent-messages.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "pool-request",
+      "name": {
+        "en": "Request an Agent from a pool",
+        "zh-cn": "从资源池申请 Agent"
+      },
+      "desktop": {
+        "en": "Select pool, Agent name and positive token ceiling.",
+        "zh-cn": "选择资源池、Agent 名称与正数 token 上限。"
+      },
+      "server": {
+        "en": "Current schema-24 applicant-driven contract.",
+        "zh-cn": "当前 schema 24 由申请人发起的流程。"
+      },
+      "buzz": {
+        "en": "No equivalent shared-capacity approval contract verified.",
+        "zh-cn": "未核验对等的共享容量审批契约。"
+      },
+      "boundary": {
+        "en": "One pool per Agent; no prerequisite Project or intermediate reservation in the new flow.",
+        "zh-cn": "每个 Agent 使用一个池；新流程无需预先 Project 或中间预留。"
+      },
+      "guide": "resource-pools",
+      "evidence": "source",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/README.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "pool-approval",
+      "name": {
+        "en": "Resource owner approval",
+        "zh-cn": "资源所有者审批"
+      },
+      "desktop": {
+        "en": "Owner receives and reviews the request.",
+        "zh-cn": "资源所有者接收并审核申请。"
+      },
+      "server": {
+        "en": "Only selected owner decides; native hold and executor qualification follow.",
+        "zh-cn": "仅选定所有者决策，之后仍需原生额度保留和执行器资格确认。"
+      },
+      "buzz": {
+        "en": "Not established in reviewed sources.",
+        "zh-cn": "核验源码未确认。"
+      },
+      "boundary": {
+        "en": "Approval alone is not a successful hold or a ready worker.",
+        "zh-cn": "批准本身不代表额度已保留或工作器已就绪。"
+      },
+      "guide": "resource-pools",
+      "evidence": "source",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/README.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "pool-gates",
+      "name": {
+        "en": "Resource-pool availability",
+        "zh-cn": "资源池可用性"
+      },
+      "desktop": {
+        "en": "Requires a compatible Server-advertised capability.",
+        "zh-cn": "依赖兼容 Server 宣告的能力。"
+      },
+      "server": {
+        "en": "Optional management gates; explicit TOML overrides environment defaults.",
+        "zh-cn": "可选管理开关；显式 TOML 覆盖环境默认值。"
+      },
+      "buzz": {
+        "en": "No Hagency management API compatibility.",
+        "zh-cn": "不兼容 Hagency 管理 API。"
+      },
+      "boundary": {
+        "en": "A hidden pool entry may be a server configuration issue, not a missing Desktop feature.",
+        "zh-cn": "资源池入口隐藏可能是服务器配置问题，而非 Desktop 缺功能。"
+      },
+      "guide": "resource-pools",
+      "evidence": "source",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/README.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "budget",
+      "name": {
+        "en": "Budget and accounting",
+        "zh-cn": "预算与记账"
+      },
+      "desktop": {
+        "en": "Shows limits, actual use and retained uncertainty.",
+        "zh-cn": "展示限额、实际使用与待确认用量。"
+      },
+      "server": {
+        "en": "Postpaid reconciliation and retained holds.",
+        "zh-cn": "事后对账与保留额度。"
+      },
+      "buzz": {
+        "en": "Agent usage reporting; no equivalent pool ledger claimed.",
+        "zh-cn": "Agent 用量报告；未宣称对等资源池账本。"
+      },
+      "boundary": {
+        "en": "Admitted work may exceed a limit. This is not a hard spending cap or commercial billing.",
+        "zh-cn": "已接纳任务可能超限；并非硬消费上限或商业计费。"
+      },
+      "guide": "resource-pools",
+      "evidence": "source",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/README.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "retry",
+      "name": {
+        "en": "Retry and restart",
+        "zh-cn": "重试与重启"
+      },
+      "desktop": {
+        "en": "Durable commands recover their original operation.",
+        "zh-cn": "持久命令恢复原操作。"
+      },
+      "server": {
+        "en": "Leases, outbox receipts and generation checks.",
+        "zh-cn": "租约、发件箱凭据与 generation 检查。"
+      },
+      "buzz": {
+        "en": "Recovery behavior requires matched testing.",
+        "zh-cn": "恢复行为需要对等测试。"
+      },
+      "boundary": {
+        "en": "An uncertain result must not trigger a blind replay or be counted as zero usage.",
+        "zh-cn": "结果不确定时不能盲目重放，也不能按零用量计入。"
+      },
+      "guide": "operations",
+      "evidence": "server-smoke",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/README.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "stop",
+      "name": {
+        "en": "Stop and revoke",
+        "zh-cn": "停止与撤销"
+      },
+      "desktop": {
+        "en": "Applicant removes Agent; resource owner can stop supply.",
+        "zh-cn": "申请人移除 Agent，资源所有者可停止供给。"
+      },
+      "server": {
+        "en": "Fences new execution; retains consumed and unresolved usage.",
+        "zh-cn": "阻断新执行，保留已消耗和未解决用量。"
+      },
+      "buzz": {
+        "en": "Harness run controls and configuration.",
+        "zh-cn": "Harness 运行控制与配置。"
+      },
+      "boundary": {
+        "en": "Revocation cannot undo completed tool side effects; stop acknowledgment must be tested.",
+        "zh-cn": "撤销不能撤回已完成工具的副作用，停止确认需要实测。"
+      },
+      "guide": "operations",
+      "evidence": "source",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/README.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "accounts",
+      "name": {
+        "en": "Multiple owner accounts",
+        "zh-cn": "多个所有者账户"
+      },
+      "desktop": {
+        "en": "Reviewed main adds account-aware daemon hosting after rc.13.",
+        "zh-cn": "核验 main 在 rc.13 后加入按账户区分的守护进程托管。"
+      },
+      "server": {
+        "en": "Each owner/account has separate authority.",
+        "zh-cn": "每个所有者与账户权限独立。"
+      },
+      "buzz": {
+        "en": "Community switching has relay-scoped identity and state rules.",
+        "zh-cn": "社区切换遵守中继范围的身份与状态规则。"
+      },
+      "boundary": {
+        "en": "Do not promise this main-only behavior in the rc.13 installer.",
+        "zh-cn": "不能在 rc.13 安装包中承诺此 main 新行为。"
+      },
+      "guide": "connect-fleet",
+      "evidence": "main-only",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/README.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "federation",
+      "name": {
+        "en": "Federation and community scope",
+        "zh-cn": "联邦与社区范围"
+      },
+      "desktop": {
+        "en": "Matrix room membership and standard client transport.",
+        "zh-cn": "Matrix 房间成员关系与标准客户端传输。"
+      },
+      "server": {
+        "en": "Embedded Palpo supports Matrix server-to-server federation.",
+        "zh-cn": "内嵌 Palpo 支持 Matrix 服务器间联邦。"
+      },
+      "buzz": {
+        "en": "Community URL is authoritative; relay-scoped tenants, NIP-29/NIP-42.",
+        "zh-cn": "社区 URL 为权威，中继范围租户，NIP-29/NIP-42。"
+      },
+      "boundary": {
+        "en": "Federation depends on deployment, membership and keys; it does not federate coding-tool authority.",
+        "zh-cn": "联邦取决于部署、成员与密钥，不会联邦共享编程工具权限。"
+      },
+      "guide": "operations",
+      "evidence": "source",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/README.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "third-party",
+      "name": {
+        "en": "Other clients, including Element",
+        "zh-cn": "其他客户端，包括 Element"
+      },
+      "desktop": {
+        "en": "Standard m.room.message text is interoperable.",
+        "zh-cn": "标准 m.room.message 文本可互通。"
+      },
+      "server": {
+        "en": "Delivers Matrix room events; management is Hagency-specific.",
+        "zh-cn": "投递 Matrix 房间事件；管理接口为 Hagency 专用。"
+      },
+      "buzz": {
+        "en": "Nostr/NIP-compatible clients have different interoperability boundaries.",
+        "zh-cn": "Nostr/NIP 兼容客户端有不同互通边界。"
+      },
+      "boundary": {
+        "en": "Element E2E verification was not performed; native approval cards need client-specific UI.",
+        "zh-cn": "尚未执行 Element 端到端验证；原生审批卡片需要专用客户端 UI。"
+      },
+      "guide": "task-threads",
+      "evidence": "partial",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/README.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "web-admin",
+      "name": {
+        "en": "Server administration",
+        "zh-cn": "Server 管理"
+      },
+      "desktop": {
+        "en": "Native Agent experience is separate from server administration.",
+        "zh-cn": "原生 Agent 体验与服务器管理分离。"
+      },
+      "server": {
+        "en": "Rust/Yew web UI, integrated Palpo and Pasion in one process.",
+        "zh-cn": "Rust/Yew Web UI，一个进程集成 Palpo 与 Pasion。"
+      },
+      "buzz": {
+        "en": "Relay/server tooling and desktop client.",
+        "zh-cn": "中继、服务器工具与桌面客户端。"
+      },
+      "boundary": {
+        "en": "No separate Node companion or Fleet pairing is required.",
+        "zh-cn": "无需独立 Node 配套应用或 Fleet 配对。"
+      },
+      "guide": "deploy-palpo",
+      "evidence": "server-smoke",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/README.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "downloads",
+      "name": {
+        "en": "Published Desktop installers",
+        "zh-cn": "已发布 Desktop 安装包"
+      },
+      "desktop": {
+        "en": "rc.13: macOS ARM64 and Windows x86-64. Main prepares rc.14.",
+        "zh-cn": "rc.13：macOS ARM64、Windows x86-64；main 准备 rc.14。"
+      },
+      "server": {
+        "en": "No standalone release binary; source and CI containers.",
+        "zh-cn": "没有独立发布二进制包；提供源码与 CI 容器。"
+      },
+      "buzz": {
+        "en": "Desktop releases and platform-specific harness availability.",
+        "zh-cn": "桌面发布版，harness 支持依平台而异。"
+      },
+      "boundary": {
+        "en": "Old Robrix2 packages are not current Hagency Desktop releases.",
+        "zh-cn": "旧 Robrix2 安装包不是当前 Hagency Desktop 发布版。"
+      },
+      "guide": "install-robrix2",
+      "evidence": "release",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/README.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "mobile",
+      "name": {
+        "en": "Mobile availability",
+        "zh-cn": "移动端可用性"
+      },
+      "desktop": {
+        "en": "No Android or iOS installer in rc.13.",
+        "zh-cn": "rc.13 没有 Android 或 iOS 安装包。"
+      },
+      "server": {
+        "en": "Browser frontend exists; mobile UX not validated here.",
+        "zh-cn": "提供浏览器前端；本轮未验收其移动端 UX。"
+      },
+      "buzz": {
+        "en": "Do not infer mobile native parity from desktop sources.",
+        "zh-cn": "不能从桌面源码推定原生移动端对等。"
+      },
+      "boundary": {
+        "en": "Source/platform support and available installers are different claims.",
+        "zh-cn": "源码平台支持与实际安装包可用性是不同结论。"
+      },
+      "guide": "install-robrix2",
+      "evidence": "release",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/README.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "git",
+      "name": {
+        "en": "Git workflow collaboration",
+        "zh-cn": "Git 工作流协作"
+      },
+      "desktop": {
+        "en": "Coding agents can work in local repositories.",
+        "zh-cn": "编程 Agent 可操作本地仓库。"
+      },
+      "server": {
+        "en": "No matched native NIP-34-style Git review flow verified.",
+        "zh-cn": "未核验对等于 NIP-34 的原生 Git 审阅流程。"
+      },
+      "buzz": {
+        "en": "NIP-34 patches, repositories and status are documented.",
+        "zh-cn": "文档记录 NIP-34 补丁、仓库与状态。"
+      },
+      "boundary": {
+        "en": "Buzz has a documented product advantage here; a CLI returning a patch is not equivalent UX.",
+        "zh-cn": "Buzz 在此有已记录的产品优势；CLI 返回补丁不等于相同 UX。"
+      },
+      "guide": "task-threads",
+      "evidence": "source",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/README.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "workflows",
+      "name": {
+        "en": "Scheduled and event workflows",
+        "zh-cn": "定时与事件工作流"
+      },
+      "desktop": {
+        "en": "No full native YAML workflow builder established in this audit.",
+        "zh-cn": "本轮未确认完整原生 YAML 工作流构建器。"
+      },
+      "server": {
+        "en": "Agent dispatch is not a workflow-builder parity claim.",
+        "zh-cn": "Agent 调度不等于工作流构建器对等。"
+      },
+      "buzz": {
+        "en": "YAML message, reaction, schedule and webhook workflows.",
+        "zh-cn": "YAML 消息、反应、定时和 Webhook 工作流。"
+      },
+      "boundary": {
+        "en": "Buzz has broader documented automation; no fabricated Hagency parity.",
+        "zh-cn": "Buzz 的已记录自动化更广，不能虚构 Hagency 对等。"
+      },
+      "guide": "task-threads",
+      "evidence": "source",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/README.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "canvas",
+      "name": {
+        "en": "Shared canvas",
+        "zh-cn": "共享画布"
+      },
+      "desktop": {
+        "en": "Mini-apps and webviews exist; no matched collaborative canvas acceptance.",
+        "zh-cn": "具备小应用与 WebView；未完成对等协作画布验收。"
+      },
+      "server": {
+        "en": "No equivalent canvas contract established.",
+        "zh-cn": "未确认等价画布契约。"
+      },
+      "buzz": {
+        "en": "Channels and direct-message canvases are documented.",
+        "zh-cn": "文档记录频道与私信画布。"
+      },
+      "boundary": {
+        "en": "A mini-app container is not a substitute for a tested shared canvas workflow.",
+        "zh-cn": "小应用容器不能替代已验证的共享画布工作流。"
+      },
+      "guide": "choose-your-path",
+      "evidence": "source",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/README.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "voice",
+      "name": {
+        "en": "Voice collaboration",
+        "zh-cn": "语音协作"
+      },
+      "desktop": {
+        "en": "No equivalent core Agent voice workflow verified.",
+        "zh-cn": "未核验对等的核心 Agent 语音工作流。"
+      },
+      "server": {
+        "en": "No matched voice task acceptance.",
+        "zh-cn": "没有对等语音任务验收。"
+      },
+      "buzz": {
+        "en": "Current help documents voice huddles and agent participation.",
+        "zh-cn": "当前帮助文档记录语音 huddle 与 Agent 参与。"
+      },
+      "boundary": {
+        "en": "Use current Buzz help, not its older incomplete-huddles README summary.",
+        "zh-cn": "依据 Buzz 当前帮助，不能挑选旧 README 的未完成描述。"
+      },
+      "guide": "choose-your-path",
+      "evidence": "source",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/README.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    },
+    {
+      "id": "testing",
+      "name": {
+        "en": "Acceptance and evidence",
+        "zh-cn": "验收与证据"
+      },
+      "desktop": {
+        "en": "Historical encrypted real-stack JIT evidence is dated separately.",
+        "zh-cn": "历史加密真实链路 JIT 证据单独标注日期。"
+      },
+      "server": {
+        "en": "Pinned-main CI and local container smoke have separate results.",
+        "zh-cn": "固定 main CI 与本地容器 smoke 分别记录结果。"
+      },
+      "buzz": {
+        "en": "Source-reviewed here; no same-task native live benchmark yet.",
+        "zh-cn": "本轮做源码核验，尚无相同任务的原生真实基准。"
+      },
+      "boundary": {
+        "en": "A score above 90 or an overall win requires repeatable task evidence for both products.",
+        "zh-cn": "90 分以上或整体胜出需要双方可重复的任务证据。"
+      },
+      "guide": "operations",
+      "evidence": "source",
+      "sources": [
+        {
+          "product": "desktop",
+          "url": "https://github.com/hagency-org/hagency-desktop/blob/71d6e9adba17b15dcb33c15732320c4286c45735/docs/testing/spontaneous-messages-real-stack.md"
+        },
+        {
+          "product": "server",
+          "url": "https://github.com/hagency-org/hagency-server/blob/9a9cbad5195f72d583b760f627d9eba608b9067f/docs/OPERATIONS.md"
+        },
+        {
+          "product": "buzzApp",
+          "url": "https://github.com/block/buzz-app/blob/c3d2b046a8773824244735750c8d87a23da36218/docs/buzz-help.md"
+        }
+      ]
+    }
+  ]
+}
