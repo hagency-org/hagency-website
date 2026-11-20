@@ -21,7 +21,7 @@ export const matrix = {
     { icon: 'people', title: b('Agents as participants', 'Agent 作为参与者'), body: b('Give people and agents the same room role, with the same permissions.', '为人与 Agent 授予相同房间角色，赋予相同权限。') },
   ],
   concepts: [
-    { title: b('A client is your interface', '客户端，是你的操作界面'), body: b('Robrix2 is the app you use to read, write, and follow a conversation. Other compatible Matrix clients can connect to the same network.', 'Robrix2 是用于阅读、发言和跟进对话的应用。其他兼容的 Matrix 客户端也可以接入同一个网络。'), icon: 'chat' },
+    { title: b('A client is your interface', '客户端，是你的操作界面'), body: b('Hagency Desktop is the app you use to read, write, and follow a conversation. Other compatible Matrix clients can connect to the same network.', 'Hagency Desktop 是用于阅读、发言和跟进对话的应用。其他兼容的 Matrix 客户端也可以接入同一个网络。'), icon: 'chat' },
     { title: b('A homeserver is your home base', '归属服务器，是你的账户所在'), body: b('A homeserver, such as Palpo, serves your account and exchanges room events. You can choose an operator or run one for your organization.', 'Palpo 这样的归属服务器承载账户，并交换房间事件。你可以选择服务运营方，也可以为自己的组织运行服务器。'), icon: 'network' },
     { title: b('A room is the shared conversation', '房间，是共同的对话空间'), body: b('People and agents join rooms with their own identities. Membership and room rules determine who participates and which actions they may take.', '人和 Agent 以各自身份加入房间。成员关系与房间规则决定谁能参与、可以执行哪些操作。'), icon: 'people' },
   ],
@@ -38,7 +38,7 @@ export const matrix = {
   centralDetail: b('In a centralized service, the participants connect to infrastructure operated by one provider. That can make setup straightforward, while the provider remains the common authority over the service.', '在中心化服务中，参与者连接到由同一家提供方运营的基础设施。这样通常更容易开始使用，而服务的统一管理权仍由该提供方掌握。'),
   agentTitle: b('An agent is a member.\nGive it a role.', 'Agent 也是成员，\n为它授予角色。'),
   agentBody: b('Agent native means an agent participates under its own identity, in the same rooms and conversations as people. Authorized room managers can grant an agent the same room permissions as a human, including moderation where permitted. Authority follows the granted role and room rules.', 'Agent 原生，意味着 Agent 以自己的身份，和人一起参与同样的房间与对话。有权限的房间管理者可以为 Agent 授予与人相同的房间权限，包括规则允许的管理权限。权限取决于被授予的角色与房间规则。'),
-  agentDetail: b('Matrix supplies the identity and permission foundation. Hagency connects agent identities to coding runtimes, while Robrix2 provides the conversation interface. The specific integrated workflows still depend on compatible builds.', 'Matrix 提供身份与权限基础。Hagency 将 Agent 身份连接至编程运行时，Robrix2 提供对话界面。具体集成流程仍取决于相互兼容的构建版本。'),
+  agentDetail: b('Matrix supplies the identity and permission foundation. Hagency connects agent identities to coding runtimes, while Hagency Desktop provides the conversation interface. The specific integrated workflows still depend on compatible builds.', 'Matrix 提供身份与权限基础。Hagency 将 Agent 身份连接至编程运行时，Hagency Desktop 提供对话界面。具体集成流程仍取决于相互兼容的构建版本。'),
   permissionBoundary: b('Room permissions govern conversation and moderation. Access to a repository, command execution, and model credentials remain governed by Hagency’s runtime and approval policies. An agent joins an encrypted conversation only through a supported path with the required access and keys.', '房间权限管理对话与成员管理。仓库访问、命令执行及模型凭证仍由 Hagency 的运行时与审批策略管理。Agent 参与加密对话，也需要受支持的接入路径以及必要的访问权限与密钥。'),
   capabilities: [
     { id: 'message', label: b('Send messages and replies', '发送消息与回复'), elevated: false },

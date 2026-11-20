@@ -2,6 +2,7 @@
 import { locales, projects, t, type Locale } from '@/data/site';
 import { coreSlugs, pageInfo, guides, articles } from '@/data/content';
 import Layout from '@/layouts/Layout.astro';
+import VerificationPage from '@/components/VerificationPage.astro';
 import Home from '@/components/Home.astro';
 import StandardPage from '@/components/StandardPage.astro';
 import ProjectPage from '@/components/ProjectPage.astro';
@@ -22,5 +23,5 @@ const info = project ? { title: project.headline, description: project.descripti
 if (!info) throw new Error(`Unknown page: ${lang}/${slug}`);
 ---
 <Layout lang={lang} slug={slug} title={t(info.title,lang)} description={t(info.description,lang)}>
-  {slug === '' ? <Home lang={lang}/> : slug === 'matrix' ? <MatrixPage lang={lang}/> : slug === 'architecture' ? <ArchitecturePage lang={lang}/> : project ? <ProjectPage lang={lang} project={project}/> : content ? <ArticlePage lang={lang} article={content} kind={guide ? 'docs' : 'updates'}/> : <StandardPage lang={lang} slug={slug as Exclude<keyof typeof pageInfo,''|'matrix'|'architecture'>}/>}
+  {slug === 'capabilities' || slug === 'compare' ? <VerificationPage lang={lang} compare={slug==='compare'}/> : slug === '' ? <Home lang={lang}/> : slug === 'matrix' ? <MatrixPage lang={lang}/> : slug === 'architecture' ? <ArchitecturePage lang={lang}/> : project ? <ProjectPage lang={lang} project={project}/> : content ? <ArticlePage lang={lang} article={content} kind={guide ? 'docs' : 'updates'}/> : <StandardPage lang={lang} slug={slug as Exclude<keyof typeof pageInfo,''|'matrix'|'architecture'>}/>}
 </Layout>

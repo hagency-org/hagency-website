@@ -1,0 +1,153 @@
+{
+  "reviewDate": "2026-11-19",
+  "timeZone": "America/Los_Angeles",
+  "scope": "Website and Desktop core Agent collaboration",
+  "pins": {
+    "desktop": {
+      "repository": "hagency-org/hagency-desktop",
+      "commit": "71d6e9adba17b15dcb33c15732320c4286c45735"
+    },
+    "server": {
+      "repository": "hagency-org/hagency-server",
+      "commit": "9a9cbad5195f72d583b760f627d9eba608b9067f"
+    },
+    "buzz": {
+      "repository": "block/buzz",
+      "commit": "69ea27343c9b60eeeb1f6e903529cd8b789e910e"
+    },
+    "buzzApp": {
+      "repository": "block/buzz-app",
+      "commit": "c3d2b046a8773824244735750c8d87a23da36218"
+    }
+  },
+  "checks": {
+    "website": {
+      "status": "passed",
+      "tests": 23,
+      "failures": 0,
+      "localizedRoutes": 68,
+      "wcagScanConfigurations": 32,
+      "productionPathTests": {
+        "status": "passed",
+        "tests": 2
+      },
+      "source": "npm run verify; production SITE_URL build + tests/pages.test.mjs",
+      "repositoryPrefixPathTests": {
+        "status": "passed",
+        "tests": 2,
+        "prefix": "/hagency-website/"
+      }
+    },
+    "desktopCoreWidgets": {
+      "status": "passed",
+      "mode": "JIT",
+      "tests": 50,
+      "failures": 0,
+      "nativeCompilation": false,
+      "matchedNativePackages": 19,
+      "scope": "Current-main hagency::ui::tests, not a full live model journey."
+    },
+    "server": {
+      "status": "passed",
+      "commit": "9a9cbad5195f72d583b760f627d9eba608b9067f",
+      "image": "ghcr.io/hagency-org/hagency-server:sha-9a9cbad",
+      "digest": "sha256:40e0429cd662e7f6bc40231d56bfb7585af217cd302fd96f71d20d8bf99461e5",
+      "fixture": "isolated Compose, PostgreSQL / Palpo / Pasion / management / actual Matrix reply / restart / SIGTERM receipt drain",
+      "modelInvoked": false
+    },
+    "desktopLive": {
+      "status": "partial",
+      "mode": "headless JIT",
+      "passed": [
+        "Real Pasion PKCE and Matrix sync against reviewed Server image",
+        "Fresh account → Agent manager → My Agents",
+        "Reproduced missing hosting guidance and misleading Server-upgrade notice",
+        "Guidance patch rendered and semantically checked in English and Simplified Chinese",
+        "Existing profile restored across two JIT restarts",
+        "Existing Hosting header reached the setup page without installing hosting"
+      ],
+      "notRun": [
+        "OS hosting installation",
+        "First local Agent creation through current UI",
+        "Actual provider model catalog and inference",
+        "Current-main encrypted multi-user Agent execution",
+        "Live owner tool decision, stop and executor recovery",
+        "Native Buzz matched-task benchmark"
+      ],
+      "fix": "https://github.com/hagency-org/hagency-desktop/pull/179"
+    },
+    "heldFixtureContinuation": {
+      "status": "failed",
+      "result": "HTTP 401 authentication_required renewing the original harness session after the prolonged UI hold. This continuation is not counted as a second smoke pass. The fresh exact-image smoke passed separately; UI PKCE/sync and restore passed.",
+      "classification": "Held fixture session-lifecycle failure; no full post-hold regression claim."
+    }
+  },
+  "ux": {
+    "method": "Internal expert review grounded in headless tasks, actual screens and local measurements; not a user study.",
+    "website": {
+      "score": 92,
+      "maximum": 100,
+      "criteria": [
+        {
+          "criterion": "Truth and version clarity",
+          "maximum": 25,
+          "awarded": 24,
+          "evidenceAndLimits": "35 pinned feature records; actual release assets; main/release/test boundaries. Future upstream drift still requires maintenance."
+        },
+        {
+          "criterion": "Finding the right first step",
+          "maximum": 20,
+          "awarded": 18,
+          "evidenceAndLimits": "Role-based entry, current Agent route and hosting prerequisite. Legacy URL bookmarks remain."
+        },
+        {
+          "criterion": "Task guidance",
+          "maximum": 20,
+          "awarded": 18,
+          "evidenceAndLimits": "11 bilingual guides, current pool and deployment steps. Advanced owner setup still has substantial reading."
+        },
+        {
+          "criterion": "Accessibility and responsive interaction",
+          "maximum": 20,
+          "awarded": 18,
+          "evidenceAndLimits": "Keyboard, no-JS, two themes, WCAG scans and 320/390/768px checks. No assistive-technology user study."
+        },
+        {
+          "criterion": "Loading and interaction",
+          "maximum": 15,
+          "awarded": 14,
+          "evidenceAndLimits": "16 local browser lab samples with cache disabled, 4x CPU and emulated network; no field or physical-device measurement."
+        }
+      ],
+      "assessmentTarget": "Proposed website branch; public website changes only after PR merge/deployment."
+    },
+    "desktop": {
+      "score": null,
+      "acceptedAt90": false,
+      "reason": "Current live first-Agent/model/encrypted-collaboration/permission-stop journeys and matched Buzz acceptance are incomplete. Component and historical passes cannot fill these categories."
+    },
+    "comparison": {
+      "overallWinner": null,
+      "buzzEvidence": "Pinned source/help review only; no matched native benchmark."
+    }
+  },
+  "browserLab": {
+    "method": "Local static preview; headless Chromium; 4x CPU, 40ms latency, 10Mbps; not field Core Web Vitals; cache disabled; readings taken before scripted screenshot scrolling",
+    "samples": 16,
+    "fcpMs": [
+      164,
+      228
+    ],
+    "lcpMs": [
+      164,
+      292
+    ],
+    "maximumInitialCLS": 0.0003289252381762798,
+    "transferredSubresourceBytes": [
+      115852,
+      183360
+    ],
+    "horizontalOverflowSamples": 0
+  },
+  "privateArtifacts": "Raw profiles, credentials, authorization URLs, private test logs and screenshots are excluded from commits."
+}

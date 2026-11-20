@@ -52,5 +52,14 @@
     "bytes": 341698,
     "sha256": "db7533d3092ef32d411663899d7d776b65c359194d5832c385cc921c50fefa89",
     "sourceModified": "2026-09-08T23:48:52.522Z"
+  },
+  {
+    "id": "desktop-jit-reports-20261117",
+    "source": "Historical real-stack JIT acceptance, November 17 2026; synthetic fixture",
+    "width": 1280,
+    "height": 900,
+    "bytes": 167953,
+    "sha256": "d6cf421d79d23b63f86f71237e6a4c9cbd085697cfd5aafb4e9ec83e1435d220",
+    "sourceModified": "2026-11-17T17:45:32Z"
   }
 ]

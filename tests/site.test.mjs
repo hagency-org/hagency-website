@@ -16,7 +16,7 @@ async function walk(path) {
 }
 const pages = (await walk(dist)).filter(file=>file.endsWith('index.html') && /[/\\](en|zh-cn)[/\\]/.test(file)).map(file=>file.slice(dist.length).replaceAll(sep,'/').replace(/index\.html$/,''));
 before(async()=>{
-  assert.equal(pages.length,62,'Expected 31 complete routes per language');
+  assert.equal(pages.length,68,'Expected 34 complete routes per language');
   server=createServer(async(req,res)=>{
     try {
       const pathname=decodeURIComponent(new URL(req.url,'http://localhost').pathname);
@@ -82,7 +82,7 @@ test('language preserves route and theme persists across pages',async()=>{
     await page.locator('[data-language-switch]').click();
     await page.waitForURL('**/en/docs/approvals/#section-2');
     assert.equal(await page.locator('html').getAttribute('data-theme'),'light');
-    assert.match(await page.locator('h1').innerText(),/approvals/);
+    assert.match(await page.locator('h1').innerText(),/permission|approvals/i);
     await page.locator('.brand').first().click();
     await page.waitForURL('**/en/');
     assert.equal(await page.locator('html').getAttribute('data-theme'),'light');
@@ -127,7 +127,7 @@ test('localized search finds guides and handles no matches',async()=>{
     await page.waitForFunction(()=>!document.querySelector('.search-dialog').open);
     assert.equal(await page.locator('.search-dialog').isVisible(),false);
     await page.locator('.inline-search').click();
-    await page.locator('.search-dialog input').fill(lang==='en'?'approvals':'执行审批');
+    await page.locator('.search-dialog input').fill(lang==='en'?'permission':'权限');
     await page.locator(`.search-results a[href="/${lang}/docs/approvals/"]`).click();
     await page.waitForURL(`**/${lang}/docs/approvals/`);
   });
@@ -173,7 +173,7 @@ test('mobile navigation and layouts have no horizontal overflow',async()=>{
 test('key pages meet automated accessibility checks in both themes',async()=>{
   const failures=[];
   for(const lang of ['en','zh-cn'])for(const theme of ['dark','light'])await withPage(async page=>{
-    for(const slug of ['','matrix/','architecture/','docs/','demo/','downloads/']){
+    for(const slug of ['','matrix/','architecture/','docs/','demo/','downloads/','capabilities/','compare/']){
       await go(page,`/${lang}/${slug}`);
       const result=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();
       failures.push(...result.violations.map(v=>({lang,theme,slug,id:v.id,description:v.description,nodes:v.nodes.map(n=>({target:n.target,summary:n.failureSummary}))})));
@@ -188,7 +188,7 @@ test('copy controls, update filters, feeds, and missing pages work',async()=>{
     await context.grantPermissions(['clipboard-read','clipboard-write']);
     await go(page,'/zh-cn/docs/deploy-palpo/');
     await page.locator('[data-copy]').click();
-    assert.match(await page.evaluate(()=>navigator.clipboard.readText()),/cargo build --release/);
+    assert.match(await page.evaluate(()=>navigator.clipboard.readText()),/just init-docker/);
     await go(page,'/en/updates/');
     await page.locator('[data-filter="palpo"]').click();
     assert.equal(await page.locator('[data-filter-item]:visible').count(),1);
@@ -197,7 +197,7 @@ test('copy controls, update filters, feeds, and missing pages work',async()=>{
       const response=await page.request.get(`${base}/${lang}/rss.xml`);
       assert.equal(response.status(),200);assert.equal(((await response.text()).match(/<item>/g)||[]).length,3);
     }
-    const sitemap=await page.request.get(`${base}/sitemap.xml`);assert.equal(((await sitemap.text()).match(/<loc>/g)||[]).length,62);
+    const sitemap=await page.request.get(`${base}/sitemap.xml`);assert.equal(((await sitemap.text()).match(/<loc>/g)||[]).length,68);
     const robots=await page.request.get(`${base}/robots.txt`);assert.match(await robots.text(),/Disallow: \//);
     const response=await go(page,'/missing-page/');assert.equal(response.status(),404);assert.equal(await page.locator('h1').count(),1);
   });
@@ -245,7 +245,7 @@ test('equal room roles update human and agent permissions together',async()=>{
 test('project screenshots load and enlarge with localized captions and keyboard controls',async()=>{
   for(const lang of ['en','zh-cn'])for(const width of [320,1440])await withPage(async page=>{
     await go(page,`/${lang}/`);
-    assert.equal(await page.locator('#projects [data-screenshot]').count(),3);
+    assert.equal(await page.locator('#projects [data-screenshot]').count(),1);
     for(const shot of await page.locator('#projects [data-screenshot]').all()){
       await shot.scrollIntoViewIfNeeded();
       await shot.locator('img').evaluate(img=>img.decode());
@@ -256,12 +256,12 @@ test('project screenshots load and enlarge with localized captions and keyboard 
     await page.keyboard.press('Escape');
     await page.waitForFunction(()=>!document.querySelector('[data-screenshot-dialog]').open);
     assert.equal(await first.evaluate(node=>document.activeElement===node),true);
-    for(const project of ['hagency','robrix2','palpo']){
+    for(const project of ['robrix2']){
       await go(page,`/${lang}/projects/${project}/#screenshots`);
       const shots=page.locator('#screenshots [data-screenshot]');
-      assert.equal(await shots.count(),2);
+      assert.equal(await shots.count(),1);
       if(project==='palpo')assert.match(await page.locator('#screenshots .screenshot-scope').first().innerText(),lang==='en'?/separate companion administration app/:/独立配套管理应用/);
-      for(let i=0;i<2;i++){
+      for(let i=0;i<1;i++){
         const shot=shots.nth(i);
         await shot.scrollIntoViewIfNeeded();
         await shot.locator('img').evaluate(img=>img.decode());
@@ -272,7 +272,7 @@ test('project screenshots load and enlarge with localized captions and keyboard 
         assert.equal(await dialog.isVisible(),true);
         assert.equal(await dialog.locator('img').getAttribute('alt'),await shot.getAttribute('data-alt'));
         assert.equal(await dialog.locator('#screenshot-title').innerText(),await shot.getAttribute('data-title'));
-        assert.match(await dialog.locator('[data-screenshot-metadata]').innerText(),lang==='en'?/Development integration/:/开发版集成/);
+        assert.match(await dialog.locator('[data-screenshot-metadata]').innerText(),lang==='en'?/Historical JIT/:/历史 JIT/);
         const original=await shot.getAttribute('href');
         assert.equal(await dialog.locator('[data-screenshot-original]').getAttribute('href'),base+original);
         const dims=await dialog.locator('img').evaluate(img=>({width:img.naturalWidth,height:img.naturalHeight}));
@@ -281,7 +281,8 @@ test('project screenshots load and enlarge with localized captions and keyboard 
         await dialog.locator('[data-screenshot-zoom]').click();
         assert.equal(await dialog.locator('[data-screenshot-zoom]').getAttribute('aria-pressed'),'true');
         const scroll=await dialog.locator('[data-screenshot-image]').evaluate(el=>({client:el.clientWidth,scroll:el.scrollWidth}));
-        assert.ok(scroll.scroll>scroll.client,`${project}: actual size allows horizontal inspection`);
+        assert.equal(await dialog.locator('img').evaluate(img=>Math.round(img.getBoundingClientRect().width)),dims.width,'Actual-size mode preserves source pixels');
+        assert.equal(scroll.scroll>scroll.client,dims.width>scroll.client,`${project}: horizontal inspection follows the image size`);
         const bounds=await dialog.boundingBox();assert.ok(bounds.x>=0&&bounds.x+bounds.width<=width,`${project}: dialog fits viewport`);
         assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
         await dialog.locator('[data-screenshot-zoom]').click();
@@ -299,7 +300,7 @@ test('project screenshots load and enlarge with localized captions and keyboard 
 });
 
 test('original screenshot links work without JavaScript',async()=>{
-  for(const project of ['hagency','robrix2','palpo'])await withPage(async page=>{
+  for(const project of ['robrix2'])await withPage(async page=>{
     await go(page,`/zh-cn/projects/${project}/#screenshots`);
     const shot=page.locator('#screenshots [data-screenshot]').first();
     const path=await shot.getAttribute('href');
@@ -312,7 +313,7 @@ test('original screenshot links work without JavaScript',async()=>{
 test('screenshot load failures show a localized recovery link',async()=>{
   for(const lang of ['en','zh-cn'])await withPage(async page=>{
     await page.route('**/images/screenshots/*.png',route=>route.abort());
-    await go(page,`/${lang}/projects/hagency/`);
+    await go(page,`/${lang}/projects/robrix2/`);
     const opener=page.locator('#screenshots [data-screenshot]').first();
     await opener.click();
     await page.waitForFunction(()=>document.querySelector('[data-screenshot-image] img')?.hidden);
@@ -324,7 +325,7 @@ test('screenshot load failures show a localized recovery link',async()=>{
 });
 
 test('architecture diagram switches views and inspects connections in both languages',async()=>{
-  const expected={overview:12,registration:8,messages:10,runtimes:8};
+  const expected={overview:9,registration:6,messages:9,runtimes:8};
   for(const lang of ['en','zh-cn'])await withPage(async page=>{
     const requests=[];page.on('request',r=>requests.push({url:r.url(),method:r.method()}));
     await go(page,`/${lang}/architecture/#map`);
@@ -333,9 +334,10 @@ test('architecture diagram switches views and inspects connections in both langu
       await page.locator(`[data-architecture-view="${view}"]`).click();
       assert.equal(await page.locator('.react-flow__node').count(),count,view);
       assert.equal(await page.locator(`[data-architecture-view="${view}"]`).getAttribute('aria-pressed'),'true');
-      const chosen={overview:'palpo',registration:'bridge',messages:'devices',runtimes:'acp'}[view];
+      const chosen={overview:'palpo',registration:'bridge',messages:'devices',runtimes:'octos'}[view];
       await page.locator('[data-component-select]').selectOption(chosen);
-      assert.ok((await page.locator('[data-flow-inspector]').innerText()).length>140);
+      assert.ok((await page.locator('[data-flow-inspector] p').first().innerText()).length>15);
+      assert.ok((await page.locator('[data-flow-inspector] code').first().innerText()).length>5);
       const node=page.locator(`.react-flow__node[data-id="${chosen}"]`);
       assert.equal(await page.locator('[data-flow-inspector] h3').innerText(),await node.getAttribute('aria-label'));
       // Native graph keyboard selection also changes the inspector.
@@ -351,12 +353,12 @@ test('architecture diagram switches views and inspects connections in both langu
       await page.keyboard.press('Enter');
       assert.equal(await page.locator('[data-flow-inspector] .eyebrow').textContent(),lang==='en'?'Connection':'连接');
       assert.match(await page.locator('[data-flow-inspector] h3').innerText(),/→/);
-      if(view==='runtimes')for(const [id,protocol] of [['terminal',/tmux runtime interface/],['codex-approval',/Native JSON-RPC approval request/],['acp',/Agent Client Protocol/]]) {
+      if(view==='runtimes')for(const [id,protocol] of [['files',/Scoped workspace/],['decision',/Structured native approval/],['oup',/Octos Unified Protocol/]]) {
         const link=page.locator(`.react-flow__edge[data-id="${id}"]`);
         await link.focus();await page.keyboard.press('Enter');
         assert.match(await page.locator('[data-flow-inspector]').innerText(),protocol);
       }
-      if(view==='overview')assert.match(await page.locator('[data-flow-inspector]').innerText(),lang==='en'?/ACK is not approval/:/ACK 不代表审批/);
+      if(view==='overview')assert.match(await page.locator('[data-flow-inspector]').innerText(),lang==='en'?/not model completion/:/不等于模型完成/);
     }
     assert.equal(requests.some(r=>new URL(r.url).origin!==base||r.method!=='GET'),false,'Diagram does not contact live services or issue grants');
     await page.locator('[data-language-switch]').click();
@@ -393,26 +395,21 @@ test('architecture zoom reset theme and mobile controls work',async()=>{
     assert.equal(await page.locator('[data-architecture-flow]').getAttribute('data-color-mode'),'light');
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,'Graph navigation stays within the page');
     await page.locator('[data-component-select]').selectOption('bridge');
-    assert.match(await page.locator('[data-flow-inspector]').innerText(),lang==='en'?/No inbound listener/:/不需要入站监听/);
+    assert.match(await page.locator('[data-flow-inspector]').innerText(),lang==='en'?/Local runtime credentials remain local/:/本地运行时凭据留在本地/);
   },{viewport:{width,height:1000}});
 });
 
 test('architecture text explains all connections without JavaScript',async()=>{
   for(const lang of ['en','zh-cn'])await withPage(async page=>{
     await go(page,`/${lang}/architecture/`);
-    assert.equal(await page.locator('#registration .architecture-steps li').count(),7);
-    assert.equal(await page.locator('#runtimes .architecture-runtime-card').count(),5);
-    assert.equal(await page.locator('#transport tbody tr').count(),5);
+    assert.equal(await page.locator('#registration .architecture-steps li').count(),4);
+    assert.equal(await page.locator('#runtimes .architecture-runtime-card').count(),3);
     assert.equal(await page.locator('#connections details').count(),4);
-    await page.locator('.architecture-example summary').click();
-    const yaml=await page.locator('.architecture-example code').innerText();
-    assert.match(yaml,/as_token: <APP_SERVICE_SECRET>/);assert.match(yaml,/hs_token: <HOMESERVER_SECRET>/);
-    assert.match(yaml,/\/api\/relay\/v2\//);
     await page.locator('#connections details').last().locator('summary').click();
-    assert.match(await page.locator('#connections details').last().innerText(),/JSON-RPC/);
-    assert.match(await page.locator('#client').innerText(),/SyncService/);
-    assert.match(await page.locator('#runtimes').innerText(),/coding-full/);
-    assert.match(await page.locator('#runtimes').innerText(),/thread\/start/);
+    assert.match(await page.locator('#connections details').last().innerText(),/Octos Unified Protocol/);
+    assert.match(await page.locator('#runtimes').innerText(),/App Server JSON-RPC/);
+    assert.match(await page.locator('#runtimes').innerText(),/Octos/);
+    assert.equal(await page.locator('#architecture-sources a[href*="github.com"]').count(),2);
     assert.equal(await page.locator('.architecture-fallback').isVisible(),true);
   },{javaScriptEnabled:false});
 });
@@ -424,11 +421,61 @@ test('architecture text survives a failed island request',async()=>{
     await page.route('**/ArchitectureFlow*.js',route=>{blocked++;return route.abort();});
     await go(page,'/zh-cn/architecture/');
     assert.ok(blocked>0,'The actual architecture island was blocked');
-    assert.equal(await page.locator('#registration .architecture-steps li').count(),7);
-    assert.equal(await page.locator('#transport tbody tr').count(),5);
-    assert.equal(await page.locator('#client h2').isVisible(),true);
+    assert.equal(await page.locator('#registration .architecture-steps li').count(),4);
+    assert.equal(await page.locator('#runtimes .architecture-runtime-card').count(),3);
+    assert.equal(await page.locator('#connections h2').isVisible(),true);
     assert.equal(await page.locator('.architecture-fallback').isVisible(),true);
     await page.locator('.architecture-fallback a').click();
     await page.waitForURL('**/zh-cn/architecture/#connections');
   }finally{await context.close();}
+});
+
+
+test('feature audit filters, searches and links to the selected evidence in both languages',async()=>{
+  for(const lang of ['en','zh-cn'])for(const compare of [false,true])await withPage(async page=>{
+    await go(page,`/${lang}/${compare?'compare':'capabilities'}/`);
+    assert.equal(await page.locator('[data-audit-row]:visible').count(),35);
+    assert.equal(await page.locator('#reports a[href*="/blob/"]').count(),compare?3:2);
+    await page.locator('[data-audit-query]').fill('Octos');
+    assert.ok(await page.locator('[data-audit-row]:visible').count()>1);
+    assert.ok(await page.locator('[data-audit-row]:visible').count()<35);
+    await page.locator('[data-audit-query]').fill('qzxv-no-result-189');
+    assert.equal(await page.locator('[data-audit-row]:visible').count(),0);
+    assert.equal(await page.locator('[data-audit-empty]').isVisible(),true);
+    await page.locator('[data-audit-query]').fill('');
+    await page.locator('[data-audit-filter]').selectOption('partial');
+    assert.equal(await page.locator('[data-audit-row]:visible').count(),2);
+    assert.equal(await page.locator('[data-audit-count]').innerText(),lang==='en'?'2 features shown':'2 项功能');
+    await page.locator('[data-audit-filter]').selectOption('all');
+    assert.equal(await page.locator('[data-audit-row]:visible').count(),35);
+    await page.locator('[data-audit-query]').focus();await page.keyboard.press('Tab');
+    assert.equal(await page.locator('[data-audit-filter]').evaluate(n=>n===document.activeElement),true);
+    await page.locator('[data-language-switch]').click();
+    await page.waitForURL(`**/${lang==='en'?'zh-cn':'en'}/${compare?'compare':'capabilities'}/`);
+  });
+});
+
+test('capability and comparison evidence remains readable without JavaScript',async()=>{
+  for(const lang of ['en','zh-cn'])for(const slug of ['capabilities','compare'])await withPage(async page=>{
+    await go(page,`/${lang}/${slug}/`);
+    assert.equal(await page.locator('[data-audit-row]:visible').count(),35);
+    assert.match(await page.locator('#post-run').innerText(),/ADR 0013/);
+    if(slug==='compare')assert.match(await page.locator('#encryption').innerText(),/NIP-17/);
+    await page.locator('.audit-pins summary').click();
+    assert.equal(await page.locator('.audit-pins li').count(),4);
+  },{javaScriptEnabled:false});
+});
+
+test('current and archived captures are clearly separated',async()=>{
+  await withPage(async page=>{
+    for(const project of ['hagency','palpo']){
+      await go(page,`/en/projects/${project}/`);
+      assert.equal(await page.locator('#screenshots [data-screenshot]').count(),0);
+      assert.match(await page.locator('#screenshots').innerText(),/No current product capture/);
+    }
+    await go(page,'/en/media/');
+    await page.locator('main details summary').click();
+    assert.equal(await page.locator('main details [data-screenshot]').count(),6);
+    assert.match(await page.locator('main details').innerText(),/Archived integration/);
+  });
 });

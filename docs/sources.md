@@ -1,120 +1,30 @@
-# Content verification — September 8, 2026
+# Current source snapshot
 
-The site uses primary project repositories, their latest published releases,
-and existing dated integration reports in the operator's local working trees.
-No live product instance was restarted or exercised for this editorial review.
+Reviewed November 19, 2026 (America/Los_Angeles).
 
-| Project | Public source reviewed | Published release | Development evidence |
-|---|---|---|---|
-| Hagency | [hagency-org/hagency](https://github.com/hagency-org/hagency), master `4fb9749` | [v1.2.0](https://github.com/hagency-org/hagency/releases/tag/v1.2.0), July 30 | Local `c380959`, September 8 integration reports |
-| Robrix2 | [Project-Robius-China/robrix2](https://github.com/Project-Robius-China/robrix2), main `e28e118e` | [v1.1.0](https://github.com/Project-Robius-China/robrix2/releases/tag/v1.1.0), July 22 | Local `88ebf221`, September 8 macOS client verification |
-| Palpo | [palpo-im/palpo](https://github.com/palpo-im/palpo), main `c96c8e33` | [v0.4.0](https://github.com/palpo-im/palpo/releases/tag/v0.4.0), July 7 | Separate local companion-admin worktree `c8748200` |
+- desktop: [71d6e9adba17b15dcb33c15732320c4286c45735](https://github.com/hagency-org/hagency-desktop/tree/71d6e9adba17b15dcb33c15732320c4286c45735)
+- server: [9a9cbad5195f72d583b760f627d9eba608b9067f](https://github.com/hagency-org/hagency-server/tree/9a9cbad5195f72d583b760f627d9eba608b9067f)
+- buzz: [69ea27343c9b60eeeb1f6e903529cd8b789e910e](https://github.com/block/buzz/tree/69ea27343c9b60eeeb1f6e903529cd8b789e910e)
+- buzzApp: [c3d2b046a8773824244735750c8d87a23da36218](https://github.com/block/buzz-app/tree/c3d2b046a8773824244735750c8d87a23da36218)
 
-Public and local branches diverge. The local changes must not be presented as
-included in those public release packages. `src/data/releases.json` contains
-the exact GitHub release asset URLs, byte sizes, architectures, publication
-timestamps, signatures when supplied, and the API verification timestamp.
+Desktop rc.13's published build manifest identifies source
+`5d9933a9d04577d0637723e35f369abe5f1c6e61` and Makepad
+`8f788cbb788f287f4e684de913e83fbbb70df701`. Reviewed main is later and prepares
+rc.14. The release JSON lists actual assets, not an inferred support matrix.
+Standalone Palpo v0.6.0 is distinct from Server's pinned Palpo source.
 
-## Hagency
+The full 35-feature record is `src/data/verification.json`, with immutable
+Desktop, Server and Buzz-app source links on every row. Buzz core and desktop
+are separate repositories. Current Buzz help documents voice huddles; its older
+README summary alone is not used to mark that capability absent. Buzz NIP-17
+DM encryption is explicitly included.
 
-Node.js local coding-agent operations, documented macOS/Linux setup, resource
-configuration and named agent definitions. The newer integration includes
-manual contributor allocation, observed admission, task threads, visible
-activity, scoped owner approvals, and file delivery. Those capabilities have
-explicit runtime and version limits. No centralized marketplace, commercial
-billing, universal hard token-cap enforcement, or universal offline model
-execution is claimed.
+Current main documentation contains historical sections. Server OPERATIONS.md
+starts with the schema-24 direct pool-Agent flow; later schema-22/23 project
+reservation descriptions are historical. Its old CRYPTO_CAPABILITY_GAPS note is
+not current authority for rejecting all encrypted work. Desktop's older account
+switch descriptions do not establish behavior of later account-aware daemon
+hosting. The audit records these boundaries instead of copying obsolete claims.
 
-## Robrix2
-
-Native Rust/Makepad Matrix client. Native Sliding Sync is a prerequisite.
-The verified release has macOS ARM64/x86-64, Linux ARM64/x86-64, Windows x86-64,
-and Android ARM64 assets. iOS requires a source build; OpenHarmony is
-experimental. Recent approval-card and encrypted-attachment changes were
-verified on a selected macOS development build, not every published platform.
-The upstream community link was obtained from the repository documentation.
-
-## Palpo
-
-Rust/Salvo Matrix homeserver using PostgreSQL. The inspected source README
-specifies Rust 1.94+ and PostgreSQL 16+. See [Palpo documentation](https://palpo.im/).
-Maintainers identify limited large-scale, long-running production evidence.
-The newer Hagency companion admin is a separate Node service; it is not part
-of the v0.4.0 archive. Credential rotation and fleet-wide stop acknowledgment
-remain gaps. No blanket production-readiness or complete encryption-path
-compatibility claim is made.
-
-## Supporting sources
-
-- [Matrix specification](https://spec.matrix.org/): rooms, identities, events,
-  membership, application services, and protocol responsibilities.
-- [Adora website source](https://github.com/ymote/adora-website): selected visual
-  reference; local revision `44ff68f` matched public HEAD.
-- [Astro documentation](https://docs.astro.build/): static routing and localized
-  page architecture. Installed Astro version is pinned in `package-lock.json`.
-
-Project names and upstream license attribution remain with the respective
-projects. Marketing prose describes current responsibilities and explicitly
-labeled illustrative scenarios; it invents no customer testimonials, adoption
-statistics, performance benchmarks, pricing, or release commitments.
-
-## Matrix introduction and agent-native positioning
-
-The operator requested an open-source WeChat comparison, the benefits of Matrix
-over centralized communication, equal granted agent privileges, and federation.
-The resulting English and Chinese Matrix pages draw on these primary sources:
-
-- [Matrix introduction](https://matrix.org/) and
-  [elements of Matrix](https://matrix.org/docs/matrix-concepts/elements-of-matrix/):
-  the open protocol and client/homeserver relationships.
-- [Matrix room model](https://spec.matrix.org/latest/#room-structure):
-  shared rooms, user identities, and event synchronization across homeservers.
-- [Server-server API](https://spec.matrix.org/latest/server-server-api/):
-  federation between independent homeservers.
-- [Room power levels](https://spec.matrix.org/latest/client-server-api/#mroompower_levels):
-  per-identity room permissions and per-action thresholds. The site's equal
-  human/agent roles are an application of this identity-based model; the protocol
-  does not award elevated privileges merely because a participant is an agent.
-- [Application-service API](https://spec.matrix.org/latest/application-service-api/):
-  integration identities and application-service participation.
-
-The permission illustration uses ordinary message events and typical room topic/
-redaction thresholds. It is not a settings screen and does not grant privileges.
-Room authority remains distinct from runtime/host authority. Creator-specific
-rules vary across Matrix room versions; no universal administrator override is
-claimed. The source comparison concerns typical deployment models, not a feature
-audit of every centralized messenger.
-
-The WeChat comparison is the operator's product positioning for communication
-and collaboration. Copy identifies Hagency as independent and does not claim
-WeChat affiliation, payments/Mini Programs parity, universal encryption support,
-automatic account migration, or outage immunity.
-
-## Real project screenshots
-
-Six reviewed September 7–8 integration captures were added from the operator's
-local verification archive. Their originals, hashes, UI-language labels, and
-provenance are recorded in [screenshots.md](screenshots.md). Homepage project
-cards now show real interfaces; project pages each include two views. Palpo's
-views are labeled as its separate development companion admin application,
-not as features bundled in the published Palpo v0.4.0 server package.
-
-## Interactive architecture expansion
-
-The new architecture page follows the outbound development implementation:
-Hagency local revision `05dc46b`, Palpo `8a0908cd`, and Robrix2 `d5523276`.
-See [architecture source notes](architecture.md) for exact files, transport
-directions, runtime distinctions and current-versus-published availability.
-The Matrix client, Appservice and federation references remain the standard
-protocol sources; fleet v2 polling and Palpo admin routes are project extensions.
-The older fleet connection guide now describes outbound pairing and generation
-proof followed by heartbeats, with legacy callback behavior identified separately.
-
-## Product rename — September 9
-
-The operator selected Hagency as the sole runtime brand, with no old-name
-aliases. Generic fleet identifiers and endpoints are unchanged. Historical
-captures retain their original pixels and are identified as pre-rename captures.
-No Hagency release assets have been published; downloads offer source installation
-instead of inventing renamed asset URLs. Earlier verification records remain
-historical evidence.
+See [verification and UX](feature-verification-2026-11-19.md). Old September logs
+and contracts remain historical; none are counted as November passes.

@@ -1,12 +1,234 @@
-import { b } from './site';
-
 export const steps = [
-  { project: 'Hagency', title: b('Contribute a resource', '贡献一项资源'), description: b('A contributor configures a coding resource and publishes the roles it can serve. Availability is an explicit choice.', '贡献者配置编程资源，发布可以提供的角色。是否可用，由人明确决定。'), status: b('Resource published', '资源已发布'), actor: b('Resource contributor', '资源贡献者'), message: b('Atlas can help with implementation and review. Make this resource available to project requests.', 'Atlas 可以协助开发和审查。将这项资源开放给项目申请。'), detail: b('Named definition · available for allocation', '命名定义 · 可供分配'), guide: 'run-hagency', icon: 'fleet' },
-  { project: 'Palpo', title: b('Request a collaborator', '申请一位协作者'), description: b('A project owner chooses a published role. The request stays tied to the verified project and the person asking.', '项目所有者选择已发布角色。请求始终关联经过验证的项目和实际申请人。'), status: b('Waiting for resource approval', '等待资源审批'), actor: b('Project owner', '项目所有者'), message: b('Our project needs an implementation agent. Request the coding role for the project room.', '我们的项目需要一位开发 Agent。为项目房间申请编程角色。'), detail: b('Verified project · owner established', '已验证项目 · 所有者已确认'), guide: 'request-agent', icon: 'network' },
-  { project: 'Hagency', title: b('Approve the allocation', '批准资源分配'), description: b('The provider selects a qualified agent. Fulfillment and actual room membership are checked before the collaborator is ready.', '提供方选择符合条件的 Agent。确认分配完成并实际加入房间后，协作者才准备就绪。'), status: b('Agent admitted to project', 'Agent 已加入项目'), actor: b('Resource contributor', '资源贡献者'), message: b('Allocate Atlas to this project. The agent has joined the target room and is ready for a task.', '将 Atlas 分配给这个项目。Agent 已加入目标房间，可以开始接收任务。'), detail: b('Qualified resource · membership verified', '资源符合条件 · 成员关系已验证'), guide: 'request-agent', icon: 'check' },
-  { project: 'Robrix2', title: b('Start the conversation', '开启任务对话'), description: b('A person mentions the agent with a clear request. The project conversation becomes the starting point for useful work.', '成员明确提及 Agent 并交代任务。项目中的一段对话，成为有价值工作的起点。'), status: b('Task thread opened', '任务线程已开启'), actor: b('Project member', '项目成员'), message: b('@Atlas, read this sample CSV and create a short summary with a verified total. Return it as a text file.', '@Atlas，请读取这份示例 CSV，生成包含已核验合计值的简要摘要，并以文本文件返回。'), detail: b('Project room · explicit mention', '项目房间 · 明确提及'), guide: 'task-threads', icon: 'chat' },
-  { project: 'Hagency', title: b('Follow the work', '跟进工作进展'), description: b('Concise activity updates show that the task is moving. The result and verification still determine completion.', '简明活动更新让你看见任务正在推进。是否完成，仍取决于成果及其验证。'), status: b('Working on the task', '正在处理任务'), actor: 'Atlas', message: b('Reading the attachment, checking the rows, and preparing the summary. I’ll verify the total before returning the file.', '正在读取附件、检查数据行并准备摘要。返回文件前会核验合计值。'), detail: b('Task thread · activity update', '任务线程 · 活动更新'), guide: 'task-threads', icon: 'activity' },
-  { project: 'Robrix2', title: b('Make the permission decision', '作出权限决定'), description: b('If a supported operation needs permission, the owner reviews its exact scope in a separate encrypted conversation.', '如果受支持的操作需要权限，所有者在独立加密会话中审阅其准确范围。'), status: b('Owner reviews the request', '所有者审阅请求'), actor: b('Private owner conversation', '所有者私密会话'), message: b('Review the requested file operation and its scope. A structured decision returns to the runtime; a chat message is not approval.', '审阅请求的文件操作及其范围。结构化决策将送回运行时；普通聊天消息不构成审批。'), detail: b('Encrypted conversation · scoped decision', '加密会话 · 限定范围决策'), guide: 'approvals', icon: 'shield' },
-  { project: 'Robrix2', title: b('Bring the result back', '将成果带回团队'), description: b('The agent returns the artifact to the original task thread. People can inspect the file and the reported verification.', 'Agent 将文件成果返回原任务线程。成员可以检查文件与报告的验证结果。'), status: b('Result delivered', '成果已交付'), actor: 'Atlas', message: b('The summary is ready. I checked the input rows and the total. The deliverable is attached to this task thread.', '摘要已经准备好。我检查了输入数据行与合计值，交付文件已附在这个任务线程中。'), detail: b('summary.txt · illustrative deliverable', 'summary.txt · 示例交付文件'), guide: 'share-files', icon: 'file' },
-  { project: 'Hagency', title: b('Keep the conversation going', '让协作继续'), description: b('Clarify, extend, or start another task. People keep setting the direction while the connected system carries the work.', '补充说明、扩展任务，或开始新的工作。人持续指引方向，互联的系统承载执行。'), status: b('Ready for your next idea', '准备迎接你的下一个想法'), actor: b('Project member', '项目成员'), message: b('Thanks, Atlas. Let’s add a breakdown by category next, and keep it in this thread.', '谢谢 Atlas。接下来增加一份分类明细，继续放在这个线程里。'), detail: b('Same context · a new instruction', '相同上下文 · 新的指令'), guide: 'choose-your-path', icon: 'arrow' },
+  {
+    "project": "Hagency Desktop",
+    "title": {
+      "en": "Sign in",
+      "zh-cn": "登录"
+    },
+    "description": {
+      "en": "Connect Desktop to Hagency Server and complete Pasion authorization.",
+      "zh-cn": "连接 Desktop 到 Hagency Server，完成 Pasion 授权。"
+    },
+    "status": {
+      "en": "Account connected",
+      "zh-cn": "账户已连接"
+    },
+    "actor": {
+      "en": "You",
+      "zh-cn": "你"
+    },
+    "message": {
+      "en": "Sign in with my account.",
+      "zh-cn": "使用我的账户登录。"
+    },
+    "detail": {
+      "en": "OAuth / PKCE · device session",
+      "zh-cn": "OAuth / PKCE · 设备会话"
+    },
+    "guide": "connect-fleet",
+    "icon": "network"
+  },
+  {
+    "project": "Hagency Desktop",
+    "title": {
+      "en": "Create your Agent",
+      "zh-cn": "创建 Agent"
+    },
+    "description": {
+      "en": "After hosting this account on the execution computer, add a local Agent. A Project is not required.",
+      "zh-cn": "先在执行电脑托管当前账户，再添加本地 Agent；无需预先创建 Project。"
+    },
+    "status": {
+      "en": "Personal Agent created",
+      "zh-cn": "个人 Agent 已创建"
+    },
+    "actor": {
+      "en": "You",
+      "zh-cn": "你"
+    },
+    "message": {
+      "en": "Create Atlas and open its private conversation.",
+      "zh-cn": "创建 Atlas 并打开私密对话。"
+    },
+    "detail": {
+      "en": "Permanent owner · private by default",
+      "zh-cn": "永久所有者 · 默认私密"
+    },
+    "guide": "request-agent",
+    "icon": "people"
+  },
+  {
+    "project": "Hagency Desktop",
+    "title": {
+      "en": "Choose a local runtime",
+      "zh-cn": "选择本地运行时"
+    },
+    "description": {
+      "en": "Select Codex, Claude or an actual installed Octos profile.",
+      "zh-cn": "选择 Codex、Claude 或实际安装的 Octos 配置。"
+    },
+    "status": {
+      "en": "Runtime selected",
+      "zh-cn": "已选择运行时"
+    },
+    "actor": {
+      "en": "Owner",
+      "zh-cn": "所有者"
+    },
+    "message": {
+      "en": "Use my selected profile and workspace.",
+      "zh-cn": "使用我选定的配置与工作区。"
+    },
+    "detail": {
+      "en": "Local credentials · selected model",
+      "zh-cn": "本地凭据 · 所选模型"
+    },
+    "guide": "run-hagency",
+    "icon": "fleet"
+  },
+  {
+    "project": "Hagency Desktop",
+    "title": {
+      "en": "Send a clear task",
+      "zh-cn": "发送明确任务"
+    },
+    "description": {
+      "en": "Start in the private conversation; group rooms need a bound mention.",
+      "zh-cn": "从私密对话开始，群聊需要绑定与明确提及。"
+    },
+    "status": {
+      "en": "Task accepted",
+      "zh-cn": "已接纳任务"
+    },
+    "actor": {
+      "en": "You",
+      "zh-cn": "你"
+    },
+    "message": {
+      "en": "Inspect this sample project and explain the failing test.",
+      "zh-cn": "检查这个示例项目，解释测试失败的原因。"
+    },
+    "detail": {
+      "en": "Private conversation · bounded scope",
+      "zh-cn": "私密对话 · 限定范围"
+    },
+    "guide": "task-threads",
+    "icon": "chat"
+  },
+  {
+    "project": "Hagency Desktop",
+    "title": {
+      "en": "Follow separate updates",
+      "zh-cn": "跟进独立更新"
+    },
+    "description": {
+      "en": "Captured supported reports appear as individual chat messages.",
+      "zh-cn": "捕获的受支持报告以独立聊天消息呈现。"
+    },
+    "status": {
+      "en": "Work in progress",
+      "zh-cn": "工作进行中"
+    },
+    "actor": {
+      "en": "Atlas",
+      "zh-cn": "Atlas"
+    },
+    "message": {
+      "en": "I found the failing assertion and am checking its cause.",
+      "zh-cn": "我找到了失败断言，正在检查原因。"
+    },
+    "detail": {
+      "en": "Illustrative report · not a live model",
+      "zh-cn": "示例报告 · 非真实模型"
+    },
+    "guide": "task-threads",
+    "icon": "activity"
+  },
+  {
+    "project": "Hagency Desktop",
+    "title": {
+      "en": "Make the owner decision",
+      "zh-cn": "作出所有者决策"
+    },
+    "description": {
+      "en": "Review the exact supported permission request before deciding.",
+      "zh-cn": "决定前审核准确支持的权限请求。"
+    },
+    "status": {
+      "en": "Waiting for a bound decision",
+      "zh-cn": "等待绑定决策"
+    },
+    "actor": {
+      "en": "Owner control",
+      "zh-cn": "所有者控制"
+    },
+    "message": {
+      "en": "Allow this supported operation in its requested scope.",
+      "zh-cn": "在请求的范围内允许此受支持操作。"
+    },
+    "detail": {
+      "en": "Chat text is not approval",
+      "zh-cn": "聊天文本不构成审批"
+    },
+    "guide": "approvals",
+    "icon": "shield"
+  },
+  {
+    "project": "Hagency Desktop",
+    "title": {
+      "en": "Inspect the result",
+      "zh-cn": "检查结果"
+    },
+    "description": {
+      "en": "Check the returned explanation, changes and validation evidence.",
+      "zh-cn": "检查返回的解释、修改与验证证据。"
+    },
+    "status": {
+      "en": "Result received",
+      "zh-cn": "已收到结果"
+    },
+    "actor": {
+      "en": "Atlas",
+      "zh-cn": "Atlas"
+    },
+    "message": {
+      "en": "Here is the proposed change and the test result for review.",
+      "zh-cn": "这是待审阅的修改建议与测试结果。"
+    },
+    "detail": {
+      "en": "Returned evidence · verify before adopting",
+      "zh-cn": "返回证据 · 采用前核验"
+    },
+    "guide": "share-files",
+    "icon": "file"
+  },
+  {
+    "project": "Hagency Desktop",
+    "title": {
+      "en": "Continue, stop or share",
+      "zh-cn": "继续、停止或共享"
+    },
+    "description": {
+      "en": "Continue in the same context, stop new work, or request a separately approved pool Agent.",
+      "zh-cn": "在相同上下文继续，停止新工作，或另行申请需审核的资源池 Agent。"
+    },
+    "status": {
+      "en": "Your next decision",
+      "zh-cn": "下一步由你决定"
+    },
+    "actor": {
+      "en": "You",
+      "zh-cn": "你"
+    },
+    "message": {
+      "en": "Keep this thread for the follow-up.",
+      "zh-cn": "在此线程继续后续工作。"
+    },
+    "detail": {
+      "en": "Retain receipts · reconcile actual usage",
+      "zh-cn": "保留凭据 · 对账实际用量"
+    },
+    "guide": "operations",
+    "icon": "arrow"
+  }
 ];

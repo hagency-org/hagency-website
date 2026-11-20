@@ -1,173 +1,76 @@
 # Hagency website
 
-A complete English and Simplified Chinese promotional website for Hagency,
-Robrix2, and Palpo. Built with Astro and TypeScript, with original generated
-hero artwork inspired by the selected Adora visual direction.
+Bilingual Astro website for **Hagency Desktop**, **Hagency Server** and the
+**Palpo** Matrix foundation. Content audited November 19, 2026.
 
-This directory is an independent new Git repository, owned here under
-`projects/hagency-website/`. It is not a symlink. Source: https://github.com/hagency-org/hagency-website.
+## Develop and verify
 
-## Run locally
-
-Requires Node.js 22.12+ (developed with Node.js 24.10).
+Requires Node 22.12+; this review used Node 24.21 and existing headless Chromium.
 
 ```sh
 npm ci
 npm run dev
-```
-
-- English: http://127.0.0.1:4328/en/
-- 简体中文: http://127.0.0.1:4328/zh-cn/
-
-To serve the static build:
-
-```sh
-npm run build
-npm run preview
-```
-
-Astro 7 manages its preview server as a background process. Use
-`npx astro preview status`, `npx astro preview logs`, and
-`npx astro preview stop` to manage this website's preview.
-
-## Included
-
-31 pages per language: 18 main pages, 10 practical guides, and 3 introductory
-articles. Main pages cover the ecosystem, all three projects, an eight-step
-interactive walkthrough, use cases, getting started, downloads, documentation,
-trust and control, updates, roadmap, community, about, and brand/media.
-
-The Matrix introduction explains the protocol, federation, and Hagency's
-open-source, agent-native alternative-to-WeChat positioning. It includes an
-interactive network comparison and an illustrative role selector showing equal
-room permissions for a person and an agent. Both examples are local and issue
-no real server requests or authorization grants.
-
-The architecture page uses React Flow for four interactive views: the whole
-system, Appservice registration, message delivery, and coding-agent runtimes.
-Nodes and connections expose detailed bilingual explanations; pan/zoom/reset,
-keyboard inspection, a minimap and theme switching are supported. Static API
-tables, registration steps, runtime differences and connection references remain
-readable without JavaScript. See [implementation sources](docs/architecture.md).
-
-Language switching preserves the route and section anchor. Theme preference
-persists across navigation. Search indexes the current language's pages and
-guide/article text, with title and description ranking. Download filters use
-a checked-in GitHub release manifest. The walkthrough is explicitly illustrative
-and makes no requests to live agents or Matrix services.
-
-The site includes responsive navigation, keyboard search, accessible native
-dialogs, reduced-motion support, copy buttons, release filters, local fonts,
-localized titles/descriptions, canonical/hreflang metadata, RSS, sitemap, and 404.
-
-Six real development integration screenshots appear on the homepage and in
-the three project galleries. Each has bilingual captions, UI-language labels,
-and an enlarged view with actual-size scrolling and original-image links.
-Palpo's gallery explicitly identifies its separate companion administration app.
-
-## Content and i18n
-
-- `src/data/site.ts`: shared UI strings, project capabilities, home content.
-- `src/data/content.ts`: localized page metadata, guides, articles, trust copy.
-- `src/data/workflow.ts`: all eight bilingual walkthrough steps.
-- `src/data/matrix.ts`: Matrix, federation, comparison, and agent identity copy.
-- `src/data/screenshots.ts`: real project screenshots and bilingual captions.
-- `src/data/architecture.ts`: React Flow components, connections and four views.
-- `src/data/architecture-content.ts`: detailed architecture and source notes.
-- `src/data/releases.json`: verified upstream release assets and source URLs.
-- `src/components/StandardPage.astro`: secondary pages and their localized copy.
-- `src/pages/[lang]/[...slug].astro`: all localized content routes.
-- `src/styles/global.css`: typography, dark/light tokens, responsive layouts.
-
-`b(english, chinese)` produces a required value for each locale. Add both
-translations together. Product names, commands, protocol identifiers, and asset
-filenames stay unchanged. Source installation snippets are explanations linked
-to upstream instructions, not a one-command deployment of the full integration.
-
-The content snapshot was reviewed on **September 8, 2026**. Published releases
-and local development integration capabilities are deliberately identified.
-See [source notes](docs/sources.md) for revisions and availability boundaries.
-
-To refresh upstream release metadata explicitly:
-
-```sh
-node scripts/update-releases.mjs
-```
-
-Review the resulting manifest and update the corresponding version labels,
-dates, guides, platform descriptions, and roadmap in both languages together.
-The normal build makes no GitHub API requests and uses the reviewed snapshot.
-
-## Artwork
-
-Both theme backgrounds are original native image-generation outputs. Their
-geometry matches; headings and controls are accessible HTML. Original PNGs,
-optimized WebPs, and downloadable brand assets are in `public/`.
-
-Read [the exact prompts and provenance](docs/artwork.md). Recreate the WebP
-exports after replacing the original PNGs with:
-
-```sh
-node scripts/optimize-images.mjs
-```
-
-Real interface captures have separate [provenance notes](docs/screenshots.md).
-To verify their original hashes and recreate responsive previews:
-
-```sh
-node scripts/optimize-screenshots.mjs
-```
-
-The Adora reference used `gen-hero.cjs` and `gen-hero-light.cjs` with Google
-GenAI. Those scripts were inspected, but their provider dependency and key
-configuration were not copied. This website has no image-generation API key
-or runtime image-generation dependency.
-
-Geist and Geist Mono are distributed with their original SIL Open Font License
-at `public/fonts/OFL.txt`. Project descriptions do not transfer ownership of
-upstream names or licenses.
-
-## Verify
-
-```sh
-npx playwright install chromium
 npm run verify
-```
-
-The Node browser suite starts an isolated local static server and checks every
-localized route, internal destinations and anchors, locale/theme persistence,
-the complete walkthrough, search and empty results, download filtering, mobile
-layouts at 320/390/768px, representative WCAG A/AA automated rules in both themes,
-clipboard behavior, feeds, release filtering, and the missing-page experience.
-
-The active Task Contract is `specs/task-interactive-architecture.spec.md`; earlier
-site, Matrix and screenshot contracts remain in `specs/`. Their exact
-test selectors are bound to the Node suite. The installed agent-spec 1.4.0
-native lifecycle does not execute this Node suite; its scenario skips are
-recorded separately and must not be reported as passes. See
-[verification notes](docs/verification.md), `docs/lifecycle-architecture-result.json`,
-`docs/lifecycle-screenshots-result.json`,
-`docs/lifecycle-matrix-result.json`,
-and the earlier `docs/lifecycle-result.json`.
-
-## Public website
-
-- English: https://hagency.org/en/
-- 简体中文: https://hagency.org/zh-cn/
-
-Pushes to `main` run typecheck, the complete local browser suite, a production
-build and published-path browser checks, then publish the tested `dist/` artifact
-through GitHub Pages. Pull requests run the same checks without deploying.
-
-```sh
 SITE_URL=https://hagency.org/ npm run build
 SITE_URL=https://hagency.org/ node --test tests/pages.test.mjs
 ```
 
-`SITE_URL` determines the origin and base path for navigation, images,
-canonical URLs, language alternates, feeds and sitemap. The custom domain
-serves the site at the root path, so the published build uses no repository
-prefix. Set a `https://<owner>.github.io/<repo>/` value instead to publish
-under a repository subpath; the same tests cover both. Unset it for local
-previews at the root path with indexing disabled. Native agent-spec does not
-execute these Node browser tests; its skips are reported separately.
+The site has **34 routes per language**: 20 core/project pages, 11 guides and
+3 articles. The two languages have matching routes. Language switching preserves
+anchors; theme, search, mobile navigation, keyboard controls and no-JS references
+are tested. Examples make no live Agent requests or permission grants.
+
+## Current product and evidence
+
+- Desktop is the native client and local owner engine. Published Desktop
+  **rc.13** has macOS ARM64 and Windows x86-64 installers; reviewed main prepares
+  rc.14. Later source changes are not advertised as rc.13 capabilities.
+- Server embeds Palpo, Pasion and management in one Rust process. Retired Fleet,
+  Engagement and separate Node companion setup is not the current path.
+- The 35-feature [audit and UX review](docs/feature-verification-2026-11-19.md)
+  distinguishes source contracts, release assets, current checks and historical
+  real-stack JIT evidence. Buzz strengths and unmatched acceptance remain visible.
+- `/capabilities/` and `/compare/` have bilingual search and evidence filters,
+  immutable source links and complete no-JS content.
+- Older URL names such as `/projects/robrix2/`, `/docs/install-robrix2/` and
+  `/docs/connect-fleet/` remain valid bookmarks. Their content describes the
+  current product, not the retired setup.
+
+Primary data: `src/data/site.ts`, `content.ts`, `verification.json`,
+`architecture.ts`, `workflow.ts`, `releases.json` and `screenshots.ts`.
+Both locales are required together. Product names and protocol tokens stay
+unchanged. [Source notes](docs/sources.md) record exact revisions.
+
+## Releases and captures
+
+Normal builds are offline and use a checked-in release snapshot. Refresh it
+explicitly, then review version labels, prerelease status, architecture, download
+filenames, checksums and guides together:
+
+```sh
+node scripts/update-releases.mjs
+node scripts/optimize-screenshots.mjs
+```
+
+The updater includes Desktop prereleases and preserves source-only Server release
+records. It does not infer native installers from platform source support.
+
+One dated November 17 JIT fixture capture appears in the Desktop gallery. Six
+September Fleet/companion captures remain only in the media archive and are
+clearly historical. Original hashes are checked before generating WebP previews.
+See [capture provenance](docs/screenshots.md).
+
+Hero artwork and local Geist fonts retain their original provenance and SIL
+license; see [artwork](docs/artwork.md). No image-generation key is required.
+
+## Publishing
+
+PRs run validation without deploying. Merging to main runs the same checks,
+production metadata/path checks, then publishes through GitHub Pages to
+https://hagency.org/. Local builds and PRs do not update the public site.
+`SITE_URL` controls origin and base path; production and repository-prefix paths
+are checked by `tests/pages.test.mjs`. Local previews disable indexing.
+
+The active contract is [current capabilities](specs/task-current-capabilities.spec.md).
+Earlier contracts and September logs are historical records, not current passes.
+Astro 7 manages preview processes: `npx astro preview status` / `stop`.

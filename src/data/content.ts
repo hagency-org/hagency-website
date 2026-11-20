@@ -1,145 +1,928 @@
-import { b, repos, type Text } from './site';
-import { matrix, matrixSources } from './matrix';
-
-export type Section = { title: Text; paragraphs: Text[]; bullets?: Text[]; code?: string; link?: { label: Text; href: string } };
-export type Article = { slug: string; title: Text; description: Text; category: Text; sections: Section[]; source?: string; date?: string };
-const section = (title: Text, paragraphs: Text[], extra: Partial<Section> = {}): Section => ({ title, paragraphs, ...extra });
+import { type Text } from './site';
+export type Section = {title:Text; paragraphs:Text[]; bullets?:Text[]; code?:string; link?:{label:Text;href:string}};
+export type Article = {slug:string;title:Text;description:Text;category:Text;sections:Section[];source?:string;date?:string};
 
 export const guides: Article[] = [
   {
-    slug: 'choose-your-path', title: b('Find your starting point', '选择你的起点'), category: b('FOUNDATIONS', '基础入门'),
-    description: b('Understand the three projects and choose the pieces that fit your team.', '理解三个项目，选择适合团队的组合。'),
-    sections: [
-      section(b('Three responsibilities, clearly separated', '三个项目，各司其职'), [b('Robrix2 is the client where people read, write, and follow conversations. Palpo is the Matrix homeserver that carries accounts, rooms, and events. Hagency runs coding agents and maintains their tasks and execution state.', 'Robrix2 是人们阅读、发言和跟进对话的客户端。Palpo 是承载账户、房间和事件的 Matrix 服务器。Hagency 运行编程 Agent，并维护其任务与执行状态。'), b('You can adopt each project independently. A Matrix client does not need a coding-agent runtime, and Hagency’s Matrix bridge is optional. The combined system connects these existing responsibilities.', '每个项目都可以独立使用。Matrix 客户端不必配套编程 Agent 运行时，Hagency 的 Matrix 桥接也是可选的。组合使用时，三者会连接起各自的职责。')]),
-      section(b('Choose a practical first step', '选择一个实际的起点'), [b('For a conversation-first evaluation, install a published Robrix2 package and use a homeserver with native Sliding Sync. For agent operations, start Hagency on a supported local host. For infrastructure, evaluate Palpo with a separate test database and domain.', '如果想先体验对话，安装已发布的 Robrix2，并连接支持原生 Sliding Sync 的服务器。若关注 Agent 运维，在受支持的本地主机运行 Hagency。若关注基础设施，使用独立测试数据库和域名评估 Palpo。')], { bullets: [b('Client path: Robrix2 + a compatible homeserver.', '客户端路径：Robrix2 + 兼容的服务器。'), b('Agent path: Hagency + your configured coding runtime.', 'Agent 路径：Hagency + 你配置的编程运行时。'), b('Integrated path: a tested combination of all three development revisions.', '集成路径：经过验证、版本相互匹配的三个开发构建。')] }),
-      section(b('Keep versions explicit', '明确版本边界'), [b('Published packages and the September 8 integration builds are different baselines. Download a release for its documented capabilities. Follow a development guide only with the referenced compatible revisions; combining arbitrary latest branches is not a verified installation.', '已发布安装包与 9 月 8 日集成构建是不同的基线。下载版本应以对应说明为准。跟随开发指南时，应使用已核验的兼容版本；任意组合各仓库最新分支，并不等于经过验证的安装。')]),
+    "slug": "choose-your-path",
+    "title": {
+      "en": "Choose your first useful step",
+      "zh-cn": "选择第一个实际步骤"
+    },
+    "description": {
+      "en": "Start with a personal Agent; hosting and resource sharing are separate paths.",
+      "zh-cn": "从个人 Agent 开始；托管服务器与共享资源是另外两条路径。"
+    },
+    "category": {
+      "en": "CURRENT GUIDE",
+      "zh-cn": "当前指南"
+    },
+    "sections": [
+      {
+        "title": {
+          "en": "Use Desktop, connect to Server",
+          "zh-cn": "使用 Desktop，连接 Server"
+        },
+        "paragraphs": [
+          {
+            "en": "Install Hagency Desktop and sign in to a compatible Hagency Server through Pasion. Server already integrates Palpo, Pasion and Agent management. Members do not create a Fleet or install a separate companion admin.",
+            "zh-cn": "安装 Hagency Desktop，通过 Pasion 登录兼容的 Hagency Server。Server 已集成 Palpo、Pasion 与 Agent 管理；成员无需创建 Fleet 或安装独立配套管理界面。"
+          },
+          {
+            "en": "Generic Matrix chat and Hagency Agent management have different requirements. A generic Matrix server alone does not provide the Hagency management APIs.",
+            "zh-cn": "普通 Matrix 聊天与 Hagency Agent 管理有不同要求；单独的通用 Matrix 服务器不会提供 Hagency 管理 API。"
+          }
+        ]
+      },
+      {
+        "title": {
+          "en": "Choose your role",
+          "zh-cn": "选择自己的角色"
+        },
+        "paragraphs": [
+          {
+            "en": "For your own work, create a personal Agent and connect a local CLI. To contribute capacity, follow the resource-owner guide. To operate the service, follow Server deployment. A personal Agent does not require a Project first.",
+            "zh-cn": "为自己的工作创建个人 Agent 并连接本地 CLI；贡献容量请看资源所有者指南，运维服务请看 Server 部署指南。个人 Agent 无需先创建 Project。"
+          }
+        ]
+      },
+      {
+        "title": {
+          "en": "Check the version boundary",
+          "zh-cn": "确认版本边界"
+        },
+        "paragraphs": [
+          {
+            "en": "The reviewed main is preparing rc.14; the published Desktop snapshot is rc.13. Later Windows setup and multi-account hosting changes must not be assumed to be in rc.13. Use the capability audit and the exact release notes.",
+            "zh-cn": "核验的 main 正准备 rc.14，已发布 Desktop 快照为 rc.13。更晚的 Windows 配置与多账户托管修改不能视作已包含于 rc.13；请查看能力核验页与准确的版本说明。"
+          }
+        ]
+      }
     ],
+    "source": "https://github.com/hagency-org/hagency-desktop/blob/main/docs/hagency-quickstart.md"
   },
   {
-    slug: 'install-robrix2', title: b('Install Robrix2', '安装 Robrix2'), category: b('CLIENT', '客户端'),
-    description: b('Choose a native package, connect to Matrix, and enter your first room.', '选择原生安装包，连接 Matrix，进入第一个房间。'), source: `${repos.robrix2}#installing-robrix`,
-    sections: [
-      section(b('Choose the right package', '选择合适的安装包'), [b('Robrix2’s release assets use the application name Robrix. Version 1.1.0 includes macOS DMGs for Apple Silicon and Intel, Linux DEBs for ARM64 and x86-64, a Windows x86-64 installer, and an Android ARM64 APK. Choose the architecture of the device you will run it on.', 'Robrix2 发布文件使用应用名称 Robrix。1.1.0 包含 Apple Silicon 与 Intel 的 macOS DMG、ARM64 与 x86-64 的 Linux DEB、Windows x86-64 安装程序及 Android ARM64 APK。请选择目标设备对应的架构。'), b('The verified release does not contain an iOS binary. Use the upstream source-build instructions for iOS. OpenHarmony is experimental. Platform support and a particular Hagency integration’s validation are separate questions.', '本次核验的版本不包含 iOS 二进制包。iOS 请参照上游源码构建说明。OpenHarmony 处于实验阶段。平台支持与某个 Hagency 集成是否已验证，是两个不同的问题。')]),
-      section(b('Connect to a compatible homeserver', '连接兼容服务器'), [b('Open the app and enter your homeserver and Matrix account. The homeserver needs native Sliding Sync. Once signed in, join an existing project room or accept an invitation. Preserve device and session data when updating if you need access to encrypted history.', '打开应用并输入服务器地址与 Matrix 账户。服务器需要支持原生 Sliding Sync。登录后加入项目房间或接受邀请。更新应用时，如需继续访问加密历史，请保留设备和会话数据。')]),
-      section(b('Build from source when needed', '按需从源码构建'), [b('A source build requires the project’s Rust toolchain and platform prerequisites. The command below selects the current repository state, not the published 1.1.0 release. For reproducible evaluation, record or check out the specific revision you intend to test.', '源码构建需要项目指定的 Rust 工具链与平台依赖。以下命令使用当前仓库状态，而非已发布的 1.1.0。若需可复现的评估，请记录或切换至准备测试的具体版本。')], { code: 'git clone https://github.com/Project-Robius-China/robrix2.git\ncd robrix2\ncargo run --release', link: { label: b('Read platform prerequisites', '阅读平台依赖说明'), href: repos.robrix2 } }),
+    "slug": "install-robrix2",
+    "title": {
+      "en": "Install Hagency Desktop",
+      "zh-cn": "安装 Hagency Desktop"
+    },
+    "description": {
+      "en": "Download an actual release asset and enter the current native workspace.",
+      "zh-cn": "下载实际发布的安装包，进入当前原生协作客户端。"
+    },
+    "category": {
+      "en": "CURRENT GUIDE",
+      "zh-cn": "当前指南"
+    },
+    "sections": [
+      {
+        "title": {
+          "en": "Choose an available installer",
+          "zh-cn": "选择确实可用的安装包"
+        },
+        "paragraphs": [
+          {
+            "en": "The rc.13 release contains a macOS ARM64 DMG and a Windows x86-64 installer, plus checksums and build manifests. No Linux, Intel macOS, Android or iOS installer is listed in this release. A successful build job is not a download asset.",
+            "zh-cn": "rc.13 包含 macOS ARM64 DMG、Windows x86-64 安装程序，以及校验和与构建清单；此版本没有列出 Linux、Intel macOS、Android 或 iOS 安装包。构建成功不等于已提供下载文件。"
+          },
+          {
+            "en": "This is a release candidate. Current main contains newer local-Codex discovery and sign-in fixes; consult release notes for your platform before relying on a runtime.",
+            "zh-cn": "这是候选发行版。当前 main 包含更晚的本地 Codex 发现与登录修正；使用某个运行时前，请阅读对应平台的发布说明。"
+          }
+        ]
+      },
+      {
+        "title": {
+          "en": "Sign in through Pasion",
+          "zh-cn": "通过 Pasion 登录"
+        },
+        "paragraphs": [
+          {
+            "en": "Enter your Hagency Server origin, continue to browser sign-in, and return through the OAuth callback. Keep the same account and device data when updating if you need encrypted history. Device verification alone does not restore missing room keys.",
+            "zh-cn": "输入 Hagency Server 地址，继续到浏览器登录并经 OAuth 回调返回。更新时如需访问加密历史，请保留同一账户及设备数据；仅验证设备并不能恢复缺失的房间密钥。"
+          }
+        ]
+      },
+      {
+        "title": {
+          "en": "Use JIT for development",
+          "zh-cn": "开发测试使用 JIT"
+        },
+        "paragraphs": [
+          {
+            "en": "Development, UI checks and integration testing use the pinned Makepad JIT. Reuse a matching runner, native dependencies and helpers. Native compilation is reserved for release work; preserve other running JITs and use isolated state.",
+            "zh-cn": "开发、UI 检查与联调使用固定版本的 Makepad JIT。复用匹配的 runner、原生依赖与 helper；原生编译仅用于 release，并保留其他运行中的 JIT、隔离测试状态。"
+          }
+        ],
+        "code": "git clone https://github.com/hagency-org/hagency-desktop.git\ncd hagency-desktop\n# Read .jit/NOTES.md and reuse the matching existing JIT runner."
+      }
     ],
+    "source": "https://github.com/hagency-org/hagency-desktop"
   },
   {
-    slug: 'run-hagency', title: b('Run Hagency locally', '在本地运行 Hagency'), category: b('AGENTS', 'AGENT'),
-    description: b('Prepare a local host, review installation, and understand resource configuration.', '准备本地主机、检查安装步骤，并理解资源配置。'), source: `${repos.hagency}/blob/master/docs/DEPLOYMENT.md`,
-    sections: [
-      section(b('Prepare your host', '准备运行环境'), [b('Hagency’s documented local installation paths cover Linux and macOS. The main runtime uses Node.js 22 or later, tmux, git, and a configured coding CLI. Model access is supplied through that runtime’s supported authentication; a resource label by itself does not establish working model access.', 'Hagency 文档提供 Linux 和 macOS 本地安装路径。主要运行时需要 Node.js 22 或更高版本、tmux、git，以及已配置的编程 CLI。模型访问通过该运行时支持的认证方式提供；填写资源标签本身并不代表模型已经可用。')]),
-      section(b('Review before installing', '先检查，再安装'), [b('Clone the repository and use the platform-specific dry run. The macOS installer uses launchd; the Linux full installer uses systemd. Review the prerequisites, generated services, and existing tmux sessions before proceeding with the documented installation.', '克隆仓库，先运行对应平台的预检查。macOS 安装器使用 launchd，Linux 完整安装器使用 systemd。正式安装前，请检查依赖、生成的服务以及已有 tmux 会话。')], { code: 'git clone https://github.com/hagency-org/hagency.git\ncd hagency\n# macOS: review the installation\n./install/install-macos.sh --dry-run\n# Linux: review the installation\n./install-full.sh --dry-run' }),
-      section(b('Configure a resource, then verify it', '配置资源并验证'), [b('In the September 8 development console, begin with resources: choose supported framework/model settings and define the named agents that can serve qualified roles. Publishing exposes only the intended public catalog. Provisioning or reusing an agent happens when a project request is approved.', '在 9 月 8 日开发版控制台中，从资源开始：选择受支持的框架与模型设置，定义可承担合格角色的命名 Agent。发布只公开预期的目录信息。项目请求获批后，才创建或复用 Agent。'), b('Check observed launch and connection health. A configured resource, published role, approved request, and usable agent are distinct states. Follow the project’s error details rather than treating configuration as proof of successful execution.', '检查实际观察到的启动与连接状态。已配置资源、已发布角色、已批准请求和可用 Agent 是不同状态。请依据项目提供的具体错误进行处理，不要将配置完成当作执行成功。')]),
+    "slug": "run-hagency",
+    "title": {
+      "en": "Connect a local coding runtime",
+      "zh-cn": "连接本地编程运行时"
+    },
+    "description": {
+      "en": "Choose Codex, Claude Code or an actual Octos profile without inventing credentials.",
+      "zh-cn": "选择 Codex、Claude Code 或真实 Octos 配置档，不虚构凭据。"
+    },
+    "category": {
+      "en": "CURRENT GUIDE",
+      "zh-cn": "当前指南"
+    },
+    "sections": [
+      {
+        "title": {
+          "en": "Use the existing provider account",
+          "zh-cn": "使用现有提供方账户"
+        },
+        "paragraphs": [
+          {
+            "en": "In the Agent’s model/runtime settings, select a supported local runtime. Codex and Claude Code can use supported existing local sign-ins. Octos uses the selected local profile, including its model and reasoning settings. Credentials stay with the provider app.",
+            "zh-cn": "在 Agent 的模型／运行时设置中选择受支持的本地运行时。Codex 与 Claude Code 可使用受支持的现有本地登录；Octos 使用选定的本地配置档及其模型、推理设置。凭据保留在提供方应用中。"
+          }
+        ]
+      },
+      {
+        "title": {
+          "en": "Select from the actual catalog",
+          "zh-cn": "从真实目录中选择"
+        },
+        "paragraphs": [
+          {
+            "en": "Use the models and profiles returned by the installed runtime. Two Octos profiles using the same model remain distinct configurations. Local models and custom endpoints depend on that profile; this is not a guarantee that every CLI feature is exposed.",
+            "zh-cn": "使用已安装运行时返回的模型和配置档。同模型的两个 Octos 配置仍是独立配置；本地模型和自定义端点取决于该配置，这不保证 CLI 的每一项能力都已暴露。"
+          }
+        ]
+      },
+      {
+        "title": {
+          "en": "Start the selected scope",
+          "zh-cn": "启动选定范围"
+        },
+        "paragraphs": [
+          {
+            "en": "Save the model and reasoning settings, then choose the owner private chat or a bound Room in Service and start responding. Stop before changing runtime and restart after saving. A workspace is created automatically; a custom directory is optional.",
+            "zh-cn": "保存模型与推理设置，再在 Service 中选择所有者私聊或已绑定房间并开始响应。更换运行时前先停止，保存后再启动。工作目录会自动创建，自定义目录是可选项。"
+          },
+          {
+            "en": "Codex, Claude and Octos differ in tools, file delivery and report protocols. The audit distinguishes implemented adapters from live model inference and full CLI parity.",
+            "zh-cn": "Codex、Claude 与 Octos 的工具、文件交付和报告协议能力不同；核验页会区分已实现适配器、真实模型推理与完整 CLI 等价。"
+          }
+        ]
+      }
     ],
+    "source": "https://github.com/hagency-org/hagency-desktop/blob/main/docs/hagency-quickstart.md"
   },
   {
-    slug: 'deploy-palpo', title: b('Deploy Palpo', '部署 Palpo'), category: b('INFRASTRUCTURE', '基础设施'),
-    description: b('Establish a Matrix server with a deliberate database, identity, and network setup.', '规划数据库、服务器身份与网络配置，建立 Matrix 服务器。'), source: 'https://palpo.im/',
-    sections: [
-      section(b('Start with an evaluation deployment', '从评估部署开始'), [b('Palpo combines a Rust/Salvo application with PostgreSQL. Its README documents Rust 1.94 or later and PostgreSQL 16 or later for the inspected source baseline. Confirm the current toolchain and deployment guide before building a different revision.', 'Palpo 将 Rust/Salvo 应用与 PostgreSQL 组合使用。本次核验的源码 README 要求 Rust 1.94 或更高版本、PostgreSQL 16 或更高版本。构建其他版本前，请确认当前工具链与部署指南。'), b('Use a dedicated evaluation database and back it up. Palpo’s maintainers describe large-scale, long-running production evidence as an ongoing effort; select your deployment purpose accordingly.', '使用独立的评估数据库并做好备份。Palpo 维护者说明，大规模长期生产运行证据仍在积累中，请据此选择适合的部署用途。')]),
-      section(b('Build and configure', '构建与配置'), [b('The source path below builds the server. Copy the documented example configuration and set the server identity, PostgreSQL connection, listener, and public URL before starting it. Docker deployment is also documented upstream; pin an image appropriate to your evaluation.', '以下源码路径用于构建服务器。启动前，复制文档指定的示例配置，填写服务器身份、PostgreSQL 连接、监听地址与公共 URL。上游也提供 Docker 部署说明；评估时应固定合适的镜像版本。')], { code: 'git clone https://github.com/palpo-im/palpo.git\ncd palpo\ncargo build --release\ncp palpo-example.toml palpo.toml', link: { label: b('Open Palpo deployment documentation', '打开 Palpo 部署文档'), href: 'https://palpo.im/' } }),
-      section(b('Verify the path your clients use', '验证客户端实际使用的路径'), [b('Confirm HTTPS, authentication, room history, media, and sync through the public URL the client will use. A process running on the server does not prove the route from a user’s device works. For Robrix2, verify native Sliding Sync support on the selected build.', '通过客户端实际使用的公共 URL，确认 HTTPS、认证、房间历史、媒体与同步。服务器进程运行中，并不能证明用户设备到服务器的路径可达。使用 Robrix2 时，还应验证选定构建的原生 Sliding Sync 支持。'), b('Decide whether to enable federation and configure its discovery and network requirements separately. The Hagency web-admin companion is a distinct Node service and is not part of the v0.4.0 server package.', '是否启用联邦互通，需要单独规划发现机制与网络要求。Hagency 配套网页管理器是独立 Node 服务，不属于 v0.4.0 服务器安装包。')]),
+    "slug": "deploy-palpo",
+    "title": {
+      "en": "Deploy Hagency Server",
+      "zh-cn": "部署 Hagency Server"
+    },
+    "description": {
+      "en": "Host the integrated Rust server; standalone Palpo is a different installation.",
+      "zh-cn": "托管集成 Rust 服务器；独立 Palpo 是另一种安装方式。"
+    },
+    "category": {
+      "en": "CURRENT GUIDE",
+      "zh-cn": "当前指南"
+    },
+    "sections": [
+      {
+        "title": {
+          "en": "One process, three databases",
+          "zh-cn": "一个进程，三个数据库"
+        },
+        "paragraphs": [
+          {
+            "en": "Hagency Server embeds Palpo, Pasion authentication and the management web UI. One PostgreSQL service holds separate Hagency, Palpo and Pasion databases. The integrated Agent Appservice is required; users do not register one service per Fleet.",
+            "zh-cn": "Hagency Server 内嵌 Palpo、Pasion 认证与管理 Web 界面。一个 PostgreSQL 服务承载独立的 Hagency、Palpo、Pasion 数据库。集成 Agent Appservice 是必需组件；用户不会按 Fleet 逐个注册服务。"
+          }
+        ]
+      },
+      {
+        "title": {
+          "en": "Follow the complete operator guide",
+          "zh-cn": "遵循完整运维指南"
+        },
+        "paragraphs": [
+          {
+            "en": "Prepare the documented toolchain, database, Pasion resources and frontend assets. Generate configuration for your own origin and server name. Create the bootstrap administrator through a protected password file, then run behind the documented TLS proxy.",
+            "zh-cn": "准备文档指定的工具链、数据库、Pasion 资源与前端文件。按自己的公开地址及服务器名称生成配置，通过受保护密码文件建立首位管理员，再按文档配置 TLS 代理。"
+          },
+          {
+            "en": "The latest Server release entry has no binary assets. Do not substitute an obsolete Node installer, Fleet callback setup or a standalone Palpo archive for the integrated server.",
+            "zh-cn": "Server 最新 release 条目没有二进制附件；不要用旧 Node 安装器、Fleet 回调配置或独立 Palpo 压缩包代替集成服务器。"
+          }
+        ],
+        "code": "git clone https://github.com/hagency-org/hagency-server.git\ncd hagency-server\n# Review README.md and docs/guide.md first.\njust init-docker --origin https://matrix.example.org --server-name matrix.example.org"
+      },
+      {
+        "title": {
+          "en": "Enable only the features you intend",
+          "zh-cn": "只启用确实需要的能力"
+        },
+        "paragraphs": [
+          {
+            "en": "Management and resource-pool behavior have separate configuration gates. HAGENCY_ENABLE_RESOURCE_POOLS enables defaults for the relevant pool/admission settings; explicit TOML settings take precedence. Use matching Desktop, daemon and Server versions and read forward-only migration notes.",
+            "zh-cn": "管理与资源池行为有各自的配置开关。HAGENCY_ENABLE_RESOURCE_POOLS 会启用相关资源池、准入设置的默认值，显式 TOML 设置优先。请使用匹配的 Desktop、daemon 与 Server，并阅读只前进迁移说明。"
+          }
+        ]
+      }
     ],
+    "source": "https://github.com/hagency-org/hagency-server/blob/main/docs/guide.md"
   },
   {
-    slug: 'connect-fleet', title: b('Connect a fleet to Palpo', '将 Agent 舰队接入 Palpo'), category: b('DEVELOPMENT INTEGRATION', '开发版本集成'),
-    description: b('Follow administrator authorization, owner pairing, and real event verification.', '完成管理员授权、所有者配对与真实事件验证。'), source: `${repos.hagency}/tree/master/docs`,
-    sections: [
-      section(b('Use a matched development installation', '使用匹配的开发部署'), [b('This guide describes the September 8 Hagency/Palpo admin integration. It requires the companion web-admin service, the matching Hagency bridge, and Palpo application-service support. Published releases alone do not establish this workflow.', '本指南描述 9 月 8 日的 Hagency/Palpo 管理集成，需要配套 web-admin 服务、匹配的 Hagency 桥接及 Palpo 应用服务支持。仅安装已发布版本，并不能建立这一流程。')]),
-      section(b('Authorize and pair', '授权与配对'), [b('A Palpo administrator authorizes a fleet for an identified local owner using outbound transport. The companion service installs a scoped Appservice registration pointing to its server-side relay. The fleet owner downloads only that fleet’s configuration and imports it into Hagency, which initiates HTTPS polling and state publication.', 'Palpo 管理员以出站传输为已确认的本地所有者授权机群。配套服务安装限定范围的 Appservice 注册，指向服务器侧中继。机群所有者仅下载自己的配置并导入 Hagency，由 Hagency 主动发起 HTTPS 轮询与状态发布。'), b('Import the configuration into the corresponding Hagency instance. Keep service credentials in the intended private store. Installation and credential delivery leave the fleet pending until the connection itself is verified.', '将配置导入对应的 Hagency 实例，并把服务凭证保存在指定的私密存储中。完成安装与凭证交付后，舰队仍保持待连接状态，直至连接本身通过验证。')]),
-      section(b('Prove the event round trip', '验证真实事件往返'), [b('Use the connection verification action. The bridge must prove receipt of the exact probe event through the application-service path, with the expected reception-room membership. A simple HTTP response or reading the event back is not sufficient.', '使用连接验证操作。桥接需要证明已通过应用服务路径收到指定探测事件，并确认接待房间成员正确。简单的 HTTP 响应或重新读取事件都不足以证明接入成功。'), b('In the current outbound transport, the exact current-generation probe establishes the connection and background heartbeats maintain liveness. Request observations have separate freshness checks. Preserve request identity during recovery. Earlier callback deployments retain their explicit verification-expiry rules until migrated.', '当前出站传输以当前 generation 的确切探测建立连接，再由后台心跳维持活性；申请观察结果另行检查时效。恢复过程中保留请求身份。较早的回调部署在迁移前仍遵循其明确的验证过期规则。')]),
+    "slug": "connect-fleet",
+    "title": {
+      "en": "Connect your account and device",
+      "zh-cn": "连接账户与设备"
+    },
+    "description": {
+      "en": "The current flow uses Pasion and native ownership, not a Fleet configuration file.",
+      "zh-cn": "当前流程使用 Pasion 与原生所有权，不使用 Fleet 配置文件。"
+    },
+    "category": {
+      "en": "CURRENT GUIDE",
+      "zh-cn": "当前指南"
+    },
+    "sections": [
+      {
+        "title": {
+          "en": "Use your own Matrix identity",
+          "zh-cn": "使用自己的 Matrix 身份"
+        },
+        "paragraphs": [
+          {
+            "en": "Sign in with Pasion. The SDK owns OAuth login, refresh and logout; Hagency management checks the corresponding Matrix account. A body field or an Agent display name cannot establish ownership.",
+            "zh-cn": "使用 Pasion 登录。SDK 负责 OAuth 登录、刷新与退出，Hagency 管理检查对应的 Matrix 账户；请求字段或 Agent 显示名称不能建立所有权。"
+          }
+        ]
+      },
+      {
+        "title": {
+          "en": "Keep account and execution distinct",
+          "zh-cn": "区分账户与执行设备"
+        },
+        "paragraphs": [
+          {
+            "en": "An Agent has a permanent owner. Assigning execution to a computer does not transfer ownership or copy its private crypto state. Current main supports per-account enrollment in one daemon; that later change is not assumed present in rc.13.",
+            "zh-cn": "Agent 有永久所有者。把执行分配到某台电脑，不会转移所有权或复制私有加密状态。当前 main 支持一个 daemon 中按账户登记；这一较晚修改不能视作已包含于 rc.13。"
+          }
+        ]
+      },
+      {
+        "title": {
+          "en": "Recover without erasing evidence",
+          "zh-cn": "恢复时保留证据"
+        },
+        "paragraphs": [
+          {
+            "en": "Use the original account/device and documented recovery controls. Unknown work, unresolved usage and old device generations must not be reset into new execution. The legacy Fleet URL is retained as a bookmark only; its installation and authority-import workflow are retired.",
+            "zh-cn": "使用原账户、设备及文档指定的恢复控制。不确定工作、未结算用量与旧设备代际不能被重置成新执行。本页保留旧 Fleet URL 仅为兼容书签，其安装与 authority import 流程已退役。"
+          }
+        ]
+      }
     ],
+    "source": "https://github.com/hagency-org/hagency-desktop/blob/main/docs/hagency-quickstart.md"
   },
   {
-    slug: 'request-agent', title: b('Create a project and request an agent', '创建项目并申请 Agent'), category: b('TEAM SETUP', '团队配置'),
-    description: b('Separate project ownership, resource approval, and actual agent admission.', '区分项目归属、资源审批与 Agent 实际入驻。'),
-    sections: [
-      section(b('Establish the project and its owner', '建立项目与所有者关系'), [b('In the development admin workflow, the project owner creates a project room or registers a room they control. The system verifies room authority and establishes a fleet-scoped project binding. It also creates or validates a separate encrypted owner approval conversation.', '在开发版管理流程中，项目所有者创建项目房间，或注册自己有管理权的已有房间。系统验证房间权限，建立限定舰队范围的项目绑定，并创建或验证独立加密的所有者审批会话。'), b('A server account, project metadata, and the right to approve a specific agent’s work are different relationships. Do not assume the first requester becomes the owner automatically.', '服务器账户、项目元数据和批准某个 Agent 操作的权利，是不同的关系。不能自动将第一位申请人视为所有者。')]),
-      section(b('Request a published role', '申请已发布角色'), [b('Choose a role from the fleet’s current published catalog and the requested allocation. The request is tied to the actual sender and target project. The resource contributor decides which qualified resource or named agent will serve it.', '从舰队当前已发布目录中选择角色及所需配额。请求绑定真实发送者与目标项目。资源贡献者决定由哪个符合条件的资源或命名 Agent 提供服务。'), b('The provider reviews the request in Hagency. Configured definitions are not yet running agents; allocation may provision a new identity or reuse a qualified existing agent.', '提供方在 Hagency 中审核请求。已配置的定义不等于正在运行的 Agent；分配可能创建新身份，也可能复用合格的已有 Agent。')]),
-      section(b('Wait for actual admission', '确认实际加入'), [b('The request becomes usable only after fulfillment succeeds and the actual agent is observed in the target room. Pending, failed, and unknown states need to remain visible. Once admitted, open the project in Robrix2 and start a task with an explicit mention.', '只有分配执行成功，并确认实际 Agent 已加入目标房间后，请求才变得可用。待处理、失败和未知状态应保持可见。完成入驻后，在 Robrix2 打开项目，通过明确提及开始任务。')]),
+    "slug": "request-agent",
+    "title": {
+      "en": "Create your first Agent",
+      "zh-cn": "创建第一个 Agent"
+    },
+    "description": {
+      "en": "A personal Agent starts in a private chat; shared capacity uses a separate request.",
+      "zh-cn": "个人 Agent 从私聊开始，共享容量走独立申请流程。"
+    },
+    "category": {
+      "en": "CURRENT GUIDE",
+      "zh-cn": "当前指南"
+    },
+    "sections": [
+      {
+        "title": {
+          "en": "Create an identity",
+          "zh-cn": "创建身份"
+        },
+        "paragraphs": [
+          {
+            "en": "Open Agent → Agent manager → My Agents. For a local Agent, this computer must first host the current account: check Hosting in the panel header. Once Local Agents is available, choose Add Local Agent and complete the native creation form. A Project is not required. Wait for the owner private chat to be ready.",
+            "zh-cn": "打开 Agent → Agent 管理者 → 我的 Agent。本地 Agent 需要本机先托管当前账户，请检查面板顶部 Hosting／资源托管。出现本地 Agent 区域后，选择添加本地 Agent 并完成原生创建表单，无需预先创建 Project。等待所有者私聊就绪。"
+          }
+        ]
+      },
+      {
+        "title": {
+          "en": "Connect and start",
+          "zh-cn": "连接并启动"
+        },
+        "paragraphs": [
+          {
+            "en": "Open the Agent’s model/runtime settings and select a supported local configuration. Save its actual model choice, review usage and permissions, then enable its service and open the private conversation. A configured CLI and an active model account are prerequisites.",
+            "zh-cn": "打开 Agent 的模型／运行时设置，选择受支持的本地配置并保存实际模型选项；检查用量与权限后，启用服务并打开私密对话。需要已配置的 CLI 和可用的模型账户。"
+          }
+        ]
+      },
+      {
+        "title": {
+          "en": "Invite it into a team Room",
+          "zh-cn": "邀请进入团队房间"
+        },
+        "paragraphs": [
+          {
+            "en": "Bind the Agent to the intended Project/Room with actual membership and permissions. Use an explicit mention in shared-room requests, including thread follow-ups. Requesting another owner’s resource pool is a separate owner-approved operation.",
+            "zh-cn": "按真实成员资格与权限，把 Agent 绑定至目标 Project/Room。共享房间中的请求应明确提及 Agent，包括线程后续请求。申请其他所有者的资源池是另一项需要其批准的操作。"
+          }
+        ]
+      }
     ],
+    "source": "https://github.com/hagency-org/hagency-desktop/blob/main/docs/hagency-quickstart.md"
   },
   {
-    slug: 'task-threads', title: b('Work together in task threads', '在任务线程中协作'), category: b('WORKFLOWS', '协作流程'),
-    description: b('Give each task a conversation that can be followed, clarified, and continued.', '为每个任务建立可跟进、可澄清、可持续的对话。'),
-    sections: [
-      section(b('Start with an explicit request', '以明确的请求开始'), [b('Mention an admitted agent in the project room and describe a bounded task: its expected result, relevant repository, and any constraints. Shared project rooms use mention-gated behavior by default, so ordinary unaddressed discussion does not start agent work.', '在项目房间提及已入驻的 Agent，描述边界明确的任务，包括预期结果、相关仓库及约束。共享项目房间默认采用提及触发，未指定对象的日常讨论不会启动 Agent 工作。')]),
-      section(b('Keep the follow-up attached', '让后续交流保持关联'), [b('Use the task’s thread for clarifications and results. The newer Hagency integration binds thread continuity to the room, root event, requester, and current authority. It does not guess the last active agent when a thread is unknown.', '在任务线程中补充说明、查看成果。更新的 Hagency 集成将线程连续性绑定到房间、根事件、请求者与当前权限。遇到未知线程时，不会猜测最后活跃的 Agent。'), b('Visible activity is a progress signal, not proof that the entire task is complete. Look for the final result and verified task outcome. A model finishing one response does not mean all requested work has been completed.', '可见活动表示进展，并不证明整个任务已完成。应查看最终成果与经过核验的任务状态。模型结束一轮回复，不等于全部请求的工作都已完成。')]),
-      section(b('Continue with a new instruction', '通过新指令继续'), [b('The September 8 development workflow supports follow-ups after completion while preserving task authority. Completion also changes permission lifecycle boundaries: a permission granted only for an earlier task must not silently authorize unrelated future work.', '9 月 8 日开发流程支持任务完成后的继续交流，同时保持任务权限边界。完成状态也会改变授权生命周期：仅授予之前任务的权限，不应悄然授权无关的后续工作。'), b('Use a separate thread for a separate task. In encrypted contexts, check the exact supported path in the selected build instead of assuming that every room type has identical behavior.', '不同任务使用不同线程。在加密场景中，请检查所选构建具体支持的路径，不要假设所有房间类型的行为完全一致。')]),
+    "slug": "resource-pools",
+    "title": {
+      "en": "Request or contribute a resource pool",
+      "zh-cn": "申请或贡献资源池"
+    },
+    "description": {
+      "en": "Keep applicant intent, resource-owner approval and runtime readiness separate.",
+      "zh-cn": "区分申请意图、资源所有者批准与运行时就绪。"
+    },
+    "category": {
+      "en": "CURRENT GUIDE",
+      "zh-cn": "当前指南"
+    },
+    "sections": [
+      {
+        "title": {
+          "en": "For the applicant",
+          "zh-cn": "申请人流程"
+        },
+        "paragraphs": [
+          {
+            "en": "When pools are enabled, open Agent → Agent manager → Browse resource pools, choose a pool, name the Agent and request a positive token ceiling. Requests and detail views show the decision state. Duplicate retries retain the original request identity.",
+            "zh-cn": "启用资源池后，打开 Agent → Agent 管理者 → 浏览资源池，选择资源池、填写 Agent 名称并请求正数 token 上限。申请列表与详情显示决策状态；重复重试保留原申请身份。"
+          }
+        ]
+      },
+      {
+        "title": {
+          "en": "For the resource owner",
+          "zh-cn": "资源所有者流程"
+        },
+        "paragraphs": [
+          {
+            "en": "A resource owner publishes eligible capacity and reviews their own requests. Approval creates the Agent and its grant; rejection has a visible reason. Existing local runtime profiles and the executor must qualify before work begins.",
+            "zh-cn": "资源所有者发布符合条件的容量，并审阅归属自己的申请。批准后创建 Agent 及授权，拒绝则保留可见原因；本地运行时配置与执行器通过资格检查后才能开始工作。"
+          }
+        ]
+      },
+      {
+        "title": {
+          "en": "Understand what a ceiling means",
+          "zh-cn": "理解上限的实际含义"
+        },
+        "paragraphs": [
+          {
+            "en": "Each Agent uses one pool. Published capacity is not a live balance guarantee. Accounting is postpaid; admitted work can exceed its limit. Unknown holds, owner withdrawal and applicant removal retain their recovery and settlement rules. There is no marketplace payment or commercial billing claim.",
+            "zh-cn": "每个 Agent 使用一个资源池。发布的容量不保证实时余额。用量在任务后记账，已接纳任务可能超过限额；不确定预留、所有者撤回和申请人移除仍遵循恢复与结算规则。这里不宣称市场支付或商业计费。"
+          }
+        ]
+      }
     ],
+    "source": "https://github.com/hagency-org/hagency-server/blob/main/docs/OPERATIONS.md"
   },
   {
-    slug: 'approvals', title: b('Understand execution approvals', '理解执行审批'), category: b('TRUST & CONTROL', '信任与控制'),
-    description: b('Know who decides, what is being authorized, and how long the permission lasts.', '了解谁来决定、授权什么，以及授权持续多久。'),
-    sections: [
-      section(b('Separate resource approval from execution', '区分资源审批与执行审批'), [b('Approving an agent allocation gives a project access to a resource. An execution approval answers a later, narrower question: may this agent perform this requested operation? Those decisions can belong to different people and different interfaces.', '批准 Agent 分配，是允许项目使用某项资源。执行审批则回答之后更具体的问题：是否允许该 Agent 执行当前请求的操作？这两种决策可能由不同的人在不同界面中完成。')]),
-      section(b('Read the request in the owner conversation', '在所有者会话中阅读请求'), [b('Managed runtimes start sandboxed. Supported permission requests are routed to a separate owner approval conversation, where the native client displays the relevant operation and scope. The server validates the real sender, request identity, and decision.', '受管运行时默认启用沙箱。受支持的权限请求会发送到独立的所有者审批会话，由原生客户端展示操作及其范围。服务端验证真实发送者、请求身份与决策。'), b('Typing “yes” in a project room is not a structured authorization. Public waiting messages do not expose private approval details. Keep ownership and encrypted-room membership intact when recovering a setup.', '在项目房间输入“同意”并不构成结构化授权。公开等待消息不会披露私密审批细节。恢复配置时，请保留正确的所有权与加密房间成员关系。')]),
-      section(b('Choose only the scope you intend', '只授予你真正需要的范围'), [b('The newer supported Codex integration can offer one-time, task-scoped, and persistent grants, with contributor revocation. Unsupported or ambiguous scopes remain single-use. Read the exact operation and scope shown on the card rather than inferring broad permission.', '更新的受支持 Codex 集成可提供单次、任务范围及持久授权，并支持贡献者撤销。未支持或不明确的范围仍保持单次授权。应阅读卡片展示的准确操作与范围，不要推断为广泛权限。'), b('Explicit contributor-selected execution modes can change the sandbox boundary. Defaults remain sandboxed. Changing future policy or revoking a grant does not undo an operation that has already happened.', '贡献者明确选择的执行模式可以改变沙箱边界，默认值仍保留沙箱。修改后续策略或撤销授权，不会撤销已发生的操作。')]),
+    "slug": "task-threads",
+    "title": {
+      "en": "Chat, progress and conversation scope",
+      "zh-cn": "聊天、进展与会话范围"
+    },
+    "description": {
+      "en": "Keep the right requester, Room and thread attached to every turn.",
+      "zh-cn": "让每一轮都关联正确的请求人、房间与线程。"
+    },
+    "category": {
+      "en": "CURRENT GUIDE",
+      "zh-cn": "当前指南"
+    },
+    "sections": [
+      {
+        "title": {
+          "en": "Choose the right context",
+          "zh-cn": "选择正确上下文"
+        },
+        "paragraphs": [
+          {
+            "en": "Owner private chats do not require mentions. Use an explicit mention for shared-room requests, including thread follow-ups. Different Rooms and top-level group threads keep independent provider contexts; a display-name match is not routing authority.",
+            "zh-cn": "所有者私聊无需提及；共享房间中的请求应明确提及，包括线程后续请求。不同房间及群聊顶层线程保持独立提供方上下文，显示名称相同不代表路由授权。"
+          }
+        ]
+      },
+      {
+        "title": {
+          "en": "Read distinct messages",
+          "zh-cn": "逐条阅读独立消息"
+        },
+        "paragraphs": [
+          {
+            "en": "Supported progress and background reports are separate Matrix messages from the final answer. Equal text can be two distinct source messages; replaying one source identity must not create an extra event. Octos strong native reports and complete provider replay remain bounded by the capability audit.",
+            "zh-cn": "受支持的进展与后台报告作为独立 Matrix 消息显示，与最终回答分开。相同文本可来自两条不同来源消息；重放同一来源身份不能增加额外事件。Octos 强原生报告与完整提供方重放仍受能力核验范围限制。"
+          }
+        ]
+      },
+      {
+        "title": {
+          "en": "Wait for the sender SDK’s keys",
+          "zh-cn": "等待发送方 SDK 的密钥就绪"
+        },
+        "paragraphs": [
+          {
+            "en": "A server-side keys query is not enough: the sending SDK must discover and verify the recipient device before encrypting. Desktop uses that readiness guard. Delayed room keys, device verification and history recovery are different conditions.",
+            "zh-cn": "只查询服务端密钥还不够：发送方 SDK 必须在加密前发现并验证接收设备。Desktop 使用该就绪检查。房间密钥延迟、设备验证与历史恢复是不同的条件。"
+          }
+        ]
+      }
     ],
+    "source": "https://github.com/hagency-org/hagency-desktop/blob/main/docs/testing/spontaneous-messages-real-stack.md"
   },
   {
-    slug: 'share-files', title: b('Exchange files with agents', '与 Agent 交换文件'), category: b('WORKFLOWS', '协作流程'),
-    description: b('Keep inputs and deliverables alongside the conversation that produced them.', '让输入文件与交付成果留在产生它们的对话旁。'),
-    sections: [
-      section(b('Attach the input to the right conversation', '将输入文件放到正确的对话'), [b('In the September 8 development integration, supported room, thread, and direct-message paths carry attachment metadata to the agent. Send the file where the task lives and describe what the agent should do with it. Shared room mention rules still apply.', '在 9 月 8 日开发集成中，受支持的房间、线程和私信路径会将附件元数据提供给 Agent。请把文件发送到任务所在位置，并说明处理要求。共享房间的提及规则仍然适用。')]),
-      section(b('Receive a deliverable', '接收交付成果'), [b('A returned artifact belongs to the current task context. Hagency snapshots the output for durable delivery, and the client downloads it through the authenticated media path. A status message alone is not a file; check the actual attachment and expected content.', '返回的文件成果属于当前任务上下文。Hagency 会对输出建立快照，支持持久交付，客户端则通过需认证的媒体路径下载。状态消息本身不是文件，请确认实际附件和预期内容。')]),
-      section(b('Handle encryption and recovery', '处理加密与恢复'), [b('Encrypted attachments need both authentication and the event’s encryption metadata. Recent native Robrix2 changes recover download behavior and avoid an indefinite spinner. Those changes were tested on the selected macOS development build.', '加密附件需要认证信息以及事件中的加密元数据。近期 Robrix2 原生改进修复了下载行为，避免无限等待。相关变更已在选定的 macOS 开发构建中测试。'), b('If a download fails, retain the original conversation and device session, check media reachability, and retry through the client. A public media URL alone does not establish that encrypted content can be decoded.', '如果下载失败，请保留原始会话与设备状态，检查媒体服务可达性，并通过客户端重试。只有公共媒体 URL，并不能证明加密内容可被正确解码。')]),
+    "slug": "approvals",
+    "title": {
+      "en": "Permissions and human decisions",
+      "zh-cn": "权限与人工决策"
+    },
+    "description": {
+      "en": "Review the operation, scope and decision maker rather than replying “yes” in chat.",
+      "zh-cn": "按操作、范围和决策者审阅权限，而不是在聊天里回复“同意”。"
+    },
+    "category": {
+      "en": "CURRENT GUIDE",
+      "zh-cn": "当前指南"
+    },
+    "sections": [
+      {
+        "title": {
+          "en": "Different decisions grant different things",
+          "zh-cn": "不同决策授予不同权限"
+        },
+        "paragraphs": [
+          {
+            "en": "Room membership is not tool authorization. A resource-pool approval is not permission for every command. The local Agent, Room and requester policies still apply; denial at a layer blocks the operation.",
+            "zh-cn": "房间成员资格不等于工具授权，资源池批准也不代表所有命令都获准。Agent、房间与请求人的本地策略仍然有效，任一层拒绝都会阻止操作。"
+          }
+        ]
+      },
+      {
+        "title": {
+          "en": "Use the supported approval control",
+          "zh-cn": "使用受支持的审批控制"
+        },
+        "paragraphs": [
+          {
+            "en": "Read the requested tool and exact scope in the supported owner approval surface. Ordinary message text is not a structured decision. Conversational question or run-control cards do not grant tool approval authority.",
+            "zh-cn": "在受支持的所有者审批界面中阅读工具与准确范围。普通聊天文字不是结构化决策，交互问题或运行控制卡片也不会授予工具审批权限。"
+          }
+        ]
+      },
+      {
+        "title": {
+          "en": "Respect runtime and host limits",
+          "zh-cn": "遵守运行时与主机限制"
+        },
+        "paragraphs": [
+          {
+            "en": "Codex, Claude and Octos have different tool and isolation surfaces. Shared Claude macOS confinement is not a cross-platform sandbox guarantee. Revocation prevents future authorization but cannot undo completed work or recover plaintext already received.",
+            "zh-cn": "Codex、Claude 与 Octos 的工具和隔离能力不同。共享 Claude 在 macOS 的隔离不代表跨平台沙箱保证；撤销可阻止后续授权，但无法撤销已完成操作或收回已获得的明文。"
+          }
+        ]
+      }
     ],
+    "source": "https://github.com/hagency-org/hagency-desktop/blob/main/docs/hagency-quickstart.md"
   },
   {
-    slug: 'operations', title: b('Operate and troubleshoot the stack', '运维与故障排查'), category: b('OPERATIONS', '运维'),
-    description: b('Verify each layer, preserve state, and make updates reproducible.', '逐层验证、保留状态，让更新可复现。'),
-    sections: [
-      section(b('Check the path, layer by layer', '沿实际路径逐层检查'), [b('Begin with the symptom and the component that can observe it. A client history error can be a missing network route even when the server is healthy. An approved resource can still be unusable if launch or membership verification failed.', '从症状及能够观察到它的组件开始。即使服务器健康，缺少网络路径也可能导致客户端历史记录报错。资源即使已获批准，也可能因为启动失败或成员验证失败而无法使用。')], { bullets: [b('Client → homeserver: TLS, login, sync, history, and media.', '客户端 → 服务器：TLS、登录、同步、历史与媒体。'), b('Homeserver → bridge: actual application-service event delivery.', '服务器 → 桥接：实际应用服务事件投递。'), b('Bridge → runtime: scoped authority, launch health, and task outcome.', '桥接 → 运行时：限定权限、启动状态与任务结果。')] }),
-      section(b('Preserve the state that matters', '保留关键状态'), [b('Back up the server database and the private configuration needed to restore the deployment. Retain Matrix device and crypto stores if encrypted history matters. Treat account identifiers, homeserver identity, agent identity, and task authority as durable relationships.', '备份服务器数据库及恢复部署所需的私密配置。如果加密历史很重要，请保留 Matrix 设备与加密存储。账户标识、服务器身份、Agent 身份和任务权限都是持久关系。')]),
-      section(b('Update with a known baseline', '从已知基线更新'), [b('Record the revisions and release assets you use. Follow each project’s upgrade and rollback instructions, test the intended user workflow, and distinguish a passing unit test from a passing integrated deployment. Native lifecycle skips remain unresolved evidence, not successful tests.', '记录实际使用的版本与发布文件。遵循各项目的升级与回滚说明，测试目标用户流程，并区分单元测试通过与集成部署通过。原生生命周期中的跳过项仍属于未解决证据，而非成功测试。'), b('Palpo’s companion admin service currently has explicit gaps such as credential rotation and fleet-wide stop acknowledgment. Design recovery around documented capabilities and keep partial failures visible.', 'Palpo 配套管理服务目前仍存在凭证轮换、全舰队停止确认等明确缺口。请围绕已记录的能力设计恢复流程，并保持部分失败状态可见。')]),
+    "slug": "share-files",
+    "title": {
+      "en": "Exchange files in the admitted Room",
+      "zh-cn": "在获准房间中交换文件"
+    },
+    "description": {
+      "en": "Keep file delivery scoped, encrypted where required and within transfer bounds.",
+      "zh-cn": "让文件交付受范围约束，按需加密，并遵循传输边界。"
+    },
+    "category": {
+      "en": "CURRENT GUIDE",
+      "zh-cn": "当前指南"
+    },
+    "sections": [
+      {
+        "title": {
+          "en": "Use the correct Room",
+          "zh-cn": "使用正确房间"
+        },
+        "paragraphs": [
+          {
+            "en": "Attach inputs and publish outputs within the admitted conversation. The native Matrix file bridge is documented for Codex and Claude; do not assume the same bridge exists for every Octos or external adapter.",
+            "zh-cn": "在获准对话中发送输入与发布输出。原生 Matrix 文件桥接明确用于 Codex 与 Claude，不应假设每个 Octos 或外部适配器都具有同样桥接。"
+          }
+        ]
+      },
+      {
+        "title": {
+          "en": "Know the limits",
+          "zh-cn": "了解限制"
+        },
+        "paragraphs": [
+          {
+            "en": "Shared Matrix file publication permits up to 64 files and 64 MiB per request. A transfer-limit error leaves the task running. Exact retries preserve the original delivery receipt; an owner-local path is not a delivered attachment.",
+            "zh-cn": "共享 Matrix 文件发布每次请求最多 64 个文件、64 MiB。触及传输上限会返回工具错误，任务仍继续运行；准确重试保留原交付回执，所有者本地路径不等于已交付附件。"
+          }
+        ]
+      },
+      {
+        "title": {
+          "en": "Understand the privacy boundary",
+          "zh-cn": "理解隐私边界"
+        },
+        "paragraphs": [
+          {
+            "en": "The Agent executor must decrypt encrypted inputs to process them. The selected model provider may receive their content. Matrix encryption protects transport between participant devices; it does not make every selected model local.",
+            "zh-cn": "Agent 执行器必须解密加密输入才能处理，所选模型提供方也可能接收内容。Matrix 加密保护参与设备之间的通信，并不会让所有模型都在本地运行。"
+          }
+        ]
+      }
     ],
+    "source": "https://github.com/hagency-org/hagency-desktop/blob/main/docs/hagency-quickstart.md"
   },
+  {
+    "slug": "operations",
+    "title": {
+      "en": "Operate and recover the current stack",
+      "zh-cn": "运维与恢复当前系统"
+    },
+    "description": {
+      "en": "Separate health, authorization, durable recovery and actual model execution.",
+      "zh-cn": "区分健康状态、授权、持久恢复与真实模型执行。"
+    },
+    "category": {
+      "en": "CURRENT GUIDE",
+      "zh-cn": "当前指南"
+    },
+    "sections": [
+      {
+        "title": {
+          "en": "Observe the right component",
+          "zh-cn": "观察正确组件"
+        },
+        "paragraphs": [
+          {
+            "en": "Server health and Appservice ACKs show transport readiness, not a qualified model. Desktop’s owner daemon, local profile, workspace and provider sign-in must also be valid. A registered Agent identity is not proof that a model call succeeded.",
+            "zh-cn": "Server 健康状态与 Appservice ACK 表示传输就绪，不代表模型通过资格检查。Desktop owner daemon、本地配置、工作目录和提供方登录也必须有效；注册 Agent 身份不等于模型调用成功。"
+          }
+        ]
+      },
+      {
+        "title": {
+          "en": "Recover original work",
+          "zh-cn": "恢复原工作"
+        },
+        "paragraphs": [
+          {
+            "en": "Retain receipts, source IDs, binding generations and usage holds. Reconnect or resume the original operation when documented; do not erase uncertainty by resetting counters, creating a new request or replaying the model.",
+            "zh-cn": "保留回执、来源 ID、绑定代际与用量预留。按文档重连或恢复原操作，不通过重置计数、新建请求或重跑模型来消除不确定状态。"
+          }
+        ]
+      },
+      {
+        "title": {
+          "en": "Test the exact deployment",
+          "zh-cn": "测试准确部署版本"
+        },
+        "paragraphs": [
+          {
+            "en": "Record Desktop, Server, Palpo/Pasion pins and runtime versions. Use isolated test accounts and state. This audit separates source review, historical JIT fixtures, CI checks and newly executed UI checks; none alone certifies every production path.",
+            "zh-cn": "记录 Desktop、Server、Palpo/Pasion 固定版本及运行时版本，并使用隔离测试账户与状态。本次核验区分源码审查、历史 JIT 夹具、CI 检查与新执行的 UI 检查，任一种都不能单独证明所有生产路径。"
+          }
+        ]
+      }
+    ],
+    "source": "https://github.com/hagency-org/hagency-server/blob/main/docs/TESTING.md"
+  }
 ];
 
 export const articles: Article[] = [
-  { slug: 'introducing-hagency', title: b('Human agency is the starting point.', '一切，从人的能动性出发。'), category: b('PERSPECTIVE', '理念'), date: '2026-09-08', description: b('An open ecosystem for people and agents to work in the same conversation.', '一个让人和 Agent 在同一段对话中工作的开放生态。'), sections: [
-    section(b('A place for people in the process', '让人在过程中始终拥有位置'), [b('As agents become more capable, collaboration becomes a design problem. Where does a team discuss the work? How does a person understand what is happening? Who authorizes the next step? Hagency starts with those questions.', '当 Agent 的能力持续增强，协作本身成为一个设计问题。团队在哪里讨论工作？人如何理解正在发生的事情？下一步由谁授权？Hagency 从这些问题出发。'), b('The goal is a workspace in which people can set direction, agents can do useful work, and everyone has a clear place in the conversation. Open protocols and explicit responsibilities make that workspace inspectable.', '目标是建立这样的空间：人可以指引方向，Agent 可以完成有价值的工作，每位参与者都在对话中拥有清晰的位置。开放协议与明确职责，让这一空间能够被理解和检查。')]),
-    section(b('Three projects, connected by purpose', '三个项目，由共同目标连接'), [b('Robrix2 supplies the native conversation experience. Hagency supplies agent execution and task coordination. Palpo supplies Matrix infrastructure. Each project has an independent purpose, and their integration brings those responsibilities together.', 'Robrix2 提供原生对话体验，Hagency 提供 Agent 执行与任务协调，Palpo 提供 Matrix 基础设施。每个项目都有独立价值，集成则将这些职责连接起来。'), b('Start with the part you need. Follow the source, try an evaluation deployment, or contribute to documentation and testing. Hagency is built through the same open collaboration it wants to make possible.', '从你需要的部分开始。阅读源码、尝试评估部署，或贡献文档与测试。Hagency 本身也通过它希望促进的开放协作而成长。')]),
-  ] },
-  { slug: 'conversation-to-result', title: b('From a project request to an agent result.', '从项目请求，到 Agent 成果。'), category: b('WORKFLOW', '工作流程'), date: '2026-09-08', description: b('Inside the development integration connecting capacity, conversation, and delivery.', '理解连接资源、对话与交付的开发版本集成。'), sections: [
-    section(b('The workflow starts before the prompt', '流程始于提示词之前'), [b('An agent needs a working resource, a project, and the authority to act in it. The development integration makes these relationships explicit: a contributor configures capacity, a project requests a role, and the provider approves an appropriate allocation.', 'Agent 需要可用资源、一个项目，以及在其中行动的权限。开发集成明确建立这些关系：贡献者配置资源，项目申请角色，提供方批准合适的分配。'), b('The system then verifies that the real agent has joined the target room. This is where a request becomes an available collaborator, rather than simply an approved row in a dashboard.', '随后系统确认真实 Agent 已加入目标房间。到这一步，请求才转化为可参与工作的协作者，而不只是仪表盘里的一条已批准记录。')]),
-    section(b('Execution stays connected to its context', '执行始终关联上下文'), [b('The task begins with a mention in Robrix2. Updates, clarifications, and the final artifact follow the task thread. If the runtime asks for a supported permission, the owner reviews it in a separate conversation.', '任务通过 Robrix2 中的一次提及开始。进展、澄清与最终文件都沿着任务线程展开。如果运行时请求受支持的权限，所有者会在独立会话中审阅。'), b('This walkthrough represents the September 8 development integration. It is a concrete path to evaluate, not a claim that all published binaries contain the same features. The guides identify the setup and availability boundaries.', '这一流程代表 9 月 8 日开发集成，提供具体的评估路径，并不意味着所有已发布二进制包都具备相同功能。指南会说明配置要求与可用性边界。')]),
-  ] },
-  { slug: 'why-matrix', title: b('Why a collaboration stack uses Matrix.', '为什么协作技术栈选择 Matrix。'), category: b('ARCHITECTURE', '架构'), date: '2026-09-08', description: b('Rooms, identities, and threads give human–agent work a shared language.', '房间、身份与线程，为人机协作提供共同语言。'), source: matrixSources.protocol, sections: [
-    section(b('An open-source, agent-native alternative to WeChat', '开源、Agent 原生的微信式协作'), [matrix.introduction, b('The comparison starts with communication and collaboration. Hagency is an independent ecosystem; it does not claim WeChat affiliation or parity with payments and Mini Programs.', '这一类比从通信与协作出发。Hagency 是独立生态，不宣称与微信有关联，也不宣称具备微信支付、小程序等完整功能。')]),
-    section(b('Federation connects independent communities', '联邦互通，连接独立社区'), [matrix.federationBody, matrix.federationDetail], {link: {label: b('Read the federation specification','阅读联邦规范'), href: matrixSources.federation}}),
-    section(b('Agent identities can receive equal room privileges', 'Agent 身份可以获得同等房间权限'), [matrix.agentBody, matrix.permissionBoundary], {link: {label: b('Read the room permission rules','阅读房间权限规则'), href: matrixSources.permissions}}),
-    section(b('Reuse a conversation model people understand', '沿用人们熟悉的对话模型'), [b('Teams already understand rooms, direct messages, replies, and mentions. Matrix gives those interactions a protocol representation, alongside identities and room membership. An agent can participate as an identifiable member rather than through an unrelated work portal.', '团队已经熟悉房间、私信、回复与提及。Matrix 为这些交互以及身份和房间成员关系提供协议表示。Agent 因而可以作为身份明确的成员参与，而无需另建一个割裂的工作门户。')]),
-    section(b('Keep responsibilities on the right side', '让职责留在正确的位置'), [b('A client renders messages and lets a person act. The homeserver carries the communication. The agent runtime governs execution. A beautiful approval card does not make the client the authority; the backend still has to verify the sender, request, and permitted scope.', '客户端呈现消息并让人作出操作，服务器承载通信，Agent 运行时管理执行。一个精美的审批卡片并不会让客户端成为权限来源，后端仍必须验证发送者、请求与允许范围。'), b('Open communication does not remove operational choices. Federation, encryption, model-provider access, and application-service configuration each have their own boundaries. Making them understandable is part of the product.', '开放通信并不会消除运维选择。联邦互通、加密、模型服务访问与应用服务配置，各自都有边界。让这些边界易于理解，也是产品的一部分。')]),
-  ] },
+  {
+    "slug": "introducing-hagency",
+    "title": {
+      "en": "Hagency now has two native applications",
+      "zh-cn": "Hagency 现已采用双应用结构"
+    },
+    "description": {
+      "en": "Desktop owns the workspace and local execution; Server integrates identity and Matrix.",
+      "zh-cn": "Desktop 负责协作界面与本地执行，Server 集成身份和 Matrix。"
+    },
+    "category": {
+      "en": "VERIFIED SNAPSHOT",
+      "zh-cn": "核验快照"
+    },
+    "sections": [
+      {
+        "title": {
+          "en": "The current boundaries",
+          "zh-cn": "当前边界"
+        },
+        "paragraphs": [
+          {
+            "en": "Hagency Desktop replaces the old Robrix2-facing product story. Hagency Server integrates Palpo, Pasion and the management UI in Rust. Legacy Fleet and Engagement instructions no longer describe this system.",
+            "zh-cn": "Hagency Desktop 取代旧的 Robrix2 产品叙事，Hagency Server 以 Rust 集成 Palpo、Pasion 与管理界面；旧 Fleet 和 Engagement 指南已不适用。"
+          }
+        ]
+      }
+    ],
+    "source": "https://github.com/hagency-org/hagency-desktop",
+    "date": "2026-11-19"
+  },
+  {
+    "slug": "conversation-to-result",
+    "title": {
+      "en": "What the encrypted-message evidence proves",
+      "zh-cn": "加密消息证据证明了什么"
+    },
+    "description": {
+      "en": "Read the tested flow and its provider, platform and replay limits.",
+      "zh-cn": "阅读已测流程，以及提供方、平台与重放限制。"
+    },
+    "category": {
+      "en": "VERIFIED SNAPSHOT",
+      "zh-cn": "核验快照"
+    },
+    "sections": [
+      {
+        "title": {
+          "en": "A bounded real-stack result",
+          "zh-cn": "有明确边界的真实链路结果"
+        },
+        "paragraphs": [
+          {
+            "en": "Recorded JIT tests used real Server/Pasion/Palpo and SDK encryption with a deterministic Codex protocol subprocess. They exercised distinct reports, two receivers and daemon restart, then restored a UI to render six separate Agent rows. This was not paid inference or an Element acceptance run.",
+            "zh-cn": "记录的 JIT 测试使用真实 Server/Pasion/Palpo 与 SDK 加密，配合确定性 Codex 协议子进程；覆盖独立报告、双接收方与 daemon 重启，随后恢复 UI 显示六条独立 Agent 消息。这不是真实付费推理或 Element 验收。"
+          }
+        ]
+      }
+    ],
+    "source": "https://github.com/hagency-org/hagency-desktop/blob/main/docs/testing/spontaneous-messages-real-stack.md",
+    "date": "2026-11-19"
+  },
+  {
+    "slug": "why-matrix",
+    "title": {
+      "en": "Why open protocol boundaries matter",
+      "zh-cn": "开放协议边界为什么重要"
+    },
+    "description": {
+      "en": "Interoperability, room roles and federation need precise claims.",
+      "zh-cn": "互通、房间角色与联邦需要准确说明。"
+    },
+    "category": {
+      "en": "VERIFIED SNAPSHOT",
+      "zh-cn": "核验快照"
+    },
+    "sections": [
+      {
+        "title": {
+          "en": "Protocol and product are separate",
+          "zh-cn": "协议与产品分开评估"
+        },
+        "paragraphs": [
+          {
+            "en": "Matrix supplies users, rooms, device encryption and federation. Hagency adds owner/device leases, local execution and capacity policy. Compare Buzz fairly: its community relay, workflow, Git, canvas and harness surfaces have their own strengths, and their source evidence is not our live test result.",
+            "zh-cn": "Matrix 提供用户、房间、设备加密与联邦，Hagency 增加所有者/设备租约、本地执行与容量策略。应公平比较 Buzz：其社区中继、工作流、Git、画布和 harness 各有优势，源码证据不能被视作本次实时测试结果。"
+          }
+        ]
+      }
+    ],
+    "source": "https://spec.matrix.org/latest/",
+    "date": "2026-11-19"
+  }
 ];
 
 export const pageInfo = {
-  architecture: { title: b('Follow every connection.', '看清每一条连接。'), description: b('Explore the entire Hagency architecture with React Flow: Hagency outbound transport, Palpo Appservice registration, Robrix2, and coding-agent runtimes.', '通过 React Flow 探索完整 Hagency 架构：Hagency 出站传输、Palpo Appservice 注册、Robrix2 和编程 Agent 运行时。') },
-  '': { title: b('Human agency. Amplified.', '让人的能动性，延伸得更远。'), description: b('Hagency, Robrix2 and Palpo: an open ecosystem for human-directed AI collaboration.', 'Hagency、Robrix2 与 Palpo：由人主导的开放 AI 协作生态。') },
-  ecosystem: { title: b('Three layers. One conversation.', '三层架构，一段共同对话。'), description: b('See how a native workspace, an agent control plane, and an open homeserver work together.', '了解原生工作空间、Agent 控制平面与开放服务器如何协同工作。') },
-  matrix: { title: b('Matrix: open, federated, agent native', 'Matrix：开放、联邦互通、Agent 原生'), description: b('An open-source alternative to WeChat: learn the Matrix protocol, federation, and how agents can receive the same room permissions as humans.', '开源的微信式协作：了解 Matrix 协议、联邦互通，以及 Agent 如何获得与人相同的房间权限。') },
-  demo: { title: b('Take a task from idea to outcome.', '让一个想法，成为工作成果。'), description: b('Walk through the connected experience, from contributed capacity to a result in your project thread.', '体验完整流程，从贡献资源到在项目线程中收到成果。') },
-  'use-cases': { title: b('Different teams. Shared possibilities.', '不同团队，共同的可能。'), description: b('Bring agent work into the places where your team already thinks, talks, and builds.', '让 Agent 工作融入团队思考、交流和构建的空间。') },
-  'get-started': { title: b('Start where you are.', '从你需要的地方开始。'), description: b('Choose a path, understand the prerequisites, and make your first connection.', '选择路径、了解前提，建立你的第一个连接。') },
-  downloads: { title: b('Open projects. Ready to explore.', '开放项目，等待你的探索。'), description: b('Choose a published package for your platform, or explore the latest source.', '选择适合平台的已发布安装包，或探索最新源码。') },
-  docs: { title: b('Make the pieces work together.', '让每个部分，协同运转。'), description: b('Practical guides for your first connection, your first agent, and everything that follows.', '从首次连接、第一个 Agent，到后续运维的实用指南。') },
-  security: { title: b('Capability with clear boundaries.', '能力越强，边界越要清晰。'), description: b('Understand who directs the work, who grants permission, and where information travels.', '理解谁指引工作、谁授予权限，以及信息流向何处。') },
-  updates: { title: b('Building in the open.', '在开放中，持续构建。'), description: b('Ideas, integration stories, and verified project releases from the Hagency ecosystem.', '来自 Hagency 生态的理念、集成故事与已核验的项目版本。') },
-  roadmap: { title: b('A clear view of what’s next.', '清晰了解，接下来会发生什么。'), description: b('Published foundations, demonstrated development work, and the questions still open.', '已发布的基础能力、已演示的开发工作，以及仍待解决的问题。') },
-  community: { title: b('There’s a place for your contribution.', '你的贡献，在这里拥有位置。'), description: b('Code, document, translate, design, or test. Help shape a more open way to work.', '编写代码、完善文档、翻译、设计或测试，一起塑造更开放的工作方式。') },
-  about: { title: b('More agency for people.', '让人，拥有更多主动权。'), description: b('An ecosystem built around a simple belief: capable tools should expand what people can do.', '这个生态基于一个朴素的信念：强大的工具，应该拓展人的能力。') },
-  media: { title: b('Tell the Hagency story.', '讲述 Hagency 的故事。'), description: b('Project descriptions, original brand assets, and artwork for sharing the ecosystem.', '用于介绍生态的项目说明、原创品牌素材与插图。') },
+  "architecture": {
+    "title": {
+      "en": "Current architecture, clearly connected.",
+      "zh-cn": "看清当前系统架构。"
+    },
+    "description": {
+      "en": "Desktop, owner daemon, Server, Palpo, Pasion and the actual runtime protocols.",
+      "zh-cn": "Desktop、owner daemon、Server、Palpo、Pasion 与真实运行时协议。"
+    }
+  },
+  "": {
+    "title": {
+      "en": "Your coding agents, in the conversation.",
+      "zh-cn": "让编程 Agent 进入团队对话。"
+    },
+    "description": {
+      "en": "A native Matrix workspace and a self-hostable Rust server for human-directed Agent work.",
+      "zh-cn": "原生 Matrix 协作空间与可自主托管的 Rust 服务器，由人掌握 Agent 工作方向。"
+    }
+  },
+  "ecosystem": {
+    "title": {
+      "en": "Desktop. Server. Open foundations.",
+      "zh-cn": "Desktop、Server 与开放基础。"
+    },
+    "description": {
+      "en": "Understand the current component boundaries before installing.",
+      "zh-cn": "安装前先理解当前组件边界。"
+    }
+  },
+  "matrix": {
+    "title": {
+      "en": "Open conversations, explicit permissions.",
+      "zh-cn": "开放对话，明确权限。"
+    },
+    "description": {
+      "en": "Matrix identities, room roles, encryption and federation with their actual boundaries.",
+      "zh-cn": "Matrix 身份、房间角色、加密与联邦，以及它们的实际边界。"
+    }
+  },
+  "demo": {
+    "title": {
+      "en": "Try the first-Agent walkthrough.",
+      "zh-cn": "体验首个 Agent 流程。"
+    },
+    "description": {
+      "en": "An illustrative, local-only walkthrough; no account or live model is connected.",
+      "zh-cn": "仅在本地运行的示意演练，不连接账户或真实模型。"
+    }
+  },
+  "use-cases": {
+    "title": {
+      "en": "Choose a real workflow.",
+      "zh-cn": "选择真实工作流程。"
+    },
+    "description": {
+      "en": "Personal coding, team conversations and owner-approved resource sharing.",
+      "zh-cn": "个人编程、团队对话与所有者批准的资源共享。"
+    }
+  },
+  "get-started": {
+    "title": {
+      "en": "One useful first conversation.",
+      "zh-cn": "从一段有用的对话开始。"
+    },
+    "description": {
+      "en": "Install Desktop, sign in, connect a local runtime and start a personal Agent.",
+      "zh-cn": "安装 Desktop、登录、连接本地运行时并启动个人 Agent。"
+    }
+  },
+  "downloads": {
+    "title": {
+      "en": "Download what actually exists.",
+      "zh-cn": "下载确实存在的安装包。"
+    },
+    "description": {
+      "en": "Reviewed release assets, platform limits and source-only components.",
+      "zh-cn": "核验后的发布文件、平台限制与仅源码组件。"
+    }
+  },
+  "docs": {
+    "title": {
+      "en": "Current guides. Clear next steps.",
+      "zh-cn": "当前指南，明确下一步。"
+    },
+    "description": {
+      "en": "Native setup and recovery with retired Fleet instructions removed.",
+      "zh-cn": "原生配置与恢复指南，已移除退役 Fleet 操作步骤。"
+    }
+  },
+  "security": {
+    "title": {
+      "en": "Know who can see and do what.",
+      "zh-cn": "看清谁能看到、执行什么。"
+    },
+    "description": {
+      "en": "Owner authority, executor access, encryption, provider data flow and postpaid limits.",
+      "zh-cn": "所有者权限、执行器访问、加密、模型数据流与事后记账限额。"
+    }
+  },
+  "updates": {
+    "title": {
+      "en": "What changed, with evidence.",
+      "zh-cn": "有证据的变化。"
+    },
+    "description": {
+      "en": "Current architecture and bounded verification, not release promises.",
+      "zh-cn": "当前架构与有边界的核验，不作发布承诺。"
+    }
+  },
+  "roadmap": {
+    "title": {
+      "en": "Implemented, partial or not verified.",
+      "zh-cn": "已实现、部分实现或尚未验证。"
+    },
+    "description": {
+      "en": "Distinguish available source, release candidates and remaining gaps.",
+      "zh-cn": "区分可用源码、候选发行版与仍然存在的缺口。"
+    }
+  },
+  "community": {
+    "title": {
+      "en": "Build and verify in the open.",
+      "zh-cn": "公开构建，公开核验。"
+    },
+    "description": {
+      "en": "Report reproducible issues, improve documentation and test isolated workflows.",
+      "zh-cn": "报告可复现问题、改进文档并测试隔离工作流程。"
+    }
+  },
+  "about": {
+    "title": {
+      "en": "More agency, with clear boundaries.",
+      "zh-cn": "更多自主性，边界清晰。"
+    },
+    "description": {
+      "en": "Hagency combines native collaboration with local Agent execution.",
+      "zh-cn": "Hagency 将原生协作与本地 Agent 执行连接起来。"
+    }
+  },
+  "media": {
+    "title": {
+      "en": "Real captures. Explicit provenance.",
+      "zh-cn": "真实截图，明确来源。"
+    },
+    "description": {
+      "en": "Current brand assets and separately labeled historical integration captures.",
+      "zh-cn": "当前品牌素材与单独标明的历史集成截图。"
+    }
+  },
+  "capabilities": {
+    "title": {
+      "en": "Every capability, with its evidence.",
+      "zh-cn": "逐项能力，逐项证据。"
+    },
+    "description": {
+      "en": "Review current Desktop and Server features, limits, source pins and test confidence.",
+      "zh-cn": "核对当前 Desktop、Server 的功能、限制、源码固定版本与验证可信度。"
+    }
+  },
+  "compare": {
+    "title": {
+      "en": "Hagency and Buzz, without the hype.",
+      "zh-cn": "客观比较 Hagency 与 Buzz。"
+    },
+    "description": {
+      "en": "Compare the same tasks and retain unknowns instead of manufacturing a winner.",
+      "zh-cn": "比较相同任务，保留未知项，不制造未经证实的胜者。"
+    }
+  }
 };
-export const coreSlugs = [...Object.keys(pageInfo), 'projects/hagency', 'projects/robrix2', 'projects/palpo'];
 
 export const trustSections: Section[] = [
-  section(b('People direct, systems verify', '人来指引，系统校验'), [b('Hagency puts people in the same conversation as their agents. Workflow conventions encourage reporting and clarification. Authorization is a separate mechanism: it depends on authenticated identities, explicit ownership, and server-side request validation.', 'Hagency 让人和 Agent 参与同一段对话。工作约定鼓励汇报和澄清，而授权是独立机制，依赖已认证身份、明确所有权和服务端请求验证。')]),
-  section(b('Private approval conversations', '私密审批会话'), [b('Supported runtime permission requests go to the owner in a separate encrypted conversation. A public waiting notice does not expose the operation’s private details. Structured decisions are checked against the request; ordinary chat text cannot grant approval.', '受支持的运行时权限请求会送往所有者的独立加密会话。公开等待提示不会暴露操作的私密细节。结构化决策会依据请求进行核验；普通聊天文本不能授予权限。')]),
-  section(b('Defaults and explicit choices', '默认值与明确选择'), [b('Managed coding agents default to sandboxed execution. Newer supported Codex workflows offer scoped grants and contributor revocation. An explicitly selected less-restricted mode changes the execution boundary; it should be an informed configuration choice.', '受管编程 Agent 默认在沙箱中执行。更新的受支持 Codex 流程提供限定范围授权及贡献者撤销。明确选择限制更少的模式会改变执行边界，这应是知情后的配置决定。')]),
-  section(b('Know where the data goes', '了解数据去向'), [b('Self-hosting gives you a choice of where the collaboration infrastructure runs. Coding runtimes may still send inputs to configured model providers. Matrix data follows the room’s membership, encryption, and federation configuration. Encrypted messaging is not a promise that every service sees no data.', '自行托管让你选择协作基础设施的运行位置。编程运行时仍可能向配置的模型提供方发送输入。Matrix 数据遵循房间成员、加密与联邦配置。加密通信并不意味着所有服务都无法接触任何数据。')]),
-  section(b('Capacity is not billing', '资源配额不等于账单'), [b('Hagency distinguishes configured capacity, committed allocation, and observed token usage. A declared ceiling is not universal runtime enforcement, and token counts are not monetary billing. Read the measurement and enforcement status of the selected runtime.', 'Hagency 区分配置的资源、已承诺分配与实际观察到的 token 用量。声明上限不等于全面的运行时强制限制，token 数量也不等于货币计费。请阅读所选运行时的计量与执行状态。')]),
-  section(b('Evaluate the build you use', '评估你实际使用的构建'), [b('The website separates published releases from development integration evidence. Palpo is still accumulating large-scale operational evidence, and the companion admin workflow has documented gaps. Follow project security guidance and report an issue through the relevant repository’s available security channel.', '网站区分已发布版本与开发集成证据。Palpo 仍在积累大规模运维证据，配套管理流程也有明确记录的缺口。请遵循项目安全指导，通过对应仓库提供的安全渠道报告问题。')]),
+  {
+    "title": {
+      "en": "Encrypted does not mean nobody sees the work",
+      "zh-cn": "加密不等于无人可见"
+    },
+    "paragraphs": [
+      {
+        "en": "Participant devices decrypt room content. An Agent executor and the selected model provider can see the content they process. Self-hosting Server does not make inference local.",
+        "zh-cn": "参与设备会解密房间内容，Agent 执行器与所选模型提供方可看到它们处理的内容；自托管 Server 不会让推理自动变为本地。"
+      }
+    ]
+  },
+  {
+    "title": {
+      "en": "Authorization follows identity and scope",
+      "zh-cn": "授权遵循身份与范围"
+    },
+    "paragraphs": [
+      {
+        "en": "Permanent ownership, Matrix membership, binding generations, device leases and tool policy are distinct boundaries. A room moderator role is not arbitrary coding-tool permission.",
+        "zh-cn": "永久所有权、Matrix 成员资格、绑定代际、设备租约与工具策略是不同边界；房间管理角色不等于任意编程工具权限。"
+      }
+    ]
+  },
+  {
+    "title": {
+      "en": "Limits are not financial billing",
+      "zh-cn": "限额不等于商业计费"
+    },
+    "paragraphs": [
+      {
+        "en": "Accounting follows completed or retained evidence. Admitted work may exceed a limit. Unknown usage remains unresolved, not zero; revocation cannot undo already completed work.",
+        "zh-cn": "记账遵循已完成或保留的证据。已接纳工作可能超限，不确定用量保持待确认而非零；撤销不能撤回已经完成的工作。"
+      }
+    ]
+  }
 ];
+
+export const coreSlugs = [...Object.keys(pageInfo), ...['hagency','robrix2','palpo'].map(id=>`projects/${id}`)];

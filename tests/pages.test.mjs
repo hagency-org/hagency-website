@@ -47,7 +47,7 @@ async function withPage(run) {
 test('GitHub Pages serves localized routes and assets under its base path', async () => {
   const routes = (await walk(dist)).filter(file => /[/\\](en|zh-cn)[/\\].*index\.html$/.test(file))
     .map(file => file.slice(dist.length + 1).replaceAll(sep, '/').replace(/index\.html$/, ''));
-  assert.equal(routes.length, 62);
+  assert.equal(routes.length, 68);
   await withPage(async page => {
     await page.goto(origin + prefix);
     await page.waitForURL(origin + prefix + 'en/');
@@ -78,11 +78,11 @@ test('GitHub Pages serves localized routes and assets under its base path', asyn
 });
 test('GitHub Pages keeps locale search screenshots and architecture interactive', async () => {
   for (const lang of ['en', 'zh-cn']) await withPage(async page => {
-    await page.goto(origin + prefix + lang + '/projects/hagency/');
+    await page.goto(origin + prefix + lang + '/projects/robrix2/');
     const other = lang === 'en' ? 'zh-cn' : 'en';
-    assert.equal(await page.locator('[data-language-switch]').getAttribute('href'), prefix + other + '/projects/hagency/');
+    assert.equal(await page.locator('[data-language-switch]').getAttribute('href'), prefix + other + '/projects/robrix2/');
     await page.locator('[data-language-switch]').click();
-    await page.waitForURL(origin + prefix + other + '/projects/hagency/');
+    await page.waitForURL(origin + prefix + other + '/projects/robrix2/');
     await page.locator('[data-screenshot]').first().click();
     await page.waitForFunction(() => document.querySelector('[data-screenshot-image] img')?.naturalWidth > 0);
     await page.locator('[data-screenshot-close]').click();

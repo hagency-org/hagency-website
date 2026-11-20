@@ -1,87 +1,945 @@
-import { b, type Text } from './site';
-
-export type ComponentInfo = { title: Text; layer: Text; body: Text; interfaces: string[]; boundary: Text; color: 'blue'|'amber'|'teal'|'muted' };
-const component = (title: Text, layer: Text, body: Text, interfaces: string[], boundary: Text, color: ComponentInfo['color']): ComponentInfo => ({title,layer,body,interfaces,boundary,color});
-const client = b('CLIENT DEVICE','客户端设备'), server = b('PALPO SERVER SIDE','PALPO 服务器侧'), fleet = b('CONTRIBUTOR MACHINE','资源贡献方机器'), runtime = b('CODING RUNTIME','编程运行时');
-
-export const components = {
-  robrix: component(b('Robrix2','Robrix2'),client,b('Makepad renders rooms and threads. MatrixRequest sends UI actions to the Tokio worker; matrix-sdk and matrix-sdk-ui log in, synchronize rooms, send events and fetch media.','Makepad 呈现房间与线程；MatrixRequest 将界面操作交给 Tokio 工作线程，matrix-sdk 与 matrix-sdk-ui 负责登录、房间同步、事件发送和媒体获取。'),['Matrix Client–Server API','Native sliding sync · SyncService','SQLite session / crypto store'],b('Human Matrix user + device session. Connects to Palpo’s Matrix endpoint.','使用人的 Matrix 用户与设备会话，连接 Palpo 的 Matrix 入口。'),'blue'),
-  palpo: component(b('Palpo homeserver','Palpo Matrix 服务器'),server,b('Maintains Matrix identities, room membership, events and media. Checks room power levels, delivers Appservice transactions and federates with other homeservers. Its server process is separate from the companion web application.','维护 Matrix 身份、房间成员、事件与媒体，检查房间权限，投递 Appservice 事务，并与其他服务器联邦互通。服务器进程与配套 Web 应用独立。'),['/_matrix/client/*','/_matrix/federation/*','/_palpo/admin/v1/appservices'],b('Matrix access tokens, Appservice credentials and server federation keys serve different callers.','Matrix 访问令牌、Appservice 凭据和联邦签名密钥分别用于不同调用方。'),'amber'),
-  admin: component(b('Owner / admin browser','所有者 / 管理员浏览器'),client,b('The Palpo companion portal lets administrators authorize fleets, fleet owners download their configuration, and project owners register projects and request agents.','Palpo 配套门户供管理员授权机群、资源所有者下载配置、项目所有者注册项目并申请 Agent。'),['HTTPS · browser session','Same-origin mutations + CSRF'],b('A browser session is not a fleet machine credential. Administrative operations require Palpo admin authority.','浏览器会话不是机群机器凭据；管理操作需要 Palpo 管理员权限。'),'blue'),
-  web: component(b('Palpo web service','Palpo Web 服务'),server,b('A separate Node application owns fleet onboarding, resource snapshots, project requests and connection proofs. It stores a durable outbound transport and serves browser and machine APIs.','独立 Node 应用负责机群接入、资源快照、项目申请和连接验证，持久化出站传输数据，并提供浏览器与机器 API。'),['/api/fleets/*','/api/fleet/v2/{fleetId}/*','Private SQLite store'],b('Palpo-specific development extension. Server-side admin calls install registrations; fleet calls use their own token.','Palpo 专属开发扩展；服务端管理调用安装注册，机群调用使用独立令牌。'),'amber'),
-  relay: component(b('AS relay + durable queues','AS 中继与持久队列'),server,b('Runs inside the Palpo web service. Receives homeserver Appservice transactions, persists them before HTTP 200, and leases deliveries through separate Matrix and work queues.','运行在 Palpo Web 服务内部。接收 homeserver 的 Appservice 事务，持久化后返回 HTTP 200，并通过独立的 Matrix 与工作队列租约投递。'),['PUT /api/relay/v2/{fleetId}/_matrix/app/v1/transactions/{txnId}','matrix lane · work lane'],b('Homeserver → relay uses hs_token. Hagency polls with a separate machine token and generation.','服务器到中继使用 hs_token；Hagency 轮询使用独立机器令牌和 generation。'),'amber'),
-  console: component(b('Hagency console','Hagency 控制台'),client,b('The contributor configures model resources, imports the owner-bound Palpo configuration, reviews engagements and sees local agent activity. Its server proxy talks to the local Hagency backend.','资源贡献方配置模型资源、导入 Palpo 专属配置、查看接洽和本地 Agent 活动；控制台的服务端代理连接本地 Hagency 后端。'),['Local console → backend API','Resource / engagement configuration'],b('Local backend authorization stays with the console’s server proxy.','本地后端授权由控制台服务端代理持有。'),'teal'),
-  bridge: component(b('Hagency Matrix bridge','Hagency Matrix 桥接'),fleet,b('Initiates HTTPS polls and status updates to Palpo. Journals inbox/outbox records, validates Matrix senders and room bindings, then hands admitted work to the backend. Sends replies through Matrix.','主动向 Palpo 发起 HTTPS 轮询与状态更新，记录收发件箱，验证 Matrix 发送者与房间绑定，再将获准的工作交给后端，并通过 Matrix 返回回复。'),['GET /poll?lane=matrix|work','POST /ack · POST /updates','Authenticated local backend API'],b('No inbound listener is needed for outbound transport. ACK means durable receipt, not permission to execute.','出站传输不需要入站监听；ACK 表示持久接收，不代表获得执行权限。'),'teal'),
-  backend: component(b('Hagency control plane','Hagency 控制平面'),fleet,b('Owns resources, engagements, agent identities, task/session bindings, dispatch leases and execution approvals. Reconstructs bounded context from durable state before selecting a runner.','拥有资源、接洽、Agent 身份、任务与会话绑定、调度租约和执行审批。从持久状态重建有界上下文后选择运行器。'),['Task/session router','Dispatch ledger · SQLite','Execution authorization'],b('Room membership and a queue receipt do not approve resource allocation or coding-tool execution.','加入房间和收到队列消息，都不会自动批准资源分配或编程工具执行。'),'teal'),
-  runners: component(b('Coding-agent adapters','编程 Agent 适配器'),runtime,b('Claude Code and Codex have disposable headless task runners. Octos, Hermes and Codex ACP use explicit ACP adapters. A retained tmux transport serves terminal-managed agents.','Claude Code 与 Codex 使用按任务启动的临时无界面运行器；Octos、Hermes 与 Codex ACP 使用明确的 ACP 适配器，并保留 tmux 终端运行方式。'),['Headless child process','ACP JSON-RPC / stdio','Retained tmux transport'],b('Adapter capabilities differ. ACP support does not imply headless task-runner parity.','不同适配器能力不同，支持 ACP 不代表与无界面任务运行器完全等价。'),'teal'),
-  provider: component(b('Configured model providers','配置的模型服务'),b('PROVIDER BOUNDARY','模型服务边界'),b('Each coding agent uses its configured model endpoint and credentials. Prompts and model responses travel on that connection; they are not inferred to pass through Palpo’s Matrix API.','各编程 Agent 使用其配置的模型入口与凭据。提示词和模型响应经过这条连接，不应被理解为经由 Palpo 的 Matrix API 转发。'),['Provider-specific HTTPS API','Cloud or local model endpoint'],b('Model-provider authentication is separate from Matrix, fleet transport and MCP capabilities.','模型服务认证与 Matrix、机群传输及 MCP 能力凭据独立。'),'muted'),
-  devices: component(b('Agent Matrix devices','Agent Matrix 设备'),fleet,b('Hagency maintains real agent device sessions for supported encrypted conversations and private owner approvals. Crypto state lives with these clients; an Appservice transaction alone cannot decrypt a room.','Hagency 为受支持的加密会话和私密所有者审批维护真实 Agent 设备会话。加密状态保存在客户端，仅收到 Appservice 事务并不能解密房间。'),['Matrix client sync / send','Persistent device + Rust crypto store'],b('Keep device identity and crypto state stable. Decryption and room access still require the relevant keys and membership.','保持设备身份与加密状态稳定；解密和房间访问仍需要相应密钥与成员资格。'),'teal'),
-  federation: component(b('Other Matrix homeservers','其他 Matrix 服务器'),b('INDEPENDENT OPERATORS','独立运营方'),b('Other operators host their own users. Homeservers exchange authorized room events through Matrix federation so participants on different servers can share a room.','其他运营方托管自己的用户。服务器通过 Matrix 联邦交换获授权的房间事件，让不同服务器的成员共享房间。'),['Matrix Server–Server API','Signed HTTPS requests'],b('Federation carries room events. It does not directly register a fleet or grant host execution authority.','联邦承载房间事件，不直接注册机群或授予主机执行权限。'),'blue'),
-  claude: component(b('Claude Code runner','Claude Code 运行器'),runtime,b('A guarded child process runs claude -p with streamed JSON output. Hagency rebuilds the dispatch context, supplies scoped MCP tools, observes activity and settles output against the dispatch ledger.','受管理的子进程运行 claude -p，并输出流式 JSON。Hagency 重建调度上下文，提供限定范围的 MCP 工具，观察活动，并按调度账本结算输出。'),['claude -p --output-format stream-json --verbose','Prompt data via stdin','Claude tool-permission integration'],b('A disposable worker, not an authoritative terminal session. Tool execution follows the configured runtime policy.','工作进程可以被替换，终端会话不是权威状态来源；工具执行遵循运行时策略。'),'teal'),
-  codex: component(b('Codex App Server','Codex App Server'),runtime,b('Hagency starts a short-lived codex app-server --stdio process, initializes it, creates a fresh thread and starts a turn. JSON-RPC notifications provide activity, output and approval requests.','Hagency 启动短生命周期的 codex app-server --stdio 进程，初始化后创建新线程并开始一轮执行。JSON-RPC 通知提供活动、输出与审批请求。'),['initialize → thread/start → turn/start','Command / file / permission approval requests','MCP elicitation correlation'],b('The backend validates operation identity and the owner decision before returning a native approval response.','后端先验证操作身份和所有者决定，再返回原生审批响应。'),'teal'),
-  acp: component(b('ACP adapter layer','ACP 适配层'),runtime,b('Hagency spawns the selected adapter and speaks newline-delimited JSON-RPC over stdio: initialize, session/new and session/prompt, with session/update notifications and adapter-specific permission handling.','Hagency 启动所选适配器，通过标准输入输出交换按行分隔的 JSON-RPC：initialize、session/new、session/prompt，并接收 session/update 通知与适配器特有的权限请求。'),['Octos · Hermes · Codex ACP','initialize → session/new → session/prompt','session/update · request_permission'],b('Resume, model flags and MCP injection must follow each adapter’s declared capabilities.','恢复会话、模型参数与 MCP 注入必须遵循各适配器声明的能力。'),'teal'),
-  tmux: component(b('Retained tmux transport','保留的 tmux 传输'),runtime,b('The terminal transport can launch sessions, deliver input and observe pane output. It remains distinct from the backend-owned headless task runner and from ACP processes without panes.','终端传输可以启动会话、投递输入并观察窗格输出；它与后端拥有状态的无界面任务运行器、没有窗格的 ACP 进程保持区分。'),['Session / pane lifecycle','Terminal input and capture'],b('Terminal observations are not the durable task/session source of truth.','终端观察结果不是任务与会话的持久权威状态。'),'muted'),
-  mcp: component(b('Hagency MCP tools','Hagency MCP 工具'),fleet,b('Coding agents call the local MCP server for identity, conversations, tasks, messages and files. The server presents a dispatch-scoped tool surface and forwards authenticated operations to the backend.','编程 Agent 调用本地 MCP 服务获取身份、会话、任务、消息和文件能力。服务提供调度范围内的工具，并向后端转交经过认证的操作。'),['mcp-server.js · stdio','whoami · read_conversation · create_task','send_message · receive_file · send_file'],b('MCP is a tool protocol. It does not replace ACP, Matrix or the model-provider connection.','MCP 是工具协议，不替代 ACP、Matrix 或模型服务连接。'),'teal'),
-  state: component(b('Durable task + session state','持久任务与会话状态'),fleet,b('SQLite records agent/room/thread scope, immutable inputs, summaries, task bindings, leases and dispatch results. Context is rebuilt for each worker; late output is fenced against current authority.','SQLite 记录 Agent、房间、线程范围，以及不可变输入、摘要、任务绑定、租约和调度结果。每次执行重建上下文，迟到输出按当前权限隔离。'),['Agent + room + scope + thread root','Task ID + dispatch lease','Inbox / outbox / execution ledger'],b('A task thread and dispatch capability are checked before coding work is admitted.','接纳编程工作之前检查任务线程和调度能力凭据。'),'teal'),
-  approval: component(b('Execution approval','执行审批'),fleet,b('The runtime’s tool request becomes a bound approval operation. The bridge presents it in the verified private owner room; a valid owner decision is checked and returned to the waiting runtime.','运行时的工具请求形成已绑定的审批操作，经桥接呈现在经过验证的私密所有者房间；有效的所有者决定经过校验后返回等待中的运行时。'),['Operation digest + dispatch scope','Private owner Matrix room','Allow / deny / revocation'],b('Room power levels do not automatically authorize shell commands, filesystem changes or privileged MCP calls.','房间权限不会自动授权 shell 命令、文件修改或特权 MCP 调用。'),'amber'),
-  workspace: component(b('Agent workspaces + files','Agent 工作空间与文件'),fleet,b('Coding processes operate in their assigned working directory. Files reach Matrix only through explicit, authorized file-transfer operations; a shared room is not a shared filesystem.','编程进程在分配的工作目录运行。文件仅通过明确授权的传输操作进入 Matrix；共享房间不等于共享文件系统。'),['Assigned cwd','Repository / task artifacts','Scoped file operations'],b('Host access follows the selected runtime policy and approved operations.','主机访问遵循所选运行时策略和已批准的操作。'),'muted'),
-};
-export type ComponentId = keyof typeof components;
-export type Connection = { id: string; from: ComponentId; to: ComponentId; label: Text; detail: Text; protocol: string; reverse?: boolean };
-const edge = (id: string, from: ComponentId, to: ComponentId, label: Text, protocol: string, detail: Text, reverse = false): Connection => ({id,from,to,label,protocol,detail,reverse});
-export const connections = [
-  edge('client','robrix','palpo',b('Client API','客户端 API'),'HTTPS · Matrix user/device token',b('Robrix authenticates to Palpo, sends messages and media, and receives room updates through SDK sync. It has no direct Hagency backend connection.','Robrix 向 Palpo 认证、发送消息和媒体，并通过 SDK 同步接收房间更新；它不直接连接 Hagency 后端。'),true),
-  edge('portal','admin','web',b('Portal','管理门户'),'HTTPS · session cookie + CSRF',b('Humans use the companion app with their own Matrix identity. The server validates identity and the authority needed by each action.','用户以自己的 Matrix 身份使用配套应用；服务端验证身份及各操作所需权限。')),
-  edge('registration','web','palpo',b('Register AS','注册 AS'),'POST /_palpo/admin/v1/appservices',b('The web service uses server administrator authority to install a generated, fleet-scoped registration, then reads it back and verifies the complete configuration. This is a Palpo admin API.','Web 服务以服务器管理员权限安装按机群隔离的注册，再回读核验完整配置。这是 Palpo 管理 API。')),
-  edge('transactions','palpo','relay',b('AS transactions','AS 事务'),'PUT …/_matrix/app/v1/transactions/{txnId} · hs_token',b('Palpo pushes transactions to its colocated relay. The relay checks hs_token and persists the original ID and body before acknowledging. This hop stays server-side.','Palpo 向同侧中继推送事务；中继校验 hs_token，保存原始 ID 和内容后确认。这一跳位于服务器侧。')),
-  edge('poll','bridge','relay',b('Poll + ACK','轮询与确认'),'GET /poll · POST /ack · machine token + generation',b('Hagency initiates HTTPS requests; deliveries return in poll responses. Separate matrix/work lanes are leased. Local SQLite persistence precedes ACK; ACK is not approval.','Hagency 主动发起 HTTPS 请求，投递内容随轮询响应返回。matrix/work 队列分别使用租约；先写本地 SQLite 再 ACK，ACK 不代表审批。'),true),
-  edge('updates','bridge','web',b('Publish state','发布状态'),'POST /updates · machine token + generation',b('Hagency publishes resource snapshots, heartbeats and request observations from a sequenced durable outbox. Retrying an old observation does not make it fresh.','Hagency 从带序号的持久发件箱发布资源快照、心跳和申请观察结果；重试旧观察不会让它变成新状态。')),
-  edge('dispatch','bridge','backend',b('Admit + dispatch','接纳与调度'),'Authenticated local API',b('The bridge verifies sender, room, namespace and project bindings. The control plane retains contributor approval, quotas, task ownership and execution authority.','桥接验证发送者、房间、命名空间和项目绑定；控制平面保留资源方审批、额度、任务归属和执行权限检查。'),true),
-  edge('reply','bridge','palpo',b('Room replies','房间回复'),'Matrix Client–Server API · as_token + scoped user_id',b('The bridge can send as registered local identities within its namespace using Appservice authentication. Supported encrypted paths use real device sessions instead.','桥接可凭 Appservice 认证，以命名空间内已注册的本地身份发言；受支持的加密路径则使用真实设备会话。')),
-  edge('console','console','backend',b('Local API','本地 API'),'Console server proxy → Hagency API',b('Resource configuration and engagement decisions use the authenticated local backend. Browser-side code does not become the backend authority.','资源配置与接洽决定调用经过认证的本地后端；浏览器代码不是后端权限来源。')),
-  edge('launch','backend','runners',b('Dispatch','调度'),'Guarded subprocess / selected transport',b('The backend chooses an eligible configured agent and transport. It validates the dispatch and passes context as data, not executable shell text.','后端选择符合条件的 Agent 和传输方式，验证调度，并以数据形式传递上下文，而不是可执行 shell 文本。')),
-  edge('model','runners','provider',b('Model API','模型 API'),'Provider-specific endpoint + credentials',b('The agent runtime connects to its configured model service independently of Matrix transport. Local endpoints are possible when supported by that agent.','Agent 运行时独立于 Matrix 传输连接配置的模型服务；该 Agent 支持时也可使用本地入口。'),true),
-  edge('device','devices','palpo',b('Encrypted clients','加密客户端'),'Matrix device token · sync + media + crypto',b('Real device clients maintain keys and session stores for supported encrypted messaging and private approvals. Server-side relay custody is not possession of decryption keys.','真实设备客户端维护受支持加密消息和私密审批的密钥与会话存储；服务器中继持有消息不等于持有解密密钥。'),true),
-  edge('device-owner','bridge','devices',b('Device lifecycle','设备生命周期'),'Persistent device/crypto state',b('The bridge starts and supervises the dedicated Matrix device clients and admits their decrypted messages through the same binding checks.','桥接启动并监管专用 Matrix 设备客户端，并按相同绑定规则接纳其解密消息。')),
-  edge('federation','palpo','federation',b('Federation','联邦'),'Matrix Server–Server API · signed requests',b('Independent homeservers exchange authorized room events. The recipient homeserver applies Matrix event and membership rules; runtime permissions remain local to Hagency.','独立服务器交换获授权的房间事件；接收方执行 Matrix 事件与成员规则，运行时权限仍由 Hagency 本地掌握。'),true),
-  edge('state','backend','state',b('Durable context','持久上下文'),'SQLite transactions / dispatch ledger',b('Session identity and task state survive runner exit. Context is reconstructed from accepted inputs, summaries and room/thread bindings.','会话身份和任务状态在运行器退出后仍然保留；上下文由已接纳输入、摘要和房间线程绑定重建。'),true),
-  edge('claude','backend','claude',b('Headless CLI','无界面 CLI'),'claude -p · stream-json',b('Spawn a guarded Claude child for the dispatch, stream activity and output, then settle or record an uncertain failure using the ledger.','为本次调度启动受管理的 Claude 子进程，流式读取活动与输出，再按账本结算或记录不确定失败。')),
-  edge('codex','backend','codex',b('App Server','App Server'),'JSON-RPC / stdio',b('initialize, thread/start, turn/start; correlate notifications and approval responses with the current dispatch. Each worker starts a fresh App Server thread.','执行 initialize、thread/start、turn/start，并把通知与审批响应关联到当前调度。每个工作进程创建新的 App Server 线程。')),
-  edge('acp','backend','acp',b('ACP','ACP'),'Agent Client Protocol / stdio',b('Use the explicitly selected Octos, Hermes or Codex ACP adapter. Session/update reports progress; request_permission behavior is adapter-specific.','使用明确选择的 Octos、Hermes 或 Codex ACP 适配器；session/update 报告进度，request_permission 行为因适配器而异。')),
-  edge('terminal','backend','tmux',b('Terminal','终端'),'tmux runtime interface',b('Retained terminal-managed agents use pane input/capture. This transport is not silently substituted for the headless runner or an ACP session.','保留的终端 Agent 使用窗格输入与捕获；该方式不会被视为无界面运行器或 ACP 会话的隐式替代。')),
-  edge('claude-mcp','claude','mcp',b('Scoped tools','限定范围工具'),'MCP / stdio',b('Claude project configuration points at mcp-server.js; dispatch credentials arrive with the launched process rather than being embedded in public configuration.','Claude 项目配置指向 mcp-server.js；调度凭据随进程启动传入，不写入公开配置。')),
-  edge('codex-mcp','codex','mcp',b('Scoped tools','限定范围工具'),'MCP / stdio',b('The App Server launch injects the Hagency MCP server configuration and allowed environment names; operation identity is checked for privileged tool calls.','App Server 启动时注入 Hagency MCP 配置和允许的环境变量名称，并为特权工具调用核验操作身份。')),
-  edge('acp-mcp','acp','mcp',b('Adapter MCP','适配器 MCP'),'session/new mcpServers or agent-side config',b('Hermes and Codex ACP accept session MCP configuration. The reviewed Octos adapter requires its own config and coding-full profile instead.','Hermes 与 Codex ACP 接受会话 MCP 配置；核验的 Octos 适配器则需要自身配置和 coding-full 配置档。')),
-  edge('mcp-backend','mcp','backend',b('Tool operations','工具操作'),'Authenticated backend API + dispatch capability',b('MCP requests become checked task, conversation, messaging and file operations. Authority follows the dispatch and operation rather than text written by a model.','MCP 请求转换为经过检查的任务、会话、消息和文件操作；权限取决于调度与操作，而非模型写出的文字。')),
-  edge('codex-approval','codex','approval',b('Tool approval','工具审批'),'Native JSON-RPC approval request',b('A command, file change or other supported native request pauses for a bound owner decision. An approval card is presentation; the backend validates the answer.','命令、文件修改或其他受支持的原生请求等待已绑定的所有者决定。审批卡片负责展示，后端验证答案。'),true),
-  edge('approval-device','approval','devices',b('Private owner room','私密所有者房间'),'Verified Matrix owner binding',b('Approval requests and decisions travel through the verified owner channel. Granting a Matrix room role cannot bypass this execution check.','审批请求与决定经过验证的所有者通道；授予 Matrix 房间角色不能绕过执行检查。'),true),
-  edge('workspace','runners','workspace',b('Work + artifacts','工作与产物'),'Assigned cwd + runtime tool policy',b('Code and task artifacts are created in the assigned workspace. Publishing files back to a room is an explicit authorized operation.','代码和任务产物写入分配的工作目录；向房间发布文件是明确授权的操作。'),true),
+import {type Text} from './site';
+export type ComponentInfo={title:Text;layer:Text;body:Text;interfaces:string[];boundary:Text;color:'blue'|'amber'|'teal'|'muted'};
+export const components={
+  "robrix": {
+    "title": {
+      "en": "Hagency Desktop",
+      "zh-cn": "Hagency Desktop"
+    },
+    "layer": {
+      "en": "CLIENT",
+      "zh-cn": "客户端"
+    },
+    "body": {
+      "en": "Native Makepad UI and Matrix SDK: personal Agents, chat, local profiles and supported owner decisions.",
+      "zh-cn": "原生 Makepad UI 与 Matrix SDK：个人 Agent、聊天、本地配置与支持的所有者决策。"
+    },
+    "interfaces": [
+      "Matrix Client–Server API",
+      "Pasion OAuth / PKCE"
+    ],
+    "boundary": {
+      "en": "Presentation does not grant tool authority. The release snapshot is rc.13; main is newer.",
+      "zh-cn": "界面展示不会授予工具权限；发布快照为 rc.13，main 更新。"
+    },
+    "color": "blue"
+  },
+  "palpo": {
+    "title": {
+      "en": "Embedded Palpo",
+      "zh-cn": "内嵌 Palpo"
+    },
+    "layer": {
+      "en": "SERVER PROCESS",
+      "zh-cn": "服务器进程"
+    },
+    "body": {
+      "en": "Carries Matrix rooms, membership, events, media, application-service transactions and federation inside Hagency Server.",
+      "zh-cn": "在 Hagency Server 内承载 Matrix 房间、成员、事件、媒体、应用服务事务和联邦。"
+    },
+    "interfaces": [
+      "/_matrix/client/*",
+      "/_matrix/federation/*"
+    ],
+    "boundary": {
+      "en": "No separate Node companion is required. Matrix transport is not model inference.",
+      "zh-cn": "无需独立 Node 配套应用；Matrix 传输不是模型推理。"
+    },
+    "color": "amber"
+  },
+  "pasion": {
+    "title": {
+      "en": "Embedded Pasion",
+      "zh-cn": "内嵌 Pasion"
+    },
+    "layer": {
+      "en": "SERVER PROCESS",
+      "zh-cn": "服务器进程"
+    },
+    "body": {
+      "en": "Personal account registration, login, OAuth scopes, session and token lifecycle.",
+      "zh-cn": "个人账户注册、登录、OAuth scope、会话与令牌生命周期。"
+    },
+    "interfaces": [
+      "OAuth / OIDC",
+      "Native DCR / PKCE"
+    ],
+    "boundary": {
+      "en": "A browser session, Matrix device and executor grant have different authority.",
+      "zh-cn": "浏览器会话、Matrix 设备与执行器授权的权限不同。"
+    },
+    "color": "amber"
+  },
+  "backend": {
+    "title": {
+      "en": "Server control plane",
+      "zh-cn": "Server 控制平面"
+    },
+    "layer": {
+      "en": "SERVER PROCESS",
+      "zh-cn": "服务器进程"
+    },
+    "body": {
+      "en": "Owns permanent Agent identity, management policy, context, execution leases and durable command / reply receipts.",
+      "zh-cn": "负责永久 Agent 身份、管理策略、上下文、执行租约及持久命令和回复凭据。"
+    },
+    "interfaces": [
+      "/hagency/api/*",
+      "PostgreSQL: hagency database"
+    ],
+    "boundary": {
+      "en": "A lease admits work; it does not prove model completion or a hard spending cap.",
+      "zh-cn": "租约接纳任务，不证明模型完成，也不构成硬消费上限。"
+    },
+    "color": "teal"
+  },
+  "bridge": {
+    "title": {
+      "en": "Local owner daemon",
+      "zh-cn": "本地所有者守护进程"
+    },
+    "layer": {
+      "en": "EXECUTOR DEVICE",
+      "zh-cn": "执行器设备"
+    },
+    "body": {
+      "en": "The Desktop owner engine qualifies its local runtime and handles eligible work using bound owner, device and generation.",
+      "zh-cn": "Desktop 所有者引擎确认本地运行时资格，依据绑定所有者、设备与 generation 处理工作。"
+    },
+    "interfaces": [
+      "Owner-device protocol",
+      "Persistent local ledger"
+    ],
+    "boundary": {
+      "en": "Local runtime credentials remain local. New account-aware hosting is later than rc.13.",
+      "zh-cn": "本地运行时凭据留在本地；新的按账户托管晚于 rc.13。"
+    },
+    "color": "teal"
+  },
+  "devices": {
+    "title": {
+      "en": "Agent crypto device",
+      "zh-cn": "Agent 加密设备"
+    },
+    "layer": {
+      "en": "EXECUTOR DEVICE",
+      "zh-cn": "执行器设备"
+    },
+    "body": {
+      "en": "A real Matrix SDK device owns its crypto store, receives room keys and sends encrypted Agent messages.",
+      "zh-cn": "真实 Matrix SDK 设备持有加密存储，接收房间密钥并发送 Agent 加密消息。"
+    },
+    "interfaces": [
+      "Matrix SDK crypto store",
+      "Encrypted sync / send"
+    ],
+    "boundary": {
+      "en": "Server key presence alone is not sender SDK readiness. Provider-bound task plaintext leaves the encryption boundary.",
+      "zh-cn": "服务器存在密钥不等于发送方 SDK 就绪；提供方任务明文会离开端到端加密边界。"
+    },
+    "color": "blue"
+  },
+  "codex": {
+    "title": {
+      "en": "Codex",
+      "zh-cn": "Codex"
+    },
+    "layer": {
+      "en": "LOCAL RUNTIME",
+      "zh-cn": "本地运行时"
+    },
+    "body": {
+      "en": "Native App Server protocol correlates turns, progress, supported questions, permissions and usage.",
+      "zh-cn": "原生 App Server 协议关联 turn、进度、支持的问题、权限和用量。"
+    },
+    "interfaces": [
+      "App Server JSON-RPC / stdio"
+    ],
+    "boundary": {
+      "en": "Supported protocol operations do not establish complete CLI equivalence.",
+      "zh-cn": "支持的协议操作不代表完整 CLI 对等。"
+    },
+    "color": "teal"
+  },
+  "claude": {
+    "title": {
+      "en": "Claude",
+      "zh-cn": "Claude"
+    },
+    "layer": {
+      "en": "LOCAL RUNTIME",
+      "zh-cn": "本地运行时"
+    },
+    "body": {
+      "en": "Managed local CLI with supported structured permission and execution controls.",
+      "zh-cn": "托管本地 CLI，支持结构化权限与执行控制。"
+    },
+    "interfaces": [
+      "Native Claude CLI"
+    ],
+    "boundary": {
+      "en": "Isolation and supported interactions depend on runtime and platform policy.",
+      "zh-cn": "隔离与交互支持取决于运行时及平台策略。"
+    },
+    "color": "teal"
+  },
+  "octos": {
+    "title": {
+      "en": "Octos",
+      "zh-cn": "Octos"
+    },
+    "layer": {
+      "en": "LOCAL RUNTIME",
+      "zh-cn": "本地运行时"
+    },
+    "body": {
+      "en": "OUP discovery reads actual installed profiles and model choices, including supported local or custom endpoints.",
+      "zh-cn": "OUP 发现读取实际安装配置与模型选项，包括支持的本地模型或自定义端点。"
+    },
+    "interfaces": [
+      "Octos Unified Protocol / stdio"
+    ],
+    "boundary": {
+      "en": "Distinct profiles remain distinct. Full autonomous post-run reports are not established.",
+      "zh-cn": "不同配置保持独立；尚未证明完整的运行结束后自主报告。"
+    },
+    "color": "teal"
+  },
+  "provider": {
+    "title": {
+      "en": "Selected model provider",
+      "zh-cn": "选用的模型提供方"
+    },
+    "layer": {
+      "en": "INFERENCE",
+      "zh-cn": "推理"
+    },
+    "body": {
+      "en": "The coding runtime contacts its selected hosted, local or custom model endpoint.",
+      "zh-cn": "编程运行时连接所选云端、本地或自定义模型入口。"
+    },
+    "interfaces": [
+      "Provider-specific model API"
+    ],
+    "boundary": {
+      "en": "Receives the submitted task plaintext; provider policy is separate from Matrix encryption.",
+      "zh-cn": "接收提交的任务明文；提供方策略独立于 Matrix 加密。"
+    },
+    "color": "muted"
+  },
+  "approval": {
+    "title": {
+      "en": "Owner decision",
+      "zh-cn": "所有者决策"
+    },
+    "layer": {
+      "en": "BOUND AUTHORITY",
+      "zh-cn": "绑定权限"
+    },
+    "body": {
+      "en": "Supported approval and question cards return a bound decision to the active runtime.",
+      "zh-cn": "支持的审批与问题卡片将绑定决策返回当前运行时。"
+    },
+    "interfaces": [
+      "Structured owner decision"
+    ],
+    "boundary": {
+      "en": "Ordinary chat text, room membership and global administration do not substitute for the required owner.",
+      "zh-cn": "普通聊天、房间成员关系与全局管理员不能替代所需所有者。"
+    },
+    "color": "blue"
+  },
+  "pool": {
+    "title": {
+      "en": "Optional resource pool",
+      "zh-cn": "可选资源池"
+    },
+    "layer": {
+      "en": "SERVER MANAGEMENT",
+      "zh-cn": "服务器管理"
+    },
+    "body": {
+      "en": "An applicant selects one pool and a positive ceiling; its owner reviews, native capacity is reserved and an executor qualifies.",
+      "zh-cn": "申请人选择一个池和正数上限，所有者审核，原生额度保留后执行器确认资格。"
+    },
+    "interfaces": [
+      "resource-pool-agents-v1"
+    ],
+    "boundary": {
+      "en": "Capability gates must be enabled. Published capacity is not a live balance; approval alone is not readiness.",
+      "zh-cn": "需开启能力开关；公布容量不是实时余额，批准不等于就绪。"
+    },
+    "color": "amber"
+  },
+  "federation": {
+    "title": {
+      "en": "Other Matrix homeservers",
+      "zh-cn": "其他 Matrix 服务器"
+    },
+    "layer": {
+      "en": "FEDERATION",
+      "zh-cn": "联邦"
+    },
+    "body": {
+      "en": "Authorized room events cross independent Matrix homeservers.",
+      "zh-cn": "获授权房间事件可在独立 Matrix 服务器间交换。"
+    },
+    "interfaces": [
+      "Matrix Server–Server API"
+    ],
+    "boundary": {
+      "en": "Membership, reachability and keys still apply; coding-tool authority is not federated.",
+      "zh-cn": "仍受成员、连通性与密钥限制；编程工具权限不会联邦共享。"
+    },
+    "color": "muted"
+  },
+  "workspace": {
+    "title": {
+      "en": "Local workspace / artifacts",
+      "zh-cn": "本地工作区与产物"
+    },
+    "layer": {
+      "en": "EXECUTOR DEVICE",
+      "zh-cn": "执行器设备"
+    },
+    "body": {
+      "en": "Allowed tools operate on the assigned workspace. Supported native file operations return artifacts to Matrix.",
+      "zh-cn": "获准工具操作分配工作区，支持的原生文件操作将产物返回 Matrix。"
+    },
+    "interfaces": [
+      "Scoped filesystem operations",
+      "Matrix media"
+    ],
+    "boundary": {
+      "en": "Codex/Claude native bridge: 64 files / 64 MiB per request. No blanket Octos file parity.",
+      "zh-cn": "Codex、Claude 原生桥接每次最多 64 文件、64 MiB，不宣称 Octos 全面对等。"
+    },
+    "color": "teal"
+  }
+} satisfies Record<string,ComponentInfo>;
+export type ComponentId=keyof typeof components;
+export type Connection={id:string;from:ComponentId;to:ComponentId;label:Text;protocol:string;detail:Text;reverse?:boolean};
+export const connections:Connection[]=[
+  {
+    "id": "client",
+    "from": "robrix",
+    "to": "palpo",
+    "label": {
+      "en": "Room events",
+      "zh-cn": "房间事件"
+    },
+    "protocol": "Matrix Client–Server API",
+    "detail": {
+      "en": "The human SDK sends, syncs and renders Matrix events. Agent management uses separate Hagency APIs.",
+      "zh-cn": "人的 SDK 发送、同步与呈现 Matrix 事件；Agent 管理使用独立 Hagency API。"
+    },
+    "reverse": true
+  },
+  {
+    "id": "login",
+    "from": "robrix",
+    "to": "pasion",
+    "label": {
+      "en": "Sign in",
+      "zh-cn": "登录"
+    },
+    "protocol": "OAuth / PKCE",
+    "detail": {
+      "en": "Browser authorization returns to the native SDK callback. Device keys still require publication and discovery.",
+      "zh-cn": "浏览器授权返回原生 SDK 回调，设备密钥仍需发布和发现。"
+    },
+    "reverse": true
+  },
+  {
+    "id": "management",
+    "from": "robrix",
+    "to": "backend",
+    "label": {
+      "en": "Manage Agent",
+      "zh-cn": "管理 Agent"
+    },
+    "protocol": "Authenticated Hagency management API",
+    "detail": {
+      "en": "Create a personal Agent without a Project; owner and scope checks remain server-enforced.",
+      "zh-cn": "无需 Project 即可创建个人 Agent，所有者与范围仍由服务器校验。"
+    },
+    "reverse": true
+  },
+  {
+    "id": "registration",
+    "from": "palpo",
+    "to": "backend",
+    "label": {
+      "en": "Integrated AS",
+      "zh-cn": "内置 AS"
+    },
+    "protocol": "Mandatory Appservice transaction roundtrip",
+    "detail": {
+      "en": "The single Server installs and checks its integrated application service. It is not per-Fleet onboarding.",
+      "zh-cn": "单个 Server 安装并验证内置应用服务，而非每个 Fleet 单独接入。"
+    },
+    "reverse": true
+  },
+  {
+    "id": "poll",
+    "from": "bridge",
+    "to": "backend",
+    "label": {
+      "en": "Work / receipts",
+      "zh-cn": "工作 / 凭据"
+    },
+    "protocol": "Owner-device lease protocol",
+    "detail": {
+      "en": "The local executor handles eligible leases and retains original receipts. An acknowledgment is not model completion.",
+      "zh-cn": "本地执行器处理符合条件的租约并保留原始凭据；确认接收不等于模型完成。"
+    },
+    "reverse": true
+  },
+  {
+    "id": "device",
+    "from": "devices",
+    "to": "palpo",
+    "label": {
+      "en": "Encrypted room path",
+      "zh-cn": "加密房间路径"
+    },
+    "protocol": "Matrix SDK device / sync / crypto",
+    "detail": {
+      "en": "Executor-device routing uses a real Agent crypto store. Server routing is distinct from decryption.",
+      "zh-cn": "执行器设备路由使用真实 Agent 加密存储；服务器路由与解密分别处理。"
+    },
+    "reverse": true
+  },
+  {
+    "id": "crypto-owner",
+    "from": "bridge",
+    "to": "devices",
+    "label": {
+      "en": "Device custody",
+      "zh-cn": "设备保管"
+    },
+    "protocol": "Persistent SDK device and crypto state",
+    "detail": {
+      "en": "Keep crypto custody stable across daemon restart. Never open two stores for the same device.",
+      "zh-cn": "重启守护进程时保持加密保管稳定，不能为同一设备打开两个存储。"
+    },
+    "reverse": true
+  },
+  {
+    "id": "codex",
+    "from": "bridge",
+    "to": "codex",
+    "label": {
+      "en": "Run turn",
+      "zh-cn": "执行 turn"
+    },
+    "protocol": "App Server JSON-RPC / stdio",
+    "detail": {
+      "en": "Bind turns, reports, permissions and completion to the original dispatch.",
+      "zh-cn": "将 turn、报告、权限与完成绑定到原始调度。"
+    },
+    "reverse": true
+  },
+  {
+    "id": "claude",
+    "from": "bridge",
+    "to": "claude",
+    "label": {
+      "en": "Run turn",
+      "zh-cn": "执行 turn"
+    },
+    "protocol": "Managed native Claude CLI",
+    "detail": {
+      "en": "Use the configured native runtime and preserve supported execution policy.",
+      "zh-cn": "使用配置的原生运行时，遵守支持的执行策略。"
+    },
+    "reverse": true
+  },
+  {
+    "id": "oup",
+    "from": "bridge",
+    "to": "octos",
+    "label": {
+      "en": "Profiles / run",
+      "zh-cn": "配置 / 执行"
+    },
+    "protocol": "Octos Unified Protocol / stdio",
+    "detail": {
+      "en": "Read actual installed Octos profiles and expose only owner-selected model configurations.",
+      "zh-cn": "读取实际安装的 Octos 配置，只暴露所有者选定的模型配置。"
+    },
+    "reverse": true
+  },
+  {
+    "id": "model-codex",
+    "from": "codex",
+    "to": "provider",
+    "label": {
+      "en": "Inference",
+      "zh-cn": "推理"
+    },
+    "protocol": "Provider-specific API",
+    "detail": {
+      "en": "The selected runtime sends task content to its configured provider.",
+      "zh-cn": "所选运行时将任务内容发送到配置的提供方。"
+    },
+    "reverse": true
+  },
+  {
+    "id": "model-claude",
+    "from": "claude",
+    "to": "provider",
+    "label": {
+      "en": "Inference",
+      "zh-cn": "推理"
+    },
+    "protocol": "Provider-specific API",
+    "detail": {
+      "en": "The selected runtime sends task content to its configured provider.",
+      "zh-cn": "所选运行时将任务内容发送到配置的提供方。"
+    },
+    "reverse": true
+  },
+  {
+    "id": "model-octos",
+    "from": "octos",
+    "to": "provider",
+    "label": {
+      "en": "Inference",
+      "zh-cn": "推理"
+    },
+    "protocol": "Provider-specific API",
+    "detail": {
+      "en": "The selected runtime sends task content to its configured provider.",
+      "zh-cn": "所选运行时将任务内容发送到配置的提供方。"
+    },
+    "reverse": true
+  },
+  {
+    "id": "decision",
+    "from": "approval",
+    "to": "bridge",
+    "label": {
+      "en": "Bound decision",
+      "zh-cn": "绑定决策"
+    },
+    "protocol": "Structured native approval / question response",
+    "detail": {
+      "en": "The owner decides the supported operation. Chat text is not approval.",
+      "zh-cn": "所有者决策支持的操作，聊天文本不能构成审批。"
+    },
+    "reverse": true
+  },
+  {
+    "id": "decision-ui",
+    "from": "robrix",
+    "to": "approval",
+    "label": {
+      "en": "Review",
+      "zh-cn": "审阅"
+    },
+    "protocol": "Native owner control UI",
+    "detail": {
+      "en": "Render the exact supported request and return its correlated decision.",
+      "zh-cn": "呈现准确支持的请求，返回对应决策。"
+    },
+    "reverse": true
+  },
+  {
+    "id": "pool-request",
+    "from": "robrix",
+    "to": "pool",
+    "label": {
+      "en": "Request",
+      "zh-cn": "申请"
+    },
+    "protocol": "Authenticated pool Agent request",
+    "detail": {
+      "en": "Select a pool, name and positive token ceiling; no Project or intermediate reservation in the new flow.",
+      "zh-cn": "选择资源池、名称和正数 token 上限；新流程无需 Project 或中间预留。"
+    },
+    "reverse": false
+  },
+  {
+    "id": "pool-owner",
+    "from": "pool",
+    "to": "backend",
+    "label": {
+      "en": "Owner approval / hold",
+      "zh-cn": "所有者批准 / 额度保留"
+    },
+    "protocol": "Owner authority + native capacity ledger",
+    "detail": {
+      "en": "Only the selected owner decides; native hold, worker qualification and room admission still follow.",
+      "zh-cn": "仅选定所有者决策，之后仍需原生额度保留、工作器资格确认与入房。"
+    },
+    "reverse": true
+  },
+  {
+    "id": "federation",
+    "from": "palpo",
+    "to": "federation",
+    "label": {
+      "en": "Federation",
+      "zh-cn": "联邦"
+    },
+    "protocol": "Matrix Server–Server API",
+    "detail": {
+      "en": "Room events federate under Matrix rules; executor authority remains separately checked.",
+      "zh-cn": "房间事件依 Matrix 规则联邦互通，执行器权限仍独立校验。"
+    },
+    "reverse": true
+  },
+  {
+    "id": "files",
+    "from": "bridge",
+    "to": "workspace",
+    "label": {
+      "en": "Tools / artifacts",
+      "zh-cn": "工具 / 产物"
+    },
+    "protocol": "Scoped workspace and file operations",
+    "detail": {
+      "en": "Authorized local tools act within their policy; supported file bridges return artifacts.",
+      "zh-cn": "获授权本地工具在策略范围内执行，由支持的文件桥接返回产物。"
+    },
+    "reverse": true
+  }
 ];
-
-export type ViewId = 'overview'|'registration'|'messages'|'runtimes';
-export type Placement = {id: ComponentId; x: number; y: number};
-export type ArchitectureView = {id: ViewId; title: Text; description: Text; nodes: Placement[]; edges: string[]; initial: ComponentId};
-const place = (id: ComponentId,x: number,y: number): Placement => ({id,x,y});
-export const architectureViews: ArchitectureView[] = [
-  {id:'overview',title:b('Whole system','整体架构'),description:b('Three project boundaries. Matrix connects conversations; the outbound web transport connects fleet operations. Select a node or a line to inspect it.','三个项目边界：Matrix 连接对话，出站 Web 传输连接机群操作。选择节点或连线查看详情。'),initial:'bridge',nodes:[place('robrix',0,0),place('palpo',0,215),place('federation',0,430),place('devices',0,645),place('admin',410,0),place('web',410,215),place('relay',410,430),place('provider',410,645),place('console',820,0),place('bridge',820,215),place('backend',820,430),place('runners',820,645)],edges:['client','portal','registration','transactions','poll','updates','dispatch','console','launch','model','device','federation']},
-  {id:'registration',title:b('Appservice registration','Appservice 注册'),description:b('Follow the administrator, companion service, homeserver, and fleet owner. Registration, receipt verification, and execution approval are separate stages.','沿着管理员、配套服务、homeserver 与机群所有者查看接入过程。注册、接收验证和执行审批是独立阶段。'),initial:'web',nodes:[place('admin',0,0),place('web',410,0),place('palpo',820,0),place('console',0,270),place('bridge',410,270),place('relay',820,270),place('backend',0,540),place('devices',820,540)],edges:['portal','registration','transactions','poll','updates','console','dispatch','device-owner','device']},
-  {id:'messages',title:b('Message → work → reply','消息 → 工作 → 回复'),description:b('Trace a room message into a task and back. Encrypted device traffic is shown separately from Appservice transaction delivery.','追踪房间消息如何进入任务并返回回复；加密设备流量与 Appservice 事务投递分别呈现。'),initial:'robrix',nodes:[place('robrix',0,0),place('palpo',0,240),place('devices',0,480),place('relay',410,240),place('bridge',820,240),place('backend',820,480),place('runners',820,720),place('provider',410,720),place('workspace',0,720),place('approval',410,480)],edges:['client','transactions','poll','dispatch','launch','reply','model','workspace','device','approval-device']},
-  {id:'runtimes',title:b('Coding-agent runtimes','编程 Agent 运行时'),description:b('Inspect the headless runners and alternate transports. ACP carries agent sessions; MCP carries tool calls; provider APIs carry inference.','查看无界面运行器和其他传输方式：ACP 承载 Agent 会话，MCP 承载工具调用，模型 API 承载推理请求。'),initial:'codex',nodes:[place('state',0,0),place('backend',410,0),place('approval',820,0),place('claude',0,245),place('codex',410,245),place('acp',820,245),place('mcp',410,500),place('tmux',820,500)],edges:['state','claude','codex','acp','terminal','claude-mcp','codex-mcp','acp-mcp','mcp-backend','codex-approval']},
+export type ViewId='overview'|'registration'|'messages'|'runtimes';
+export type ArchitectureView={id:ViewId;title:Text;description:Text;nodes:{id:ComponentId;x:number;y:number}[];edges:string[];initial:ComponentId};
+export const architectureViews:ArchitectureView[]=[
+  {
+    "id": "overview",
+    "title": {
+      "en": "Whole system",
+      "zh-cn": "整体架构"
+    },
+    "description": {
+      "en": "Desktop, integrated Server and a local executor. Inspect a node or connection.",
+      "zh-cn": "Desktop、集成 Server 与本地执行器。选择节点或连接查看详情。"
+    },
+    "nodes": [
+      {
+        "id": "robrix",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "pasion",
+        "x": 410,
+        "y": 0
+      },
+      {
+        "id": "backend",
+        "x": 820,
+        "y": 0
+      },
+      {
+        "id": "palpo",
+        "x": 0,
+        "y": 245
+      },
+      {
+        "id": "devices",
+        "x": 410,
+        "y": 245
+      },
+      {
+        "id": "bridge",
+        "x": 820,
+        "y": 245
+      },
+      {
+        "id": "federation",
+        "x": 0,
+        "y": 490
+      },
+      {
+        "id": "provider",
+        "x": 410,
+        "y": 490
+      },
+      {
+        "id": "pool",
+        "x": 820,
+        "y": 490
+      }
+    ],
+    "edges": [
+      "client",
+      "login",
+      "management",
+      "registration",
+      "poll",
+      "device",
+      "crypto-owner",
+      "federation",
+      "pool-request",
+      "pool-owner"
+    ],
+    "initial": "bridge"
+  },
+  {
+    "id": "registration",
+    "title": {
+      "en": "Identity and setup",
+      "zh-cn": "身份与配置"
+    },
+    "description": {
+      "en": "One integrated application service. Human sign-in and owner-device authorization are separate.",
+      "zh-cn": "一个内置应用服务；人的登录与所有者设备授权独立。"
+    },
+    "nodes": [
+      {
+        "id": "robrix",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "pasion",
+        "x": 410,
+        "y": 0
+      },
+      {
+        "id": "backend",
+        "x": 820,
+        "y": 0
+      },
+      {
+        "id": "palpo",
+        "x": 0,
+        "y": 245
+      },
+      {
+        "id": "devices",
+        "x": 410,
+        "y": 245
+      },
+      {
+        "id": "bridge",
+        "x": 820,
+        "y": 245
+      }
+    ],
+    "edges": [
+      "login",
+      "management",
+      "registration",
+      "device",
+      "poll",
+      "crypto-owner"
+    ],
+    "initial": "backend"
+  },
+  {
+    "id": "messages",
+    "title": {
+      "en": "Message → work → reply",
+      "zh-cn": "消息 → 工作 → 回复"
+    },
+    "description": {
+      "en": "Follow encrypted room events, owner decisions, local execution and its original receipts.",
+      "zh-cn": "跟随加密房间事件、所有者决策、本地执行及原始凭据。"
+    },
+    "nodes": [
+      {
+        "id": "robrix",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "backend",
+        "x": 410,
+        "y": 0
+      },
+      {
+        "id": "bridge",
+        "x": 820,
+        "y": 0
+      },
+      {
+        "id": "palpo",
+        "x": 0,
+        "y": 245
+      },
+      {
+        "id": "devices",
+        "x": 410,
+        "y": 245
+      },
+      {
+        "id": "codex",
+        "x": 820,
+        "y": 245
+      },
+      {
+        "id": "approval",
+        "x": 0,
+        "y": 490
+      },
+      {
+        "id": "workspace",
+        "x": 410,
+        "y": 490
+      },
+      {
+        "id": "provider",
+        "x": 820,
+        "y": 490
+      }
+    ],
+    "edges": [
+      "client",
+      "management",
+      "poll",
+      "device",
+      "crypto-owner",
+      "codex",
+      "model-codex",
+      "decision",
+      "decision-ui",
+      "files"
+    ],
+    "initial": "robrix"
+  },
+  {
+    "id": "runtimes",
+    "title": {
+      "en": "Coding-agent runtimes",
+      "zh-cn": "编程 Agent 运行时"
+    },
+    "description": {
+      "en": "Codex, Claude and Octos have explicit native integrations. A protocol is not a promise of complete CLI parity.",
+      "zh-cn": "Codex、Claude、Octos 各有明确原生接入；协议不构成完整 CLI 对等承诺。"
+    },
+    "nodes": [
+      {
+        "id": "backend",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "bridge",
+        "x": 410,
+        "y": 0
+      },
+      {
+        "id": "approval",
+        "x": 820,
+        "y": 0
+      },
+      {
+        "id": "codex",
+        "x": 0,
+        "y": 245
+      },
+      {
+        "id": "claude",
+        "x": 410,
+        "y": 245
+      },
+      {
+        "id": "octos",
+        "x": 820,
+        "y": 245
+      },
+      {
+        "id": "workspace",
+        "x": 0,
+        "y": 490
+      },
+      {
+        "id": "provider",
+        "x": 410,
+        "y": 490
+      }
+    ],
+    "edges": [
+      "poll",
+      "codex",
+      "claude",
+      "oup",
+      "model-codex",
+      "model-claude",
+      "model-octos",
+      "decision",
+      "files"
+    ],
+    "initial": "octos"
+  }
 ];
-
-for (const view of architectureViews) for (const id of view.edges) {
-  const connection = connections.find(item => item.id === id);
-  if (!connection || !view.nodes.some(n=>n.id===connection.from) || !view.nodes.some(n=>n.id===connection.to)) throw new Error(`Invalid architecture connection: ${view.id}/${id}`);
-}
-
-export const architectureUI = {
-  label:b('EXPLORE THE CONNECTIONS','探索系统连接'),title:b('Follow every connection.','看清每一条连接。'),
-  intro:b('From a Matrix conversation to a coding agent’s workspace. Explore how Robrix2, Palpo, its companion web service, and Hagency work together.','从 Matrix 对话，到编程 Agent 的工作目录。探索 Robrix2、Palpo 及其配套 Web 服务如何与 Hagency 协作。'),
-  snapshot:b('Reviewed development architecture · September 2026','已核验的开发版架构 · 2026 年 9 月'),
-  scope:b('The outbound transport and companion administration app describe the reviewed development integration, not a promise about every published package. The map is explanatory and never connects to live services.','出站传输与配套管理应用描述已核验的开发集成，不代表所有发布包都包含这些能力。图表用于说明，不连接真实服务。'),
-  inspect:b('Inspect a component','查看组件'),component:b('Component','组件'),connection:b('Connection','连接'),interfaces:b('Interfaces','接口'),boundary:b('Authority & scope','权限与范围'),
-  zoomIn:b('Zoom in','放大'),zoomOut:b('Zoom out','缩小'),fit:b('Fit diagram','适应画布'),reset:b('Reset layout','重置布局'),
-  help:b('Drag the background to pan. Use + / − to zoom. Select a component or connection for details.','拖动画布平移，使用 + / − 缩放，选择组件或连线查看详情。'),
-  fallback:b('Read the complete architecture below. The interactive diagram is available when its browser module loads.','下方提供完整架构说明，交互图将在浏览器模块加载后显示。'),
-  textView:b('Read the connections','阅读连接说明'),selected:b('Selected connection','已选连接'),
+export const architectureUI={
+  "label": {
+    "en": "CURRENT SYSTEM",
+    "zh-cn": "当前系统"
+  },
+  "title": {
+    "en": "Follow a request into real work.",
+    "zh-cn": "跟随请求，走进真实执行。"
+  },
+  "intro": {
+    "en": "Native Desktop, one integrated Rust Server and owner-controlled local coding runtimes.",
+    "zh-cn": "原生 Desktop、一个集成 Rust Server，以及由所有者控制的本地编程运行时。"
+  },
+  "snapshot": {
+    "en": "Pinned source review · November 19, 2026",
+    "zh-cn": "固定源码核验 · 2026 年 11 月 19 日"
+  },
+  "fallback": {
+    "en": "The interactive map is optional. Every connection is readable below.",
+    "zh-cn": "交互图是可选增强，下方可阅读所有连接。"
+  },
+  "textView": {
+    "en": "Read the text reference",
+    "zh-cn": "阅读文字参考"
+  },
+  "scope": {
+    "en": "This map describes the reviewed main, not a live deployment or every published installer.",
+    "zh-cn": "此图描述核验 main，并非实际部署或所有发布安装包。"
+  },
+  "inspect": {
+    "en": "Inspect a component",
+    "zh-cn": "查看组件"
+  },
+  "selected": {
+    "en": "Select a component",
+    "zh-cn": "选择组件"
+  },
+  "zoomIn": {
+    "en": "Zoom in",
+    "zh-cn": "放大"
+  },
+  "zoomOut": {
+    "en": "Zoom out",
+    "zh-cn": "缩小"
+  },
+  "fit": {
+    "en": "Fit map",
+    "zh-cn": "适应视图"
+  },
+  "reset": {
+    "en": "Reset",
+    "zh-cn": "重置"
+  },
+  "help": {
+    "en": "Select a component or line. Keyboard controls and the text reference provide another way to explore.",
+    "zh-cn": "选择组件或连线，也可使用键盘与文字参考。"
+  },
+  "component": {
+    "en": "Component",
+    "zh-cn": "组件"
+  },
+  "connection": {
+    "en": "Connection",
+    "zh-cn": "连接"
+  },
+  "interfaces": {
+    "en": "Interfaces",
+    "zh-cn": "接口"
+  },
+  "boundary": {
+    "en": "Boundary",
+    "zh-cn": "边界"
+  }
 };

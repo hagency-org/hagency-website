@@ -1,22 +1,22 @@
-import { writeFile } from 'node:fs/promises';
+import {writeFile} from 'node:fs/promises';
 
-const repositories = { hagency: 'hagency-org/hagency', robrix2: 'Project-Robius-China/robrix2', palpo: 'palpo-im/palpo' };
-const results = await Promise.all(Object.entries(repositories).map(async ([id, repo]) => {
-  const response = await fetch(`https://api.github.com/repos/${repo}/releases/latest`, { headers: { Accept: 'application/vnd.github+json' } });
-  if (id === 'hagency' && response.status === 404) return null;
-  if (!response.ok) throw new Error(`${repo}: GitHub returned ${response.status}`);
-  const release = await response.json();
-  const assets = release.assets.filter(asset => /\.(tar\.gz|zip|apk|deb|dmg|exe)$/.test(asset.name)
-    && (id !== 'hagency' || asset.name.startsWith('hagency-'))).map(asset => {
-    const name = asset.name.toLowerCase();
-    const platform = id === 'hagency' ? 'macos,linux' : /macos|apple-darwin/.test(name) ? 'macos' : /windows/.test(name) ? 'windows' : /android/.test(name) ? 'android' : /linux/.test(name) ? 'linux' : null;
-    if (!platform) throw new Error(`Unrecognized release platform: ${asset.name}`);
-    return { name: asset.name, url: asset.browser_download_url, size: asset.size, platform, arch: /aarch64/.test(name) ? 'ARM64' : /x86_64/.test(name) ? 'x86-64' : 'Node.js', signature: release.assets.find(candidate => candidate.name === `${asset.name}.sig`)?.browser_download_url ?? null };
+// Normal builds use the checked-in snapshot. Run explicitly to refresh and review.
+const repositories={robrix2:'hagency-org/hagency-desktop',palpo:'palpo-im/palpo',hagency:'hagency-org/hagency-server'};
+const results=await Promise.all(Object.entries(repositories).map(async([id,repo])=>{
+  const response=await fetch(`https://api.github.com/repos/${repo}/releases?per_page=30`,{headers:{Accept:'application/vnd.github+json'}});
+  if(!response.ok)throw new Error(`${repo}: GitHub returned ${response.status}`);
+  const candidates=(await response.json()).filter(r=>!r.draft).sort((a,b)=>new Date(b.published_at)-new Date(a.published_at));
+  // /releases/latest excludes Desktop prereleases. Select an actual installer release.
+  const release=id==='hagency'?candidates[0]:candidates.find(r=>r.assets.some(a=>/\.(tar\.gz|zip|apk|deb|dmg|exe)$/.test(a.name)));
+  if(!release)throw new Error(`${repo}: no published release snapshot found`);
+  const assets=release.assets.filter(a=>/\.(tar\.gz|zip|apk|deb|dmg|exe)$/.test(a.name)).map(a=>{
+    const name=a.name.toLowerCase();
+    const platform=/macos|apple-darwin/.test(name)?'macos':/windows/.test(name)?'windows':/android/.test(name)?'android':/linux/.test(name)?'linux':null;
+    const arch=/aarch64|arm64/.test(name)?'ARM64':/x86_64|amd64|x64/.test(name)?'x86-64':null;
+    if(!platform||!arch)throw new Error(`Unrecognized installer: ${a.name}`);
+    return {name:a.name,url:a.browser_download_url,size:a.size,platform,arch,signature:release.assets.find(s=>s.name===a.name+'.sig')?.browser_download_url??null,...(a.digest?{digest:a.digest}:{})};
   });
-  if (!assets.length && id === 'hagency') return null;
-  if (!assets.length) throw new Error(`${repo}: no supported assets found`);
-  return { id, tag: release.tag_name, publishedAt: release.published_at, source: release.html_url, assets, checksums: release.assets.find(asset => asset.name === 'SHA256SUMS')?.browser_download_url ?? null };
+  return {id,tag:release.tag_name,publishedAt:release.published_at,prerelease:release.prerelease,source:release.html_url,assets,checksums:release.assets.find(a=>/^SHA256SUMS(?:\.txt)?$/.test(a.name))?.browser_download_url??null};
 }));
-const published = results.filter(Boolean);
-await writeFile(new URL('../src/data/releases.json', import.meta.url), JSON.stringify({ verifiedAt: new Date().toISOString(), releases: published }, null, 2) + '\n');
-console.log(`Verified ${published.length} releases and ${published.reduce((n, r) => n + r.assets.length, 0)} downloadable assets. Review content version labels before committing.`);
+await writeFile(new URL('../src/data/releases.json',import.meta.url),JSON.stringify({verifiedAt:new Date().toISOString(),releases:results},null,2)+'\n');
+console.log(`Verified ${results.length} release records and ${results.reduce((n,r)=>n+r.assets.length,0)} installers. Review source-only records and version labels before committing.`);
