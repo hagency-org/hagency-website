@@ -13,11 +13,12 @@ Desktop rc.13's published build manifest identifies source
 rc.14. The release JSON lists actual assets, not an inferred support matrix.
 Standalone Palpo v0.6.0 is distinct from Server's pinned Palpo source.
 
-The full 35-feature record is `src/data/verification.json`, with immutable
+The full 35-feature record is `docs/feature-audit-record.json`, with immutable
 Desktop, Server and Buzz-app source links on every row. Buzz core and desktop
-are separate repositories. Current Buzz help documents voice huddles; its older
-README summary alone is not used to mark that capability absent. Buzz NIP-17
-DM encryption is explicitly included.
+are separate repositories. The follow-up implementation review supersedes documentation-based competitor
+claims. Buzz relay gift-wrap support is distinct from the native DM send path;
+no native NIP-17 DM promise appears in the public comparison. See
+[buzz-implementation-2026-11-19.md](buzz-implementation-2026-11-19.md).
 
 Current main documentation contains historical sections. Server OPERATIONS.md
 starts with the schema-24 direct pool-Agent flow; later schema-22/23 project

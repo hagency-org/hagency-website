@@ -1,0 +1,1137 @@
+{
+  "updatedAt": "2026-11-19",
+  "pins": {
+    "desktop": {
+      "repository": "hagency-org/hagency-desktop",
+      "commit": "71d6e9adba17b15dcb33c15732320c4286c45735"
+    },
+    "server": {
+      "repository": "hagency-org/hagency-server",
+      "commit": "9a9cbad5195f72d583b760f627d9eba608b9067f"
+    },
+    "buzz": {
+      "repository": "block/buzz",
+      "commit": "69ea27343c9b60eeeb1f6e903529cd8b789e910e"
+    },
+    "buzzApp": {
+      "repository": "block/buzz-app",
+      "commit": "c3d2b046a8773824244735750c8d87a23da36218"
+    }
+  },
+  "groups": {
+    "all": {
+      "en": "All features",
+      "zh-cn": "全部功能"
+    },
+    "collaboration": {
+      "en": "Chat & collaboration",
+      "zh-cn": "聊天与协作"
+    },
+    "runtimes": {
+      "en": "Coding runtimes",
+      "zh-cn": "编程运行时"
+    },
+    "control": {
+      "en": "Resources & permissions",
+      "zh-cn": "资源与权限"
+    },
+    "deployment": {
+      "en": "Platforms & deployment",
+      "zh-cn": "平台与部署"
+    },
+    "workflows": {
+      "en": "Workflows & tools",
+      "zh-cn": "工作流与工具"
+    }
+  },
+  "rows": [
+    {
+      "id": "identity",
+      "name": {
+        "en": "Account and sign-in",
+        "zh-cn": "账户与登录"
+      },
+      "desktop": {
+        "en": "Native Pasion OAuth / PKCE; Matrix SDK session.",
+        "zh-cn": "原生 Pasion OAuth / PKCE；Matrix SDK 会话。"
+      },
+      "server": {
+        "en": "Embedded Pasion; Matrix account provisioning.",
+        "zh-cn": "内嵌 Pasion，开通 Matrix 账户。"
+      },
+      "buzz": {
+        "en": "Nostr keys and community-scoped relay messaging.",
+        "zh-cn": "使用 Nostr 密钥与社区范围的中继消息。"
+      },
+      "boundary": {
+        "en": "Sign in through Pasion and keep account and device data when updating to retain encrypted history.",
+        "zh-cn": "通过 Pasion 登录；更新时保留账户与设备数据，以便继续访问加密历史。"
+      },
+      "guide": "connect-fleet",
+      "category": "collaboration",
+      "availability": "",
+      "comparison": true,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "Sign in through Pasion and keep account and device data when updating to retain encrypted history.",
+        "zh-cn": "通过 Pasion 登录；更新时保留账户与设备数据，以便继续访问加密历史。"
+      }
+    },
+    {
+      "id": "personal-agent",
+      "name": {
+        "en": "First personal Agent",
+        "zh-cn": "首个个人 Agent"
+      },
+      "desktop": {
+        "en": "Agent → Agent manager → My Agents → Add Local Agent, after this account is hosted here.",
+        "zh-cn": "本机完成当前账户托管后：Agent → Agent 管理者 → 我的 Agent → 添加本地 Agent。"
+      },
+      "server": {
+        "en": "Permanent owner and Agent creation policy.",
+        "zh-cn": "永久所有者与 Agent 创建策略。"
+      },
+      "buzz": {
+        "en": "",
+        "zh-cn": ""
+      },
+      "boundary": {
+        "en": "Local execution requires this computer to host the current account. Create a personal Agent first and add shared rooms when needed.",
+        "zh-cn": "本地执行需要本机托管当前账户。先创建个人 Agent，再按需添加共享房间。"
+      },
+      "guide": "request-agent",
+      "category": "collaboration",
+      "availability": "",
+      "comparison": false,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "Local execution requires this computer to host the current account. Create a personal Agent first and add shared rooms when needed.",
+        "zh-cn": "本地执行需要本机托管当前账户。先创建个人 Agent，再按需添加共享房间。"
+      }
+    },
+    {
+      "id": "ownership",
+      "name": {
+        "en": "Agent ownership",
+        "zh-cn": "Agent 所有权"
+      },
+      "desktop": {
+        "en": "Owner controls settings, execution and removal.",
+        "zh-cn": "所有者控制设置、执行和移除。"
+      },
+      "server": {
+        "en": "Personal ownership is separate from global administration.",
+        "zh-cn": "个人所有权与全局管理权限分离。"
+      },
+      "buzz": {
+        "en": "",
+        "zh-cn": ""
+      },
+      "boundary": {
+        "en": "The owner manages the Agent; each room manages its own membership and roles.",
+        "zh-cn": "所有者管理 Agent，各房间独立管理成员与角色。"
+      },
+      "guide": "request-agent",
+      "category": "control",
+      "availability": "",
+      "comparison": false,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "The owner manages the Agent; each room manages its own membership and roles.",
+        "zh-cn": "所有者管理 Agent，各房间独立管理成员与角色。"
+      }
+    },
+    {
+      "id": "projects",
+      "name": {
+        "en": "Projects and rooms",
+        "zh-cn": "项目与房间"
+      },
+      "desktop": {
+        "en": "Projects use Matrix Spaces; rooms have independent membership.",
+        "zh-cn": "项目使用 Matrix Space；房间成员独立。"
+      },
+      "server": {
+        "en": "Space/room verification and bindings.",
+        "zh-cn": "验证 Space、房间与绑定。"
+      },
+      "buzz": {
+        "en": "Community conversations are organized into relay-backed channels and threads.",
+        "zh-cn": "社区对话通过中继中的频道与线程组织。"
+      },
+      "boundary": {
+        "en": "Manage each room’s members and permissions independently, including rooms in the same Space.",
+        "zh-cn": "同一 Space 中的各房间也分别管理自己的成员与权限。"
+      },
+      "guide": "task-threads",
+      "category": "collaboration",
+      "availability": "",
+      "comparison": true,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "Manage each room’s members and permissions independently, including rooms in the same Space.",
+        "zh-cn": "同一 Space 中的各房间也分别管理自己的成员与权限。"
+      }
+    },
+    {
+      "id": "triggers",
+      "name": {
+        "en": "When an Agent responds",
+        "zh-cn": "Agent 何时响应"
+      },
+      "desktop": {
+        "en": "Personal DM; explicit group mentions subject to the bound room policy.",
+        "zh-cn": "个人私聊；群聊明确提及，并遵守绑定房间策略。"
+      },
+      "server": {
+        "en": "Routes eligible events to the bound executor.",
+        "zh-cn": "将符合条件的事件路由到绑定执行器。"
+      },
+      "buzz": {
+        "en": "",
+        "zh-cn": ""
+      },
+      "boundary": {
+        "en": "Address the Agent explicitly when starting work in a bound group room.",
+        "zh-cn": "在已绑定的群聊中明确提及 Agent，发起工作。"
+      },
+      "guide": "task-threads",
+      "category": "collaboration",
+      "availability": "",
+      "comparison": false,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "Address the Agent explicitly when starting work in a bound group room.",
+        "zh-cn": "在已绑定的群聊中明确提及 Agent，发起工作。"
+      }
+    },
+    {
+      "id": "context",
+      "name": {
+        "en": "Conversation context",
+        "zh-cn": "对话上下文"
+      },
+      "desktop": {
+        "en": "Contexts scoped by Agent, room and top-level group thread.",
+        "zh-cn": "上下文按 Agent、房间及群聊顶层线程限定。"
+      },
+      "server": {
+        "en": "Durable context and dispatch identity.",
+        "zh-cn": "持久上下文与调度身份。"
+      },
+      "buzz": {
+        "en": "",
+        "zh-cn": ""
+      },
+      "boundary": {
+        "en": "Each room and top-level group thread keeps its own Agent context.",
+        "zh-cn": "各房间及群聊顶层线程分别保留 Agent 上下文。"
+      },
+      "guide": "task-threads",
+      "category": "collaboration",
+      "availability": "",
+      "comparison": false,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "Each room and top-level group thread keeps its own Agent context.",
+        "zh-cn": "各房间及群聊顶层线程分别保留 Agent 上下文。"
+      }
+    },
+    {
+      "id": "codex",
+      "name": {
+        "en": "Codex integration",
+        "zh-cn": "Codex 接入"
+      },
+      "desktop": {
+        "en": "Native App Server protocol, supported approvals, questions and usage.",
+        "zh-cn": "原生 App Server 协议，支持的审批、问题与用量。"
+      },
+      "server": {
+        "en": "Executor capability and lease control.",
+        "zh-cn": "执行器能力与租约控制。"
+      },
+      "buzz": {
+        "en": "",
+        "zh-cn": ""
+      },
+      "boundary": {
+        "en": "Use the configured model and approve supported tool requests within the Agent’s permissions.",
+        "zh-cn": "使用已配置的模型，在 Agent 权限范围内审批受支持的工具请求。"
+      },
+      "guide": "run-hagency",
+      "category": "runtimes",
+      "availability": "",
+      "comparison": false,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "Use the configured model and approve supported tool requests within the Agent’s permissions.",
+        "zh-cn": "使用已配置的模型，在 Agent 权限范围内审批受支持的工具请求。"
+      }
+    },
+    {
+      "id": "claude",
+      "name": {
+        "en": "Claude integration",
+        "zh-cn": "Claude 接入"
+      },
+      "desktop": {
+        "en": "Managed native CLI, structured supported controls.",
+        "zh-cn": "托管原生 CLI，支持结构化控制。"
+      },
+      "server": {
+        "en": "Qualified executor dispatch.",
+        "zh-cn": "调度合格执行器。"
+      },
+      "buzz": {
+        "en": "",
+        "zh-cn": ""
+      },
+      "boundary": {
+        "en": "Execution follows the configured workspace, tool policy and platform permissions.",
+        "zh-cn": "执行遵循已配置的工作区、工具策略和平台权限。"
+      },
+      "guide": "run-hagency",
+      "category": "runtimes",
+      "availability": "",
+      "comparison": false,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "Execution follows the configured workspace, tool policy and platform permissions.",
+        "zh-cn": "执行遵循已配置的工作区、工具策略和平台权限。"
+      }
+    },
+    {
+      "id": "octos",
+      "name": {
+        "en": "Octos and actual model profiles",
+        "zh-cn": "Octos 与实际模型配置"
+      },
+      "desktop": {
+        "en": "OUP integration lists installed Octos profiles and model choices.",
+        "zh-cn": "通过 OUP 列出实际安装的 Octos 配置与模型。"
+      },
+      "server": {
+        "en": "Resource configuration is bound to executor capability.",
+        "zh-cn": "资源配置绑定执行器能力。"
+      },
+      "buzz": {
+        "en": "",
+        "zh-cn": ""
+      },
+      "boundary": {
+        "en": "Profiles retain their own model, endpoint and credentials, including multiple profiles for the same model.",
+        "zh-cn": "各配置保留独立的模型、端点与凭据，同一模型也可使用多个配置。"
+      },
+      "guide": "run-hagency",
+      "category": "runtimes",
+      "availability": "",
+      "comparison": false,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "Profiles retain their own model, endpoint and credentials, including multiple profiles for the same model.",
+        "zh-cn": "各配置保留独立的模型、端点与凭据，同一模型也可使用多个配置。"
+      }
+    },
+    {
+      "id": "local-models",
+      "name": {
+        "en": "Local and custom model endpoints",
+        "zh-cn": "本地模型与自定义端点"
+      },
+      "desktop": {
+        "en": "Octos profiles may use local models or custom endpoints.",
+        "zh-cn": "Octos 配置可使用本地模型或自定义端点。"
+      },
+      "server": {
+        "en": "Per-resource accounting; no universal provider identity.",
+        "zh-cn": "按资源记账，不假设统一供应商身份。"
+      },
+      "buzz": {
+        "en": "",
+        "zh-cn": ""
+      },
+      "boundary": {
+        "en": "The owner selects the profiles available to the team. Credentials stay on the execution computer.",
+        "zh-cn": "所有者选择可供团队使用的配置，凭据保留在执行电脑上。"
+      },
+      "guide": "run-hagency",
+      "category": "runtimes",
+      "availability": "",
+      "comparison": false,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "The owner selects the profiles available to the team. Credentials stay on the execution computer.",
+        "zh-cn": "所有者选择可供团队使用的配置，凭据保留在执行电脑上。"
+      }
+    },
+    {
+      "id": "other-harnesses",
+      "name": {
+        "en": "Coding-agent connections",
+        "zh-cn": "编程 Agent 接入"
+      },
+      "desktop": {
+        "en": "Native integrations for Codex, Claude Code and Octos.",
+        "zh-cn": "原生接入 Codex、Claude Code 与 Octos。"
+      },
+      "server": {
+        "en": "Routes work to a qualified local executor.",
+        "zh-cn": "将任务路由到符合条件的本地执行器。"
+      },
+      "buzz": {
+        "en": "Desktop harness integrations for Claude Code, Codex, Goose and Pi.",
+        "zh-cn": "桌面 harness 接入 Claude Code、Codex、Goose 与 Pi。"
+      },
+      "boundary": {
+        "en": "Connect Codex, Claude Code or Octos through Desktop and select a local model profile.",
+        "zh-cn": "通过 Desktop 连接 Codex、Claude Code 或 Octos，并选择本地模型配置。"
+      },
+      "guide": "run-hagency",
+      "category": "runtimes",
+      "availability": "",
+      "comparison": true,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "Buzz’s Claude Code and Codex harnesses register on macOS and Linux. Hagency connects its supported local runtimes through Desktop.",
+        "zh-cn": "Buzz 的 Claude Code 与 Codex harness 在 macOS 和 Linux 注册；Hagency 通过 Desktop 连接受支持的本地运行时。"
+      }
+    },
+    {
+      "id": "permissions",
+      "name": {
+        "en": "Tool permission decisions",
+        "zh-cn": "工具权限决策"
+      },
+      "desktop": {
+        "en": "Owner reviews supported native requests in structured UI.",
+        "zh-cn": "所有者在结构化界面审核支持的原生请求。"
+      },
+      "server": {
+        "en": "Validates ownership, bound decision and execution authority.",
+        "zh-cn": "校验所有者、绑定决策与执行权限。"
+      },
+      "buzz": {
+        "en": "",
+        "zh-cn": ""
+      },
+      "boundary": {
+        "en": "Permission requests return a structured decision from the Agent owner.",
+        "zh-cn": "权限请求由 Agent 所有者作出结构化决策。"
+      },
+      "guide": "approvals",
+      "category": "control",
+      "availability": "",
+      "comparison": false,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "Permission requests return a structured decision from the Agent owner.",
+        "zh-cn": "权限请求由 Agent 所有者作出结构化决策。"
+      }
+    },
+    {
+      "id": "questions",
+      "name": {
+        "en": "Interactive questions",
+        "zh-cn": "交互提问"
+      },
+      "desktop": {
+        "en": "Supported structured questions return to the active runtime.",
+        "zh-cn": "支持的结构化问题返回当前运行时。"
+      },
+      "server": {
+        "en": "Retains bound operations and receipts.",
+        "zh-cn": "保留绑定操作与回执。"
+      },
+      "buzz": {
+        "en": "",
+        "zh-cn": ""
+      },
+      "boundary": {
+        "en": "Questions and responses stay associated with the active runtime operation.",
+        "zh-cn": "问题与回答始终关联当前运行时操作。"
+      },
+      "guide": "approvals",
+      "category": "control",
+      "availability": "",
+      "comparison": false,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "Questions and responses stay associated with the active runtime operation.",
+        "zh-cn": "问题与回答始终关联当前运行时操作。"
+      }
+    },
+    {
+      "id": "files",
+      "name": {
+        "en": "Files and artifacts",
+        "zh-cn": "文件与产物"
+      },
+      "desktop": {
+        "en": "Native Matrix file bridge for Codex and Claude.",
+        "zh-cn": "Codex 与 Claude 的原生 Matrix 文件桥接。"
+      },
+      "server": {
+        "en": "Media and durable authorized file operations.",
+        "zh-cn": "媒体与持久授权文件操作。"
+      },
+      "buzz": {
+        "en": "",
+        "zh-cn": ""
+      },
+      "boundary": {
+        "en": "Codex and Claude native file delivery supports up to 64 files and 64 MiB per request.",
+        "zh-cn": "Codex 与 Claude 原生文件交付每次支持最多 64 个文件、64 MiB。"
+      },
+      "guide": "share-files",
+      "category": "collaboration",
+      "availability": "",
+      "comparison": false,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "Codex and Claude native file delivery supports up to 64 files and 64 MiB per request.",
+        "zh-cn": "Codex 与 Claude 原生文件交付每次支持最多 64 个文件、64 MiB。"
+      }
+    },
+    {
+      "id": "encryption",
+      "name": {
+        "en": "Encrypted conversation",
+        "zh-cn": "加密对话"
+      },
+      "desktop": {
+        "en": "Matrix SDK device keys and encrypted Agent room path.",
+        "zh-cn": "Matrix SDK 设备密钥与 Agent 加密房间路径。"
+      },
+      "server": {
+        "en": "Executor-device routing for encrypted Agent work.",
+        "zh-cn": "Agent 加密工作使用执行器设备路由。"
+      },
+      "buzz": {
+        "en": "",
+        "zh-cn": ""
+      },
+      "boundary": {
+        "en": "Agent devices decrypt task content for local execution; the selected model provider processes the submitted inputs.",
+        "zh-cn": "Agent 设备解密任务内容并在本地执行，所选模型提供方处理提交的输入。"
+      },
+      "guide": "approvals",
+      "category": "collaboration",
+      "availability": "",
+      "comparison": false,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "Agent devices decrypt task content for local execution; the selected model provider processes the submitted inputs.",
+        "zh-cn": "Agent 设备解密任务内容并在本地执行，所选模型提供方处理提交的输入。"
+      }
+    },
+    {
+      "id": "keys",
+      "name": {
+        "en": "Room-key readiness",
+        "zh-cn": "房间密钥就绪"
+      },
+      "desktop": {
+        "en": "Discovers and verifies recipient device keys before encrypted delivery.",
+        "zh-cn": "加密投递前发现并校验接收方设备密钥。"
+      },
+      "server": {
+        "en": "Server key publication alone does not update sender SDK state.",
+        "zh-cn": "服务器已发布密钥不等于发送方 SDK 已刷新。"
+      },
+      "buzz": {
+        "en": "",
+        "zh-cn": ""
+      },
+      "boundary": {
+        "en": "Encrypted delivery requires the recipient’s device keys. Keep device data and room keys available when restoring your account.",
+        "zh-cn": "加密投递需要接收方设备密钥；恢复账户时应保留设备数据与房间密钥。"
+      },
+      "guide": "operations",
+      "category": "collaboration",
+      "availability": "",
+      "comparison": false,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "Encrypted delivery requires the recipient’s device keys. Keep device data and room keys available when restoring your account.",
+        "zh-cn": "加密投递需要接收方设备密钥；恢复账户时应保留设备数据与房间密钥。"
+      }
+    },
+    {
+      "id": "reports",
+      "name": {
+        "en": "Independent Agent reports",
+        "zh-cn": "独立 Agent 报告"
+      },
+      "desktop": {
+        "en": "Captured provider reports get distinct chat events and duplicate suppression.",
+        "zh-cn": "捕获的提供方报告生成独立聊天事件并去重。"
+      },
+      "server": {
+        "en": "Delivery-only authorization and reply outbox.",
+        "zh-cn": "仅投递授权与回复发件箱。"
+      },
+      "buzz": {
+        "en": "",
+        "zh-cn": ""
+      },
+      "boundary": {
+        "en": "Distinct source messages keep separate identities; delivery retries reuse the original message.",
+        "zh-cn": "不同来源的消息保留独立标识，重复投递沿用原消息。"
+      },
+      "guide": "task-threads",
+      "category": "collaboration",
+      "availability": "",
+      "comparison": false,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "Distinct source messages keep separate identities; delivery retries reuse the original message.",
+        "zh-cn": "不同来源的消息保留独立标识，重复投递沿用原消息。"
+      }
+    },
+    {
+      "id": "post-run",
+      "name": {
+        "en": "Autonomous post-run messages",
+        "zh-cn": "运行结束后的自主消息"
+      },
+      "desktop": {
+        "en": "Captured runtime reports are delivered as individual chat messages. Octos post-run autonomous reporting is not enabled.",
+        "zh-cn": "捕获的运行时报告以独立聊天消息投递；Octos 运行结束后的自主报告当前未开放。"
+      },
+      "server": {
+        "en": "Authorizes message delivery and retains outgoing message receipts.",
+        "zh-cn": "校验消息投递权限，保留发送回执。"
+      },
+      "buzz": {
+        "en": "",
+        "zh-cn": ""
+      },
+      "boundary": {
+        "en": "Background message delivery follows the selected runtime’s reporting capabilities.",
+        "zh-cn": "后台消息投递取决于所选运行时的报告能力。"
+      },
+      "guide": "task-threads",
+      "category": "collaboration",
+      "availability": "runtime-dependent",
+      "comparison": false,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "Background message delivery follows the selected runtime’s reporting capabilities.",
+        "zh-cn": "后台消息投递取决于所选运行时的报告能力。"
+      }
+    },
+    {
+      "id": "pool-request",
+      "name": {
+        "en": "Request an Agent from a pool",
+        "zh-cn": "从资源池申请 Agent"
+      },
+      "desktop": {
+        "en": "Select pool, Agent name and positive token ceiling.",
+        "zh-cn": "选择资源池、Agent 名称与正数 token 上限。"
+      },
+      "server": {
+        "en": "Creates the requested Agent from the selected pool after the resource owner’s approval.",
+        "zh-cn": "资源所有者批准后，从选定资源池创建所申请的 Agent。"
+      },
+      "buzz": {
+        "en": "",
+        "zh-cn": ""
+      },
+      "boundary": {
+        "en": "One pool per Agent; no prerequisite Project or intermediate reservation in the new flow.",
+        "zh-cn": "每个 Agent 使用一个池；新流程无需预先 Project 或中间预留。"
+      },
+      "guide": "resource-pools",
+      "category": "control",
+      "availability": "",
+      "comparison": false,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "One pool per Agent; no prerequisite Project or intermediate reservation in the new flow.",
+        "zh-cn": "每个 Agent 使用一个池；新流程无需预先 Project 或中间预留。"
+      }
+    },
+    {
+      "id": "pool-approval",
+      "name": {
+        "en": "Resource owner approval",
+        "zh-cn": "资源所有者审批"
+      },
+      "desktop": {
+        "en": "Owner receives and reviews the request.",
+        "zh-cn": "资源所有者接收并审核申请。"
+      },
+      "server": {
+        "en": "Only selected owner decides; native hold and executor qualification follow.",
+        "zh-cn": "仅选定所有者决策，之后仍需原生额度保留和执行器资格确认。"
+      },
+      "buzz": {
+        "en": "",
+        "zh-cn": ""
+      },
+      "boundary": {
+        "en": "Work starts after owner approval, capacity reservation and executor readiness.",
+        "zh-cn": "完成所有者审批、容量预留和执行器就绪后开始工作。"
+      },
+      "guide": "resource-pools",
+      "category": "control",
+      "availability": "",
+      "comparison": false,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "Work starts after owner approval, capacity reservation and executor readiness.",
+        "zh-cn": "完成所有者审批、容量预留和执行器就绪后开始工作。"
+      }
+    },
+    {
+      "id": "pool-gates",
+      "name": {
+        "en": "Resource-pool availability",
+        "zh-cn": "资源池可用性"
+      },
+      "desktop": {
+        "en": "Requires a compatible Server-advertised capability.",
+        "zh-cn": "依赖兼容 Server 宣告的能力。"
+      },
+      "server": {
+        "en": "Optional management gates; explicit TOML overrides environment defaults.",
+        "zh-cn": "可选管理开关；显式 TOML 覆盖环境默认值。"
+      },
+      "buzz": {
+        "en": "",
+        "zh-cn": ""
+      },
+      "boundary": {
+        "en": "Server administrators enable resource-pool requests through management configuration.",
+        "zh-cn": "服务器管理员通过管理配置启用资源池申请。"
+      },
+      "guide": "resource-pools",
+      "category": "control",
+      "availability": "",
+      "comparison": false,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "Server administrators enable resource-pool requests through management configuration.",
+        "zh-cn": "服务器管理员通过管理配置启用资源池申请。"
+      }
+    },
+    {
+      "id": "budget",
+      "name": {
+        "en": "Usage and limits",
+        "zh-cn": "用量与限额"
+      },
+      "desktop": {
+        "en": "Shows token limits, consumed usage and pending usage.",
+        "zh-cn": "展示 token 限额、已消耗用量与待确认用量。"
+      },
+      "server": {
+        "en": "Postpaid reconciliation and retained holds.",
+        "zh-cn": "事后对账与保留额度。"
+      },
+      "buzz": {
+        "en": "Summaries of available harness token usage and recorded or estimated costs.",
+        "zh-cn": "汇总 harness 提供的 token 用量，以及已记录或估算的成本。"
+      },
+      "boundary": {
+        "en": "Usage settles after the task. Admitted work may exceed its configured token limit.",
+        "zh-cn": "用量在任务后结算，已接纳的工作可能超过设定的 token 限额。"
+      },
+      "guide": "resource-pools",
+      "category": "control",
+      "availability": "",
+      "comparison": true,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "Usage settles after the task. Admitted work may exceed its configured token limit.",
+        "zh-cn": "用量在任务后结算，已接纳的工作可能超过设定的 token 限额。"
+      }
+    },
+    {
+      "id": "retry",
+      "name": {
+        "en": "Retry and restart",
+        "zh-cn": "重试与重启"
+      },
+      "desktop": {
+        "en": "Durable commands recover their original operation.",
+        "zh-cn": "持久命令恢复原操作。"
+      },
+      "server": {
+        "en": "Leases, outbox receipts and generation checks.",
+        "zh-cn": "租约、发件箱回执与 generation 检查。"
+      },
+      "buzz": {
+        "en": "",
+        "zh-cn": ""
+      },
+      "boundary": {
+        "en": "Original request IDs, message receipts and usage records are retained during recovery.",
+        "zh-cn": "恢复过程中保留原请求标识、消息回执与用量记录。"
+      },
+      "guide": "operations",
+      "category": "control",
+      "availability": "",
+      "comparison": false,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "Original request IDs, message receipts and usage records are retained during recovery.",
+        "zh-cn": "恢复过程中保留原请求标识、消息回执与用量记录。"
+      }
+    },
+    {
+      "id": "stop",
+      "name": {
+        "en": "Stop and revoke",
+        "zh-cn": "停止与撤销"
+      },
+      "desktop": {
+        "en": "Applicant removes Agent; resource owner can stop supply.",
+        "zh-cn": "申请人移除 Agent，资源所有者可停止供给。"
+      },
+      "server": {
+        "en": "Fences new execution; retains consumed and unresolved usage.",
+        "zh-cn": "阻断新执行，保留已消耗和未解决用量。"
+      },
+      "buzz": {
+        "en": "",
+        "zh-cn": ""
+      },
+      "boundary": {
+        "en": "Stopping supply prevents new work. Completed tool actions and consumed or unresolved usage remain recorded.",
+        "zh-cn": "停止供给会阻止新工作；已完成的工具操作、已消耗和待确认用量仍保留记录。"
+      },
+      "guide": "operations",
+      "category": "control",
+      "availability": "",
+      "comparison": false,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "Stopping supply prevents new work. Completed tool actions and consumed or unresolved usage remain recorded.",
+        "zh-cn": "停止供给会阻止新工作；已完成的工具操作、已消耗和待确认用量仍保留记录。"
+      }
+    },
+    {
+      "id": "accounts",
+      "name": {
+        "en": "Multiple owner accounts",
+        "zh-cn": "多个所有者账户"
+      },
+      "desktop": {
+        "en": "Desktop rc.14 provides separate owner-daemon enrollment and runtime state for each account.",
+        "zh-cn": "Desktop rc.14 为各账户提供独立的所有者守护进程注册与运行状态。"
+      },
+      "server": {
+        "en": "Each owner/account has separate authority.",
+        "zh-cn": "每个所有者与账户权限独立。"
+      },
+      "buzz": {
+        "en": "",
+        "zh-cn": ""
+      },
+      "boundary": {
+        "en": "Manage each account’s background hosting separately from the visible chat account.",
+        "zh-cn": "分别管理各账户的后台托管与当前可见聊天账户。"
+      },
+      "guide": "connect-fleet",
+      "category": "control",
+      "availability": "",
+      "comparison": false,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "Manage each account’s background hosting separately from the visible chat account.",
+        "zh-cn": "分别管理各账户的后台托管与当前可见聊天账户。"
+      }
+    },
+    {
+      "id": "federation",
+      "name": {
+        "en": "Federation and community scope",
+        "zh-cn": "联邦与社区范围"
+      },
+      "desktop": {
+        "en": "Matrix room membership and standard client transport.",
+        "zh-cn": "Matrix 房间成员关系与标准客户端传输。"
+      },
+      "server": {
+        "en": "Embedded Palpo supports Matrix server-to-server federation.",
+        "zh-cn": "内嵌 Palpo 支持 Matrix 服务器间联邦。"
+      },
+      "buzz": {
+        "en": "Nostr identities connect to community-scoped relay messaging.",
+        "zh-cn": "Nostr 身份连接到社区范围的中继消息。"
+      },
+      "boundary": {
+        "en": "Matrix federation carries authorized room messages; coding-tool permissions stay with the Agent owner.",
+        "zh-cn": "Matrix 联邦传递获授权的房间消息，编程工具权限仍由 Agent 所有者管理。"
+      },
+      "guide": "operations",
+      "category": "collaboration",
+      "availability": "",
+      "comparison": true,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "Matrix federation carries authorized room messages; coding-tool permissions stay with the Agent owner.",
+        "zh-cn": "Matrix 联邦传递获授权的房间消息，编程工具权限仍由 Agent 所有者管理。"
+      }
+    },
+    {
+      "id": "third-party",
+      "name": {
+        "en": "Other clients, including Element",
+        "zh-cn": "其他客户端，包括 Element"
+      },
+      "desktop": {
+        "en": "Standard m.room.message text is interoperable.",
+        "zh-cn": "标准 m.room.message 文本可互通。"
+      },
+      "server": {
+        "en": "Delivers Matrix room events; management is Hagency-specific.",
+        "zh-cn": "投递 Matrix 房间事件；管理接口为 Hagency 专用。"
+      },
+      "buzz": {
+        "en": "",
+        "zh-cn": ""
+      },
+      "boundary": {
+        "en": "Use compatible Matrix clients for standard room messages, and Hagency Desktop for Agent management and interactive approval cards.",
+        "zh-cn": "通过兼容的 Matrix 客户端收发标准房间消息，通过 Hagency Desktop 管理 Agent 并处理交互式审批卡片。"
+      },
+      "guide": "task-threads",
+      "category": "collaboration",
+      "availability": "",
+      "comparison": false,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "Use compatible Matrix clients for standard room messages, and Hagency Desktop for Agent management and interactive approval cards.",
+        "zh-cn": "通过兼容的 Matrix 客户端收发标准房间消息，通过 Hagency Desktop 管理 Agent 并处理交互式审批卡片。"
+      }
+    },
+    {
+      "id": "web-admin",
+      "name": {
+        "en": "Server administration",
+        "zh-cn": "Server 管理"
+      },
+      "desktop": {
+        "en": "Native Agent experience is separate from server administration.",
+        "zh-cn": "原生 Agent 体验与服务器管理分离。"
+      },
+      "server": {
+        "en": "Rust/Yew web UI, integrated Palpo and Pasion in one process.",
+        "zh-cn": "Rust/Yew Web UI，一个进程集成 Palpo 与 Pasion。"
+      },
+      "buzz": {
+        "en": "",
+        "zh-cn": ""
+      },
+      "boundary": {
+        "en": "Deploy Palpo, Pasion and Hagency management as one integrated Server.",
+        "zh-cn": "通过一个集成 Server 部署 Palpo、Pasion 与 Hagency 管理功能。"
+      },
+      "guide": "deploy-palpo",
+      "category": "deployment",
+      "availability": "",
+      "comparison": false,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "Deploy Palpo, Pasion and Hagency management as one integrated Server.",
+        "zh-cn": "通过一个集成 Server 部署 Palpo、Pasion 与 Hagency 管理功能。"
+      }
+    },
+    {
+      "id": "downloads",
+      "name": {
+        "en": "Published Desktop installers",
+        "zh-cn": "已发布 Desktop 安装包"
+      },
+      "desktop": {
+        "en": "rc.14 installers for macOS ARM64 and Windows x86-64.",
+        "zh-cn": "rc.14 提供 macOS ARM64 与 Windows x86-64 安装包。"
+      },
+      "server": {
+        "en": "No standalone release binary; source and CI containers.",
+        "zh-cn": "没有独立发布二进制包；提供源码与 CI 容器。"
+      },
+      "buzz": {
+        "en": "",
+        "zh-cn": ""
+      },
+      "boundary": {
+        "en": "Installers and checksums are listed together on Downloads.",
+        "zh-cn": "下载页集中提供安装包与校验和。"
+      },
+      "guide": "install-robrix2",
+      "category": "deployment",
+      "availability": "",
+      "comparison": false,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "Installers and checksums are listed together on Downloads.",
+        "zh-cn": "下载页集中提供安装包与校验和。"
+      }
+    },
+    {
+      "id": "mobile",
+      "name": {
+        "en": "Mobile availability",
+        "zh-cn": "移动端可用性"
+      },
+      "desktop": {
+        "en": "No Android or iOS installer in rc.14.",
+        "zh-cn": "rc.14 没有 Android 或 iOS 安装包。"
+      },
+      "server": {
+        "en": "Browser-based server administration.",
+        "zh-cn": "通过浏览器管理服务器。"
+      },
+      "buzz": {
+        "en": "",
+        "zh-cn": ""
+      },
+      "boundary": {
+        "en": "Choose an installer from the Downloads page for your operating system.",
+        "zh-cn": "根据操作系统在下载页选择对应安装包。"
+      },
+      "guide": "install-robrix2",
+      "category": "deployment",
+      "availability": "",
+      "comparison": false,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "Choose an installer from the Downloads page for your operating system.",
+        "zh-cn": "根据操作系统在下载页选择对应安装包。"
+      }
+    },
+    {
+      "id": "git",
+      "name": {
+        "en": "Repository work",
+        "zh-cn": "仓库工作"
+      },
+      "desktop": {
+        "en": "Coding agents can work in local repositories.",
+        "zh-cn": "编程 Agent 可操作本地仓库。"
+      },
+      "server": {
+        "en": "Returns Agent messages and files to the conversation.",
+        "zh-cn": "将 Agent 消息与文件返回对话。"
+      },
+      "buzz": {
+        "en": "Repository browsing with Nostr repository, issue and pull-request activity and status.",
+        "zh-cn": "浏览仓库，展示 Nostr 仓库、Issue 和 Pull Request 的动态与状态。"
+      },
+      "boundary": {
+        "en": "Choose the Agent’s workspace and review the changes it returns to the conversation.",
+        "zh-cn": "为 Agent 选择工作区，在对话中审阅它返回的修改。"
+      },
+      "guide": "task-threads",
+      "category": "workflows",
+      "availability": "",
+      "comparison": true,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "Hagency agents work on assigned local repositories. Buzz’s repository interface presents repository content and activity.",
+        "zh-cn": "Hagency Agent 在分配的本地仓库中工作；Buzz 的仓库界面呈现仓库内容和动态。"
+      }
+    },
+    {
+      "id": "workflows",
+      "name": {
+        "en": "Task triggers",
+        "zh-cn": "任务触发"
+      },
+      "desktop": {
+        "en": "Start coding work from a personal conversation or a bound team room.",
+        "zh-cn": "在个人对话或已绑定团队房间中发起编程任务。"
+      },
+      "server": {
+        "en": "Coordinates Agent work through execution leases and conversation context.",
+        "zh-cn": "通过执行租约与对话上下文协调 Agent 工作。"
+      },
+      "buzz": {
+        "en": "Form and YAML workflow editors with message, reaction, schedule and webhook triggers.",
+        "zh-cn": "表单与 YAML 工作流编辑器，支持消息、反应、定时和 Webhook 触发。"
+      },
+      "boundary": {
+        "en": "Start in the Agent’s private conversation or mention it in a bound team room.",
+        "zh-cn": "在 Agent 私密对话中开始，或在已绑定团队房间中明确提及它。"
+      },
+      "guide": "task-threads",
+      "category": "workflows",
+      "availability": "",
+      "comparison": true,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "Hagency starts Agent tasks from conversations. Buzz workflows add configured event and schedule triggers.",
+        "zh-cn": "Hagency 从对话发起 Agent 任务；Buzz 工作流提供可配置的事件与定时触发。"
+      }
+    },
+    {
+      "id": "canvas",
+      "name": {
+        "en": "Conversation workspaces",
+        "zh-cn": "对话工作区"
+      },
+      "desktop": {
+        "en": "Open mini-apps and webviews alongside conversations.",
+        "zh-cn": "在对话旁打开小应用和 WebView。"
+      },
+      "server": {
+        "en": "Organizes collaboration through Matrix rooms and Spaces.",
+        "zh-cn": "通过 Matrix 房间与 Space 组织协作。"
+      },
+      "buzz": {
+        "en": "Saved Markdown canvases for conversations, with revision history and conflict checks.",
+        "zh-cn": "对话中的 Markdown 页面，提供保存、修订历史与冲突检查。"
+      },
+      "boundary": {
+        "en": "Keep mini-apps and webviews open beside the conversation in the native workspace.",
+        "zh-cn": "在原生工作空间中，将小应用和 WebView 与对话并排使用。"
+      },
+      "guide": "choose-your-path",
+      "category": "workflows",
+      "availability": "",
+      "comparison": true,
+      "audience": "all",
+      "comparisonNote": {
+        "en": "Hagency docks mini-apps and webviews beside chat. Buzz stores Markdown pages with conversation context.",
+        "zh-cn": "Hagency 在聊天旁停靠小应用和 WebView；Buzz 将 Markdown 页面保存在对应对话中。"
+      }
+    },
+    {
+      "id": "voice",
+      "name": {
+        "en": "Voice integration",
+        "zh-cn": "语音接入"
+      },
+      "desktop": {
+        "en": "Agent tasks and results stay in text conversations.",
+        "zh-cn": "Agent 任务与结果保留在文字对话中。"
+      },
+      "server": {
+        "en": "Carries Matrix room messages and media.",
+        "zh-cn": "承载 Matrix 房间消息与媒体。"
+      },
+      "buzz": {
+        "en": "Voice Huddles and a Codex realtime-voice integration.",
+        "zh-cn": "语音 Huddle 与 Codex 实时语音接入。"
+      },
+      "boundary": {
+        "en": "Buzz’s Agent voice integration uses Codex; the Agent receives its owner’s audio. Hagency keeps coding tasks and results in Matrix conversations.",
+        "zh-cn": "Buzz 的 Agent 语音接入使用 Codex，Agent 接收其所有者的音频；Hagency 将编程任务与结果保留在 Matrix 对话中。"
+      },
+      "guide": "choose-your-path",
+      "category": "workflows",
+      "availability": "",
+      "comparison": true,
+      "audience": "comparison",
+      "comparisonNote": {
+        "en": "Buzz’s Agent voice integration uses Codex; the Agent receives its owner’s audio. Hagency keeps coding tasks and results in Matrix conversations.",
+        "zh-cn": "Buzz 的 Agent 语音接入使用 Codex，Agent 接收其所有者的音频；Hagency 将编程任务与结果保留在 Matrix 对话中。"
+      }
+    }
+  ]
+}

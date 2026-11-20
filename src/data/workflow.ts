@@ -105,8 +105,8 @@ export const steps = [
       "zh-cn": "你"
     },
     "message": {
-      "en": "Inspect this sample project and explain the failing test.",
-      "zh-cn": "检查这个示例项目，解释测试失败的原因。"
+      "en": "Review this API change and summarize the updates needed.",
+      "zh-cn": "审阅这项 API 修改，并总结需要同步更新的内容。"
     },
     "detail": {
       "en": "Private conversation · bounded scope",
@@ -138,8 +138,8 @@ export const steps = [
       "zh-cn": "我找到了失败断言，正在检查原因。"
     },
     "detail": {
-      "en": "Illustrative report · not a live model",
-      "zh-cn": "示例报告 · 非真实模型"
+      "en": "Progress update",
+      "zh-cn": "进展更新"
     },
     "guide": "task-threads",
     "icon": "activity"
@@ -180,8 +180,8 @@ export const steps = [
       "zh-cn": "检查结果"
     },
     "description": {
-      "en": "Check the returned explanation, changes and validation evidence.",
-      "zh-cn": "检查返回的解释、修改与验证证据。"
+      "en": "Review the returned explanation, changes and task results.",
+      "zh-cn": "审阅返回的解释、修改与任务结果。"
     },
     "status": {
       "en": "Result received",
@@ -192,12 +192,12 @@ export const steps = [
       "zh-cn": "Atlas"
     },
     "message": {
-      "en": "Here is the proposed change and the test result for review.",
-      "zh-cn": "这是待审阅的修改建议与测试结果。"
+      "en": "Here is the proposed change and the execution result for review.",
+      "zh-cn": "这是供审阅的修改方案与执行结果。"
     },
     "detail": {
-      "en": "Returned evidence · verify before adopting",
-      "zh-cn": "返回证据 · 采用前核验"
+      "en": "Changes and results",
+      "zh-cn": "修改与结果"
     },
     "guide": "share-files",
     "icon": "file"

@@ -1,0 +1,306 @@
+{
+  "reviewDate": "2026-11-19",
+  "reviewType": "Independent public-copy final re-review, v3",
+  "score": 92,
+  "maximum": 100,
+  "threshold": 90,
+  "accepted": true,
+  "criticalIssuesPresent": false,
+  "blockingFindingsRemain": false,
+  "criteria": [
+    {
+      "criterion": "Audience, problem and value",
+      "awarded": 24,
+      "maximum": 25,
+      "reason": "Home, role paths, product features and comparison now serve users choosing Agent collaboration and developers configuring the stack. Hagency features have independent product descriptions."
+    },
+    {
+      "criterion": "Clarity and specificity",
+      "awarded": 22,
+      "maximum": 25,
+      "reason": "Specific runtimes, setup route, owner authority, token semantics and comparison subsets are clear. The longer technical feature/architecture references still contain dense implementation vocabulary."
+    },
+    {
+      "criterion": "Truth and defensible promises",
+      "awarded": 19,
+      "maximum": 20,
+      "reason": "Current rc.14 and platform statements, postpaid limits, encryption data flow and Hagency/Matrix management distinction are consistent with supplied facts. Buzz claims remain limited to traced implementation; unsupported native encryption/parity/winner promises are absent."
+    },
+    {
+      "criterion": "Useful next steps for developers and users",
+      "awarded": 18,
+      "maximum": 20,
+      "reason": "Hosting prerequisites, first-Agent route, Save/Service/start sequence, group binding/mention, pool roles and deployment paths provide workable next steps. Advanced operational setup still relies on linked repository guides."
+    },
+    {
+      "criterion": "Bilingual professional tone",
+      "awarded": 9,
+      "maximum": 10,
+      "reason": "The repeated author-facing headlines/descriptions are removed; Chinese receipts and source-setup wording are corrected. A few literal technical labels remain as nonblocking polish."
+    }
+  ],
+  "coverage": {
+    "pages": 68,
+    "en": 34,
+    "zh-cn": 34,
+    "method": "Full 68-route reading established in v1; repaired surfaces reread in v2. V3 reread both complete features and comparison pages, confirmed architecture terminology in both languages, spot-checked runtime guides and project setup text, and globally scanned all current titles/descriptions/main text for the previously rejected stale phrases. All source bytes are bound below."
+  },
+  "artifact": ".run/public-copy/rendered-text.json",
+  "artifactSha256": "0e1a7580a8279a930f4ee72deb08fc6b922c9581a2b9865f02ee456769e994aa",
+  "inputHashChecks": {
+    "src/components/Architecture.astro": {
+      "expected": "e20d27ccbf7154a221260edac8103df0af7d554175e7616d72f69975edbd9cd2",
+      "actual": "e20d27ccbf7154a221260edac8103df0af7d554175e7616d72f69975edbd9cd2",
+      "matches": true
+    },
+    "src/components/ArchitectureFlow.tsx": {
+      "expected": "f3ad92d8adfa98334c25cb0cdf74807c69f8dab33cbdb14f9931f390a156beca",
+      "actual": "f3ad92d8adfa98334c25cb0cdf74807c69f8dab33cbdb14f9931f390a156beca",
+      "matches": true
+    },
+    "src/components/ArchitecturePage.astro": {
+      "expected": "a6afd00bac1bd0a144f4d61126f178b58c9ce7885d384e926ef58b6837f9ace2",
+      "actual": "a6afd00bac1bd0a144f4d61126f178b58c9ce7885d384e926ef58b6837f9ace2",
+      "matches": true
+    },
+    "src/components/ArticlePage.astro": {
+      "expected": "36959d54d3c6668aff0b849aa16c90c2fd138c123e03f980e66df321ae1f74f6",
+      "actual": "36959d54d3c6668aff0b849aa16c90c2fd138c123e03f980e66df321ae1f74f6",
+      "matches": true
+    },
+    "src/components/Code.astro": {
+      "expected": "b7d96114cc2e863944eea25135c34f9ebe3978d7fd2ed5d2b03249189a8fe8cf",
+      "actual": "b7d96114cc2e863944eea25135c34f9ebe3978d7fd2ed5d2b03249189a8fe8cf",
+      "matches": true
+    },
+    "src/components/Home.astro": {
+      "expected": "ba6035ab6c6bc0afa565fb2a88c9c0c4503e341a60945577067d339ef40e5112",
+      "actual": "ba6035ab6c6bc0afa565fb2a88c9c0c4503e341a60945577067d339ef40e5112",
+      "matches": true
+    },
+    "src/components/Icon.astro": {
+      "expected": "17c0d873f9d46fb8177a8870beb31ccb024b5ba2a4aa6b4d4aac9988564beda3",
+      "actual": "17c0d873f9d46fb8177a8870beb31ccb024b5ba2a4aa6b4d4aac9988564beda3",
+      "matches": true
+    },
+    "src/components/Mark.astro": {
+      "expected": "2202dfbb2ed1ec3e944e7b7575359f870b28410b29a78ed35f6007927e95728d",
+      "actual": "2202dfbb2ed1ec3e944e7b7575359f870b28410b29a78ed35f6007927e95728d",
+      "matches": true
+    },
+    "src/components/MatrixIntro.astro": {
+      "expected": "660b84eed0383ce1b08a492123e710a4c0290190cb6ee01d0317774c31e5ac5a",
+      "actual": "660b84eed0383ce1b08a492123e710a4c0290190cb6ee01d0317774c31e5ac5a",
+      "matches": true
+    },
+    "src/components/MatrixNetwork.astro": {
+      "expected": "712124ade04838bd1922956e903d26b661eeea74e3d8378eda57f881798061e4",
+      "actual": "712124ade04838bd1922956e903d26b661eeea74e3d8378eda57f881798061e4",
+      "matches": true
+    },
+    "src/components/MatrixPage.astro": {
+      "expected": "27dc599f028774e9140fee272de8b63b3429ab3cc7840fa3596571d9527b987e",
+      "actual": "27dc599f028774e9140fee272de8b63b3429ab3cc7840fa3596571d9527b987e",
+      "matches": true
+    },
+    "src/components/ProjectPage.astro": {
+      "expected": "3ed4c7ab9fa19834735f28cddaa1b56ba42aee5079132c695c5eec8730e2e015",
+      "actual": "3ed4c7ab9fa19834735f28cddaa1b56ba42aee5079132c695c5eec8730e2e015",
+      "matches": true
+    },
+    "src/components/ProjectScreenshot.astro": {
+      "expected": "afa30c9232ddde48c347035ab25d3468581056eb705187ff52c5e307a466f31e",
+      "actual": "afa30c9232ddde48c347035ab25d3468581056eb705187ff52c5e307a466f31e",
+      "matches": true
+    },
+    "src/components/ProjectVisual.astro": {
+      "expected": "77b8eaee691a177f969d61948e4c41af4811b08484128bbf8800e4024bee7b93",
+      "actual": "77b8eaee691a177f969d61948e4c41af4811b08484128bbf8800e4024bee7b93",
+      "matches": true
+    },
+    "src/components/RoomPermissions.astro": {
+      "expected": "621dabd3d41f9da7932400207b329b305307990f83d2a95a081b2e1c2a426397",
+      "actual": "621dabd3d41f9da7932400207b329b305307990f83d2a95a081b2e1c2a426397",
+      "matches": true
+    },
+    "src/components/ScreenshotGallery.astro": {
+      "expected": "6d8eb873fad1662c43a966c37486d64a7a4b2cbb692ec330632bcb86c455eb1d",
+      "actual": "6d8eb873fad1662c43a966c37486d64a7a4b2cbb692ec330632bcb86c455eb1d",
+      "matches": true
+    },
+    "src/components/ScreenshotViewer.astro": {
+      "expected": "fad8289c1bdc453b90bf255c495607734e046ceafe1410edbbd9db349cf5b6d1",
+      "actual": "fad8289c1bdc453b90bf255c495607734e046ceafe1410edbbd9db349cf5b6d1",
+      "matches": true
+    },
+    "src/components/StandardPage.astro": {
+      "expected": "c41bb6bb9c88bf9c261dc03f1c3e5731a2bcbe631b7590940e174a993fc1eaa0",
+      "actual": "c41bb6bb9c88bf9c261dc03f1c3e5731a2bcbe631b7590940e174a993fc1eaa0",
+      "matches": true
+    },
+    "src/components/VerificationPage.astro": {
+      "expected": "03b947cb9d0cdc9cd3e8a59cb34338a628b8f5b7cfcb305c7b40eccc97ff422a",
+      "actual": "03b947cb9d0cdc9cd3e8a59cb34338a628b8f5b7cfcb305c7b40eccc97ff422a",
+      "matches": true
+    },
+    "src/components/Workflow.astro": {
+      "expected": "933f6696bdc2f9e8171ebb2ec87a1c56d243a97e3d4a43b972596d92b229f9ea",
+      "actual": "933f6696bdc2f9e8171ebb2ec87a1c56d243a97e3d4a43b972596d92b229f9ea",
+      "matches": true
+    },
+    "src/data/architecture.ts": {
+      "expected": "e4aee7b2b26b230b4ce27202813ba7428623f7dd56a05d4e3144457716ca7cd2",
+      "actual": "e4aee7b2b26b230b4ce27202813ba7428623f7dd56a05d4e3144457716ca7cd2",
+      "matches": true
+    },
+    "src/data/capabilities.json": {
+      "expected": "ff71d486438eab7aa2edd792a715ed4fc918c68231fa3bf67df23b2a9b37cbe2",
+      "actual": "ff71d486438eab7aa2edd792a715ed4fc918c68231fa3bf67df23b2a9b37cbe2",
+      "matches": true
+    },
+    "src/data/content.ts": {
+      "expected": "6e6ac44248bbf670f9079fb2ccb6572abcfbcbfb76c08de0345d0fdeb45df4f8",
+      "actual": "6e6ac44248bbf670f9079fb2ccb6572abcfbcbfb76c08de0345d0fdeb45df4f8",
+      "matches": true
+    },
+    "src/data/matrix.ts": {
+      "expected": "c69af051c1fe591dda2419c3a5eac83e9b1f0fd73b51652cd75913f82cac959f",
+      "actual": "c69af051c1fe591dda2419c3a5eac83e9b1f0fd73b51652cd75913f82cac959f",
+      "matches": true
+    },
+    "src/data/releases.json": {
+      "expected": "d190edcafcc7406105606098299afde252fca0832f175ca641154fef9a8dd88c",
+      "actual": "d190edcafcc7406105606098299afde252fca0832f175ca641154fef9a8dd88c",
+      "matches": true
+    },
+    "src/data/screenshot-assets.json": {
+      "expected": "da36d61be4b18377579929a21a2195729e62775e9f1e25da613db0194ff6f952",
+      "actual": "da36d61be4b18377579929a21a2195729e62775e9f1e25da613db0194ff6f952",
+      "matches": true
+    },
+    "src/data/screenshots.ts": {
+      "expected": "1dcae5293f50b02a7d8dc907eba77699e8e896c254111bb8f85ee81f1a5f77ad",
+      "actual": "1dcae5293f50b02a7d8dc907eba77699e8e896c254111bb8f85ee81f1a5f77ad",
+      "matches": true
+    },
+    "src/data/site.ts": {
+      "expected": "ba9a07b4fe466afe9961c8cb53217f287c989ef1a55147b84e1bd80cb70c91c9",
+      "actual": "ba9a07b4fe466afe9961c8cb53217f287c989ef1a55147b84e1bd80cb70c91c9",
+      "matches": true
+    },
+    "src/data/workflow.ts": {
+      "expected": "bfceeece41f1edcf6172a124808b775cd1a06340fb0482731172f3899644e54a",
+      "actual": "bfceeece41f1edcf6172a124808b775cd1a06340fb0482731172f3899644e54a",
+      "matches": true
+    },
+    "src/layouts/Layout.astro": {
+      "expected": "e3b083d08260af6d3ba38d2759d710f92da5ef5ac0388331b8c1bcab5d8ea4fd",
+      "actual": "e3b083d08260af6d3ba38d2759d710f92da5ef5ac0388331b8c1bcab5d8ea4fd",
+      "matches": true
+    },
+    "src/pages/404.astro": {
+      "expected": "620ea745c47c87f50cf87bfbfa15a6d18a7993a8ec6e44cb42943e9ec51b52bb",
+      "actual": "620ea745c47c87f50cf87bfbfa15a6d18a7993a8ec6e44cb42943e9ec51b52bb",
+      "matches": true
+    },
+    "src/pages/[lang]/[...slug].astro": {
+      "expected": "7c2008dfa103a619de2bf2ae521102ce4ef8440d9faba590b61dc3ced4a6a635",
+      "actual": "7c2008dfa103a619de2bf2ae521102ce4ef8440d9faba590b61dc3ced4a6a635",
+      "matches": true
+    },
+    "src/pages/[lang]/rss.xml.ts": {
+      "expected": "d8728af79daa0bac9db41e8defc7d48eb6045fa6105b43c496eadaea4574c067",
+      "actual": "d8728af79daa0bac9db41e8defc7d48eb6045fa6105b43c496eadaea4574c067",
+      "matches": true
+    },
+    "src/pages/index.astro": {
+      "expected": "658e9d63b04a8ef604683af28fed6b52fc00762cab89b38042d7b15c2e88afaa",
+      "actual": "658e9d63b04a8ef604683af28fed6b52fc00762cab89b38042d7b15c2e88afaa",
+      "matches": true
+    },
+    "src/pages/robots.txt.ts": {
+      "expected": "470600b8f0f5f20dc334565c0409f44f4452c18bd70746c325030bd31920734d",
+      "actual": "470600b8f0f5f20dc334565c0409f44f4452c18bd70746c325030bd31920734d",
+      "matches": true
+    },
+    "src/pages/sitemap.xml.ts": {
+      "expected": "9e324f20180f46f7c07ed9bf9ee6e66b9ee0d09c6af8b0db7791b086071ed552",
+      "actual": "9e324f20180f46f7c07ed9bf9ee6e66b9ee0d09c6af8b0db7791b086071ed552",
+      "matches": true
+    },
+    "src/scripts/site.ts": {
+      "expected": "75432487b0419f915b1078ec3899fd58ef105b147fce6837e8dae8d75317b47c",
+      "actual": "75432487b0419f915b1078ec3899fd58ef105b147fce6837e8dae8d75317b47c",
+      "matches": true
+    },
+    "src/styles/architecture.css": {
+      "expected": "32fa3bba4f2fad80ea37fd06115dc6d1663525ba281b7ed2898fcd13c251dc2c",
+      "actual": "32fa3bba4f2fad80ea37fd06115dc6d1663525ba281b7ed2898fcd13c251dc2c",
+      "matches": true
+    },
+    "src/styles/global.css": {
+      "expected": "5c218753fff8d6bb2c79b42edb29157671fc9ff557df51487bb8d36507e2c64d",
+      "actual": "5c218753fff8d6bb2c79b42edb29157671fc9ff557df51487bb8d36507e2c64d",
+      "matches": true
+    },
+    "src/styles/matrix.css": {
+      "expected": "799e4b3b845c773e08d05eadd18edb5dc72ab3b63dc65d37d4d2ab95fa394216",
+      "actual": "799e4b3b845c773e08d05eadd18edb5dc72ab3b63dc65d37d4d2ab95fa394216",
+      "matches": true
+    },
+    "src/styles/screenshots.css": {
+      "expected": "0116b394bc5bd66ac96c2725d57b97d5590aa1bf1c8e8deea27ef64d5e52ee8e",
+      "actual": "0116b394bc5bd66ac96c2725d57b97d5590aa1bf1c8e8deea27ef64d5e52ee8e",
+      "matches": true
+    }
+  },
+  "sourceFileCount": 41,
+  "allSubmittedSourceHashesMatch": true,
+  "allSrcFilesCovered": true,
+  "resolvedFindings": [
+    {
+      "id": "B1",
+      "result": "rc.14 now includes the named fixes; no newer-main contradiction remains."
+    },
+    {
+      "id": "B2",
+      "result": "Downloads, Media, runtime descriptions and introduction use direct product text."
+    },
+    {
+      "id": "B3",
+      "result": "Runtime guide gives Save → Service/start → private chat and bound-room/mention actions."
+    },
+    {
+      "id": "B4",
+      "result": "Article dates and documentation update dates no longer use the September constant."
+    },
+    {
+      "id": "B5",
+      "result": "Receipts render as 回执 in data and the ArchitecturePage literal; actual credentials remain 凭据."
+    },
+    {
+      "id": "B6",
+      "result": "Hagency-only features render independent own-product details; Buzz notes and source links remain on the comparison page. Features footer lists Desktop/Server only."
+    },
+    {
+      "id": "C1",
+      "result": "Unnecessary per-message copy/forward/export promise removed."
+    },
+    {
+      "id": "C2",
+      "result": "Source setup/源码配置 replaces the mistranslated precheck label and FAQ punctuation is repaired."
+    }
+  ],
+  "remainingNonblockingNotes": [
+    "Long feature and architecture references still contain terms such as leases, generation checks, OUP and native hold; plain action language could improve novice readability further.",
+    "Comparison wording such as harnesses register / harness 注册 is implementation-oriented; available on / 可使用 would be more natural when next editing that passage."
+  ],
+  "scopeLimit": "Acceptance is for the exact bilingual public copy and stated evidence boundaries. It is not a Desktop live-journey score, matched competitive benchmark, release execution certification or publication approval.",
+  "notPerformed": [
+    "site edits",
+    "builds",
+    "test execution",
+    "UI application launch",
+    "publication"
+  ]
+}

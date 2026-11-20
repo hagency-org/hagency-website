@@ -580,12 +580,12 @@
         "zh-cn": "Agent 加密工作使用执行器设备路由。"
       },
       "buzz": {
-        "en": "NIP-17 gift-wrapped encrypted direct messages.",
-        "zh-cn": "NIP-17 gift-wrap 加密私信。"
+        "en": "The relay accepts NIP-17 gift-wrap events. The native app’s ordinary DM path uses relay-backed kind-9 channel messages.",
+        "zh-cn": "中继接收 NIP-17 gift-wrap 事件；原生应用的普通私聊路径使用中继频道中的 kind-9 消息。"
       },
       "boundary": {
-        "en": "Both support encrypted paths. Executors and configured model providers can see task plaintext.",
-        "zh-cn": "双方都有加密路径；执行器与配置的模型提供方可见任务明文。"
+        "en": "Relay gift-wrap transport support does not establish native DM end-to-end encryption. The native app encryption comparison has been removed.",
+        "zh-cn": "中继对 gift-wrap 传输的支持不能证明原生私聊端到端加密；已移除原生应用加密对比。"
       },
       "guide": "approvals",
       "evidence": "source",

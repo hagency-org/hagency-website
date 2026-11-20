@@ -53,8 +53,8 @@ export const guides: Article[] = [
         },
         "paragraphs": [
           {
-            "en": "The reviewed main is preparing rc.14; the published Desktop snapshot is rc.13. Later Windows setup and multi-account hosting changes must not be assumed to be in rc.13. Use the capability audit and the exact release notes.",
-            "zh-cn": "核验的 main 正准备 rc.14，已发布 Desktop 快照为 rc.13。更晚的 Windows 配置与多账户托管修改不能视作已包含于 rc.13；请查看能力核验页与准确的版本说明。"
+            "en": "Desktop rc.14 is available for macOS ARM64 and Windows x86-64. Choose your installer from Downloads and follow the corresponding release notes for setup and dependencies.",
+            "zh-cn": "Desktop rc.14 提供 macOS ARM64 与 Windows x86-64 安装包。在下载页选择对应版本，按版本说明完成配置并安装依赖。"
           }
         ]
       }
@@ -83,12 +83,12 @@ export const guides: Article[] = [
         },
         "paragraphs": [
           {
-            "en": "The rc.13 release contains a macOS ARM64 DMG and a Windows x86-64 installer, plus checksums and build manifests. No Linux, Intel macOS, Android or iOS installer is listed in this release. A successful build job is not a download asset.",
-            "zh-cn": "rc.13 包含 macOS ARM64 DMG、Windows x86-64 安装程序，以及校验和与构建清单；此版本没有列出 Linux、Intel macOS、Android 或 iOS 安装包。构建成功不等于已提供下载文件。"
+            "en": "Download the macOS ARM64 DMG or the Windows x86-64 installer. Each release includes checksums and build information.",
+            "zh-cn": "rc.14 包含 macOS ARM64 DMG、Windows x86-64 安装程序，以及校验和与构建清单；此版本没有列出 Linux、Intel macOS、Android 或 iOS 安装包。构建成功不等于已提供下载文件。"
           },
           {
-            "en": "This is a release candidate. Current main contains newer local-Codex discovery and sign-in fixes; consult release notes for your platform before relying on a runtime.",
-            "zh-cn": "这是候选发行版。当前 main 包含更晚的本地 Codex 发现与登录修正；使用某个运行时前，请阅读对应平台的发布说明。"
+            "en": "Desktop rc.14 includes local Codex discovery and browser sign-in improvements. Follow the prerequisites for your operating system and runtime.",
+            "zh-cn": "Desktop rc.14 包含本地 Codex 发现与浏览器登录改进，请按所用操作系统和运行时完成依赖配置。"
           }
         ]
       },
@@ -106,16 +106,16 @@ export const guides: Article[] = [
       },
       {
         "title": {
-          "en": "Use JIT for development",
-          "zh-cn": "开发测试使用 JIT"
+          "en": "Develop from source",
+          "zh-cn": "从源码开始开发"
         },
         "paragraphs": [
           {
-            "en": "Development, UI checks and integration testing use the pinned Makepad JIT. Reuse a matching runner, native dependencies and helpers. Native compilation is reserved for release work; preserve other running JITs and use isolated state.",
-            "zh-cn": "开发、UI 检查与联调使用固定版本的 Makepad JIT。复用匹配的 runner、原生依赖与 helper；原生编译仅用于 release，并保留其他运行中的 JIT、隔离测试状态。"
+            "en": "Clone the Desktop repository and follow its README for the Makepad runtime, dependencies and local setup. Published installers are available from Downloads.",
+            "zh-cn": "克隆 Desktop 仓库，按照 README 配置 Makepad 运行环境、依赖与本地开发设置。已发布安装包见下载页。"
           }
         ],
-        "code": "git clone https://github.com/hagency-org/hagency-desktop.git\ncd hagency-desktop\n# Read .jit/NOTES.md and reuse the matching existing JIT runner."
+        "code": "git clone https://github.com/hagency-org/hagency-desktop.git\ncd hagency-desktop\n# See README.md for development setup."
       }
     ],
     "source": "https://github.com/hagency-org/hagency-desktop"
@@ -127,8 +127,8 @@ export const guides: Article[] = [
       "zh-cn": "连接本地编程运行时"
     },
     "description": {
-      "en": "Choose Codex, Claude Code or an actual Octos profile without inventing credentials.",
-      "zh-cn": "选择 Codex、Claude Code 或真实 Octos 配置档，不虚构凭据。"
+      "en": "Connect a local Codex, Claude Code or Octos configuration to your Agent.",
+      "zh-cn": "为 Agent 连接本地 Codex、Claude Code 或 Octos 配置。"
     },
     "category": {
       "en": "CURRENT GUIDE",
@@ -154,24 +154,24 @@ export const guides: Article[] = [
         },
         "paragraphs": [
           {
-            "en": "Use the models and profiles returned by the installed runtime. Two Octos profiles using the same model remain distinct configurations. Local models and custom endpoints depend on that profile; this is not a guarantee that every CLI feature is exposed.",
-            "zh-cn": "使用已安装运行时返回的模型和配置档。同模型的两个 Octos 配置仍是独立配置；本地模型和自定义端点取决于该配置，这不保证 CLI 的每一项能力都已暴露。"
+            "en": "Choose from the models and profiles supplied by the installed runtime. Octos keeps separate profiles for the same model and supports local models and custom endpoints through profile configuration.",
+            "zh-cn": "从已安装运行时提供的模型与配置中选择。Octos 为同一模型保留独立配置，并通过配置连接本地模型和自定义端点。"
           }
         ]
       },
       {
         "title": {
-          "en": "Start the selected scope",
-          "zh-cn": "启动选定范围"
+          "en": "Save and start your Agent",
+          "zh-cn": "保存配置并启动 Agent"
         },
         "paragraphs": [
           {
-            "en": "Save the model and reasoning settings, then choose the owner private chat or a bound Room in Service and start responding. Stop before changing runtime and restart after saving. A workspace is created automatically; a custom directory is optional.",
-            "zh-cn": "保存模型与推理设置，再在 Service 中选择所有者私聊或已绑定房间并开始响应。更换运行时前先停止，保存后再启动。工作目录会自动创建，自定义目录是可选项。"
+            "en": "Save the runtime, model and workspace settings. Open the Agent’s Service page, start its service and open the private conversation to send your first request.",
+            "zh-cn": "保存运行时、模型和工作区设置。打开 Agent 的 Service 页面，启动服务，再打开私密对话发送第一个请求。"
           },
           {
-            "en": "Codex, Claude and Octos differ in tools, file delivery and report protocols. The audit distinguishes implemented adapters from live model inference and full CLI parity.",
-            "zh-cn": "Codex、Claude 与 Octos 的工具、文件交付和报告协议能力不同；核验页会区分已实现适配器、真实模型推理与完整 CLI 等价。"
+            "en": "For team work, bind the Agent to the intended room and mention it in your request. Review permissions and usage settings for that conversation before starting work.",
+            "zh-cn": "团队协作时，将 Agent 绑定到目标房间，并在请求中明确提及它。开始工作前，查看该对话的权限与用量设置。"
           }
         ]
       }
@@ -271,15 +271,15 @@ export const guides: Article[] = [
         },
         "paragraphs": [
           {
-            "en": "An Agent has a permanent owner. Assigning execution to a computer does not transfer ownership or copy its private crypto state. Current main supports per-account enrollment in one daemon; that later change is not assumed present in rc.13.",
-            "zh-cn": "Agent 有永久所有者。把执行分配到某台电脑，不会转移所有权或复制私有加密状态。当前 main 支持一个 daemon 中按账户登记；这一较晚修改不能视作已包含于 rc.13。"
+            "en": "An Agent has a permanent owner. Desktop rc.14 keeps separate enrollment and runtime state for each account in background hosting. Device assignment controls where its work executes.",
+            "zh-cn": "Agent 拥有永久所有者。Desktop rc.14 在后台托管中为各账户保留独立注册与运行状态，由设备分配决定任务的执行位置。"
           }
         ]
       },
       {
         "title": {
-          "en": "Recover without erasing evidence",
-          "zh-cn": "恢复时保留证据"
+          "en": "Keep your account and work history",
+          "zh-cn": "保留账户与工作记录"
         },
         "paragraphs": [
           {
@@ -391,8 +391,8 @@ export const guides: Article[] = [
         },
         "paragraphs": [
           {
-            "en": "Each Agent uses one pool. Published capacity is not a live balance guarantee. Accounting is postpaid; admitted work can exceed its limit. Unknown holds, owner withdrawal and applicant removal retain their recovery and settlement rules. There is no marketplace payment or commercial billing claim.",
-            "zh-cn": "每个 Agent 使用一个资源池。发布的容量不保证实时余额。用量在任务后记账，已接纳任务可能超过限额；不确定预留、所有者撤回和申请人移除仍遵循恢复与结算规则。这里不宣称市场支付或商业计费。"
+            "en": "Each Agent uses one pool. After approval, the executor reserves capacity and settles actual usage after the task. Admitted work may exceed its token limit; unresolved usage stays in the ledger. Applicants can remove their Agent, and resource owners can stop supply.",
+            "zh-cn": "每个 Agent 使用一个资源池。申请批准后，由执行器预留容量并在任务后按实际用量结算。已接纳工作可能超过 token 上限，待确认用量保留在账本中。申请人可移除自己的 Agent，资源所有者可停止供给。"
           }
         ]
       }
@@ -433,8 +433,8 @@ export const guides: Article[] = [
         },
         "paragraphs": [
           {
-            "en": "Supported progress and background reports are separate Matrix messages from the final answer. Equal text can be two distinct source messages; replaying one source identity must not create an extra event. Octos strong native reports and complete provider replay remain bounded by the capability audit.",
-            "zh-cn": "受支持的进展与后台报告作为独立 Matrix 消息显示，与最终回答分开。相同文本可来自两条不同来源消息；重放同一来源身份不能增加额外事件。Octos 强原生报告与完整提供方重放仍受能力核验范围限制。"
+            "en": "Progress updates, supported background messages and final answers appear as separate Matrix messages. Distinct source messages stay separate even when their text matches. Delivery retries keep the original message identity.",
+            "zh-cn": "进展更新、受支持的后台消息和最终回答分别呈现为独立 Matrix 消息。不同来源的消息即使文本相同也会保留，重复投递沿用原消息标识。"
           }
         ]
       },
@@ -451,7 +451,7 @@ export const guides: Article[] = [
         ]
       }
     ],
-    "source": "https://github.com/hagency-org/hagency-desktop/blob/main/docs/testing/spontaneous-messages-real-stack.md"
+    "source": "https://github.com/hagency-org/hagency-desktop/blob/main/docs/agent-chat.md"
   },
   {
     "slug": "approvals",
@@ -499,8 +499,8 @@ export const guides: Article[] = [
         },
         "paragraphs": [
           {
-            "en": "Codex, Claude and Octos have different tool and isolation surfaces. Shared Claude macOS confinement is not a cross-platform sandbox guarantee. Revocation prevents future authorization but cannot undo completed work or recover plaintext already received.",
-            "zh-cn": "Codex、Claude 与 Octos 的工具和隔离能力不同。共享 Claude 在 macOS 的隔离不代表跨平台沙箱保证；撤销可阻止后续授权，但无法撤销已完成操作或收回已获得的明文。"
+            "en": "Configure tool permissions and filesystem access for the chosen runtime and platform. Permission changes govern subsequent operations; completed tool actions remain in the work history.",
+            "zh-cn": "针对所选运行时和平台配置工具权限与文件访问。权限变更管理后续操作，已完成的工具操作保留在工作记录中。"
           }
         ]
       }
@@ -583,8 +583,8 @@ export const guides: Article[] = [
         },
         "paragraphs": [
           {
-            "en": "Server health and Appservice ACKs show transport readiness, not a qualified model. Desktop’s owner daemon, local profile, workspace and provider sign-in must also be valid. A registered Agent identity is not proof that a model call succeeded.",
-            "zh-cn": "Server 健康状态与 Appservice ACK 表示传输就绪，不代表模型通过资格检查。Desktop owner daemon、本地配置、工作目录和提供方登录也必须有效；注册 Agent 身份不等于模型调用成功。"
+            "en": "Use Server health to monitor Matrix transport and the integrated Appservice. In Desktop, check the owner daemon, selected runtime profile, workspace and provider sign-in to manage Agent execution.",
+            "zh-cn": "通过 Server 健康状态监控 Matrix 传输与集成 Appservice；在 Desktop 中检查所有者守护进程、所选运行时配置、工作区与提供方登录，管理 Agent 执行。"
           }
         ]
       },
@@ -595,25 +595,25 @@ export const guides: Article[] = [
         },
         "paragraphs": [
           {
-            "en": "Retain receipts, source IDs, binding generations and usage holds. Reconnect or resume the original operation when documented; do not erase uncertainty by resetting counters, creating a new request or replaying the model.",
-            "zh-cn": "保留回执、来源 ID、绑定代际与用量预留。按文档重连或恢复原操作，不通过重置计数、新建请求或重跑模型来消除不确定状态。"
+            "en": "Keep receipts, source IDs, binding generations and usage records. Reconnect using the original operation and resolve pending usage against its execution record.",
+            "zh-cn": "保留回执、来源 ID、绑定代际与用量记录，使用原操作重连，并根据对应执行记录确认待结算用量。"
           }
         ]
       },
       {
         "title": {
-          "en": "Test the exact deployment",
-          "zh-cn": "测试准确部署版本"
+          "en": "Manage deployment versions",
+          "zh-cn": "管理部署版本"
         },
         "paragraphs": [
           {
-            "en": "Record Desktop, Server, Palpo/Pasion pins and runtime versions. Use isolated test accounts and state. This audit separates source review, historical JIT fixtures, CI checks and newly executed UI checks; none alone certifies every production path.",
-            "zh-cn": "记录 Desktop、Server、Palpo/Pasion 固定版本及运行时版本，并使用隔离测试账户与状态。本次核验区分源码审查、历史 JIT 夹具、CI 检查与新执行的 UI 检查，任一种都不能单独证明所有生产路径。"
+            "en": "Keep Desktop, Server, Palpo, Pasion and runtime versions in your deployment record. Follow the corresponding release and upgrade instructions, and back up account data, room keys and execution records before an upgrade.",
+            "zh-cn": "记录部署使用的 Desktop、Server、Palpo、Pasion 与运行时版本，遵循对应的发布和升级说明；升级前备份账户数据、房间密钥及执行记录。"
           }
         ]
       }
     ],
-    "source": "https://github.com/hagency-org/hagency-server/blob/main/docs/TESTING.md"
+    "source": "https://github.com/hagency-org/hagency-server/blob/main/docs/OPERATIONS.md"
   }
 ];
 
@@ -621,27 +621,27 @@ export const articles: Article[] = [
   {
     "slug": "introducing-hagency",
     "title": {
-      "en": "Hagency now has two native applications",
-      "zh-cn": "Hagency 现已采用双应用结构"
+      "en": "Desktop and Server, built to work together",
+      "zh-cn": "Desktop 与 Server，共同连接协作"
     },
     "description": {
       "en": "Desktop owns the workspace and local execution; Server integrates identity and Matrix.",
       "zh-cn": "Desktop 负责协作界面与本地执行，Server 集成身份和 Matrix。"
     },
     "category": {
-      "en": "VERIFIED SNAPSHOT",
-      "zh-cn": "核验快照"
+      "en": "PRODUCT UPDATE",
+      "zh-cn": "产品动态"
     },
     "sections": [
       {
         "title": {
-          "en": "The current boundaries",
-          "zh-cn": "当前边界"
+          "en": "A workspace and its services",
+          "zh-cn": "工作空间与配套服务"
         },
         "paragraphs": [
           {
-            "en": "Hagency Desktop replaces the old Robrix2-facing product story. Hagency Server integrates Palpo, Pasion and the management UI in Rust. Legacy Fleet and Engagement instructions no longer describe this system.",
-            "zh-cn": "Hagency Desktop 取代旧的 Robrix2 产品叙事，Hagency Server 以 Rust 集成 Palpo、Pasion 与管理界面；旧 Fleet 和 Engagement 指南已不适用。"
+            "en": "Use Hagency Desktop to chat, manage Agents and connect local coding runtimes. Hagency Server combines Palpo Matrix, Pasion sign-in and Agent management in one Rust service.",
+            "zh-cn": "通过 Hagency Desktop 聊天、管理 Agent 并接入本地编程运行时。Hagency Server 在一个 Rust 服务中集成 Palpo Matrix、Pasion 登录与 Agent 管理。"
           }
         ]
       }
@@ -652,58 +652,70 @@ export const articles: Article[] = [
   {
     "slug": "conversation-to-result",
     "title": {
-      "en": "What the encrypted-message evidence proves",
-      "zh-cn": "加密消息证据证明了什么"
+      "en": "Keep Agent progress in the conversation",
+      "zh-cn": "让 Agent 进展留在对话中"
     },
     "description": {
-      "en": "Read the tested flow and its provider, platform and replay limits.",
-      "zh-cn": "阅读已测流程，以及提供方、平台与重放限制。"
+      "en": "Follow updates and answers as separate messages in your Agent conversation.",
+      "zh-cn": "在 Agent 对话中逐条跟进进展更新和最终回答。"
     },
     "category": {
-      "en": "VERIFIED SNAPSHOT",
-      "zh-cn": "核验快照"
+      "en": "PRODUCT UPDATE",
+      "zh-cn": "产品动态"
     },
     "sections": [
       {
         "title": {
-          "en": "A bounded real-stack result",
-          "zh-cn": "有明确边界的真实链路结果"
+          "en": "See each update clearly",
+          "zh-cn": "逐条查看进展"
         },
         "paragraphs": [
           {
-            "en": "Recorded JIT tests used real Server/Pasion/Palpo and SDK encryption with a deterministic Codex protocol subprocess. They exercised distinct reports, two receivers and daemon restart, then restored a UI to render six separate Agent rows. This was not paid inference or an Element acceptance run.",
-            "zh-cn": "记录的 JIT 测试使用真实 Server/Pasion/Palpo 与 SDK 加密，配合确定性 Codex 协议子进程；覆盖独立报告、双接收方与 daemon 重启，随后恢复 UI 显示六条独立 Agent 消息。这不是真实付费推理或 Element 验收。"
+            "en": "Hagency presents Agent progress, supported background messages and final answers as individual Matrix messages. Follow the work step by step, with updates and results kept in the same conversation.",
+            "zh-cn": "Hagency 将 Agent 进展、受支持的后台消息与最终回答呈现为独立 Matrix 消息。逐条跟进工作，在同一对话中查看更新与成果。"
+          }
+        ]
+      },
+      {
+        "title": {
+          "en": "Keep the conversation in context",
+          "zh-cn": "保留对话上下文"
+        },
+        "paragraphs": [
+          {
+            "en": "Private conversations and shared-room threads keep their own task context. Members follow the work in the same room, while tool permissions remain under the Agent owner’s control.",
+            "zh-cn": "私密对话和共享房间线程各自保留任务上下文。成员在同一个房间跟进工作，工具权限仍由 Agent 所有者管理。"
           }
         ]
       }
     ],
-    "source": "https://github.com/hagency-org/hagency-desktop/blob/main/docs/testing/spontaneous-messages-real-stack.md",
+    "source": "https://github.com/hagency-org/hagency-desktop/blob/main/docs/agent-chat.md",
     "date": "2026-11-19"
   },
   {
     "slug": "why-matrix",
     "title": {
-      "en": "Why open protocol boundaries matter",
-      "zh-cn": "开放协议边界为什么重要"
+      "en": "Build collaboration on Matrix",
+      "zh-cn": "基于 Matrix 构建协作"
     },
     "description": {
-      "en": "Interoperability, room roles and federation need precise claims.",
-      "zh-cn": "互通、房间角色与联邦需要准确说明。"
+      "en": "Open identities, rooms and federation connect people with their Agents.",
+      "zh-cn": "通过开放的身份、房间与联邦，连接人与 Agent。"
     },
     "category": {
-      "en": "VERIFIED SNAPSHOT",
-      "zh-cn": "核验快照"
+      "en": "PRODUCT UPDATE",
+      "zh-cn": "产品动态"
     },
     "sections": [
       {
         "title": {
-          "en": "Protocol and product are separate",
-          "zh-cn": "协议与产品分开评估"
+          "en": "Conversations on an open network",
+          "zh-cn": "开放网络中的对话"
         },
         "paragraphs": [
           {
-            "en": "Matrix supplies users, rooms, device encryption and federation. Hagency adds owner/device leases, local execution and capacity policy. Compare Buzz fairly: its community relay, workflow, Git, canvas and harness surfaces have their own strengths, and their source evidence is not our live test result.",
-            "zh-cn": "Matrix 提供用户、房间、设备加密与联邦，Hagency 增加所有者/设备租约、本地执行与容量策略。应公平比较 Buzz：其社区中继、工作流、Git、画布和 harness 各有优势，源码证据不能被视作本次实时测试结果。"
+            "en": "Matrix provides user identities, rooms, device encryption and federation. Hagency connects those conversations to local coding runtimes, resource pools and owner-controlled permissions. Teams can host their own Server and collaborate through standard Matrix room messages.",
+            "zh-cn": "Matrix 提供用户身份、房间、设备加密和联邦。Hagency 将对话连接至本地编程运行时、资源池与所有者权限。团队可以托管自己的 Server，通过标准 Matrix 房间消息开展协作。"
           }
         ]
       }
@@ -760,14 +772,14 @@ export const pageInfo = {
       "zh-cn": "体验首个 Agent 流程。"
     },
     "description": {
-      "en": "An illustrative, local-only walkthrough; no account or live model is connected.",
-      "zh-cn": "仅在本地运行的示意演练，不连接账户或真实模型。"
+      "en": "Explore the steps from connecting a runtime to working with an Agent.",
+      "zh-cn": "了解从接入运行时到与 Agent 协作的各个步骤。"
     }
   },
   "use-cases": {
     "title": {
-      "en": "Choose a real workflow.",
-      "zh-cn": "选择真实工作流程。"
+      "en": "Put your Agents to work.",
+      "zh-cn": "让 Agent 参与实际工作。"
     },
     "description": {
       "en": "Personal coding, team conversations and owner-approved resource sharing.",
@@ -786,12 +798,12 @@ export const pageInfo = {
   },
   "downloads": {
     "title": {
-      "en": "Download what actually exists.",
-      "zh-cn": "下载确实存在的安装包。"
+      "en": "Download Hagency Desktop.",
+      "zh-cn": "下载 Hagency Desktop。"
     },
     "description": {
-      "en": "Reviewed release assets, platform limits and source-only components.",
-      "zh-cn": "核验后的发布文件、平台限制与仅源码组件。"
+      "en": "Desktop installers, server deployment and platform information.",
+      "zh-cn": "Desktop 安装包、服务器部署及平台信息。"
     }
   },
   "docs": {
@@ -816,32 +828,32 @@ export const pageInfo = {
   },
   "updates": {
     "title": {
-      "en": "What changed, with evidence.",
-      "zh-cn": "有证据的变化。"
+      "en": "Product news and practical ideas.",
+      "zh-cn": "产品动态与协作实践。"
     },
     "description": {
-      "en": "Current architecture and bounded verification, not release promises.",
-      "zh-cn": "当前架构与有边界的核验，不作发布承诺。"
+      "en": "Explore Hagency’s architecture, Agent conversations and open collaboration.",
+      "zh-cn": "了解 Hagency 架构、Agent 对话与开放协作。"
     }
   },
   "roadmap": {
     "title": {
-      "en": "Implemented, partial or not verified.",
-      "zh-cn": "已实现、部分实现或尚未验证。"
+      "en": "What’s available. What’s next.",
+      "zh-cn": "当前功能与后续方向。"
     },
     "description": {
-      "en": "Distinguish available source, release candidates and remaining gaps.",
-      "zh-cn": "区分可用源码、候选发行版与仍然存在的缺口。"
+      "en": "Published releases, development updates and ongoing product improvements.",
+      "zh-cn": "已发布版本、开发进展与持续改进。"
     }
   },
   "community": {
     "title": {
-      "en": "Build and verify in the open.",
-      "zh-cn": "公开构建，公开核验。"
+      "en": "Build in the open.",
+      "zh-cn": "共同建设开放协作。"
     },
     "description": {
-      "en": "Report reproducible issues, improve documentation and test isolated workflows.",
-      "zh-cn": "报告可复现问题、改进文档并测试隔离工作流程。"
+      "en": "Contribute code, improve guides and share useful Agent workflows.",
+      "zh-cn": "贡献代码、改进指南并分享实用的 Agent 工作流。"
     }
   },
   "about": {
@@ -856,32 +868,32 @@ export const pageInfo = {
   },
   "media": {
     "title": {
-      "en": "Real captures. Explicit provenance.",
-      "zh-cn": "真实截图，明确来源。"
+      "en": "Hagency brand and product assets.",
+      "zh-cn": "Hagency 品牌与产品素材。"
     },
     "description": {
-      "en": "Current brand assets and separately labeled historical integration captures.",
-      "zh-cn": "当前品牌素材与单独标明的历史集成截图。"
+      "en": "Hagency brand assets and product imagery.",
+      "zh-cn": "Hagency 品牌素材与产品界面。"
     }
   },
   "capabilities": {
     "title": {
-      "en": "Every capability, with its evidence.",
-      "zh-cn": "逐项能力，逐项证据。"
+      "en": "Explore Hagency features.",
+      "zh-cn": "了解 Hagency 的产品功能。"
     },
     "description": {
-      "en": "Review current Desktop and Server features, limits, source pins and test confidence.",
-      "zh-cn": "核对当前 Desktop、Server 的功能、限制、源码固定版本与验证可信度。"
+      "en": "Local coding agents, Matrix collaboration, resource pools and owner controls.",
+      "zh-cn": "本地编程 Agent、Matrix 协作、资源池与所有者控制。"
     }
   },
   "compare": {
     "title": {
-      "en": "Hagency and Buzz, without the hype.",
-      "zh-cn": "客观比较 Hagency 与 Buzz。"
+      "en": "Find the right fit for your team.",
+      "zh-cn": "选择适合团队的协作方式。"
     },
     "description": {
-      "en": "Compare the same tasks and retain unknowns instead of manufacturing a winner.",
-      "zh-cn": "比较相同任务，保留未知项，不制造未经证实的胜者。"
+      "en": "Compare Hagency and Buzz across coding runtimes, conversations and collaboration tools.",
+      "zh-cn": "从编程运行时、对话和协作工具了解 Hagency 与 Buzz。"
     }
   }
 };
@@ -913,13 +925,13 @@ export const trustSections: Section[] = [
   },
   {
     "title": {
-      "en": "Limits are not financial billing",
-      "zh-cn": "限额不等于商业计费"
+      "en": "Understand token accounting",
+      "zh-cn": "了解 token 记账"
     },
     "paragraphs": [
       {
-        "en": "Accounting follows completed or retained evidence. Admitted work may exceed a limit. Unknown usage remains unresolved, not zero; revocation cannot undo already completed work.",
-        "zh-cn": "记账遵循已完成或保留的证据。已接纳工作可能超限，不确定用量保持待确认而非零；撤销不能撤回已经完成的工作。"
+        "en": "Usage settles against execution records. Admitted work may exceed a configured limit, and unresolved usage remains in the ledger until its outcome is confirmed.",
+        "zh-cn": "用量依据执行记录结算。已接纳工作可能超过设定限额，待确认用量保留在账本中，直到执行结果得到确认。"
       }
     ]
   }
