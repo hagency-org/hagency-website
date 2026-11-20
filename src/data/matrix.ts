@@ -11,9 +11,9 @@ export const matrixSources = {
 
 export const matrix = {
   title: b('Familiar conversations.\nAn open world.', '熟悉的对话，\n开放的世界。'),
-  positioning: b('An open-source, agent-native alternative to WeChat.', '一个开源、Agent 原生的微信式协作空间。'),
+  positioning: b('An open workspace for people and coding agents.', '人与编程 Agent 的开放协作空间。'),
   introduction: b('Chat, share files, and work together in a familiar space. Hagency connects that experience to Matrix: an open protocol where independent servers communicate and people and agents participate in the same rooms.', '在熟悉的空间里聊天、分享文件、共同工作。Hagency 通过 Matrix 开放协议连接这一体验：独立服务器可以互通，人和 Agent 可以在同一房间中参与协作。'),
-  homeTitle: b('An open-source alternative to WeChat.\nBuilt for people and agents.', '开源的微信式协作，\n为人与 Agent 而构建。'),
+  homeTitle: b('Open conversations.\nYour own infrastructure.', '开放的对话，\n自主的基础设施。'),
   homeBody: b('Matrix is the open communication protocol underneath Hagency. Choose your client, run your own server, and connect across organizations. Agents have their own identities and can be granted the same room permissions as people.', 'Matrix 是 Hagency 底层的开放通信协议。你可以选择客户端、自建服务器，并跨组织互通。Agent 拥有自己的身份，也可以被授予与人相同的房间权限。'),
   pillars: [
     { icon: 'code', title: b('Open by design', '开放的基础'), body: b('Inspect the source and choose compatible clients and servers.', '检查源码，自主选择兼容的客户端与服务器。') },
@@ -47,9 +47,9 @@ export const matrix = {
     { id: 'redact', label: b('Redact other members’ messages', '撤回其他成员的消息'), elevated: true },
   ],
   faqs: [
-    { question: b('Is Hagency literally a WeChat clone?', 'Hagency 是微信的完整复刻吗？'), answer: b('“Open-source alternative to WeChat” describes the familiar communication and collaboration experience we are building. Hagency is an independent project, with no WeChat affiliation. It does not claim parity with WeChat payments, Mini Programs, or every social feature.', '“开源的微信式协作”描述的是我们正在构建的、让人熟悉的通信与协作体验。Hagency 是独立项目，与微信无隶属关系，也不宣称已具备微信支付、小程序或全部社交功能。') },
-    { question: b('Does federation make every room public?', '联邦互通会让所有房间公开吗？'), answer: b('No. Room membership, join rules, history visibility, encryption, and server policy remain relevant. A federated room can be invite-only. Participating servers receive the room data needed to serve their members; encryption protects message content on supported encrypted paths.', '不会。房间成员关系、加入规则、历史可见性、加密与服务器策略仍然有效。联邦房间也可以仅限邀请加入。参与的服务器会收到服务其成员所需的房间数据，受支持的加密路径则保护消息内容。') },
-    { question: b('Is federation automatically more reliable or private?', '联邦互通一定更可靠或更私密吗？'), answer: b('It reduces dependence on one network-wide operator, but each account still depends on its own homeserver. Reliability, privacy, moderation, and performance depend on deployment choices. Self-hosting also means maintaining the service; shared room data crosses the participating servers.', '它减少了对单一全网运营方的依赖，但每个账户仍依赖自己的归属服务器。可靠性、隐私、管理与性能取决于部署选择。自建服务也意味着需要维护服务，共享房间数据会经过参与的服务器。') },
-    { question: b('Are agents administrators by default?', 'Agent 默认就是管理员吗？'), answer: b('No. An agent can be granted equivalent room permissions by someone authorized to grant them. That does not give every agent automatic access to every room, every encrypted message, or the host machine.', '不是。具备相应授权能力的人，可以为 Agent 授予等同的房间权限。这不会让所有 Agent 自动访问全部房间、全部加密消息或宿主机。') },
+    { question: b('Why use Matrix for Agent collaboration?', '为什么用 Matrix 进行 Agent 协作？'), answer: b('People and Agents use their own identities in the same rooms. Start with a private Agent conversation, bring it into a team room and connect participants across Matrix servers.', '人与 Agent 以各自身份参与同一个房间。从 Agent 私聊开始，再将其加入团队房间，并通过 Matrix 连接不同服务器上的参与者。') },
+    { question: b('How do I keep a room private?', '如何保持房间私密？'), answer: b('Configure invite-only membership, history visibility and encryption for the room. Members use their device keys to read encrypted content, including in federated rooms.', '为房间配置邀请加入、历史可见性与加密。成员通过设备密钥读取加密内容，联邦房间也遵循这些设置。') },
+    { question: b('What does self-hosting involve?', '自主托管需要配置什么？'), answer: b('Run Hagency Server with its integrated Palpo and Pasion services. Configure the public address, account policy, storage, backups and network access for your organization.', '运行集成 Palpo 与 Pasion 的 Hagency Server，为组织配置公开地址、账户策略、存储、备份和网络访问。') },
+    { question: b('How are Agent permissions managed?', '如何管理 Agent 权限？'), answer: b('Room roles govern conversation and moderation. The Agent owner controls coding-tool permissions, model access and resource limits through Hagency.', '房间角色管理对话与成员操作，Agent 所有者通过 Hagency 控制编程工具权限、模型访问和资源限额。') },
   ],
 };

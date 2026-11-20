@@ -1,8 +1,8 @@
 ---
-import {b,t,type Locale,type Project} from '@/data/site';
+import {t,type Locale,type Project} from '@/data/site';
 import {projectScreenshots,screenshotUI} from '@/data/screenshots';
 import ProjectScreenshot from './ProjectScreenshot.astro';
 interface Props {lang:Locale;project:Project}
 const {lang,project}=Astro.props;const shots=projectScreenshots(project.id);
 ---
-<section class="section container" id="screenshots"><div class="section-header"><span class="eyebrow">{t(screenshotUI.label,lang)}</span><h2>{t(screenshotUI.title,lang)}</h2><p>{t(screenshotUI.intro,lang)}</p></div>{shots.length ? <div class="screenshot-gallery">{shots.map(screenshot=><ProjectScreenshot lang={lang} screenshot={screenshot}/>)}</div> : <p class="screenshot-scope">{t(b('No current product capture is available in this audit. The diagrams are conceptual views; archived Fleet or companion screens are not shown as current UI.','本轮核验没有当前产品截图。图示为概念展示，旧 Fleet 或配套应用画面不会作为当前 UI 展示。'),lang)}</p>}</section>
+{shots.length>0 && <section class="section container" id="screenshots"><div class="section-header"><span class="eyebrow">{t(screenshotUI.label,lang)}</span><h2>{t(screenshotUI.title,lang)}</h2><p>{t(screenshotUI.intro,lang)}</p></div><div class="screenshot-gallery">{shots.map(screenshot=><ProjectScreenshot lang={lang} screenshot={screenshot}/>)}</div></section>}

@@ -31,7 +31,7 @@ containers, not a standalone release installer. Palpo standalone is v0.6.0.
 | Broad task/report promise | Native captured reports supported; autonomous post-run ADR remains partial |
 | Screens from September shown as current | Dated JIT capture and explicit archived September gallery |
 | Development and releases loosely separated | Source pins, release commits and evidence category per feature |
-| No substantive Buzz comparison | Includes Buzz encryption, Git, workflows, canvas, voice and harness strengths |
+| No substantive Buzz comparison | Includes implementation-backed Buzz messaging, workflows, repository browsing, Markdown pages and selected voice/harness integrations |
 
 ## Feature-by-feature result
 
@@ -55,7 +55,7 @@ journey or paid inference. `historical-jit` explicitly refers to November 17.
 | Tool permission decisions | Owner reviews supported native requests in structured UI. | Validates ownership, bound decision and execution authority. | Harness policy and permission controls. | Ordinary chat text and room roles are not tool authorization. **source** |
 | Interactive questions | Supported structured questions return to the active runtime. | Retains bound operations and receipts. | Harness interaction support; exact parity needs a matched test. | Question handling is provider-specific; do not advertise a terminal replacement. **source** |
 | Files and artifacts | Native Matrix file bridge for Codex and Claude. | Media and durable authorized file operations. | Media and local agent artifacts. | Hagency native path caps a request at 64 files / 64 MiB; Octos parity is not established. **source** |
-| Encrypted conversation | Matrix SDK device keys and encrypted Agent room path. | Executor-device routing for encrypted Agent work. | NIP-17 gift-wrapped encrypted direct messages. | Both support encrypted paths. Executors and configured model providers can see task plaintext. **source** |
+| Encrypted conversation | Matrix SDK device keys and encrypted Agent room path. | Executor-device routing for encrypted Agent work. | Relay accepts gift-wrap transport; native DM send uses relay-backed kind-9 channels. | Native Buzz DM encryption is excluded from the public comparison. Executors and configured model providers can see Hagency task plaintext. **source** |
 | Room-key readiness | Signature-checked SDK discovery guards sendability. | Server key publication alone does not update sender SDK state. | Different Nostr key model; no Matrix room-key claim. | The 30-second helper bound does not guarantee every key-sharing case succeeds. **source** |
 | Independent Agent reports | Captured provider reports get distinct chat events and duplicate suppression. | Delivery-only authorization and reply outbox. | Agent messages in chat; no equivalent matched recovery test run here. | November 17 JIT tested encrypted DM/group and restart with deterministic Codex, not paid inference. **historical-jit** |
 | Autonomous post-run messages | ADR 0013 remains partial; native Octos report experiment is disabled. | Full durable unsolicited routing is not established by current evidence. | Schedule/webhook workflows documented. | Do not claim every autonomous message from every CLI is delivered. **partial** |
@@ -77,7 +77,7 @@ journey or paid inference. `historical-jit` explicitly refers to November 17.
 | Voice collaboration | No equivalent core Agent voice workflow verified. | No matched voice task acceptance. | Current help documents voice huddles and agent participation. | Use current Buzz help, not its older incomplete-huddles README summary. **source** |
 | Acceptance and evidence | Historical encrypted real-stack JIT evidence is dated separately. | Pinned-main CI and local container smoke have separate results. | Source-reviewed here; no same-task native live benchmark yet. | A score above 90 or an overall win requires repeatable task evidence for both products. **source** |
 
-Every row has immutable supporting links in `src/data/verification.json` and
+Every row has immutable supporting links in `docs/feature-audit-record.json` and
 the bilingual capability/compare pages. This table is a snapshot, not a claim
 that native Buzz was benchmarked against Hagency on the same tasks.
 
@@ -124,7 +124,7 @@ journeys and matched Buzz task run are required before granting ≥90 or a win.
 Hagency has useful source-level distinctions: Matrix room federation, explicit
 resource-owner decisions and installed Octos profile selection. Buzz has
 documented broader harnesses, YAML workflows, NIP-34 Git, canvases and voice.
-Both have encrypted messaging paths. No overall superiority is established.
+The native Buzz DM encryption claim was removed after implementation review; relay support alone does not establish that native workflow. No overall superiority is established.
 
 Run both products with the same fresh-account setup, deterministic provider,
 repository, permission task, encrypted conversation and restart scenario.
@@ -193,3 +193,18 @@ These are acceptance gates, not features that this website PR claims to ship.
 No native development build or shared-machine hosting installation is used as a
 shortcut. The proposed website's 92/100 is separate from the still-unaccepted
 Desktop score and does not apply to the old public site before deployment.
+
+
+## Editorial and competitor correction
+
+The product website now uses a separate public features dataset. Internal
+checks, scores and acceptance records remain in this engineering document.
+A 35-record audit is not a public feature count: the public catalog contains
+33 Hagency feature sections, while the comparison has nine implemented
+architecture/workflow topics.
+
+A code-level follow-up corrected the earlier documentation-led Buzz claims:
+relay NIP-17 support does not establish native DM E2EE; repository browsing and
+activity are narrower than a complete Git review/merge workflow; saved Markdown
+pages are not real-time coediting; voice Agent integration is Codex-specific.
+The evidence and source paths are in [the implementation review](buzz-implementation-2026-11-19.md).

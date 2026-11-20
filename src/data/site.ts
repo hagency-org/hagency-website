@@ -137,8 +137,8 @@ export const ui = {
     "zh-cn": "Hagency Desktop 与 Server 基于开源基础构建，Palpo、Pasion、Makepad 和 Robius 保留各自的许可与署名。"
   },
   "lastVerified": {
-    "en": "Source and release snapshot: November 19, 2026",
-    "zh-cn": "源码与发布快照：2026 年 11 月 19 日"
+    "en": "Updated November 19, 2026",
+    "zh-cn": "更新于 2026 年 11 月 19 日"
   },
   "readGuide": {
     "en": "Read the guide",
@@ -169,8 +169,8 @@ export const ui = {
     "zh-cn": "交互式流程演示"
   },
   "preview": {
-    "en": "Version and verification boundaries",
-    "zh-cn": "版本与验证边界"
+    "en": "Versions & availability",
+    "zh-cn": "版本与支持范围"
   },
   "published": {
     "en": "Published release",
@@ -241,8 +241,8 @@ export const ui = {
     "zh-cn": "示例工作空间"
   },
   "demoNote": {
-    "en": "An illustrative walkthrough of current roles. It does not run an Agent, authorize tools, or connect to a live account.",
-    "zh-cn": "这是当前角色与步骤的示意演练，不运行 Agent、不授予工具权限，也不连接真实账户。"
+    "en": "Explore the workflow, then connect your own Agent using the setup guide.",
+    "zh-cn": "了解协作流程，按配置指南接入自己的 Agent。"
   },
   "topic": {
     "en": "Explore by topic",
@@ -257,8 +257,8 @@ export const ui = {
     "zh-cn": "对比 Buzz"
   },
   "capabilities": {
-    "en": "Verified capabilities",
-    "zh-cn": "能力核验"
+    "en": "Features",
+    "zh-cn": "产品功能"
   }
 };
 
@@ -340,8 +340,8 @@ export const home = {
         "zh-cn": "明确可用范围"
       },
       "body": {
-        "en": "See the reviewed source, release assets and test boundaries for each capability. A design document is not a shipped feature.",
-        "zh-cn": "逐项查看源码、发布文件与测试范围。设计文档不等于已经交付的功能。"
+        "en": "Choose the right runtime, understand its permissions and follow a clear path from setup to collaboration.",
+        "zh-cn": "选择适合的运行时，了解权限设置，从配置到协作都有明确步骤。"
       },
       "icon": "eye"
     },
@@ -408,8 +408,8 @@ export const projects: Project[] = [
       "en": "Chat, local runtimes and Agent controls.",
       "zh-cn": "聊天、本地运行时与 Agent 控制。"
     },
-    "version": "0.5.0-rc.13",
-    "date": "2026-11-19",
+    "version": "0.5.0-rc.14",
+    "date": "2026-11-20",
     "technology": [
       "Rust",
       "Makepad",
@@ -459,10 +459,10 @@ export const projects: Project[] = [
       }
     ],
     "preview": {
-      "en": "rc.13 publishes Apple Silicon macOS and Windows x86-64 installers. Current main is preparing rc.14 and contains later Windows discovery, sign-in and multi-account hosting changes. Linux/Intel/mobile build paths are not rc.13 download assets.",
-      "zh-cn": "rc.13 发布了 Apple Silicon macOS 与 Windows x86-64 安装包。当前 main 正准备 rc.14，并包含更晚的 Windows CLI 发现、登录和多账户托管修改；Linux、Intel 与移动端构建路径不等于 rc.13 已发布安装包。"
+      "en": "rc.14 provides Apple Silicon macOS and Windows x86-64 installers, with Windows setup improvements, clearer sign-in feedback and account-aware background hosting.",
+      "zh-cn": "rc.14 提供 Apple Silicon macOS 与 Windows x86-64 安装包，包含 Windows 配置改进、更清晰的登录反馈与按账户管理的后台托管。"
     },
-    "install": "git clone https://github.com/hagency-org/hagency-desktop.git\ncd hagency-desktop\n# Development: reuse the matching pinned JIT runner.\n# See the repository JIT guide; do not compile a native app for testing."
+    "install": "git clone https://github.com/hagency-org/hagency-desktop.git\ncd hagency-desktop\n# See README.md for development setup."
   },
   {
     "id": "hagency",
@@ -526,11 +526,11 @@ export const projects: Project[] = [
       },
       {
         "title": {
-          "en": "Retain uncertain work",
+          "en": "Recover work with its history",
           "zh-cn": "保留不确定状态"
         },
         "body": {
-          "en": "Durable queues, generation checks, idempotency and recorded receipts support recovery. Unknown work is not automatically billed as zero or replayed as a new model run.",
+          "en": "Durable request IDs, message receipts and usage records stay linked to the original operation during recovery.",
           "zh-cn": "持久队列、代际检查、幂等标识与回执支持恢复。不确定的工作不会被自动记为零用量，也不会直接重跑为新的模型任务。"
         }
       }
@@ -597,8 +597,8 @@ export const projects: Project[] = [
           "zh-cn": "通过联邦连接"
         },
         "body": {
-          "en": "Federation is a protocol capability, not a guarantee that every deployment, room setting or Agent extension has been tested across servers.",
-          "zh-cn": "联邦是一项协议能力，并不保证每种部署、房间设置或 Agent 扩展都已经跨服务器实测。"
+          "en": "Connect rooms across Matrix homeservers. Room membership, access rules and encryption settings govern how people and Agents participate.",
+          "zh-cn": "通过 Matrix 联邦连接不同服务器上的房间，由成员关系、访问规则和加密设置管理人与 Agent 的参与。"
         }
       },
       {
@@ -691,8 +691,8 @@ export const faqs = [
       "zh-cn": "可以使用 Element 或其他 Matrix 服务器吗？"
     },
     "body": {
-      "en": "Ordinary messages use Matrix events. Hagency management requires the matching Server APIs, and interactive approval controls require a compatible client. Element end-to-end approval/report interoperability has not been verified by this audit.",
-      "zh-cn": "普通消息使用 Matrix 事件。Hagency 管理需要匹配的 Server API，交互式审批需要兼容客户端；本次审核没有验证 Element 的端到端审批或报告互通。"
+      "en": "Matrix clients such as Element exchange standard room messages. Use Hagency Desktop for Agent management and interactive approval cards, connected to a compatible Hagency Server.",
+      "zh-cn": "Element 等 Matrix 客户端通过标准房间消息通信。Agent 管理和交互式审批使用 Hagency Desktop，并连接兼容的 Hagency Server。"
     }
   },
   {
@@ -701,18 +701,18 @@ export const faqs = [
       "zh-cn": "Token 限额会中断正在运行的任务吗？"
     },
     "body": {
-      "en": "Accounting is postpaid. A task admitted within policy may exceed its limit and continues until completion or explicit stop. Unknown usage and holds remain unresolved rather than becoming zero. This is not a billing or payment service.",
-      "zh-cn": "用量在任务后记账。按策略接纳的任务可能超出限额，并持续到完成或明确停止。不确定用量与预留保持待确认，不会变成零；这不是计费或支付服务。"
+      "en": "Usage settles after the task. A task accepted within its policy can exceed the token limit and continues until completion or an explicit stop. Pending usage stays in the ledger until its result is confirmed.",
+      "zh-cn": "用量在任务后结算。按策略接纳的任务可能超过 token 上限，并持续到完成或明确停止。待确认用量保留在账本中，直到结果得到确认。"
     }
   },
   {
     "title": {
-      "en": "Is Hagency better than Buzz?",
-      "zh-cn": "Hagency 比 Buzz 更好吗？"
+      "en": "How does Hagency compare with Buzz?",
+      "zh-cn": "Hagency 与 Buzz 有哪些区别？"
     },
     "body": {
-      "en": "Compare the workflow you need. Hagency focuses on Matrix, local runtime control and owner-approved capacity. Buzz documents broader workflow, Git and canvas tools. The comparison separates source evidence from executed tests and does not claim an unmeasured overall winner.",
-      "zh-cn": "请按实际工作流程比较。Hagency 聚焦 Matrix、本地运行控制与所有者批准的容量；Buzz 文档提供更广的工作流、Git 与画布工具。对比页区分源码证据和已执行测试，不宣称未经测量的全面胜出。"
+      "en": "Hagency connects Matrix conversations with local coding runtimes, owner-controlled permissions and shared resource pools. Buzz connects Nostr communities with coding harnesses, workflow editors, repository activity and saved Markdown pages. Explore the feature comparison to choose the workflow that fits your team.",
+      "zh-cn": "Hagency 将 Matrix 对话、本地编程运行时、所有者权限和共享资源池连接起来。Buzz 将 Nostr 社区与编程 harness、工作流编辑器、仓库动态和 Markdown 页面结合。查看功能对比，选择适合团队的协作方式。"
     }
   }
 ];

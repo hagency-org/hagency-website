@@ -19,8 +19,8 @@ export const components={
       "Pasion OAuth / PKCE"
     ],
     "boundary": {
-      "en": "Presentation does not grant tool authority. The release snapshot is rc.13; main is newer.",
-      "zh-cn": "界面展示不会授予工具权限；发布快照为 rc.13，main 更新。"
+      "en": "Desktop rc.14 brings the conversation and owner controls together; tool execution follows the Agent’s permissions.",
+      "zh-cn": "Desktop rc.14 集中呈现对话与所有者控制，工具执行遵循 Agent 权限。"
     },
     "color": "blue"
   },
@@ -81,7 +81,7 @@ export const components={
     },
     "body": {
       "en": "Owns permanent Agent identity, management policy, context, execution leases and durable command / reply receipts.",
-      "zh-cn": "负责永久 Agent 身份、管理策略、上下文、执行租约及持久命令和回复凭据。"
+      "zh-cn": "负责永久 Agent 身份、管理策略、上下文、执行租约及持久命令和回复回执。"
     },
     "interfaces": [
       "/hagency/api/*",
@@ -111,8 +111,8 @@ export const components={
       "Persistent local ledger"
     ],
     "boundary": {
-      "en": "Local runtime credentials remain local. New account-aware hosting is later than rc.13.",
-      "zh-cn": "本地运行时凭据留在本地；新的按账户托管晚于 rc.13。"
+      "en": "Runtime credentials stay on the execution computer, with separate background hosting state for each account.",
+      "zh-cn": "运行时凭据保留在执行电脑上，各账户拥有独立的后台托管状态。"
     },
     "color": "teal"
   },
@@ -156,8 +156,8 @@ export const components={
       "App Server JSON-RPC / stdio"
     ],
     "boundary": {
-      "en": "Supported protocol operations do not establish complete CLI equivalence.",
-      "zh-cn": "支持的协议操作不代表完整 CLI 对等。"
+      "en": "Tool requests follow the Agent’s configured permissions.",
+      "zh-cn": "工具请求遵循 Agent 已配置的权限。"
     },
     "color": "teal"
   },
@@ -200,8 +200,8 @@ export const components={
       "Octos Unified Protocol / stdio"
     ],
     "boundary": {
-      "en": "Distinct profiles remain distinct. Full autonomous post-run reports are not established.",
-      "zh-cn": "不同配置保持独立；尚未证明完整的运行结束后自主报告。"
+      "en": "Each profile keeps its own model, endpoint and credentials.",
+      "zh-cn": "各配置保留独立的模型、端点与凭据。"
     },
     "color": "teal"
   },
@@ -386,12 +386,12 @@ export const connections:Connection[]=[
     "to": "backend",
     "label": {
       "en": "Work / receipts",
-      "zh-cn": "工作 / 凭据"
+      "zh-cn": "工作 / 回执"
     },
     "protocol": "Owner-device lease protocol",
     "detail": {
       "en": "The local executor handles eligible leases and retains original receipts. An acknowledgment is not model completion.",
-      "zh-cn": "本地执行器处理符合条件的租约并保留原始凭据；确认接收不等于模型完成。"
+      "zh-cn": "本地执行器处理符合条件的租约并保留原始回执；确认接收不等于模型完成。"
     },
     "reverse": true
   },
@@ -883,8 +883,8 @@ export const architectureUI={
     "zh-cn": "原生 Desktop、一个集成 Rust Server，以及由所有者控制的本地编程运行时。"
   },
   "snapshot": {
-    "en": "Pinned source review · November 19, 2026",
-    "zh-cn": "固定源码核验 · 2026 年 11 月 19 日"
+    "en": "Desktop · Server · Local coding runtimes",
+    "zh-cn": "Desktop · Server · 本地编程运行时"
   },
   "fallback": {
     "en": "The interactive map is optional. Every connection is readable below.",
@@ -895,8 +895,8 @@ export const architectureUI={
     "zh-cn": "阅读文字参考"
   },
   "scope": {
-    "en": "This map describes the reviewed main, not a live deployment or every published installer.",
-    "zh-cn": "此图描述核验 main，并非实际部署或所有发布安装包。"
+    "en": "Select a component to see how conversations, permissions and local execution connect.",
+    "zh-cn": "选择组件，了解对话、权限与本地执行之间的连接。"
   },
   "inspect": {
     "en": "Inspect a component",

@@ -260,7 +260,7 @@ test('project screenshots load and enlarge with localized captions and keyboard 
       await go(page,`/${lang}/projects/${project}/#screenshots`);
       const shots=page.locator('#screenshots [data-screenshot]');
       assert.equal(await shots.count(),1);
-      if(project==='palpo')assert.match(await page.locator('#screenshots .screenshot-scope').first().innerText(),lang==='en'?/separate companion administration app/:/独立配套管理应用/);
+
       for(let i=0;i<1;i++){
         const shot=shots.nth(i);
         await shot.scrollIntoViewIfNeeded();
@@ -272,7 +272,7 @@ test('project screenshots load and enlarge with localized captions and keyboard 
         assert.equal(await dialog.isVisible(),true);
         assert.equal(await dialog.locator('img').getAttribute('alt'),await shot.getAttribute('data-alt'));
         assert.equal(await dialog.locator('#screenshot-title').innerText(),await shot.getAttribute('data-title'));
-        assert.match(await dialog.locator('[data-screenshot-metadata]').innerText(),lang==='en'?/Historical JIT/:/历史 JIT/);
+        assert.match(await dialog.locator('[data-screenshot-metadata]').innerText(),lang==='en'?/Desktop workspace/:/桌面工作台/);
         const original=await shot.getAttribute('href');
         assert.equal(await dialog.locator('[data-screenshot-original]').getAttribute('href'),base+original);
         const dims=await dialog.locator('img').evaluate(img=>({width:img.naturalWidth,height:img.naturalHeight}));
@@ -317,7 +317,7 @@ test('screenshot load failures show a localized recovery link',async()=>{
     const opener=page.locator('#screenshots [data-screenshot]').first();
     await opener.click();
     await page.waitForFunction(()=>document.querySelector('[data-screenshot-image] img')?.hidden);
-    assert.match(await page.locator('[data-screenshot-status]').innerText(),lang==='en'?/could not load/:/截图加载失败/);
+    assert.match(await page.locator('[data-screenshot-status]').innerText(),lang==='en'?/could not load/:/图片加载失败/);
     assert.equal(await page.locator('[data-screenshot-original]').isVisible(),true);
     await page.locator('[data-screenshot-close]').click();
     assert.equal(await opener.evaluate(node=>document.activeElement===node),true);
@@ -395,7 +395,7 @@ test('architecture zoom reset theme and mobile controls work',async()=>{
     assert.equal(await page.locator('[data-architecture-flow]').getAttribute('data-color-mode'),'light');
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,'Graph navigation stays within the page');
     await page.locator('[data-component-select]').selectOption('bridge');
-    assert.match(await page.locator('[data-flow-inspector]').innerText(),lang==='en'?/Local runtime credentials remain local/:/本地运行时凭据留在本地/);
+    assert.match(await page.locator('[data-flow-inspector]').innerText(),lang==='en'?/credentials stay on the execution computer/:/运行时凭据保留在执行电脑上/);
   },{viewport:{width,height:1000}});
 });
 
@@ -431,23 +431,24 @@ test('architecture text survives a failed island request',async()=>{
 });
 
 
-test('feature audit filters, searches and links to the selected evidence in both languages',async()=>{
+test('product features search and category filters work in both languages',async()=>{
   for(const lang of ['en','zh-cn'])for(const compare of [false,true])await withPage(async page=>{
+    const total=compare?9:33;
     await go(page,`/${lang}/${compare?'compare':'capabilities'}/`);
-    assert.equal(await page.locator('[data-audit-row]:visible').count(),35);
-    assert.equal(await page.locator('#reports a[href*="/blob/"]').count(),compare?3:2);
+    assert.equal(await page.locator('[data-audit-row]:visible').count(),total);
+    assert.equal(await page.locator('#identity .audit-links a').count(),1);
     await page.locator('[data-audit-query]').fill('Octos');
-    assert.ok(await page.locator('[data-audit-row]:visible').count()>1);
-    assert.ok(await page.locator('[data-audit-row]:visible').count()<35);
+    assert.ok(await page.locator('[data-audit-row]:visible').count()>=1);
+    assert.ok(await page.locator('[data-audit-row]:visible').count()<total);
     await page.locator('[data-audit-query]').fill('qzxv-no-result-189');
     assert.equal(await page.locator('[data-audit-row]:visible').count(),0);
     assert.equal(await page.locator('[data-audit-empty]').isVisible(),true);
     await page.locator('[data-audit-query]').fill('');
-    await page.locator('[data-audit-filter]').selectOption('partial');
-    assert.equal(await page.locator('[data-audit-row]:visible').count(),2);
-    assert.equal(await page.locator('[data-audit-count]').innerText(),lang==='en'?'2 features shown':'2 项功能');
+    await page.locator('[data-audit-filter]').selectOption('runtimes');
+    assert.equal(await page.locator('[data-audit-row]:visible').count(),compare?1:5);
+    assert.equal(await page.locator('[data-audit-count]').innerText(),lang==='en'?`${compare?1:5} features shown`:`${compare?1:5} 项功能`);
     await page.locator('[data-audit-filter]').selectOption('all');
-    assert.equal(await page.locator('[data-audit-row]:visible').count(),35);
+    assert.equal(await page.locator('[data-audit-row]:visible').count(),total);
     await page.locator('[data-audit-query]').focus();await page.keyboard.press('Tab');
     assert.equal(await page.locator('[data-audit-filter]').evaluate(n=>n===document.activeElement),true);
     await page.locator('[data-language-switch]').click();
@@ -455,27 +456,37 @@ test('feature audit filters, searches and links to the selected evidence in both
   });
 });
 
-test('capability and comparison evidence remains readable without JavaScript',async()=>{
+test('features and comparisons remain readable without JavaScript',async()=>{
   for(const lang of ['en','zh-cn'])for(const slug of ['capabilities','compare'])await withPage(async page=>{
+    const total=slug==='compare'?9:33;
     await go(page,`/${lang}/${slug}/`);
-    assert.equal(await page.locator('[data-audit-row]:visible').count(),35);
-    assert.match(await page.locator('#post-run').innerText(),/ADR 0013/);
-    if(slug==='compare')assert.match(await page.locator('#encryption').innerText(),/NIP-17/);
+    assert.equal(await page.locator('[data-audit-row]:visible').count(),total);
+    if(slug==='capabilities')assert.match(await page.locator('#post-run').innerText(),/Octos/);
+    if(slug==='compare'){assert.equal(await page.locator('#encryption').count(),0);assert.match(await page.locator('#git').innerText(),/Nostr/);}
     await page.locator('.audit-pins summary').click();
-    assert.equal(await page.locator('.audit-pins li').count(),4);
+    assert.equal(await page.locator('.audit-pins li').count(),slug==='compare'?4:2);
   },{javaScriptEnabled:false});
 });
 
-test('current and archived captures are clearly separated',async()=>{
-  await withPage(async page=>{
-    for(const project of ['hagency','palpo']){
-      await go(page,`/en/projects/${project}/`);
-      assert.equal(await page.locator('#screenshots [data-screenshot]').count(),0);
-      assert.match(await page.locator('#screenshots').innerText(),/No current product capture/);
-    }
-    await go(page,'/en/media/');
-    await page.locator('main details summary').click();
-    assert.equal(await page.locator('main details [data-screenshot]').count(),6);
-    assert.match(await page.locator('main details').innerText(),/Archived integration/);
-  });
+test('product imagery and brand assets contain no internal review material',async()=>{
+ await withPage(async page=>{
+  for(const project of ['hagency','palpo']){await go(page,`/en/projects/${project}/`);assert.equal(await page.locator('#screenshots').count(),0);assert.equal(await page.locator('.project-visual').count(),1);}
+  await go(page,'/en/media/');assert.equal(await page.locator('[data-screenshot]').count(),1);assert.equal(await page.locator('a[download]').count(),2);assert.equal(await page.locator('main details').count(),0);
+  for(const link of await page.locator('a[download]').evaluateAll(nodes=>nodes.map(n=>n.href)))assert.equal((await page.request.get(link)).status(),200);
+ });
+});
+
+test('all public routes and search metadata exclude internal audit and disclaimer copy',async()=>{
+ const forbidden=/本次(?:审核|核验|评审)|本轮(?:审核|核验|测试|未)|尚未(?:执行|验证|验收)|未验证|核验快照|验收缺口|历史 JIT|确定性.*(?:协议|提供方)|this audit|this review|source.review|source evidence|acceptance run|acceptance gaps|开发测试|integration testing|deterministic|test fixture|live benchmark|≥90|unmeasured overall|without inventing credentials|不虚构凭据|Download what actually exists|下载确实存在的安装包|Explicit provenance|源码.*安装预检查/i;
+ await withPage(async page=>{
+  for(const route of pages){await page.goto(base+route);const text=await page.locator('main').innerText();assert.doesNotMatch(text,forbidden,route);const metadata=await page.locator('meta[name=description]').getAttribute('content');assert.doesNotMatch(metadata,forbidden,route);const search=await page.locator('[data-search-index]').getAttribute('data-search-index');assert.doesNotMatch(search,forbidden,route);}
+ });
+});
+
+test('Hagency feature descriptions and sources stay separate from competitor comparisons',async()=>{
+ for(const lang of ['en','zh-cn'])await withPage(async page=>{
+  await go(page,`/${lang}/capabilities/`);assert.doesNotMatch(await page.locator('.audit-rows').innerText(),/Buzz/);
+  await page.locator('.audit-pins summary').click();assert.doesNotMatch(await page.locator('.audit-pins').innerText(),/Buzz/);
+  await go(page,`/${lang}/compare/`);assert.match(await page.locator('.audit-rows').innerText(),/Buzz/);
+ });
 });
